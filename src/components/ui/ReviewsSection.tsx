@@ -415,7 +415,7 @@ function ReviewCard({ review, onImageClick }: { review: Review; onImageClick: (s
                   src={imgSrc}
                   alt={`Review photo ${imgIndex + 1}`}
                   fill
-                  sizes="(max-width: 768px) 150px, 180px"
+                  sizes="(max-width: 768px) 45vw, 264px"
                   quality={65}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />

@@ -60,12 +60,34 @@ export function LeadForm({
       script.defer = true;
       document.body.appendChild(script);
     }
+
+    // Add title to iframe for accessibility (3rd party widget doesn't include it)
+    const addIframeTitle = () => {
+      const iframe = containerRef.current?.querySelector('iframe');
+      if (iframe && !iframe.title) {
+        iframe.title = 'Quote request form';
+      }
+    };
+
+    // Watch for iframe being added by the widget script
+    const observer = new MutationObserver(() => {
+      addIframeTitle();
+    });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current, { childList: true, subtree: true });
+    }
+
+    // Also try immediately in case iframe already exists
+    addIframeTitle();
+
+    return () => observer.disconnect();
   }, [isVisible]);
 
   return (
     <div ref={containerRef} id={id} className="bg-white p-6 md:p-8 rounded-xl shadow-xl shadow-slate-900/20 border border-slate-100 w-full relative z-10">
       <div className="mb-6 text-center lg:text-left">
-        <h3 className="text-2xl font-bold text-slate-900 leading-tight">{title}</h3>
+        <h2 className="text-2xl font-bold text-slate-900 leading-tight">{title}</h2>
         <p className="text-slate-500 text-sm mt-1">{subtitle}</p>
         {trustBadges && trustBadges.length > 0 && (
           <div className="flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-1 mt-3">

@@ -92,7 +92,7 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
                </div>
 
               <div className="relative z-10">
-                <h3 className="text-2xl md:text-3xl font-semibold tracking-tight mb-6">Get My Free Quote</h3>
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-6">Get My Free Quote</h2>
                 <p className="text-slate-200 text-lg mb-12 max-w-md leading-relaxed">
                   Simply fill out the form or contact us directly. We aim to respond to all enquiries within 24 hours.
                 </p>

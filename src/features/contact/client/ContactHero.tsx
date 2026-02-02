@@ -50,6 +50,28 @@ export function ContactHero() {
     } else {
       setWidgetLoaded(true);
     }
+
+    // Add title to iframe for accessibility (3rd party widget doesn't include it)
+    const addIframeTitle = () => {
+      const iframe = formRef.current?.querySelector('iframe');
+      if (iframe && !iframe.title) {
+        iframe.title = 'Quote request form';
+      }
+    };
+
+    // Watch for iframe being added by the widget script
+    const observer = new MutationObserver(() => {
+      addIframeTitle();
+    });
+
+    if (formRef.current) {
+      observer.observe(formRef.current, { childList: true, subtree: true });
+    }
+
+    // Also try immediately in case iframe already exists
+    addIframeTitle();
+
+    return () => observer.disconnect();
   }, [isVisible]);
 
   const copyToClipboard = (text: string, id: string) => {
