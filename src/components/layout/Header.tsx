@@ -25,15 +25,18 @@ export function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when mobile menu is open + signal to other components
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.dataset.mobileMenuOpen = 'true';
     } else {
       document.body.style.overflow = 'unset';
+      delete document.body.dataset.mobileMenuOpen;
     }
     return () => {
       document.body.style.overflow = 'unset';
+      delete document.body.dataset.mobileMenuOpen;
     };
   }, [mobileMenuOpen]);
 
@@ -216,8 +219,16 @@ export function Header() {
               </Link>
             </div>
 
-            {/* Desktop CTA Button */}
-            <div className="hidden lg:flex items-center">
+            {/* Desktop CTA Buttons */}
+            <div className="hidden lg:flex items-center gap-3">
+              <a
+                href={siteConfig.contact.phoneHref}
+                className="p-2.5 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Call us"
+                title={siteConfig.contact.phone}
+              >
+                <Phone className="h-5 w-5" />
+              </a>
               <Link
                 href={ctaLinks.quote}
                 className="bg-cta hover:bg-cta-hover text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-cta/25 transform hover:-translate-y-0.5 flex items-center gap-2 group"

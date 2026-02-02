@@ -13,6 +13,7 @@ import {
   ServiceGuarantees,
   ServiceFinalCTA,
   ServiceStickyCTA,
+  ServiceMiniCTA,
 } from '@/features/services/client';
 import { ContactSection } from '@/features/home/client';
 
@@ -191,6 +192,7 @@ export default async function ServicePage({ params }: Props) {
         title={<>What Our <span className="text-brand-500">{service.shortName}</span> Customers Say</>}
         subtitle={`Real reviews from Essex homeowners who used our ${service.name.toLowerCase()} service.`}
       />
+      <ServiceMiniCTA />
       <ServiceHowItWorks service={service} />
 
       {/* Mobile-only Lead Form after process */}

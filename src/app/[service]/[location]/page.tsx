@@ -26,6 +26,7 @@ import {
   ServiceGuarantees,
   ServiceFinalCTA,
   ServiceStickyCTA,
+  ServiceMiniCTA,
 } from '@/features/services/client';
 import { ContactSection } from '@/features/home/client';
 
@@ -264,6 +265,7 @@ export default async function ServiceLocationPage({ params }: PageProps) {
         title={<>What <span className="text-brand-500">{location.name}</span> Customers Say</>}
         subtitle={`Real reviews from ${location.name} homeowners who used our ${service.name.toLowerCase()} service.`}
       />
+      <ServiceMiniCTA />
       <ServiceHowItWorks service={service} location={location} />
 
       {/* Mobile-only Lead Form after process */}

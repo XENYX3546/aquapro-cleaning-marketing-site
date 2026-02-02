@@ -9,3 +9,4 @@ export { ServiceGuarantees } from './ServiceGuarantees';
 export { ServiceFinalCTA } from './ServiceFinalCTA';
 export { ServiceMobileLeadForm } from './ServiceMobileLeadForm';
 export { ServiceStickyCTA } from './ServiceStickyCTA';
+export { ServiceMiniCTA } from './ServiceMiniCTA';

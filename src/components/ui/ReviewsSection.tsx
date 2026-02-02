@@ -1,9 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { Star, X, ZoomIn, Check, MapPin, ArrowRight, ShieldCheck, Clock } from 'lucide-react';
+import { Star, X, ZoomIn, Check, MapPin, ArrowRight, ShieldCheck, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getAllReviews, reviewStatsDisplay, getRelativeTime, getLocationFromPostcode, type Review } from '@/lib/constants';
+
+// Type for flattened image gallery
+type GalleryImage = {
+  src: string;
+  review: Review;
+  imageIndex: number;
+};
 
 // CTA Card that appears in the reviews grid
 function ReviewsCTACard() {
@@ -129,8 +136,8 @@ export type ReviewsSectionProps = {
 };
 
 // Default configuration
-const DEFAULT_INITIAL_LIMIT = 9;
-const DEFAULT_BATCH_SIZE = 9;
+const DEFAULT_INITIAL_LIMIT = 8;
+const DEFAULT_BATCH_SIZE = 8;
 
 export function ReviewsSection({
   reviews,
@@ -148,7 +155,7 @@ export function ReviewsSection({
   const pathname = usePathname();
 
   // Initial reviews for SSR (service-specific, SEO-friendly)
-  const ssrReviews = reviews ?? getAllReviews().slice(0, initialLimit);
+  const ssrReviews = (reviews ?? getAllReviews()).slice(0, initialLimit);
 
   // All reviews for "load more" (includes related/general)
   const allReviews = moreReviews ?? getAllReviews();
@@ -160,7 +167,7 @@ export function ReviewsSection({
 
   // State for pagination - starts showing only SSR reviews
   const [visibleCount, setVisibleCount] = useState(ssrReviews.length);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedGalleryIndex, setSelectedGalleryIndex] = useState<number | null>(null);
 
   // Reset visible count when route or reviews change (page navigation)
   useEffect(() => {
@@ -171,13 +178,34 @@ export function ReviewsSection({
   const displayReviews = combinedReviews.slice(0, visibleCount);
   const hasMore = visibleCount < combinedReviews.length;
 
+  // Build flattened gallery of all images from all reviews (for gallery modal)
+  const galleryImages = useMemo<GalleryImage[]>(() => {
+    const images: GalleryImage[] = [];
+    combinedReviews.forEach((review) => {
+      if (review.images && review.images.length > 0) {
+        review.images.forEach((src, imageIndex) => {
+          images.push({ src, review, imageIndex });
+        });
+      }
+    });
+    return images;
+  }, [combinedReviews]);
+
+  // Find gallery index by image src
+  const handleImageClick = useCallback((imgSrc: string) => {
+    const index = galleryImages.findIndex((g) => g.src === imgSrc);
+    if (index !== -1) {
+      setSelectedGalleryIndex(index);
+    }
+  }, [galleryImages]);
+
   // Load more handler - instant, no network request
   const handleLoadMore = () => {
     setVisibleCount((prev) => Math.min(prev + batchSize, combinedReviews.length));
   };
 
   useEffect(() => {
-    if (selectedImage) {
+    if (selectedGalleryIndex !== null) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -185,7 +213,7 @@ export function ReviewsSection({
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [selectedImage]);
+  }, [selectedGalleryIndex]);
 
   const bgClass = variant === 'slate' ? 'bg-slate-50' : 'bg-white';
 
@@ -231,116 +259,38 @@ export function ReviewsSection({
             </div>
           </div>
 
-          {/* Masonry Grid Container */}
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
-            {displayReviews.map((review) => (
-              <React.Fragment key={review.id}>
+          {/* Masonry Grid Container - using flexbox columns to prevent reflow jumping */}
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Distribute reviews into columns */}
+            {(() => {
+              // On mobile: 1 column, tablet: 2 columns, desktop: 3 columns
+              // We render all 3 but hide extras on smaller screens
+              const columns: (typeof displayReviews)[] = [[], [], []];
+              displayReviews.forEach((review, i) => {
+                columns[i % 3].push(review);
+              });
+
+              // Find the column with fewest reviews (for CTA placement)
+              const shortestColIndex = columns.reduce((minIdx, col, idx, arr) =>
+                col.length < arr[minIdx].length ? idx : minIdx, 0);
+
+              return columns.map((columnReviews, colIndex) => (
                 <div
-                  className="break-inside-avoid mb-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-shadow duration-300"
+                  key={colIndex}
+                  className={`flex-1 flex flex-col gap-6 ${
+                    colIndex === 1 ? 'hidden md:flex' : ''
+                  } ${
+                    colIndex === 2 ? 'hidden lg:flex' : ''
+                  }`}
                 >
-                {/* Review Header: Avatar & Info */}
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative flex-shrink-0">
-                    {/* Avatar */}
-                    <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg text-white ${review.bg}`}
-                    >
-                      {review.initial}
-                    </div>
-                    {/* Google G Badge */}
-                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full p-[3px] shadow-sm border border-slate-100 z-10">
-                      {GOOGLE_G_LOGO}
-                    </div>
-                  </div>
-
-                  <div className="pt-0.5 min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5">
-                      <h3 className="font-bold text-slate-900 text-[15px] truncate">
-                        {review.name}
-                      </h3>
-                      {/* Verified Badge - Green with white tick */}
-                      <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 mt-0.5">
-                      <p className="text-xs text-slate-400 font-medium">
-                        {getRelativeTime(review.timestamp)}
-                      </p>
-                      {review.reviewer.reviewCount > 1 && (
-                        <span className="text-xs text-slate-400">
-                          · {review.reviewer.reviewCount} reviews
-                        </span>
-                      )}
-                    </div>
-                    {/* Local Guide Badge */}
-                    {review.reviewer.isLocalGuide && (
-                      <div className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 bg-blue-50 rounded-full">
-                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#4285F4" />
-                        </svg>
-                        <span className="text-[10px] font-semibold text-blue-700">Local Guide</span>
-                      </div>
-                    )}
-                    {/* Location Pill - shows when review has location data */}
-                    {review.location && (() => {
-                      const locationName = getLocationFromPostcode(review.location.postcodeArea);
-                      if (!locationName) {return null;}
-                      return (
-                        <div className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 bg-emerald-50 rounded-full">
-                          <MapPin className="w-3 h-3 text-emerald-600" />
-                          <span className="text-[10px] font-semibold text-emerald-700">{locationName}</span>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                </div>
-
-                {/* Stars */}
-                <div className="flex gap-1 mb-4">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 text-[#FBBC05] fill-current"
-                    />
+                  {columnReviews.map((review) => (
+                    <ReviewCard key={review.id} review={review} onImageClick={handleImageClick} />
                   ))}
+                  {/* CTA card at end of shortest column */}
+                  {colIndex === shortestColIndex && <ReviewsCTACard />}
                 </div>
-
-                {/* Review Text */}
-                <div>
-                  <ReviewText text={review.text} />
-
-                  {/* Review Images */}
-                  {review.images && review.images.length > 0 && (
-                    <div className="mt-4 grid grid-cols-2 gap-2">
-                      {review.images.map((imgSrc, index) => (
-                        <div
-                          key={index}
-                          className="relative rounded-lg overflow-hidden border border-slate-100 aspect-[4/3] group cursor-zoom-in"
-                          onClick={() => setSelectedImage(imgSrc)}
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={imgSrc}
-                            alt={`Review photo ${index + 1}`}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                            <ZoomIn className="w-6 h-6 text-white drop-shadow-md" />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                </div>
-              </React.Fragment>
-            ))}
-
-            {/* CTA card at end of grid - captures engaged users */}
-            <ReviewsCTACard />
+              ));
+            })()}
           </div>
 
           {/* Load More Button */}
@@ -352,7 +302,7 @@ export function ReviewsSection({
               >
                 Load More Reviews
                 <span className="text-slate-400 text-sm font-normal">
-                  ({allReviews.length - visibleCount} remaining)
+                  ({combinedReviews.length - visibleCount} remaining)
                 </span>
               </button>
             </div>
@@ -360,28 +310,373 @@ export function ReviewsSection({
         </div>
       </section>
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 touch-none"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-all"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={selectedImage}
-            alt="Enlarged review"
-            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
+      {/* Amazon-inspired Image Gallery Modal */}
+      {selectedGalleryIndex !== null && (
+        <ImageGalleryModal
+          images={galleryImages}
+          currentIndex={selectedGalleryIndex}
+          onClose={() => setSelectedGalleryIndex(null)}
+          onNavigate={setSelectedGalleryIndex}
+        />
       )}
     </>
+  );
+}
+
+// Extracted ReviewCard component for cleaner code
+function ReviewCard({ review, onImageClick }: { review: Review; onImageClick: (src: string) => void }) {
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-shadow duration-300">
+      {/* Review Header: Avatar & Info */}
+      <div className="flex items-start gap-4 mb-4">
+        <div className="relative flex-shrink-0">
+          {/* Avatar */}
+          <div
+            className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg text-white ${review.bg}`}
+          >
+            {review.initial}
+          </div>
+          {/* Google G Badge */}
+          <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full p-[3px] shadow-sm border border-slate-100 z-10">
+            {GOOGLE_G_LOGO}
+          </div>
+        </div>
+
+        <div className="pt-0.5 min-w-0 flex-1">
+          <div className="flex items-center gap-1.5">
+            <h3 className="font-bold text-slate-900 text-[15px] truncate">
+              {review.name}
+            </h3>
+            {/* Verified Badge - Green with white tick */}
+            <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
+            </div>
+          </div>
+          <div className="flex items-center gap-2 mt-0.5">
+            <p className="text-xs text-slate-400 font-medium">
+              {getRelativeTime(review.timestamp)}
+            </p>
+            {review.reviewer.reviewCount > 1 && (
+              <span className="text-xs text-slate-400">
+                · {review.reviewer.reviewCount} reviews
+              </span>
+            )}
+          </div>
+          {/* Local Guide Badge */}
+          {review.reviewer.isLocalGuide && (
+            <div className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 bg-blue-50 rounded-full">
+              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#4285F4" />
+              </svg>
+              <span className="text-[10px] font-semibold text-blue-700">Local Guide</span>
+            </div>
+          )}
+          {/* Location Pill - shows when review has location data */}
+          {review.location && (() => {
+            const locationName = getLocationFromPostcode(review.location.postcodeArea);
+            if (!locationName) {return null;}
+            return (
+              <div className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 bg-emerald-50 rounded-full">
+                <MapPin className="w-3 h-3 text-emerald-600" />
+                <span className="text-[10px] font-semibold text-emerald-700">{locationName}</span>
+              </div>
+            );
+          })()}
+        </div>
+      </div>
+
+      {/* Stars */}
+      <div className="flex gap-1 mb-4">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Star
+            key={i}
+            className="w-4 h-4 text-[#FBBC05] fill-current"
+          />
+        ))}
+      </div>
+
+      {/* Review Text */}
+      <div>
+        <ReviewText text={review.text} />
+
+        {/* Review Images */}
+        {review.images && review.images.length > 0 && (
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            {review.images.map((imgSrc, imgIndex) => (
+              <div
+                key={imgIndex}
+                className="relative rounded-lg overflow-hidden border border-slate-100 aspect-[4/3] group cursor-zoom-in"
+                onClick={() => onImageClick(imgSrc)}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imgSrc}
+                  alt={`Review photo ${imgIndex + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <ZoomIn className="w-6 h-6 text-white drop-shadow-md" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Amazon-inspired Image Gallery Modal
+function ImageGalleryModal({
+  images,
+  currentIndex,
+  onClose,
+  onNavigate,
+}: {
+  images: GalleryImage[];
+  currentIndex: number;
+  onClose: () => void;
+  onNavigate: (index: number) => void;
+}) {
+  const currentImage = images[currentIndex];
+  const review = currentImage.review;
+
+  // Get unique reviews with images and their first image index
+  const reviewsWithImages = useMemo(() => {
+    const seen = new Set<number>();
+    return images.reduce<{ reviewId: number; firstImageIndex: number }[]>((acc, img, idx) => {
+      if (!seen.has(img.review.id)) {
+        seen.add(img.review.id);
+        acc.push({ reviewId: img.review.id, firstImageIndex: idx });
+      }
+      return acc;
+    }, []);
+  }, [images]);
+
+  // Find current review's position in the list
+  const currentReviewPosition = reviewsWithImages.findIndex(r => r.reviewId === review.id);
+
+  // Navigate to previous/next review (not individual image)
+  const goToPrevReview = () => {
+    const prevPos = currentReviewPosition > 0 ? currentReviewPosition - 1 : reviewsWithImages.length - 1;
+    onNavigate(reviewsWithImages[prevPos].firstImageIndex);
+  };
+
+  const goToNextReview = () => {
+    const nextPos = currentReviewPosition < reviewsWithImages.length - 1 ? currentReviewPosition + 1 : 0;
+    onNavigate(reviewsWithImages[nextPos].firstImageIndex);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowLeft') {
+        goToPrevReview();
+      } else if (e.key === 'ArrowRight') {
+        goToNextReview();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentReviewPosition, reviewsWithImages, onClose, onNavigate]);
+
+  const imageCount = review.images?.length || 0;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm p-4 md:p-6 lg:p-8 touch-none"
+      onClick={onClose}
+    >
+      {/* Fixed full-page modal with consistent margin */}
+      <div
+        className="relative bg-white rounded-2xl md:rounded-3xl shadow-2xl w-full h-full overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-20 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-all"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Navigation arrows */}
+        <button
+          onClick={goToPrevReview}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 bg-white/90 hover:bg-white shadow-lg rounded-full transition-all text-slate-600 hover:text-slate-900"
+          title="Previous review"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={goToNextReview}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 bg-white/90 hover:bg-white shadow-lg rounded-full transition-all text-slate-600 hover:text-slate-900"
+          title="Next review"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+
+        {/* Main content */}
+        <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
+          {/* Left: Images area with collage layout */}
+          <div className="flex-1 bg-slate-100 p-4 lg:p-6 flex items-center justify-center overflow-hidden">
+            {/* Collage layouts based on image count */}
+            {imageCount === 1 && (
+              <div className="w-full h-full flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={review.images![0]}
+                  alt={`${review.name}'s photo`}
+                  className="max-w-full max-h-full object-contain rounded-xl shadow-lg"
+                />
+              </div>
+            )}
+
+            {imageCount === 2 && (
+              <div className="w-full h-full flex gap-3 items-center justify-center">
+                {review.images!.map((imgSrc, idx) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={idx}
+                    src={imgSrc}
+                    alt={`${review.name}'s photo ${idx + 1}`}
+                    className="max-w-[48%] max-h-full object-contain rounded-xl shadow-lg"
+                  />
+                ))}
+              </div>
+            )}
+
+            {imageCount === 3 && (
+              <div className="w-full h-full flex gap-3">
+                {/* Large image on left */}
+                <div className="flex-1 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={review.images![0]}
+                    alt={`${review.name}'s photo 1`}
+                    className="max-w-full max-h-full object-contain rounded-xl shadow-lg"
+                  />
+                </div>
+                {/* Two stacked images on right */}
+                <div className="flex flex-col gap-3 justify-center w-[40%]">
+                  {review.images!.slice(1).map((imgSrc, idx) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={idx}
+                      src={imgSrc}
+                      alt={`${review.name}'s photo ${idx + 2}`}
+                      className="max-w-full max-h-[48%] object-contain rounded-xl shadow-lg"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {imageCount >= 4 && (
+              <div className="w-full h-full grid grid-cols-2 gap-3">
+                {review.images!.map((imgSrc, idx) => (
+                  <div key={idx} className="flex items-center justify-center">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={imgSrc}
+                      alt={`${review.name}'s photo ${idx + 1}`}
+                      className="max-w-full max-h-full object-contain rounded-xl shadow-lg"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right: Review panel */}
+          <div className="lg:w-80 xl:w-96 p-5 lg:p-6 overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-200 flex flex-col">
+            {/* Reviewer header */}
+            <div className="flex items-start gap-3 mb-4">
+              <div className="relative flex-shrink-0">
+                <div
+                  className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white ${review.bg}`}
+                >
+                  {review.initial}
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full p-[3px] shadow-sm border border-slate-100 z-10">
+                  {GOOGLE_G_LOGO}
+                </div>
+              </div>
+
+              <div className="pt-0.5 min-w-0 flex-1">
+                <div className="flex items-center gap-1.5">
+                  <h3 className="font-bold text-slate-900 text-sm">{review.name}</h3>
+                  <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
+                  </div>
+                </div>
+                <p className="text-xs text-slate-400">
+                  {getRelativeTime(review.timestamp)}
+                </p>
+              </div>
+            </div>
+
+            {/* Stars */}
+            <div className="flex gap-0.5 mb-3">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} className="w-4 h-4 text-[#FBBC05] fill-current" />
+              ))}
+            </div>
+
+            {/* Review text */}
+            <p className="text-slate-600 text-sm leading-relaxed">{review.text}</p>
+
+            {/* CTA + counter - pushed to bottom */}
+            <div className="mt-auto pt-4 space-y-3">
+              <button
+                onClick={() => {
+                  onClose();
+                  setTimeout(() => {
+                    const formElement = document.getElementById('quote-form') || document.getElementById('contact');
+                    if (formElement) {
+                      formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                  }, 100);
+                }}
+                className="w-full bg-cta hover:bg-cta-hover text-white font-bold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+              >
+                Get My Free Quote
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <p className="text-center text-xs text-slate-400">
+                Review {currentReviewPosition + 1} of {reviewsWithImages.length}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom: Thumbnail strip */}
+        <div className="bg-slate-50 border-t border-slate-200 p-3 overflow-x-auto">
+          <div className="flex gap-2 justify-start lg:justify-center min-w-max px-2">
+            {images.map((img, idx) => {
+              // Highlight all images from current review
+              const isCurrentReview = img.review.id === review.id;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => onNavigate(idx)}
+                  className={`flex-shrink-0 w-14 h-14 lg:w-16 lg:h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                    isCurrentReview
+                      ? 'border-brand-500 ring-2 ring-brand-500/30'
+                      : 'border-transparent opacity-50 hover:opacity-100 hover:border-slate-300'
+                  }`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={img.src} alt="" className="w-full h-full object-cover" />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

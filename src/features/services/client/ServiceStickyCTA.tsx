@@ -13,6 +13,7 @@ interface ServiceStickyCTAProps {
 
 export function ServiceStickyCTA({ service: _service, location: _location }: ServiceStickyCTAProps) {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,8 +35,18 @@ export function ServiceStickyCTA({ service: _service, location: _location }: Ser
       setShowStickyCTA(shouldShow);
     };
 
+    // Check for mobile menu state changes via body data attribute
+    const observer = new MutationObserver(() => {
+      setMobileMenuOpen(document.body.dataset.mobileMenuOpen === 'true');
+    });
+
+    observer.observe(document.body, { attributes: true, attributeFilter: ['data-mobile-menu-open'] });
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const scrollToForm = () => {
@@ -47,9 +58,9 @@ export function ServiceStickyCTA({ service: _service, location: _location }: Ser
 
   return (
     <>
-      {/* Mobile Sticky CTA */}
+      {/* Mobile Sticky CTA - hidden when mobile menu is open */}
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 p-2 pb-[5%] md:hidden transition-transform duration-300 ease-out z-50 flex gap-2 ${showStickyCTA ? 'translate-y-0' : 'translate-y-full'}`}
+        className={`fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 p-2 pb-[5%] md:hidden transition-transform duration-300 ease-out z-40 flex gap-2 ${showStickyCTA && !mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'}`}
       >
         <button
           onClick={() => window.location.href = `tel:${siteConfig.contact.phone.replace(/\s/g, '')}`}
