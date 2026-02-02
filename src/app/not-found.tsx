@@ -81,10 +81,10 @@ export default function NotFound() {
                     className="group flex items-start gap-3 p-4 bg-neutral-50 rounded-lg hover:bg-neutral-100 transition-colors text-left"
                   >
                     <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center group-hover:bg-primary-200 transition-colors">
-                      <Icon name="arrow-right" size={20} className="text-primary-600" />
+                      <Icon name="arrow-right" size={20} className="text-primary-700" />
                     </div>
                     <div>
-                      <span className="font-medium text-neutral-900 group-hover:text-primary-600 transition-colors">
+                      <span className="font-medium text-neutral-900 group-hover:text-primary-700 transition-colors">
                         {link.label}
                       </span>
                       <p className="text-sm text-neutral-500">{link.description}</p>
@@ -98,7 +98,7 @@ export default function NotFound() {
               Need help?{' '}
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="text-primary-600 hover:text-primary-700 transition-colors"
+                className="text-primary-700 hover:text-primary-700 transition-colors"
               >
                 Contact us
               </a>

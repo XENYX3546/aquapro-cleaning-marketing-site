@@ -52,7 +52,7 @@ export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps)
               </div>
             </div>
           </div>
-          <p className="text-center text-sm text-slate-400 mt-6 font-medium flex items-center justify-center gap-2">
+          <p className="text-center text-sm text-slate-500 mt-6 font-medium flex items-center justify-center gap-2">
              <span className="relative flex h-2 w-2">
                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1B9CB6] opacity-75" />
                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1B9CB6]" />

@@ -150,7 +150,7 @@ export default function AreasPage() {
                 className="bg-neutral-50 rounded-xl p-6 border border-neutral-200 hover:border-primary-300 transition-colors"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <Icon name="map-pin" size={20} className="text-primary-600" />
+                  <Icon name="map-pin" size={20} className="text-primary-700" />
                   <h2 className="text-xl font-semibold text-neutral-900">
                     {location.name}
                   </h2>
@@ -169,7 +169,7 @@ export default function AreasPage() {
                       <Link
                         key={service.slug}
                         href={`/${service.slug}/${location.slug}`}
-                        className="text-xs px-2 py-1 bg-white rounded border border-neutral-200 text-neutral-600 hover:border-primary-300 hover:text-primary-600 transition-colors"
+                        className="text-xs px-2 py-1 bg-white rounded border border-neutral-200 text-neutral-600 hover:border-primary-300 hover:text-primary-700 transition-colors"
                       >
                         {service.shortName}
                       </Link>
@@ -201,7 +201,7 @@ export default function AreasPage() {
                   <Icon
                     name={service.icon as Parameters<typeof Icon>[0]['name']}
                     size={20}
-                    className="text-primary-600"
+                    className="text-primary-700"
                   />
                   {service.name}
                 </h3>
@@ -210,7 +210,7 @@ export default function AreasPage() {
                     <Link
                       key={location.slug}
                       href={`/${service.slug}/${location.slug}`}
-                      className="text-sm px-3 py-1.5 bg-white rounded-full border border-neutral-200 text-neutral-600 hover:border-primary-300 hover:text-primary-600 transition-colors"
+                      className="text-sm px-3 py-1.5 bg-white rounded-full border border-neutral-200 text-neutral-600 hover:border-primary-300 hover:text-primary-700 transition-colors"
                     >
                       {location.name}
                     </Link>

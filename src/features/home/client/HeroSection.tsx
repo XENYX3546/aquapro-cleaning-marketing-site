@@ -93,7 +93,7 @@ export function HeroSection() {
                     </svg>
                     <span className="text-sm font-bold text-white">Google</span>
                   </div>
-                  <div className="bg-[#34A853] text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-1 shadow-sm">
+                  <div className="bg-green-700 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-1 shadow-sm">
                     Guaranteed
                   </div>
                 </div>
@@ -103,7 +103,7 @@ export function HeroSection() {
                   <span className="text-lg font-black text-white italic tracking-tighter">
                     Smart
                   </span>
-                  <span className="text-lg font-black text-slate-400 italic tracking-tighter">
+                  <span className="text-lg font-black text-slate-500 italic tracking-tighter">
                     Seal
                   </span>
                 </div>
@@ -184,7 +184,7 @@ export function HeroSection() {
                   Get Your Free Quote
                 </Link>
 
-                <div className="flex items-center justify-center gap-4 mt-3 lg:mt-4 text-xs text-slate-400 font-medium">
+                <div className="flex items-center justify-center gap-4 mt-3 lg:mt-4 text-xs text-slate-500 font-medium">
                   <div className="flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5" />
                     <span>Takes under 60 seconds</span>

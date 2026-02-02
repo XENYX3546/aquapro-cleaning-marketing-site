@@ -57,7 +57,7 @@ export function RelatedServices({
         <div className="text-center mt-8">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-primary-600 font-medium hover:text-primary-700 transition-colors"
+            className="inline-flex items-center gap-2 text-primary-700 font-medium hover:text-primary-700 transition-colors"
           >
             View all services
             <ArrowRight className="w-4 h-4" />
@@ -84,14 +84,14 @@ function RelatedServiceCard({
       href={href}
       className="group bg-white rounded-xl p-6 border border-neutral-200 hover:border-primary-300 hover:shadow-md transition-all"
     >
-      <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+      <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
         {service.name}
         {location && <span className="text-neutral-500"> in {location.name}</span>}
       </h3>
       <p className="mt-2 text-sm text-neutral-600 line-clamp-2">
         {service.description}
       </p>
-      <div className="mt-4 flex items-center gap-1 text-sm font-medium text-primary-600 group-hover:text-primary-700">
+      <div className="mt-4 flex items-center gap-1 text-sm font-medium text-primary-700 group-hover:text-primary-700">
         Learn more
         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
       </div>

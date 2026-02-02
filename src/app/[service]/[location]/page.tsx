@@ -319,7 +319,7 @@ function NearbyAreasFooter({ service, location }: { service: Service; location: 
               <Link
                 key={loc.slug}
                 href={`/${service.slug}/${loc.slug}`}
-                className="px-4 py-2 text-sm bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-full text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-600 transition-colors shadow-sm"
+                className="px-4 py-2 text-sm bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-full text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 transition-colors shadow-sm"
               >
                 {loc.name}
               </Link>
@@ -330,14 +330,14 @@ function NearbyAreasFooter({ service, location }: { service: Service; location: 
           <div className="pt-6 border-t border-neutral-200/50 flex flex-wrap justify-center gap-4 text-sm">
             <Link
               href={`/services/${service.slug}`}
-              className="text-primary-600 hover:text-primary-700 font-medium"
+              className="text-primary-700 hover:text-primary-700 font-medium"
             >
               More about {service.shortName}
             </Link>
             <span className="text-neutral-300">|</span>
             <Link
               href={`/areas/${location.slug}`}
-              className="text-primary-600 hover:text-primary-700 font-medium"
+              className="text-primary-700 hover:text-primary-700 font-medium"
             >
               All services in {location.name}
             </Link>

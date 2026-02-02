@@ -134,7 +134,7 @@ export function ContactHero() {
                     </svg>
                     <span className="text-sm font-bold text-white">Google</span>
                   </div>
-                  <div className="bg-[#34A853] text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-1 shadow-sm">
+                  <div className="bg-green-700 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-1 shadow-sm">
                     Guaranteed
                   </div>
                 </div>
@@ -144,7 +144,7 @@ export function ContactHero() {
                   <span className="text-lg font-black text-white italic tracking-tighter">
                     Smart
                   </span>
-                  <span className="text-lg font-black text-slate-400 italic tracking-tighter">
+                  <span className="text-lg font-black text-slate-500 italic tracking-tighter">
                     Seal
                   </span>
                 </div>
@@ -213,7 +213,7 @@ export function ContactHero() {
                   >
                     Get Your Free Quote
                   </button>
-                  <div className="flex items-center justify-center gap-4 text-[11px] text-slate-400 font-medium">
+                  <div className="flex items-center justify-center gap-4 text-[11px] text-slate-500 font-medium">
                     <div className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       <span>Takes under 60 seconds</span>
@@ -252,7 +252,7 @@ export function ContactHero() {
                 <Phone className="w-5 h-5 lg:w-6 lg:h-6" />
               </div>
               <div className="flex-1">
-                <p className="text-slate-400 text-[10px] lg:text-xs font-bold uppercase tracking-wider mb-0.5">Call Us Now</p>
+                <p className="text-slate-500 text-[10px] lg:text-xs font-bold uppercase tracking-wider mb-0.5">Call Us Now</p>
                 <a href={siteConfig.contact.phoneHref} className="text-white font-bold text-sm lg:text-base hover:text-[#1B9CB6] transition-colors">{siteConfig.contact.phone}</a>
               </div>
               <button
@@ -270,7 +270,7 @@ export function ContactHero() {
                 <Mail className="w-5 h-5 lg:w-6 lg:h-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-slate-400 text-[10px] lg:text-xs font-bold uppercase tracking-wider mb-0.5">Email Us</p>
+                <p className="text-slate-500 text-[10px] lg:text-xs font-bold uppercase tracking-wider mb-0.5">Email Us</p>
                 <a href={`mailto:${siteConfig.contact.email}`} className="text-white font-bold text-sm lg:text-base hover:text-[#1B9CB6] transition-colors truncate block">{siteConfig.contact.email}</a>
               </div>
               <button
@@ -288,7 +288,7 @@ export function ContactHero() {
                 <MapPin className="w-5 h-5 lg:w-6 lg:h-6" />
               </div>
               <div className="flex-1">
-                <p className="text-slate-400 text-[10px] lg:text-xs font-bold uppercase tracking-wider mb-0.5">Location</p>
+                <p className="text-slate-500 text-[10px] lg:text-xs font-bold uppercase tracking-wider mb-0.5">Location</p>
                 <span className="text-white font-bold text-sm lg:text-base">{siteConfig.coverage}</span>
               </div>
               <button

@@ -21,7 +21,7 @@ export function ServiceClusterNav({ activeCluster }: ServiceClusterNavProps) {
           {/* Interior Cluster */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-5 h-5 text-primary-600" />
+              <Sparkles className="w-5 h-5 text-primary-700" />
               <h3 className="font-semibold text-neutral-900">
                 {clusterNames.interior}
               </h3>
@@ -34,7 +34,7 @@ export function ServiceClusterNav({ activeCluster }: ServiceClusterNavProps) {
                   className={`px-4 py-2 text-sm rounded-full font-medium transition-colors ${
                     activeCluster === 'interior'
                       ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'
-                      : 'bg-white border border-neutral-200 text-neutral-700 hover:border-primary-300 hover:text-primary-600'
+                      : 'bg-white border border-neutral-200 text-neutral-700 hover:border-primary-300 hover:text-primary-700'
                   }`}
                 >
                   {service.shortName}
@@ -46,7 +46,7 @@ export function ServiceClusterNav({ activeCluster }: ServiceClusterNavProps) {
           {/* Exterior Cluster */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Home className="w-5 h-5 text-primary-600" />
+              <Home className="w-5 h-5 text-primary-700" />
               <h3 className="font-semibold text-neutral-900">
                 {clusterNames.exterior}
               </h3>
@@ -59,7 +59,7 @@ export function ServiceClusterNav({ activeCluster }: ServiceClusterNavProps) {
                   className={`px-4 py-2 text-sm rounded-full font-medium transition-colors ${
                     activeCluster === 'exterior'
                       ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'
-                      : 'bg-white border border-neutral-200 text-neutral-700 hover:border-primary-300 hover:text-primary-600'
+                      : 'bg-white border border-neutral-200 text-neutral-700 hover:border-primary-300 hover:text-primary-700'
                   }`}
                 >
                   {service.shortName}

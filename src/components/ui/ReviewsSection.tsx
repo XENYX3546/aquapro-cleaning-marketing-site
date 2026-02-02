@@ -304,7 +304,7 @@ export function ReviewsSection({
                 className="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 text-white font-semibold rounded-full hover:bg-slate-800 transition-colors shadow-lg hover:shadow-xl"
               >
                 Load More Reviews
-                <span className="text-slate-400 text-sm font-normal">
+                <span className="text-slate-500 text-sm font-normal">
                   ({combinedReviews.length - visibleCount} remaining)
                 </span>
               </button>
@@ -356,11 +356,11 @@ function ReviewCard({ review, onImageClick }: { review: Review; onImageClick: (s
             </div>
           </div>
           <div className="flex items-center gap-2 mt-0.5">
-            <p className="text-xs text-slate-400 font-medium">
+            <p className="text-xs text-slate-500 font-medium">
               {getRelativeTime(review.timestamp)}
             </p>
             {review.reviewer.reviewCount > 1 && (
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-slate-500">
                 · {review.reviewer.reviewCount} reviews
               </span>
             )}
@@ -501,7 +501,7 @@ function ImageGalleryModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-20 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-all"
+          className="absolute top-3 right-3 z-20 text-slate-500 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-all"
         >
           <X className="w-5 h-5" />
         </button>
@@ -623,7 +623,7 @@ function ImageGalleryModal({
                     <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
                   </div>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500">
                   {getRelativeTime(review.timestamp)}
                 </p>
               </div>
@@ -656,7 +656,7 @@ function ImageGalleryModal({
                 Get My Free Quote
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <p className="text-center text-xs text-slate-400">
+              <p className="text-center text-xs text-slate-500">
                 Review {currentReviewPosition + 1} of {reviewsWithImages.length}
               </p>
             </div>

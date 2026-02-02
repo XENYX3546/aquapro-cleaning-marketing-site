@@ -22,7 +22,7 @@ export function NearbyAreas({ location, serviceSlug, serviceName }: NearbyAreasP
           <Link
             key={nearby.slug}
             href={`/${serviceSlug}/${nearby.slug}`}
-            className="px-3 py-1.5 text-sm bg-neutral-100 text-neutral-700 rounded-full hover:bg-primary-50 hover:text-primary-600 transition-colors"
+            className="px-3 py-1.5 text-sm bg-neutral-100 text-neutral-700 rounded-full hover:bg-primary-50 hover:text-primary-700 transition-colors"
           >
             {nearby.name}
           </Link>

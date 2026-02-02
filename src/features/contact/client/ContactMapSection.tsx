@@ -56,7 +56,7 @@ export function ContactMapSection() {
             Service Areas
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight mb-8">
-            Our <span className="text-primary-600">Locations & Coverage</span>
+            Our <span className="text-primary-700">Locations & Coverage</span>
           </h2>
 
           {/* Tab Buttons */}
@@ -116,7 +116,7 @@ export function ContactMapSection() {
           {/* Info Card Overlay */}
           <div className="absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-80 bg-white/95 backdrop-blur rounded-2xl p-5 shadow-lg border border-neutral-100 z-10">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 shrink-0">
+              <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 shrink-0">
                 <MapPin size={20} />
               </div>
               <div>

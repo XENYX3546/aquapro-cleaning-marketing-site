@@ -34,7 +34,7 @@ export function ContactInfoCards() {
               key={card.title}
               className="bg-white p-6 rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 mb-4">
+              <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center text-primary-700 mb-4">
                 <Icon name={card.icon} size={24} />
               </div>
               <h3 className="font-bold text-neutral-900 text-lg mb-2">{card.title}</h3>

@@ -129,7 +129,7 @@ export default async function LocationPage({ params }: PageProps) {
             <div className="animate-hero-stagger">
               {/* Location badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full mb-6">
-                <Icon name="map-pin" size={18} className="text-primary-600" />
+                <Icon name="map-pin" size={18} className="text-primary-700" />
                 <span className="text-sm font-semibold text-primary-700">
                   {location.postcodeAreas?.join(', ') || location.county}
                 </span>
@@ -137,7 +137,7 @@ export default async function LocationPage({ params }: PageProps) {
 
               <h1 className="text-[2rem] md:text-[2.5rem] font-bold text-neutral-900 tracking-tight leading-[1.1]">
                 {isCounty ? 'Professional ' : ''}Cleaning Services
-                <span className="block text-primary-600">{isCounty ? `Across ${location.name}` : `in ${location.name}`}</span>
+                <span className="block text-primary-700">{isCounty ? `Across ${location.name}` : `in ${location.name}`}</span>
               </h1>
 
               <p className="mt-6 text-lg md:text-xl text-neutral-500 max-w-xl leading-relaxed">
@@ -171,11 +171,11 @@ export default async function LocationPage({ params }: PageProps) {
                     {reviewStats.averageRating} Rated
                   </span>
                   <span className="flex items-center gap-2">
-                    <Icon name="shield-check" size={18} className="text-primary-600" />
+                    <Icon name="shield-check" size={18} className="text-primary-700" />
                     Fully Insured
                   </span>
                   <span className="flex items-center gap-2">
-                    <Icon name="users" size={18} className="text-primary-600" />
+                    <Icon name="users" size={18} className="text-primary-700" />
                     {isCounty ? `Covering All ${location.name}` : `Local ${location.county} Business`}
                   </span>
                 </div>
@@ -219,17 +219,17 @@ export default async function LocationPage({ params }: PageProps) {
                     <Icon
                       name={service.icon as Parameters<typeof Icon>[0]['name']}
                       size={28}
-                      className="text-primary-600"
+                      className="text-primary-700"
                     />
                   </div>
-                  <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                  <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
                     {service.name}
                   </h3>
                   <p className="mt-2 text-neutral-600 text-base">
                     {service.description}
                   </p>
                   <div className="mt-4 pt-4 border-t border-neutral-100">
-                    <span className="text-sm font-semibold text-primary-600 group-hover:text-primary-700 flex items-center gap-1">
+                    <span className="text-sm font-semibold text-primary-700 group-hover:text-primary-700 flex items-center gap-1">
                       {service.name} in {location.name}
                       <Icon name="arrow-right" size={14} className="group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -269,7 +269,7 @@ export default async function LocationPage({ params }: PageProps) {
                 <Link
                   key={loc.slug}
                   href={`/areas/${loc.slug}`}
-                  className="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-600 transition-colors shadow-sm border border-neutral-200"
+                  className="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-700 transition-colors shadow-sm border border-neutral-200"
                 >
                   {loc.name}
                 </Link>
@@ -306,7 +306,7 @@ export default async function LocationPage({ params }: PageProps) {
               <Button
                 href={ctaLinks.quote}
                 size="lg"
-                className="bg-white text-primary-600 hover:bg-neutral-100"
+                className="bg-white text-primary-700 hover:bg-neutral-100"
               >
                 Get a Free Quote
               </Button>
@@ -402,7 +402,7 @@ function FeaturedReview() {
     <Section className="bg-primary-50 border-y border-primary-100">
       <Container>
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-sm font-medium text-primary-600 mb-3">
+          <p className="text-sm font-medium text-primary-700 mb-3">
             Verified Google Review
           </p>
           <div className="flex justify-center gap-1 mb-4">
@@ -417,7 +417,7 @@ function FeaturedReview() {
             {topReview.name}
           </p>
           {topReview.reviewer.isLocalGuide && (
-            <p className="text-sm text-primary-600 mt-1">Local Guide</p>
+            <p className="text-sm text-primary-700 mt-1">Local Guide</p>
           )}
         </div>
       </Container>

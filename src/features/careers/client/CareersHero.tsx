@@ -85,7 +85,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
             <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center lg:justify-start gap-6 sm:gap-8">
               {/* Job Seekers Group */}
               <div className="space-y-3">
-                <span className="text-xs font-bold text-slate-400 tracking-widest uppercase block">
+                <span className="text-xs font-bold text-slate-500 tracking-widest uppercase block">
                   For Job Seekers
                 </span>
                 <button
@@ -101,7 +101,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
 
               {/* Businesses Group */}
               <div className="space-y-3">
-                <span className="text-xs font-bold text-slate-400 tracking-widest uppercase block">
+                <span className="text-xs font-bold text-slate-500 tracking-widest uppercase block">
                   For Clients
                 </span>
                 <div className="flex flex-wrap gap-4">
@@ -131,7 +131,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
               {/* Keyword Input */}
               <div className="flex-1 w-full relative group h-14 md:h-16 flex items-center px-4 md:px-6 z-30 border-b lg:border-b-0 border-slate-100">
                 <Search
-                  className="text-slate-400 group-focus-within:text-cta transition-colors mr-4 shrink-0"
+                  className="text-slate-500 group-focus-within:text-cta transition-colors mr-4 shrink-0"
                   size={24}
                 />
                 <div className="relative w-full h-full flex items-center">
@@ -145,14 +145,14 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
                     onFocus={() => setIsDropdownOpen(true)}
                     onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
                     placeholder="Find your role (e.g. Technician)"
-                    className="w-full h-full bg-transparent text-slate-900 placeholder:text-slate-400 text-lg font-medium outline-none truncate"
+                    className="w-full h-full bg-transparent text-slate-900 placeholder:text-slate-500 text-lg font-medium outline-none truncate"
                     autoComplete="off"
                   />
 
                   {/* Dropdown Menu */}
                   {isDropdownOpen && jobSuggestions.length > 0 && (
                     <div className="absolute top-full left-0 w-[calc(100%+3.5rem)] -ml-14 md:w-[calc(100%+3rem)] md:-ml-14 bg-white rounded-2xl shadow-xl border border-slate-100 mt-4 py-2 overflow-hidden z-50 max-h-96 overflow-y-auto">
-                      <div className="px-6 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest flex justify-between items-center bg-slate-50/50">
+                      <div className="px-6 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest flex justify-between items-center bg-slate-50/50">
                         <span>Available Roles</span>
                         <span className="text-slate-300">{jobSuggestions.length} found</span>
                       </div>
@@ -166,7 +166,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
                             <div className="font-bold text-slate-700 group-hover:text-brand-600 transition-colors text-base mb-1 truncate">
                               {job.title}
                             </div>
-                            <div className="flex items-center gap-3 text-xs text-slate-400 font-medium">
+                            <div className="flex items-center gap-3 text-xs text-slate-500 font-medium">
                               <span className="flex items-center gap-1">
                                 <MapPin size={12} /> {job.location}
                               </span>
@@ -191,11 +191,11 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
               {/* Location Input */}
               <div className="flex-1 w-full relative group h-14 md:h-16 flex items-center px-4 md:px-6 z-20 border-b lg:border-b-0 border-slate-100">
                 <MapPin
-                  className="text-slate-400 group-focus-within:text-cta transition-colors mr-4 shrink-0"
+                  className="text-slate-500 group-focus-within:text-cta transition-colors mr-4 shrink-0"
                   size={24}
                 />
                 <div className="flex flex-col justify-center w-full">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide hidden md:block">
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wide hidden md:block">
                     City or Postcode
                   </span>
                   <input
@@ -203,7 +203,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
                     value={locationQuery}
                     onChange={(e) => setLocationQuery(e.target.value)}
                     placeholder="Essex, CM3"
-                    className="w-full bg-transparent text-slate-900 text-base md:text-lg font-bold outline-none placeholder:text-slate-400 truncate"
+                    className="w-full bg-transparent text-slate-900 text-base md:text-lg font-bold outline-none placeholder:text-slate-500 truncate"
                   />
                 </div>
               </div>

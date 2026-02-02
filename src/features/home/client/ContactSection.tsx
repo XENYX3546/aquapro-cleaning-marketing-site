@@ -276,7 +276,7 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
                   Get My Free Quote
                 </button>
 
-                <div className="flex items-center justify-center gap-4 pt-2 text-xs text-slate-400 font-medium">
+                <div className="flex items-center justify-center gap-4 pt-2 text-xs text-slate-500 font-medium">
                   <div className="flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5" />
                     <span>Takes under 60 seconds</span>

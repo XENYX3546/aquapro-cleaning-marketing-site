@@ -185,10 +185,10 @@ function ServiceCard({ service }: { service: Service }) {
           <Icon
             name={service.icon as Parameters<typeof Icon>[0]['name']}
             size={28}
-            className="text-primary-600"
+            className="text-primary-700"
           />
         </div>
-        <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+        <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
           {service.name}
         </h3>
         <p className="mt-2 text-neutral-600">
@@ -199,14 +199,14 @@ function ServiceCard({ service }: { service: Service }) {
           <ul className="space-y-1">
             {service.idealFor.slice(0, 3).map((item) => (
               <li key={item} className="flex items-center gap-2 text-sm text-neutral-500">
-                <Icon name="check" size={12} className="text-primary-600" />
+                <Icon name="check" size={12} className="text-primary-700" />
                 {item}
               </li>
             ))}
           </ul>
         </div>
         <div className="mt-6 pt-4 border-t border-neutral-100">
-          <span className="text-sm font-medium text-primary-600 group-hover:text-primary-700 flex items-center gap-1">
+          <span className="text-sm font-medium text-primary-700 group-hover:text-primary-700 flex items-center gap-1">
             Learn more about {service.shortName}
             <Icon name="arrow-right" size={14} />
           </span>

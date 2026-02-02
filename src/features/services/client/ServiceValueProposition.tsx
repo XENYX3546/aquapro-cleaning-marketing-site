@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { Check, ChevronLeft, ChevronRight, Shield, TrendingUp, CalendarCheck } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
@@ -141,12 +142,13 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
               ref={containerRef}
               className="relative w-full aspect-[3/2] sm:aspect-[16/9] lg:aspect-auto lg:h-full rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50 select-none cursor-ew-resize ring-1 ring-black/5"
             >
-              {/* Clean Image (Right Side / Background) - using img for slider compatibility */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              {/* Clean Image (Right Side / Background) */}
+              <Image
                 src={afterImage}
                 alt={`After ${service.name.toLowerCase()}`}
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
                 draggable={false}
               />
 
@@ -158,19 +160,21 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                 AFTER
               </div>
 
-              {/* Dirty Image (Left Side / Overlay) - using img for slider compatibility */}
+              {/* Dirty Image (Left Side / Overlay) */}
               <div
                 className="absolute inset-0 overflow-hidden z-20"
                 style={{ width: `${sliderPosition}%` }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={beforeImage}
-                  alt={`Before ${service.name.toLowerCase()}`}
-                  className="absolute inset-0 w-full h-full object-cover max-w-none"
-                  style={{ width: containerWidth || '100%' }}
-                  draggable={false}
-                />
+                <div className="absolute inset-0" style={{ width: containerWidth || '100%' }}>
+                  <Image
+                    src={beforeImage}
+                    alt={`Before ${service.name.toLowerCase()}`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                    draggable={false}
+                  />
+                </div>
 
                 {/* Before Label */}
                  <div
@@ -204,7 +208,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
             </div>
 
             {/* Mobile-only interaction hint */}
-            <div className="lg:hidden text-center mt-3 text-xs text-slate-400 font-medium flex items-center justify-center gap-2">
+            <div className="lg:hidden text-center mt-3 text-xs text-slate-500 font-medium flex items-center justify-center gap-2">
               <ChevronLeft className="w-3 h-3" /> Drag to compare <ChevronRight className="w-3 h-3" />
             </div>
           </div>

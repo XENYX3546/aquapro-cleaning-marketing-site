@@ -15,11 +15,11 @@ export function CrossHubLinks({
     if (currentHub === 'services') {
       return (
         <div className="flex items-center justify-center gap-2 py-4">
-          <MapPin className="w-4 h-4 text-primary-600" />
+          <MapPin className="w-4 h-4 text-primary-700" />
           <span className="text-neutral-600">Looking for services in your area?</span>
           <Link
             href="/areas"
-            className="inline-flex items-center gap-1 text-primary-600 font-medium hover:text-primary-700"
+            className="inline-flex items-center gap-1 text-primary-700 font-medium hover:text-primary-700"
           >
             View all {locations.length} locations
             <ArrowRight className="w-4 h-4" />
@@ -30,11 +30,11 @@ export function CrossHubLinks({
 
     return (
       <div className="flex items-center justify-center gap-2 py-4">
-        <Wrench className="w-4 h-4 text-primary-600" />
+        <Wrench className="w-4 h-4 text-primary-700" />
         <span className="text-neutral-600">Want to learn more about our services?</span>
         <Link
           href="/services"
-          className="inline-flex items-center gap-1 text-primary-600 font-medium hover:text-primary-700"
+          className="inline-flex items-center gap-1 text-primary-700 font-medium hover:text-primary-700"
         >
           View all {services.length} services
           <ArrowRight className="w-4 h-4" />
@@ -48,7 +48,7 @@ export function CrossHubLinks({
     return (
       <section className="py-12 bg-primary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <MapPin className="w-10 h-10 text-primary-600 mx-auto mb-4" />
+          <MapPin className="w-10 h-10 text-primary-700 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-neutral-900 mb-2">
             Find Services in Your Area
           </h2>
@@ -71,7 +71,7 @@ export function CrossHubLinks({
   return (
     <section className="py-12 bg-primary-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <Wrench className="w-10 h-10 text-primary-600 mx-auto mb-4" />
+        <Wrench className="w-10 h-10 text-primary-700 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-neutral-900 mb-2">
           Explore Our Services
         </h2>

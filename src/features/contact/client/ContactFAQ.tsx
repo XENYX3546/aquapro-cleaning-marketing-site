@@ -70,7 +70,7 @@ export function ContactFAQ() {
             Common Questions
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight">
-            Frequently Asked <span className="text-primary-600">Questions</span>
+            Frequently Asked <span className="text-primary-700">Questions</span>
           </h2>
         </div>
 
@@ -82,7 +82,7 @@ export function ContactFAQ() {
                 onClick={() => toggleFAQ(index)}
                 aria-expanded={openIndex === index}
               >
-                <span className="text-neutral-900 font-bold text-lg md:text-xl pr-6 group-hover:text-primary-600 transition-colors">
+                <span className="text-neutral-900 font-bold text-lg md:text-xl pr-6 group-hover:text-primary-700 transition-colors">
                   {item.question}
                 </span>
                 {openIndex === index ? (

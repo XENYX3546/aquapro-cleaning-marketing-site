@@ -90,7 +90,7 @@ export function AboutHero() {
                     </svg>
                     <span className="text-sm font-bold text-white">Google</span>
                   </div>
-                  <div className="bg-[#34A853] text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-1 shadow-sm">
+                  <div className="bg-green-700 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-1 shadow-sm">
                     Guaranteed
                   </div>
                 </div>
@@ -100,7 +100,7 @@ export function AboutHero() {
                   <span className="text-lg font-black text-white italic tracking-tighter">
                     Smart
                   </span>
-                  <span className="text-lg font-black text-slate-400 italic tracking-tighter">
+                  <span className="text-lg font-black text-slate-500 italic tracking-tighter">
                     Seal
                   </span>
                 </div>

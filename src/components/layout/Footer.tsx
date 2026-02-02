@@ -204,10 +204,10 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-sm">
+          <p className="text-slate-400 text-sm">
             &copy; {currentYear} {siteConfig.legalName}. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm text-slate-500">
+          <div className="flex gap-6 text-sm text-slate-400">
             {navigation.legal.map((link) => (
               <Link
                 key={link.href}

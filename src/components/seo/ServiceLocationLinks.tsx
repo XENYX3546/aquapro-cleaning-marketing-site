@@ -39,8 +39,8 @@ export function ServiceLocationLinks({
               href={`/${service.slug}/${location.slug}`}
               className="group flex items-center gap-2 p-3 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-primary-300 hover:bg-primary-50 transition-all"
             >
-              <MapPin className="w-4 h-4 text-primary-600 flex-shrink-0" />
-              <span className="text-sm font-medium text-neutral-700 group-hover:text-primary-600 transition-colors truncate">
+              <MapPin className="w-4 h-4 text-primary-700 flex-shrink-0" />
+              <span className="text-sm font-medium text-neutral-700 group-hover:text-primary-700 transition-colors truncate">
                 {location.name}
               </span>
             </Link>
@@ -50,7 +50,7 @@ export function ServiceLocationLinks({
         <div className="text-center mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/areas"
-            className="inline-flex items-center gap-2 text-primary-600 font-medium hover:text-primary-700 transition-colors"
+            className="inline-flex items-center gap-2 text-primary-700 font-medium hover:text-primary-700 transition-colors"
           >
             View all {locations.length} locations
             <ArrowRight className="w-4 h-4" />

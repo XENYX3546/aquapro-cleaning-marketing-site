@@ -40,7 +40,7 @@ export function ServiceCrossLinks({
             <Link
               key={service.slug}
               href={`/${service.slug}/${location.slug}`}
-              className="px-4 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-full hover:bg-primary-50 hover:text-primary-600 transition-colors font-medium"
+              className="px-4 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-full hover:bg-primary-50 hover:text-primary-700 transition-colors font-medium"
             >
               {service.shortName}
             </Link>
@@ -49,7 +49,7 @@ export function ServiceCrossLinks({
         <div className="mt-4">
           <Link
             href={`/areas/${location.slug}`}
-            className="inline-flex items-center gap-1 text-sm text-primary-600 font-medium hover:text-primary-700"
+            className="inline-flex items-center gap-1 text-sm text-primary-700 font-medium hover:text-primary-700"
           >
             All services in {location.name}
             <ArrowRight className="w-3.5 h-3.5" />
@@ -85,13 +85,13 @@ export function ServiceCrossLinks({
                   href={`/${service.slug}/${location.slug}`}
                   className="group bg-white rounded-xl p-5 border border-neutral-200 hover:border-primary-300 hover:shadow-md transition-all"
                 >
-                  <h4 className="font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                  <h4 className="font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
                     {service.name}
                   </h4>
                   <p className="mt-1 text-sm text-neutral-600 line-clamp-2">
                     {service.description}
                   </p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary-600">
+                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary-700">
                     View service
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -112,7 +112,7 @@ export function ServiceCrossLinks({
                 <Link
                   key={service.slug}
                   href={`/${service.slug}/${location.slug}`}
-                  className="px-4 py-2 bg-white border border-neutral-200 text-neutral-700 rounded-lg hover:border-primary-300 hover:text-primary-600 transition-colors font-medium text-sm"
+                  className="px-4 py-2 bg-white border border-neutral-200 text-neutral-700 rounded-lg hover:border-primary-300 hover:text-primary-700 transition-colors font-medium text-sm"
                 >
                   {service.name}
                 </Link>
@@ -124,7 +124,7 @@ export function ServiceCrossLinks({
         <div className="text-center mt-8 pt-6 border-t border-neutral-200">
           <Link
             href={`/areas/${location.slug}`}
-            className="inline-flex items-center gap-2 text-primary-600 font-medium hover:text-primary-700 transition-colors"
+            className="inline-flex items-center gap-2 text-primary-700 font-medium hover:text-primary-700 transition-colors"
           >
             View all services in {location.name}
             <ArrowRight className="w-4 h-4" />
