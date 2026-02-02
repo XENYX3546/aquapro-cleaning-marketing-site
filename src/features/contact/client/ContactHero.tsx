@@ -67,6 +67,7 @@ export function ContactHero() {
           alt="Clean Home Exterior"
           fill
           sizes="100vw"
+          quality={65}
           className="object-cover grayscale mix-blend-overlay"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/60" />

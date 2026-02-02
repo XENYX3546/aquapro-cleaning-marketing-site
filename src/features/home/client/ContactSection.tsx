@@ -85,6 +85,7 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
                      fill
                      className="object-cover"
                      sizes="(max-width: 1024px) 100vw, 50vw"
+                     quality={65}
                   />
                   <div className="absolute inset-0 bg-slate-900/90" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />

@@ -304,7 +304,7 @@ export function ReviewsSection({
                 className="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 text-white font-semibold rounded-full hover:bg-slate-800 transition-colors shadow-lg hover:shadow-xl"
               >
                 Load More Reviews
-                <span className="text-slate-500 text-sm font-normal">
+                <span className="text-slate-300 text-sm font-normal">
                   ({combinedReviews.length - visibleCount} remaining)
                 </span>
               </button>
@@ -415,7 +415,8 @@ function ReviewCard({ review, onImageClick }: { review: Review; onImageClick: (s
                   src={imgSrc}
                   alt={`Review photo ${imgIndex + 1}`}
                   fill
-                  sizes="200px"
+                  sizes="(max-width: 768px) 150px, 180px"
+                  quality={65}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
@@ -534,6 +535,7 @@ function ImageGalleryModal({
                   alt={`${review.name}'s photo`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 800px"
+                  quality={65}
                   className="object-contain rounded-xl"
                 />
               </div>
@@ -548,6 +550,7 @@ function ImageGalleryModal({
                       alt={`${review.name}'s photo ${idx + 1}`}
                       fill
                       sizes="(max-width: 1024px) 50vw, 400px"
+                      quality={65}
                       className="object-contain rounded-xl"
                     />
                   </div>
@@ -564,6 +567,7 @@ function ImageGalleryModal({
                     alt={`${review.name}'s photo 1`}
                     fill
                     sizes="(max-width: 1024px) 60vw, 500px"
+                    quality={65}
                     className="object-contain rounded-xl"
                   />
                 </div>
@@ -576,6 +580,7 @@ function ImageGalleryModal({
                         alt={`${review.name}'s photo ${idx + 2}`}
                         fill
                         sizes="(max-width: 1024px) 40vw, 300px"
+                        quality={65}
                         className="object-contain rounded-xl"
                       />
                     </div>
@@ -593,6 +598,7 @@ function ImageGalleryModal({
                       alt={`${review.name}'s photo ${idx + 1}`}
                       fill
                       sizes="(max-width: 1024px) 50vw, 400px"
+                      quality={65}
                       className="object-contain rounded-xl"
                     />
                   </div>
@@ -679,7 +685,7 @@ function ImageGalleryModal({
                       : 'border-transparent opacity-50 hover:opacity-100 hover:border-slate-300'
                   }`}
                 >
-                  <Image src={img.src} alt="" fill sizes="64px" className="object-cover" />
+                  <Image src={img.src} alt="" fill sizes="64px" quality={65} className="object-cover" />
                 </button>
               );
             })}

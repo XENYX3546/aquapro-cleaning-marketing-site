@@ -39,6 +39,7 @@ export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps)
               alt={`${service.name} Process`}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
+              quality={65}
               className="object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100"
             />
 
@@ -78,7 +79,7 @@ export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps)
                       <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2">
                         {step.title}
                         {index === service.process.length - 1 && (
-                          <span className="text-[#E30663] block sm:inline"> + Satisfaction Guaranteed</span>
+                          <span className="text-pink-700 block sm:inline"> + Satisfaction Guaranteed</span>
                         )}
                       </h3>
                       <p className="text-slate-600 leading-relaxed text-sm md:text-[15px]">

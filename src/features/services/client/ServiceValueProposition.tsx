@@ -148,6 +148,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                 alt={`After ${service.name.toLowerCase()}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                quality={65}
                 className="object-cover"
                 draggable={false}
               />
@@ -171,6 +172,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                     alt={`Before ${service.name.toLowerCase()}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    quality={65}
                     className="object-cover"
                     draggable={false}
                   />
@@ -224,7 +226,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                     {benefit.icon}
                   </div>
                   <div className="pt-0.5">
-                    <h4 className="text-slate-900 font-bold text-lg mb-0.5">{benefit.title}</h4>
+                    <h3 className="text-slate-900 font-bold text-lg mb-0.5">{benefit.title}</h3>
                     <p className="text-slate-500 text-[15px] leading-relaxed">
                       {benefit.description}
                     </p>
@@ -238,9 +240,9 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                {/* Decorative accent */}
                <div className="absolute top-0 right-0 w-20 h-20 bg-[#1B9CB6]/5 rounded-bl-full -mr-4 -mt-4" />
 
-               <h4 className="font-bold text-slate-900 mb-4 flex items-center gap-2 relative z-10 text-[15px] uppercase tracking-wide">
+               <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2 relative z-10 text-[15px] uppercase tracking-wide">
                  What&apos;s Included:
-               </h4>
+               </h3>
                <ul className="space-y-3 relative z-10">
                   {service.features.slice(0, 3).map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-slate-700 text-sm font-medium">

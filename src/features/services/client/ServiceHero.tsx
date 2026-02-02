@@ -99,6 +99,7 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
           priority
           fetchPriority="high"
           sizes="100vw"
+          quality={65}
           className="object-cover object-center transition-opacity duration-500 opacity-90"
         />
 

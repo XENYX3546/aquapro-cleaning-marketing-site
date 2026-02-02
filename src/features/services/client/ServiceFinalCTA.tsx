@@ -22,6 +22,7 @@ export function ServiceFinalCTA({ service, location }: ServiceFinalCTAProps) {
           alt="Aquapro Team"
           fill
           sizes="100vw"
+          quality={65}
           className="object-cover object-center opacity-50"
         />
         {/* Base Dark Overlay */}

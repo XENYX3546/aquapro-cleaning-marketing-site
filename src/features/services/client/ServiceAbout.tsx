@@ -33,7 +33,7 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <Clock className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h4 className="font-bold text-slate-900 text-sm">10+ Years</h4>
+            <h3 className="font-bold text-slate-900 text-sm">10+ Years</h3>
             <p className="text-slate-500 text-xs">Experience</p>
           </div>
 
@@ -42,7 +42,7 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <Users className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h4 className="font-bold text-slate-900 text-sm">2k+ Clients</h4>
+            <h3 className="font-bold text-slate-900 text-sm">2k+ Clients</h3>
             <p className="text-slate-500 text-xs">Happy Customers</p>
           </div>
 
@@ -51,7 +51,7 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <Award className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h4 className="font-bold text-slate-900 text-sm">5 Star Rated</h4>
+            <h3 className="font-bold text-slate-900 text-sm">5 Star Rated</h3>
             <p className="text-slate-500 text-xs">{reviewStatsDisplay.totalReviews} Reviews</p>
           </div>
 
@@ -60,7 +60,7 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <ShieldCheck className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h4 className="font-bold text-slate-900 text-sm">Fully Insured</h4>
+            <h3 className="font-bold text-slate-900 text-sm">Fully Insured</h3>
             <p className="text-slate-500 text-xs">100% Protection</p>
           </div>
         </div>
@@ -97,6 +97,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                   alt={`Professional ${service.name}${locationText}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  quality={65}
                   className="object-cover transform hover:scale-105 transition-transform duration-700"
                 />
              </div>
@@ -132,7 +133,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                       <Clock className="w-6 h-6" strokeWidth={2} />
                    </div>
                    <div>
-                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">10+ Years</h4>
+                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">10+ Years</h3>
                       <p className="text-slate-500 text-sm">Experience</p>
                    </div>
                 </div>
@@ -143,7 +144,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                       <Users className="w-6 h-6" strokeWidth={2} />
                    </div>
                    <div>
-                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">2k+ Clients</h4>
+                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">2k+ Clients</h3>
                       <p className="text-slate-500 text-sm">Happy Customers</p>
                    </div>
                 </div>
@@ -154,7 +155,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                       <Award className="w-6 h-6" strokeWidth={2} />
                    </div>
                    <div>
-                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">5 Star Rated</h4>
+                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">5 Star Rated</h3>
                       <p className="text-slate-500 text-sm">{reviewStatsDisplay.totalReviews} Reviews</p>
                    </div>
                 </div>
@@ -165,7 +166,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                       <ShieldCheck className="w-6 h-6" strokeWidth={2} />
                    </div>
                    <div>
-                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">Fully Insured</h4>
+                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">Fully Insured</h3>
                       <p className="text-slate-500 text-sm">100% Protection</p>
                    </div>
                 </div>

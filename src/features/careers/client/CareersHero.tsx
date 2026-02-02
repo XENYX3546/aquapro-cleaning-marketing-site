@@ -52,6 +52,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
             priority
             fetchPriority="high"
             sizes="100vw"
+            quality={65}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A] via-[#0F172A]/95 to-[#0F172A]/80" />
         </div>

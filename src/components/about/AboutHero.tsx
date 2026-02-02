@@ -17,6 +17,7 @@ export function AboutHero() {
           priority
           fetchPriority="high"
           sizes="100vw"
+          quality={65}
         />
         {/* Solid dark overlay to wash out the image */}
         <div className="absolute inset-0 bg-slate-900/85 mix-blend-multiply" />
@@ -125,6 +126,7 @@ export function AboutHero() {
                 alt="Aquapro professional cleaning team at work"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                quality={65}
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent" />

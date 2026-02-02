@@ -19,6 +19,7 @@ export function CommercialBanner() {
           fill
           className="object-cover opacity-40 mix-blend-overlay"
           sizes="100vw"
+          quality={65}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/80" />
       </div>

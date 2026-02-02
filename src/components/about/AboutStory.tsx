@@ -30,6 +30,7 @@ export function AboutStory() {
                 alt="Aquapro technician performing professional carpet cleaning"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
+                quality={65}
                 className="object-cover"
               />
 
