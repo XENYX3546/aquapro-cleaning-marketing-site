@@ -1,8 +1,79 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Star, X, ZoomIn, Check, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { Star, X, ZoomIn, Check, MapPin, ArrowRight, ShieldCheck, Clock } from 'lucide-react';
 import { getAllReviews, reviewStatsDisplay, getRelativeTime, getLocationFromPostcode, type Review } from '@/lib/constants';
+
+// CTA Card that appears in the reviews grid
+function ReviewsCTACard() {
+  const scrollToQuoteForm = () => {
+    const formElement = document.getElementById('quote-form') || document.getElementById('contact');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <div className="break-inside-avoid mb-6 bg-gradient-to-br from-[#1B9CB6] to-[#157a91] rounded-2xl p-6 shadow-lg border border-[#1B9CB6]/20">
+      <div className="text-center">
+        <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Star className="w-7 h-7 text-white fill-white" />
+        </div>
+        <h3 className="text-xl font-bold text-white mb-2">
+          Join 2,000+ Happy Customers
+        </h3>
+        <p className="text-white/80 text-sm mb-5 leading-relaxed">
+          See why Essex homeowners trust us with their properties. Get your free, no-obligation quote today.
+        </p>
+
+        <button
+          onClick={scrollToQuoteForm}
+          className="w-full bg-white text-[#1B9CB6] font-bold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 mb-4"
+        >
+          Get My Free Quote
+          <ArrowRight className="w-4 h-4" />
+        </button>
+
+        <div className="flex items-center justify-center gap-4 text-white/70 text-xs">
+          <div className="flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5" />
+            <span>Quick response</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Fully insured</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const REVIEW_TRUNCATE_LENGTH = 250;
+
+function ReviewText({ text }: { text: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const shouldTruncate = text.length > REVIEW_TRUNCATE_LENGTH;
+
+  if (!shouldTruncate) {
+    return <p className="text-slate-600 text-[15px] leading-relaxed">{text}</p>;
+  }
+
+  const displayText = isExpanded ? text : text.slice(0, REVIEW_TRUNCATE_LENGTH).trim() + '...';
+
+  return (
+    <div>
+      <p className="text-slate-600 text-[15px] leading-relaxed">{displayText}</p>
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="mt-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+      >
+        {isExpanded ? 'Show less' : 'Read more'}
+      </button>
+    </div>
+  );
+}
 
 const GOOGLE_G_LOGO = (
   <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
@@ -74,6 +145,8 @@ export function ReviewsSection({
   showLoadMore = true,
   locationSlug: _locationSlug,
 }: ReviewsSectionProps) {
+  const pathname = usePathname();
+
   // Initial reviews for SSR (service-specific, SEO-friendly)
   const ssrReviews = reviews ?? getAllReviews().slice(0, initialLimit);
 
@@ -89,11 +162,10 @@ export function ReviewsSection({
   const [visibleCount, setVisibleCount] = useState(ssrReviews.length);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // Reset visible count when reviews change (page navigation)
-  const reviewsKey = ssrReviews[0]?.id ?? 0;
+  // Reset visible count when route or reviews change (page navigation)
   useEffect(() => {
     setVisibleCount(ssrReviews.length);
-  }, [reviewsKey, ssrReviews.length]);
+  }, [pathname, ssrReviews.length]);
 
   // Current visible reviews
   const displayReviews = combinedReviews.slice(0, visibleCount);
@@ -162,10 +234,10 @@ export function ReviewsSection({
           {/* Masonry Grid Container */}
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
             {displayReviews.map((review) => (
-              <div
-                key={review.id}
-                className="break-inside-avoid mb-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-shadow duration-300"
-              >
+              <React.Fragment key={review.id}>
+                <div
+                  className="break-inside-avoid mb-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-shadow duration-300"
+                >
                 {/* Review Header: Avatar & Info */}
                 <div className="flex items-start gap-4 mb-4">
                   <div className="relative flex-shrink-0">
@@ -236,9 +308,7 @@ export function ReviewsSection({
 
                 {/* Review Text */}
                 <div>
-                  <p className="text-slate-600 text-[15px] leading-relaxed">
-                    {review.text}
-                  </p>
+                  <ReviewText text={review.text} />
 
                   {/* Review Images */}
                   {review.images && review.images.length > 0 && (
@@ -265,8 +335,12 @@ export function ReviewsSection({
                   )}
                 </div>
 
-              </div>
+                </div>
+              </React.Fragment>
             ))}
+
+            {/* CTA card at end of grid - captures engaged users */}
+            <ReviewsCTACard />
           </div>
 
           {/* Load More Button */}

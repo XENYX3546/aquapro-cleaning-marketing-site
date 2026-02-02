@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, ArrowDown } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { siteConfig } from '@/lib/constants';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
@@ -11,7 +11,7 @@ interface ServiceStickyCTAProps {
   location?: Location;
 }
 
-export function ServiceStickyCTA({ service, location }: ServiceStickyCTAProps) {
+export function ServiceStickyCTA({ service: _service, location: _location }: ServiceStickyCTAProps) {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
@@ -45,24 +45,8 @@ export function ServiceStickyCTA({ service, location }: ServiceStickyCTAProps) {
     }
   };
 
-  const scrollToBottomForm = () => {
-    const formElement = document.getElementById('final-cta');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
-
   return (
     <>
-      {/* Mobile Sticky Top Banner */}
-      <div
-        onClick={scrollToBottomForm}
-        className={`fixed top-0 left-0 right-0 bg-[#1B9CB6] text-white p-3 text-center text-sm font-bold shadow-md md:hidden transition-transform duration-300 z-50 cursor-pointer flex items-center justify-center gap-2 ${showStickyCTA ? 'translate-y-0' : '-translate-y-full'}`}
-      >
-        <span>Get Your Free {location ? `${location.name}` : service.shortName} Quote</span>
-        <ArrowDown className="w-4 h-4 animate-bounce" />
-      </div>
-
       {/* Mobile Sticky CTA */}
       <div
         className={`fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 p-2 pb-[5%] md:hidden transition-transform duration-300 ease-out z-50 flex gap-2 ${showStickyCTA ? 'translate-y-0' : 'translate-y-full'}`}
@@ -78,7 +62,7 @@ export function ServiceStickyCTA({ service, location }: ServiceStickyCTAProps) {
           onClick={scrollToForm}
           className="flex-1 bg-[#E30663] text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-[#C20555]"
         >
-          Get Quote
+          See My Price
         </button>
       </div>
     </>

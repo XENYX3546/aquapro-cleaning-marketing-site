@@ -2,10 +2,19 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ArrowRight } from 'lucide-react';
-import { ctaLinks } from '@/lib/constants';
+import { Star, ArrowRight, Check } from 'lucide-react';
+import { ctaLinks, getAllReviews, type Review } from '@/lib/constants';
+
+// Max characters for testimonial to fit in the overlay
+const MAX_TESTIMONIAL_LENGTH = 120;
+
+function getTopFittingReview(reviews: Review[]): Review {
+  const fitting = reviews.filter(r => r.text.length <= MAX_TESTIMONIAL_LENGTH);
+  return fitting[0] || reviews[0];
+}
 
 export function AboutStory() {
+  const review = getTopFittingReview(getAllReviews());
   return (
     <div className="bg-slate-50 py-24 relative overflow-hidden">
       {/* Background decoration */}
@@ -31,8 +40,8 @@ export function AboutStory() {
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-white/50">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-slate-500 font-bold text-xs border border-slate-200">
-                      RK
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-xs ${review.bg}`}>
+                      {review.initial}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex text-[#FBBC05] mb-2">
@@ -41,17 +50,21 @@ export function AboutStory() {
                         ))}
                       </div>
                       <p className="text-slate-700 text-sm font-medium leading-relaxed mb-2 line-clamp-2">
-                        &quot;Professional, polite, and they left everything
-                        spotless. The difference is night and day!&quot;
+                        &quot;{review.text}&quot;
                       </p>
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-bold text-slate-900">
-                          Rebecca King
+                          {review.name}
                         </span>
                         <span className="w-1 h-1 bg-slate-300 rounded-full" />
-                        <span className="text-[10px] text-brand-500 font-bold uppercase tracking-wide">
-                          Verified Customer
-                        </span>
+                        <div className="flex items-center gap-1">
+                          <div className="w-3.5 h-3.5 bg-green-500 rounded-full flex items-center justify-center">
+                            <Check className="w-2 h-2 text-white" strokeWidth={3} />
+                          </div>
+                          <span className="text-[10px] text-green-600 font-bold uppercase tracking-wide">
+                            Verified Review
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -96,7 +109,7 @@ export function AboutStory() {
                 href={ctaLinks.quote}
                 className="bg-cta hover:bg-cta-hover text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 w-fit transition-all"
               >
-                Get a Free Quote
+                Get My Free Quote
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

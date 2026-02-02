@@ -1,13 +1,12 @@
 import { Metadata } from 'next';
 import { siteConfig, reviewStats } from '@/lib/constants';
 import { LandingLayout } from '@/components/layout';
-import { ReviewsSection } from '@/components/ui';
+import { ReviewsSection, ExpertHelpCTA } from '@/components/ui';
 import { ContactInfoCards } from '@/features/contact/server';
 import {
   ContactHero,
   ContactMapSection,
   ContactFAQ,
-  NeedHelp,
 } from '@/features/contact/client';
 
 export const metadata: Metadata = {
@@ -169,7 +168,7 @@ export default function ContactPage() {
       <ReviewsSection />
       <ContactMapSection />
       <ContactFAQ />
-      <NeedHelp />
+      <ExpertHelpCTA variant="scroll" />
     </LandingLayout>
   );
 }

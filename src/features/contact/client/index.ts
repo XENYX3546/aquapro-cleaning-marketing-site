@@ -4,4 +4,3 @@
 export { ContactHero } from './ContactHero';
 export { ContactMapSection } from './ContactMapSection';
 export { ContactFAQ } from './ContactFAQ';
-export { NeedHelp } from './NeedHelp';

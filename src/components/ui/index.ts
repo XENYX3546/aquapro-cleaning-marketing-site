@@ -10,3 +10,4 @@ export { LeadForm } from './LeadForm';
 export { CommercialBanner } from './CommercialBanner';
 export { ReviewsSection, type ReviewsSectionProps } from './ReviewsSection';
 export { FAQSection, type FAQSectionProps, type FAQItem } from './FAQSection';
+export { ExpertHelpCTA } from './ExpertHelpCTA';

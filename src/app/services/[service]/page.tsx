@@ -86,6 +86,13 @@ function generateServiceSchema(service: ReturnType<typeof getServiceBySlug>) {
         postalCode: 'CM3 6LZ',
         addressCountry: 'GB',
       },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: String(reviewStats.averageRating),
+        reviewCount: String(reviewStats.totalReviews),
+        bestRating: String(reviewStats.bestRating),
+        worstRating: String(reviewStats.worstRating),
+      },
     },
     areaServed: {
       '@type': 'GeoCircle',
@@ -96,13 +103,25 @@ function generateServiceSchema(service: ReturnType<typeof getServiceBySlug>) {
       },
       geoRadius: '50000',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: String(reviewStats.averageRating),
-      reviewCount: String(reviewStats.totalReviews),
-      bestRating: String(reviewStats.bestRating),
-      worstRating: String(reviewStats.worstRating),
-    },
+  };
+}
+
+function generateFAQSchema(service: ReturnType<typeof getServiceBySlug>) {
+  if (!service || !service.faqs || service.faqs.length === 0) {
+    return null;
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: service.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
   };
 }
 
@@ -143,6 +162,7 @@ export default async function ServicePage({ params }: Props) {
 
   const jsonLd = generateServiceSchema(service);
   const breadcrumbJsonLd = generateBreadcrumbSchema(service);
+  const faqJsonLd = generateFAQSchema(service);
 
   return (
     <LandingLayout>
@@ -156,11 +176,20 @@ export default async function ServicePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <ServiceHero service={service} />
       <ServiceValueProposition service={service} />
       <ReviewsSection
         reviews={getServiceSpecificReviews(service.id)}
         moreReviews={getAllReviewsForService(service.id)}
+        tagline={`${service.shortName} Reviews`}
+        title={<>What Our <span className="text-brand-500">{service.shortName}</span> Customers Say</>}
+        subtitle={`Real reviews from Essex homeowners who used our ${service.name.toLowerCase()} service.`}
       />
       <ServiceHowItWorks service={service} />
 

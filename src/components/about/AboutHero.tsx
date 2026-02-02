@@ -40,7 +40,7 @@ export function AboutHero() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
               Professional Cleaning <br />
               <span className="text-brand-500">With a Personal Touch</span>
             </h1>

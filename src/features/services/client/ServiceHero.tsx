@@ -78,8 +78,11 @@ interface ServiceHeroProps {
 }
 
 export function ServiceHero({ service, location }: ServiceHeroProps) {
-  // Use first 3 benefits as checkpoints
-  const checkpoints = service.benefits.slice(0, 3);
+  // Use custom hero checkpoints if available, otherwise first 3 benefits
+  const checkpoints = service.hero?.checkpoints || service.benefits.slice(0, 3);
+
+  // Custom hero content
+  const hasCustomHero = !!service.hero && !location;
 
   // Location-aware text
   const locationText = location ? ` in ${location.name}` : '';
@@ -121,11 +124,18 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
               {location ? (
                 <>
                   {service.name} <br />
                   <span className="text-[#1B9CB6]">in {location.name}</span>
+                </>
+              ) : hasCustomHero ? (
+                <>
+                  {service.hero!.headline} <br />
+                  {service.hero!.subheadline && (
+                    <span className="text-[#1B9CB6]">{service.hero!.subheadline}</span>
+                  )}
                 </>
               ) : (
                 <>
@@ -139,7 +149,9 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
             <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               {location
                 ? `Professional ${service.name.toLowerCase()} ${location.localHook}. ${localTeamText}`
-                : service.description
+                : hasCustomHero
+                  ? service.hero!.description
+                  : service.description
               }
             </p>
 
@@ -167,11 +179,12 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
           {/* Right Column: Lead Form */}
           <div className="lg:col-span-5">
              <LeadForm
-               title={location ? `Get A Free Quote in ${location.name}` : `Get A Free ${service.shortName} Quote`}
+               title={location ? `Get My Free Quote in ${location.name}` : hasCustomHero ? service.hero!.formTitle : `Get My Free ${service.shortName} Quote`}
                subtitle={location
                  ? `Fast, fixed-price ${service.name.toLowerCase()} quote for ${location.name}.`
                  : `Get a fast, fixed-price quote for ${service.name.toLowerCase()}.`
                }
+               trustBadges={hasCustomHero ? service.hero!.trustBadges : undefined}
              />
 
              {/* Mobile Only: Logos re-added under form */}

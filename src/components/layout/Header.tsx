@@ -227,8 +227,15 @@ export function Header() {
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center lg:hidden">
+            {/* Mobile Actions */}
+            <div className="flex items-center gap-1 lg:hidden">
+              <a
+                href={siteConfig.contact.phoneHref}
+                className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Call us"
+              >
+                <Phone className="h-6 w-6" />
+              </a>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors focus:outline-none"
@@ -246,23 +253,38 @@ export function Header() {
       </div>
 
       {/* Mobile Menu Backdrop */}
-      {mobileMenuOpen && (
-        <div
-          className="lg:hidden fixed inset-0 top-20 z-30 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Mobile Menu */}
       <div
         className={cn(
-          'lg:hidden fixed top-20 inset-x-0 z-40 bg-slate-900 border-b border-white/10 shadow-2xl transition-all duration-300 ease-in-out overflow-hidden flex flex-col',
+          'lg:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300',
           mobileMenuOpen
-            ? 'h-[calc(100vh-5rem)] opacity-100'
-            : 'h-0 opacity-0'
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        )}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
+      {/* Mobile Menu - Right Slide Out */}
+      <div
+        className={cn(
+          'lg:hidden fixed top-0 right-0 bottom-0 z-50 w-[85%] max-w-sm bg-slate-900 shadow-2xl transition-transform duration-300 ease-in-out flex flex-col',
+          mobileMenuOpen
+            ? 'translate-x-0'
+            : 'translate-x-full'
         )}
       >
-        <div className="overflow-y-auto flex-1 px-4 pb-8 pt-10 space-y-2">
+        {/* Close button */}
+        <div className="flex items-center justify-between p-4 border-b border-white/10">
+          <span className="text-white font-bold text-lg">Menu</span>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        <div className="overflow-y-auto flex-1 px-4 pb-8 pt-6 space-y-2">
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
@@ -348,28 +370,26 @@ export function Header() {
           >
             Contact
           </Link>
+        </div>
 
-          <div className="pt-6 mt-4 border-t border-white/10">
-            <Link
-              href={ctaLinks.quote}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full bg-cta active:bg-cta-hover text-white px-6 py-4 rounded-xl font-bold text-base shadow-lg flex items-center justify-center gap-2 mb-4"
-            >
-              Get Free Quote
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+        {/* Sticky Bottom CTA */}
+        <div className="border-t border-white/10 bg-slate-900 p-4 pb-8">
+          <Link
+            href={ctaLinks.quote}
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full bg-cta active:bg-cta-hover text-white px-6 py-4 rounded-xl font-bold text-base shadow-lg flex items-center justify-center gap-2 mb-3"
+          >
+            Get Free Quote
+            <ArrowRight className="w-4 h-4" />
+          </Link>
 
-            <div className="text-center">
-              <p className="text-slate-500 text-sm mb-1">Need help? Call us</p>
-              <a
-                href={siteConfig.contact.phoneHref}
-                className="flex items-center justify-center gap-2 text-white font-bold text-xl hover:text-brand-400 transition-colors"
-              >
-                <Phone className="w-5 h-5 text-brand-500" />
-                {siteConfig.contact.phone}
-              </a>
-            </div>
-          </div>
+          <a
+            href={siteConfig.contact.phoneHref}
+            className="w-full bg-white/10 active:bg-white/20 text-white px-6 py-3 rounded-xl font-bold text-base flex items-center justify-center gap-2"
+          >
+            <Phone className="w-5 h-5 text-brand-400" />
+            {siteConfig.contact.phone}
+          </a>
         </div>
       </div>
     </nav>

@@ -22,6 +22,15 @@ export type Service = {
     description: string;
     keywords: string[];
   };
+  // Optional custom hero content
+  hero?: {
+    headline: string;
+    subheadline?: string;
+    description: string;
+    checkpoints: string[];
+    formTitle: string;
+    trustBadges?: string[];
+  };
 };
 
 export type ProcessStep = {
@@ -261,6 +270,22 @@ export const services: Service[] = [
       title: 'Roof Cleaning & Moss Removal Essex | 3-Year Guarantee | Aquapro',
       description: 'Professional roof cleaning & moss removal in Essex. Manual scraping, biocide treatment, soft washing. Safe for clay, slate & concrete tiles. 3-year moss-free guarantee. Fixed-price quotes.',
       keywords: ['roof cleaning Essex', 'roof moss removal', 'roof cleaners', 'mossy roof cleaning', 'biocide treatment roof', 'soft washing roofs', 'roof cleaning service', 'roof cleaning near me', 'cost of roof cleaning', 'professional roof moss removal'],
+    },
+    hero: {
+      headline: 'Make Your Roof Look Brand New Again',
+      subheadline: 'Roof Cleaning Specialists',
+      description: 'Our professional roof cleaning service removes moss, algae and black streaks, prevents costly repairs and brings your home back to life - backed by our 5 year moss-free guarantee.',
+      checkpoints: [
+        'Removes 100% of moss, algae & black streaks',
+        'Stops moss falling onto your driveway, patio, and conservatory',
+        'Moss-free roof backed by our 5-year guarantee',
+        'All waste removed, no mess left behind',
+      ],
+      formTitle: 'Get a Free Roof Cleaning Quote',
+      trustBadges: [
+        'Insured for £5,000,000',
+        'Roof tile replacement guarantee',
+      ],
     },
   },
   {

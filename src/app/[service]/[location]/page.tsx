@@ -260,6 +260,9 @@ export default async function ServiceLocationPage({ params }: PageProps) {
         reviews={getReviewsForServiceAndLocation(service.id as ServiceId, location.slug)}
         moreReviews={getAllReviewsForService(service.id)}
         locationSlug={location.slug}
+        tagline={`${service.shortName} Reviews`}
+        title={<>What <span className="text-brand-500">{location.name}</span> Customers Say</>}
+        subtitle={`Real reviews from ${location.name} homeowners who used our ${service.name.toLowerCase()} service.`}
       />
       <ServiceHowItWorks service={service} location={location} />
 

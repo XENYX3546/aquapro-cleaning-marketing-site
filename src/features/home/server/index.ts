@@ -4,5 +4,4 @@
 export { AboutSection } from './AboutSection';
 export { BlogSection } from './BlogSection';
 export { CTASection } from './CTASection';
-export { ExpertCTA } from './ExpertCTA';
 export { HowItWorks } from './HowItWorks';

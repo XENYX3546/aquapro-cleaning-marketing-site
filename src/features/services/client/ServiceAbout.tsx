@@ -12,6 +12,62 @@ interface ServiceAboutProps {
   location?: Location;
 }
 
+// Mobile trust stats component
+function MobileTrustStats() {
+  return (
+    <section className="lg:hidden py-12 bg-white border-b border-slate-100 font-sans">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-8">
+          <span className="text-slate-500 font-bold tracking-widest uppercase text-xs block mb-2">
+            Why Choose Us
+          </span>
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            Trusted by <span className="text-[#1B9CB6]">2,000+ Customers</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          {/* Stat 1 */}
+          <div className="bg-slate-50 rounded-xl p-4 text-center">
+            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
+              <Clock className="w-5 h-5" strokeWidth={2} />
+            </div>
+            <h4 className="font-bold text-slate-900 text-sm">10+ Years</h4>
+            <p className="text-slate-500 text-xs">Experience</p>
+          </div>
+
+          {/* Stat 2 */}
+          <div className="bg-slate-50 rounded-xl p-4 text-center">
+            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
+              <Users className="w-5 h-5" strokeWidth={2} />
+            </div>
+            <h4 className="font-bold text-slate-900 text-sm">2k+ Clients</h4>
+            <p className="text-slate-500 text-xs">Happy Customers</p>
+          </div>
+
+          {/* Stat 3 */}
+          <div className="bg-slate-50 rounded-xl p-4 text-center">
+            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
+              <Award className="w-5 h-5" strokeWidth={2} />
+            </div>
+            <h4 className="font-bold text-slate-900 text-sm">5 Star Rated</h4>
+            <p className="text-slate-500 text-xs">{reviewStatsDisplay.totalReviews} Reviews</p>
+          </div>
+
+          {/* Stat 4 */}
+          <div className="bg-slate-50 rounded-xl p-4 text-center">
+            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
+              <ShieldCheck className="w-5 h-5" strokeWidth={2} />
+            </div>
+            <h4 className="font-bold text-slate-900 text-sm">Fully Insured</h4>
+            <p className="text-slate-500 text-xs">100% Protection</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function ServiceAbout({ service, location }: ServiceAboutProps) {
   const scrollToQuoteForm = () => {
     const formElement = document.getElementById('quote-form');
@@ -23,6 +79,11 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
   const locationText = location ? ` in ${location.name}` : '';
 
   return (
+    <>
+    {/* Mobile Trust Stats */}
+    <MobileTrustStats />
+
+    {/* Desktop About Section */}
     <section className="hidden lg:block py-24 bg-white border-b border-slate-100 font-sans">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex gap-20 items-center">
@@ -113,7 +174,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                 onClick={scrollToQuoteForm}
                 className="bg-[#E30663] hover:bg-[#C20555] text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-[#E30663]/20 transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center gap-3 text-lg"
              >
-                Get Your Free Quote
+                Get My Free Quote
                 <ArrowRight className="w-5 h-5" />
              </button>
 
@@ -121,6 +182,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

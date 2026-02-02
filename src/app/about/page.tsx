@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
 import { LandingLayout } from '@/components/layout';
-import { CommercialBanner, ReviewsSection } from '@/components/ui';
+import { CommercialBanner, ReviewsSection, ExpertHelpCTA } from '@/components/ui';
 import { AboutHero, AboutStory } from '@/components/about';
 import { ContactSection } from '@/features/home/client';
-import { ExpertCTA } from '@/features/home/server';
 import { siteConfig, reviewStats } from '@/lib/constants';
 
 // SEO Metadata
@@ -138,7 +137,7 @@ export default function AboutPage() {
       <ContactSection />
 
       {/* Expert CTA */}
-      <ExpertCTA />
+      <ExpertHelpCTA />
     </LandingLayout>
   );
 }

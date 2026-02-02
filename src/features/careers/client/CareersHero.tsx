@@ -70,7 +70,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
               Complete Exterior & <br />
               <span className="text-brand-500">Interior Cleaning Solutions</span>
             </h1>

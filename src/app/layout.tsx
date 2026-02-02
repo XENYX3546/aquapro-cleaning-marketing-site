@@ -1,5 +1,4 @@
 import { Analytics } from '@vercel/analytics/next';
-import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { siteConfig, reviewStats } from '@/lib/constants';
@@ -110,11 +109,6 @@ export default function RootLayout({
       <body className="font-sans antialiased text-neutral-900">
         {children}
         <Analytics />
-        <Script
-          src="https://static.elfsight.com/platform/platform.js"
-          data-use-service-core
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   );

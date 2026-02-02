@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { LandingLayout } from '@/components/layout';
-import { CommercialBanner, ReviewsSection, FAQSection } from '@/components/ui';
+import { CommercialBanner, ReviewsSection, FAQSection, ExpertHelpCTA } from '@/components/ui';
 import {
   HeroSection,
   ServicesSection,
@@ -10,7 +10,6 @@ import {
   AboutSection,
   HowItWorks,
   BlogSection,
-  ExpertCTA,
 } from '@/features/home/server';
 import { siteConfig, services } from '@/lib/constants';
 
@@ -140,7 +139,7 @@ export default function HomePage() {
       <BlogSection />
       <ContactSection />
       <FAQSection />
-      <ExpertCTA />
+      <ExpertHelpCTA />
     </LandingLayout>
   );
 }
