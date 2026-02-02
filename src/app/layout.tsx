@@ -102,6 +102,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        {/* DNS prefetch for faster resolution */}
+        <link rel="dns-prefetch" href="https://app.zuviaone.com" />
+        <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
         {/* Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://app.zuviaone.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />

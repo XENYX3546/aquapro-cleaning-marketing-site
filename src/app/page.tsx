@@ -1,17 +1,18 @@
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { LandingLayout } from '@/components/layout';
-import { CommercialBanner, ReviewsSection, FAQSection, ExpertHelpCTA } from '@/components/ui';
-import {
-  HeroSection,
-  ServicesSection,
-  ContactSection,
-} from '@/features/home/client';
-import {
-  AboutSection,
-  HowItWorks,
-  BlogSection,
-} from '@/features/home/server';
+import { CommercialBanner } from '@/components/ui';
+import { HeroSection, ServicesSection } from '@/features/home/client';
 import { siteConfig, services } from '@/lib/constants';
+
+// Lazy load below-the-fold components
+const ReviewsSection = dynamic(() => import('@/components/ui/ReviewsSection').then(mod => ({ default: mod.ReviewsSection })));
+const FAQSection = dynamic(() => import('@/components/ui/FAQSection').then(mod => ({ default: mod.FAQSection })));
+const ExpertHelpCTA = dynamic(() => import('@/components/ui/ExpertHelpCTA').then(mod => ({ default: mod.ExpertHelpCTA })));
+const ContactSection = dynamic(() => import('@/features/home/client/ContactSection').then(mod => ({ default: mod.ContactSection })));
+const AboutSection = dynamic(() => import('@/features/home/server/AboutSection').then(mod => ({ default: mod.AboutSection })));
+const HowItWorks = dynamic(() => import('@/features/home/server/HowItWorks').then(mod => ({ default: mod.HowItWorks })));
+const BlogSection = dynamic(() => import('@/features/home/server/BlogSection').then(mod => ({ default: mod.BlogSection })));
 
 // Comprehensive homepage metadata for SEO
 export const metadata: Metadata = {
