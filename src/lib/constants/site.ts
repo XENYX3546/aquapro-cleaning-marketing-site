@@ -20,6 +20,19 @@ export const siteConfig = {
   coverage: 'Essex & Surrounding Areas',
 } as const;
 
+// Customer statistics - single source of truth
+// Update this value as customer count grows
+export const customerStats = {
+  totalCustomers: 4600,
+} as const;
+
+// Formatted versions for display
+export const customerStatsDisplay = {
+  totalCustomers: customerStats.totalCustomers.toLocaleString(),
+  totalCustomersPlus: `${customerStats.totalCustomers.toLocaleString()}+`,
+  totalCustomersShort: `${(customerStats.totalCustomers / 1000).toFixed(1)}k+`,
+} as const;
+
 // Review statistics - single source of truth
 // Update these values as you collect more verified reviews
 export const reviewStats = {

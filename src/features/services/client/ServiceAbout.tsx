@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ShieldCheck, Users, Clock, Award, ArrowRight } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
-import { reviewStatsDisplay } from '@/lib/constants';
+import { reviewStatsDisplay, customerStatsDisplay } from '@/lib/constants';
 
 const HOUSE_IMAGE = "/images/blake-window-cleaning.jpg";
 
@@ -23,7 +23,7 @@ function MobileTrustStats() {
             Why Choose Us
           </span>
           <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
-            Trusted by <span className="text-[#1B9CB6]">2,000+ Customers</span>
+            Trusted by <span className="text-[#1B9CB6]">{customerStatsDisplay.totalCustomersPlus} Customers</span>
           </h2>
         </div>
 
@@ -42,7 +42,7 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <Users className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">2k+ Clients</h3>
+            <h3 className="font-bold text-slate-900 text-sm">{customerStatsDisplay.totalCustomersShort} Clients</h3>
             <p className="text-slate-500 text-xs">Happy Customers</p>
           </div>
 
@@ -144,7 +144,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                       <Users className="w-6 h-6" strokeWidth={2} />
                    </div>
                    <div>
-                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">2k+ Clients</h3>
+                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">{customerStatsDisplay.totalCustomersShort} Clients</h3>
                       <p className="text-slate-500 text-sm">Happy Customers</p>
                    </div>
                 </div>

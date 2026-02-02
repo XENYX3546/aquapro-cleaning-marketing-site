@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Star, X, ZoomIn, Check, MapPin, ArrowRight, ShieldCheck, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getAllReviews, reviewStatsDisplay, getRelativeTime, getLocationFromPostcode, type Review } from '@/lib/constants';
+import { getAllReviews, reviewStatsDisplay, customerStatsDisplay, getRelativeTime, getLocationFromPostcode, type Review } from '@/lib/constants';
 
 // Type for flattened image gallery
 type GalleryImage = {
@@ -29,7 +29,7 @@ function ReviewsCTACard() {
           <Star className="w-7 h-7 text-white fill-white" />
         </div>
         <h3 className="text-xl font-bold text-white mb-2">
-          Join 2,000+ Happy Customers
+          Join {customerStatsDisplay.totalCustomersPlus} Happy Customers
         </h3>
         <p className="text-white/80 text-sm mb-5 leading-relaxed">
           See why Essex homeowners trust us with their properties. Get your free, no-obligation quote today.

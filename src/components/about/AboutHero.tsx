@@ -122,7 +122,7 @@ export function AboutHero() {
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group transform transition-transform duration-500 hover:scale-[1.01] h-[500px]">
               <Image
-                src="/images/blake-carpet-cleaning.jpg"
+                src="/images/blake-van-image.jpg"
                 alt="Aquapro professional cleaning team at work"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"

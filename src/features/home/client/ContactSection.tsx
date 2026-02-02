@@ -80,7 +80,7 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
                {/* Background Image & Overlay */}
                <div className="absolute inset-0 z-0">
                   <Image
-                     src="/images/blake-carpet-cleaning.jpg"
+                     src="/images/blake-van-image.jpg"
                      alt="Aquapro professional carpet cleaning"
                      fill
                      className="object-cover"

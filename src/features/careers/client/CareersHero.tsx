@@ -45,7 +45,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/blake-carpet-cleaning.jpg"
+            src="/images/blake-van-image.jpg"
             alt="Aquapro professional carpet cleaning"
             fill
             className="object-cover opacity-40 mix-blend-overlay"

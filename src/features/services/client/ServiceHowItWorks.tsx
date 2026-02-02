@@ -5,7 +5,7 @@ import { Play } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 
-const THUMBNAIL_URL = "/images/blake-carpet-cleaning.jpg";
+const THUMBNAIL_URL = "/images/blake-van-image.jpg";
 
 interface ServiceHowItWorksProps {
   service: Service;

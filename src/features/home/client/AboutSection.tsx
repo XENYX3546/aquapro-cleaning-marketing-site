@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { ShieldCheck, Award, Clock, Users } from 'lucide-react';
-import { reviewStatsDisplay } from '@/lib/constants';
+import { reviewStatsDisplay, customerStatsDisplay } from '@/lib/constants';
 
 export function AboutSection() {
   return (
@@ -126,7 +126,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 text-xl leading-none mb-1">
-                    2k+ Clients
+                    {customerStatsDisplay.totalCustomersShort} Clients
                   </div>
                   <div className="text-sm font-medium text-slate-500">
                     Happy Customers

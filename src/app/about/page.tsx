@@ -3,12 +3,12 @@ import { LandingLayout } from '@/components/layout';
 import { CommercialBanner, ReviewsSection, ExpertHelpCTA } from '@/components/ui';
 import { AboutHero, AboutStory } from '@/components/about';
 import { ContactSection } from '@/features/home/client';
-import { siteConfig, reviewStats } from '@/lib/constants';
+import { siteConfig, reviewStats, customerStatsDisplay } from '@/lib/constants';
 
 // SEO Metadata
 export const metadata: Metadata = {
   title: `About Us | ${siteConfig.name} - Professional Exterior Cleaning in Essex`,
-  description: `Learn about ${siteConfig.name} - over 10 years of experience delivering professional exterior cleaning services in Essex. Fully insured, 5-star rated, and trusted by 2000+ happy customers.`,
+  description: `Learn about ${siteConfig.name} - over 10 years of experience delivering professional exterior cleaning services in Essex. Fully insured, 5-star rated, and trusted by ${customerStatsDisplay.totalCustomersPlus} happy customers.`,
   keywords: [
     'about aquapro',
     'exterior cleaning essex',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `About ${siteConfig.name} | Professional Exterior Cleaning`,
-    description: `Dedicated to excellence in exterior cleaning. Over 10 years experience, 2000+ happy customers, and 5-star rated service across Essex.`,
+    description: `Dedicated to excellence in exterior cleaning. Over 10 years experience, ${customerStatsDisplay.totalCustomersPlus} happy customers, and 5-star rated service across Essex.`,
     url: `${siteConfig.url}/about`,
     siteName: siteConfig.name,
     locale: 'en_GB',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `About ${siteConfig.name} | Professional Exterior Cleaning`,
-    description: `Dedicated to excellence in exterior cleaning. Over 10 years experience, 2000+ happy customers, and 5-star rated service across Essex.`,
+    description: `Dedicated to excellence in exterior cleaning. Over 10 years experience, ${customerStatsDisplay.totalCustomersPlus} happy customers, and 5-star rated service across Essex.`,
     images: [`${siteConfig.url}/images/blake-van-image.jpg`],
   },
 };

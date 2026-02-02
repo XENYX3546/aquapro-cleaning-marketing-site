@@ -64,10 +64,10 @@ export function CareersApplicationModal({ job, onClose }: CareersApplicationModa
     if (job.title.toLowerCase().includes('exterior'))
       {return '/images/blake-window-cleaning.jpg';}
     if (job.title.toLowerCase().includes('interior'))
-      {return '/images/blake-carpet-cleaning.jpg';}
+      {return '/images/blake-van-image.jpg';}
     if (job.title.toLowerCase().includes('sales'))
       {return '/images/blake-van-image.jpg';}
-    return '/images/blake-carpet-cleaning.jpg';
+    return '/images/blake-van-image.jpg';
   };
 
   return (

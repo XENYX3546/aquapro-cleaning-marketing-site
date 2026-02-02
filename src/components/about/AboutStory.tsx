@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star, ArrowRight, Check } from 'lucide-react';
-import { ctaLinks, getAllReviews, type Review } from '@/lib/constants';
+import { ctaLinks, getAllReviews, customerStatsDisplay, type Review } from '@/lib/constants';
 
 // Max characters for testimonial to fit in the overlay
 const MAX_TESTIMONIAL_LENGTH = 120;
@@ -26,7 +26,7 @@ export function AboutStory() {
           <div className="order-1 lg:order-1 mb-16 lg:mb-0 relative group">
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl h-[500px] lg:h-[600px] w-full transform transition-transform duration-700 hover:scale-[1.01]">
               <Image
-                src="/images/blake-carpet-cleaning.jpg"
+                src="/images/blake-van-image.jpg"
                 alt="Aquapro technician performing professional carpet cleaning"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -128,7 +128,7 @@ export function AboutStory() {
               <div className="w-px bg-slate-200 h-auto hidden sm:block" />
               <div>
                 <div className="text-3xl font-extrabold text-slate-900 mb-1">
-                  2k+
+                  {customerStatsDisplay.totalCustomersShort}
                 </div>
                 <div className="text-xs text-slate-500 font-bold uppercase tracking-wide">
                   Happy Clients

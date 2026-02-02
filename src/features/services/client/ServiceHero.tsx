@@ -7,7 +7,7 @@ import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay } from '@/lib/constants';
 
-const HERO_BG = "/images/blake-carpet-cleaning.jpg";
+const HERO_BG = "/images/blake-van-image.jpg";
 
 const Logos = () => (
   <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center lg:justify-start gap-6 sm:gap-8 pt-8">
