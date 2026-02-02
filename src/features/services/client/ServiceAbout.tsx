@@ -1,0 +1,127 @@
+'use client';
+
+import { ShieldCheck, Users, Clock, Award, ArrowRight } from 'lucide-react';
+import type { Service } from '@/lib/constants/services';
+import type { Location } from '@/lib/constants/locations';
+import { reviewStatsDisplay } from '@/lib/constants';
+
+const HOUSE_IMAGE = "/images/blake-window-cleaning.jpg";
+
+interface ServiceAboutProps {
+  service: Service;
+  location?: Location;
+}
+
+export function ServiceAbout({ service, location }: ServiceAboutProps) {
+  const scrollToQuoteForm = () => {
+    const formElement = document.getElementById('quote-form');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  const locationText = location ? ` in ${location.name}` : '';
+
+  return (
+    <section className="hidden lg:block py-24 bg-white border-b border-slate-100 font-sans">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex gap-20 items-center">
+
+          {/* Left Column: Image */}
+          <div className="w-1/2 relative">
+             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200 bg-slate-100 aspect-square">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={HOUSE_IMAGE}
+                  alt={`Professional ${service.name}${locationText}`}
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                />
+             </div>
+             {/* Decorative element */}
+             <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-[#1B9CB6]/10 rounded-full blur-3xl -z-10" />
+          </div>
+
+          {/* Right Column: About Content */}
+          <div className="w-1/2">
+             <div className="mb-8">
+                <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">
+                   {location ? `Serving ${location.name}` : 'Why Choose Us'}
+                </span>
+                <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
+                   Expert {service.name}{locationText} <br/>
+                   <span className="text-[#1B9CB6]">You Can Trust</span>
+                </h2>
+                <div className="space-y-6 text-slate-500 text-lg leading-relaxed font-normal">
+                   <p>
+                      At Aquapro, we&apos;ve built our reputation on delivering exceptional {service.name.toLowerCase()} results{locationText}. Our trained professionals use the latest equipment and techniques to ensure outstanding outcomes every time.
+                   </p>
+                   <p>
+                      We understand that your property deserves the best care. That&apos;s why we invest in professional-grade equipment and eco-friendly solutions that deliver results without compromising on safety.
+                   </p>
+                </div>
+             </div>
+
+             {/* Stats Grid */}
+             <div className="grid grid-cols-2 gap-x-8 gap-y-10 mb-10 pt-4">
+                {/* Stat 1 */}
+                <div className="flex items-start gap-4">
+                   <div className="w-12 h-12 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center shrink-0">
+                      <Clock className="w-6 h-6" strokeWidth={2} />
+                   </div>
+                   <div>
+                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">10+ Years</h4>
+                      <p className="text-slate-500 text-sm">Experience</p>
+                   </div>
+                </div>
+
+                {/* Stat 2 */}
+                <div className="flex items-start gap-4">
+                   <div className="w-12 h-12 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center shrink-0">
+                      <Users className="w-6 h-6" strokeWidth={2} />
+                   </div>
+                   <div>
+                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">2k+ Clients</h4>
+                      <p className="text-slate-500 text-sm">Happy Customers</p>
+                   </div>
+                </div>
+
+                {/* Stat 3 */}
+                <div className="flex items-start gap-4">
+                   <div className="w-12 h-12 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center shrink-0">
+                      <Award className="w-6 h-6" strokeWidth={2} />
+                   </div>
+                   <div>
+                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">5 Star Rated</h4>
+                      <p className="text-slate-500 text-sm">{reviewStatsDisplay.totalReviews} Reviews</p>
+                   </div>
+                </div>
+
+                {/* Stat 4 */}
+                <div className="flex items-start gap-4">
+                   <div className="w-12 h-12 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-6 h-6" strokeWidth={2} />
+                   </div>
+                   <div>
+                      <h4 className="font-bold text-slate-900 text-lg leading-none mb-1">Fully Insured</h4>
+                      <p className="text-slate-500 text-sm">100% Protection</p>
+                   </div>
+                </div>
+             </div>
+
+             {/* CTA Button */}
+             <button
+                onClick={scrollToQuoteForm}
+                className="bg-[#E30663] hover:bg-[#C20555] text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-[#E30663]/20 transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center gap-3 text-lg"
+             >
+                Get Your Free Quote
+                <ArrowRight className="w-5 h-5" />
+             </button>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default ServiceAbout;
