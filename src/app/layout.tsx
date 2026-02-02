@@ -102,6 +102,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        {/* Preconnect to critical third-party origins */}
+        <link rel="preconnect" href="https://app.zuviaone.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
+        <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="anonymous" />
         {/* Structured Data */}
         <LocalBusinessSchema />
         <WebSiteSchema />

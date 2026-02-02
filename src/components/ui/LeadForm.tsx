@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Check } from 'lucide-react';
 
 const DEFAULT_TRUST_BADGES = [
@@ -22,8 +22,34 @@ export function LeadForm({
   subtitle = "Get a fast, fixed-price quote for your home.",
   trustBadges = DEFAULT_TRUST_BADGES
 }: LeadFormProps) {
-  // Load the Zuvia widget script
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Lazy load: only load script when form is in viewport
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Load the Zuvia widget script only when visible
+  useEffect(() => {
+    if (!isVisible) {
+      return;
+    }
+
     const scriptSrc = 'https://app.zuviaone.com/api/public/widgets/02b58ca7-a579-49da-a6ae-d21620d7fee5/embed.js';
 
     // Check if script already exists
@@ -34,10 +60,10 @@ export function LeadForm({
       script.defer = true;
       document.body.appendChild(script);
     }
-  }, []);
+  }, [isVisible]);
 
   return (
-    <div id={id} className="bg-white p-6 md:p-8 rounded-xl shadow-xl shadow-slate-900/20 border border-slate-100 w-full relative z-10">
+    <div ref={containerRef} id={id} className="bg-white p-6 md:p-8 rounded-xl shadow-xl shadow-slate-900/20 border border-slate-100 w-full relative z-10">
       <div className="mb-6 text-center lg:text-left">
         <h3 className="text-2xl font-bold text-slate-900 leading-tight">{title}</h3>
         <p className="text-slate-500 text-sm mt-1">{subtitle}</p>

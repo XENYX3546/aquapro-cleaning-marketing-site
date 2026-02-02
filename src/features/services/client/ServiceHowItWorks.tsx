@@ -1,10 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { Play } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 
-const THUMBNAIL_URL = "/images/blake-carpet-cleaning.png";
+const THUMBNAIL_URL = "/images/blake-carpet-cleaning.jpg";
 
 interface ServiceHowItWorksProps {
   service: Service;
@@ -33,11 +34,12 @@ export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps)
         <div className="mb-16 lg:mb-20 max-w-3xl mx-auto">
           <div className="relative aspect-video w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 bg-slate-900 group cursor-pointer transform transition-all hover:shadow-2xl hover:-translate-y-1">
              {/* Poster Image */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={THUMBNAIL_URL}
               alt={`${service.name} Process`}
-              className="w-full h-full object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100"
+              fill
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100"
             />
 
             {/* Subtle Overlay */}

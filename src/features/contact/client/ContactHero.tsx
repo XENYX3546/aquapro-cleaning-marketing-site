@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Star, Phone, Mail, MapPin, Copy, Check, Clock, Lock } from 'lucide-react';
 import { siteConfig, reviewStatsDisplay } from '@/lib/constants';
 
@@ -9,23 +10,47 @@ const HERO_BG = "/images/blake-window-cleaning.jpg";
 export function ContactHero() {
   const [copiedState, setCopiedState] = useState<string | null>(null);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
 
-  // Load the Zuvia widget script
+  // Lazy load: only load widget when form is in viewport
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://app.zuviaone.com/api/public/widgets/02b58ca7-a579-49da-a6ae-d21620d7fee5/embed.js';
-    script.defer = true;
-    script.onload = () => setWidgetLoaded(true);
-    document.body.appendChild(script);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
 
-    return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector(`script[src="${script.src}"]`);
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
+    if (formRef.current) {
+      observer.observe(formRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
+
+  // Load the Zuvia widget script only when visible
+  useEffect(() => {
+    if (!isVisible) {
+      return;
+    }
+
+    const scriptSrc = 'https://app.zuviaone.com/api/public/widgets/02b58ca7-a579-49da-a6ae-d21620d7fee5/embed.js';
+    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = scriptSrc;
+      script.defer = true;
+      script.onload = () => setWidgetLoaded(true);
+      document.body.appendChild(script);
+    } else {
+      setWidgetLoaded(true);
+    }
+  }, [isVisible]);
 
   const copyToClipboard = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
@@ -37,11 +62,12 @@ export function ContactHero() {
     <div className="relative bg-[#0F172A] pt-8 pb-6 md:pb-12 lg:py-24 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={HERO_BG}
-          className="w-full h-full object-cover grayscale mix-blend-overlay"
           alt="Clean Home Exterior"
+          fill
+          sizes="100vw"
+          className="object-cover grayscale mix-blend-overlay"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/60" />
       </div>
@@ -136,7 +162,7 @@ export function ContactHero() {
           </div>
 
           {/* Right Content - Quote Widget */}
-          <div className="lg:col-span-5" id="quote-form">
+          <div ref={formRef} className="lg:col-span-5" id="quote-form">
             <div className="bg-white rounded-2xl shadow-2xl p-5 sm:p-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-2 text-center lg:text-left">Get a Free Quote</h2>
               <p className="text-slate-500 text-sm mb-5 lg:mb-6 text-center lg:text-left">Enter your details below for a fast, fixed price.</p>

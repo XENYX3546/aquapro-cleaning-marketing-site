@@ -1,13 +1,13 @@
 'use client';
 
+import Image from 'next/image';
 import { Star, Check } from 'lucide-react';
 import { LeadForm } from '@/components/ui/LeadForm';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay } from '@/lib/constants';
 
-const MOBILE_BG = "/images/blake-carpet-cleaning.png";
-const DESKTOP_BG = "/images/blake-carpet-cleaning.png";
+const HERO_BG = "/images/blake-carpet-cleaning.jpg";
 
 const Logos = () => (
   <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center lg:justify-start gap-6 sm:gap-8 pt-8">
@@ -92,15 +92,15 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
     <div className="relative bg-[#0F172A] pt-8 pb-6 md:pb-12 lg:py-24 overflow-hidden">
       {/* Background Media */}
       <div className="absolute inset-0 z-0 bg-slate-800">
-        <picture>
-          <source media="(min-width: 1024px)" srcSet={DESKTOP_BG} />
-          { }
-          <img
-            src={MOBILE_BG}
-            alt={`Professional ${service.name}${locationText}`}
-            className="w-full h-full object-cover object-center transition-opacity duration-500 opacity-90"
-          />
-        </picture>
+        <Image
+          src={HERO_BG}
+          alt={`Professional ${service.name}${locationText}`}
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center transition-opacity duration-500 opacity-90"
+        />
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-slate-900/[0.87] lg:bg-gradient-to-r lg:from-slate-900/75 lg:via-slate-900/65 lg:to-slate-900/35 pointer-events-none" />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Home, Shield, MapPin } from 'lucide-react';
 
 type MapView = 'interior' | 'exterior';
@@ -25,7 +25,28 @@ const tabs = [
 
 export function ContactMapSection() {
   const [activeView, setActiveView] = useState<MapView>('interior');
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const currentView = viewData[activeView];
+
+  // Lazy load: only load iframe when element is in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="py-16 bg-white border-t border-neutral-100">
@@ -74,17 +95,23 @@ export function ContactMapSection() {
           </div>
         </div>
 
-        <div className="relative w-full h-[500px] bg-neutral-100 rounded-3xl overflow-hidden shadow-2xl border border-neutral-200">
-          <iframe
-            src={currentView.mapSrc}
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title={`Map showing ${currentView.title}`}
-          />
+        <div ref={containerRef} className="relative w-full h-[500px] bg-neutral-100 rounded-3xl overflow-hidden shadow-2xl border border-neutral-200">
+          {isVisible ? (
+            <iframe
+              src={currentView.mapSrc}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`Map showing ${currentView.title}`}
+            />
+          ) : (
+            <div className="w-full h-full bg-neutral-200 animate-pulse flex items-center justify-center">
+              <span className="text-neutral-400 text-sm">Loading map...</span>
+            </div>
+          )}
 
           {/* Info Card Overlay */}
           <div className="absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-80 bg-white/95 backdrop-blur rounded-2xl p-5 shadow-lg border border-neutral-100 z-10">

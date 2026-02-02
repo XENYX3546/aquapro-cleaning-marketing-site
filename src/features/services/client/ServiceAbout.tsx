@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { ShieldCheck, Users, Clock, Award, ArrowRight } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
@@ -91,11 +92,12 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
           {/* Left Column: Image */}
           <div className="w-1/2 relative">
              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200 bg-slate-100 aspect-square">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={HOUSE_IMAGE}
                   alt={`Professional ${service.name}${locationText}`}
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transform hover:scale-105 transition-transform duration-700"
                 />
              </div>
              {/* Decorative element */}

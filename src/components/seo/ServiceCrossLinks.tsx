@@ -7,7 +7,6 @@ import {
   clusterNames,
   type Location,
 } from '@/lib/constants';
-import { ServiceAreaMap } from './ServiceAreaMap';
 
 type ServiceCrossLinksProps = {
   location: Location;
@@ -62,15 +61,8 @@ export function ServiceCrossLinks({
 
   // Full variant with sections
   return (
-    <section className="py-12 relative overflow-hidden min-h-[300px] bg-neutral-50">
-      {/* Map Background - positioned right, underlapping content */}
-      <div className="absolute inset-y-0 right-0 w-3/4 lg:w-3/5 z-0 hidden md:block">
-        <ServiceAreaMap location={location} serviceName="services" asBackground />
-      </div>
-      {/* Gradient overlay: solid on left, fading to reveal map on right */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-r from-neutral-50 from-30% via-neutral-50/80 via-50% to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[2]">
+    <section className="py-12 bg-neutral-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">
             More Services in {location.name}

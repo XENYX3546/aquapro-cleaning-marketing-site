@@ -55,7 +55,7 @@ export const services: Service[] = [
     description: 'Professional carpet cleaning and rug cleaning service for domestic and commercial properties. Hot water extraction removes stubborn stains, pet odours, and allergens. Family-run, fully insured, with 100% satisfaction guarantee.',
     longDescription: '<strong>Professional carpet cleaning</strong> that restores your carpets to like new condition. Our <strong>truck-mounted hot water extraction</strong> delivers the most thorough deep clean—far more powerful than portable cleaners. We remove <strong>stubborn stains, pet odours, and allergens</strong> with residue-free, eco-friendly solutions. <strong>Free stain protection treatment</strong> and deodoriser included. Family-run business with transparent pricing and no hidden fees.',
     icon: 'sparkles',
-    image: '/images/blake-carpet-cleaning.png',
+    image: '/images/blake-carpet-cleaning.jpg',
     benefits: [
       'Removes stubborn stains & deep-seated dirt',
       'Eliminates pet stains, odours & allergens',
@@ -116,7 +116,7 @@ export const services: Service[] = [
     description: 'Professional sofa cleaning, couch cleaning, and upholstery cleaning for all fabric furniture. We clean sofas, settees, armchairs, recliners, and leather furniture.',
     longDescription: '<strong>Expert sofa and couch cleaning</strong> that removes embedded dirt, stains, and odours your vacuum can\'t reach. Whether you need a <strong>3-seater sofa cleaned</strong>, <strong>leather sofa restoration</strong>, or <strong>fabric armchair refresh</strong>—we handle all types. Safe for velvet, linen, cotton, microfibre, and leather.',
     icon: 'sofa',
-    image: '/images/blake-carpet-cleaning.png',
+    image: '/images/blake-carpet-cleaning.jpg',
     benefits: [
       'Deep cleans sofas, couches & settees',
       'Removes stains from fabric furniture',
@@ -404,7 +404,7 @@ export const services: Service[] = [
     description: 'Targeted treatment for stubborn stains on carpets, upholstery, and hard surfaces.',
     longDescription: 'Expert stain removal for red wine, coffee, pet accidents, and more. Emergency service available for fresh spills.',
     icon: 'sparkles',
-    image: '/images/blake-carpet-cleaning.png',
+    image: '/images/blake-carpet-cleaning.jpg',
     benefits: [
       'Removes stubborn stains',
       'Emergency service available',
@@ -685,7 +685,7 @@ export const services: Service[] = [
     description: 'Professional mattress cleaning to remove dust mites, allergens, stains, and odours. Deep sanitisation for a healthier night\'s sleep. All mattress sizes and types cleaned.',
     longDescription: '<strong>Sleep healthier with a professionally cleaned mattress</strong>. Your mattress harbours <strong>dust mites, dead skin, sweat, and allergens</strong> that vacuuming alone can\'t remove. Our <strong>deep extraction cleaning</strong> removes embedded dirt, <strong>sanitises against bacteria</strong>, and eliminates odours. We treat <strong>urine stains, sweat marks, and blood stains</strong> with specialist solutions. Safe for <strong>memory foam, spring, hybrid, and all mattress types</strong>. Wake up fresher.',
     icon: 'bed',
-    image: '/images/blake-carpet-cleaning.png',
+    image: '/images/blake-carpet-cleaning.jpg',
     benefits: [
       'Removes dust mites and allergens',
       'Eliminates sweat and odour',

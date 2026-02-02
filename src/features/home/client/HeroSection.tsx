@@ -19,6 +19,7 @@ export function HeroSection() {
           fill
           className="object-cover opacity-40 mix-blend-overlay"
           priority
+          fetchPriority="high"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A] via-[#0F172A]/95 to-[#0F172A]/80" />

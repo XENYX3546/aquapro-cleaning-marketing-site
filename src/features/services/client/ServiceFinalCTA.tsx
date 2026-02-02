@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { LeadForm } from '@/components/ui/LeadForm';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
@@ -16,11 +17,12 @@ export function ServiceFinalCTA({ service, location }: ServiceFinalCTAProps) {
     <section className="relative pt-6 pb-16 overflow-hidden bg-white flex items-center justify-center lg:hidden">
       {/* Background Media with Overlay */}
       <div className="absolute inset-x-0 bottom-0 top-0 z-0 bg-slate-950">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={TEAM_IMAGE}
           alt="Aquapro Team"
-          className="w-full h-full object-cover object-center opacity-50"
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-50"
         />
         {/* Base Dark Overlay */}
         <div className="absolute inset-0 bg-slate-950/[0.65] pointer-events-none" />

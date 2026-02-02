@@ -26,7 +26,7 @@ export function AboutStory() {
           <div className="order-1 lg:order-1 mb-16 lg:mb-0 relative group">
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl h-[500px] lg:h-[600px] w-full transform transition-transform duration-700 hover:scale-[1.01]">
               <Image
-                src="/images/blake-carpet-cleaning.png"
+                src="/images/blake-carpet-cleaning.jpg"
                 alt="Aquapro technician performing professional carpet cleaning"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { Star, X, ZoomIn, Check, MapPin, ArrowRight, ShieldCheck, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getAllReviews, reviewStatsDisplay, getRelativeTime, getLocationFromPostcode, type Review } from '@/lib/constants';
 
@@ -161,9 +162,11 @@ export function ReviewsSection({
   const allReviews = moreReviews ?? getAllReviews();
 
   // Combine: SSR reviews first, then additional from allReviews (deduped)
-  const ssrIds = new Set(ssrReviews.map((r) => r.id));
-  const additionalReviews = allReviews.filter((r) => !ssrIds.has(r.id));
-  const combinedReviews = [...ssrReviews, ...additionalReviews];
+  const combinedReviews = useMemo(() => {
+    const ssrIds = new Set(ssrReviews.map((r) => r.id));
+    const additionalReviews = allReviews.filter((r) => !ssrIds.has(r.id));
+    return [...ssrReviews, ...additionalReviews];
+  }, [ssrReviews, allReviews]);
 
   // State for pagination - starts showing only SSR reviews
   const [visibleCount, setVisibleCount] = useState(ssrReviews.length);
@@ -408,12 +411,12 @@ function ReviewCard({ review, onImageClick }: { review: Review; onImageClick: (s
                 className="relative rounded-lg overflow-hidden border border-slate-100 aspect-[4/3] group cursor-zoom-in"
                 onClick={() => onImageClick(imgSrc)}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={imgSrc}
                   alt={`Review photo ${imgIndex + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  fill
+                  sizes="200px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <ZoomIn className="w-6 h-6 text-white drop-shadow-md" />
@@ -458,15 +461,15 @@ function ImageGalleryModal({
   const currentReviewPosition = reviewsWithImages.findIndex(r => r.reviewId === review.id);
 
   // Navigate to previous/next review (not individual image)
-  const goToPrevReview = () => {
+  const goToPrevReview = useCallback(() => {
     const prevPos = currentReviewPosition > 0 ? currentReviewPosition - 1 : reviewsWithImages.length - 1;
     onNavigate(reviewsWithImages[prevPos].firstImageIndex);
-  };
+  }, [currentReviewPosition, reviewsWithImages, onNavigate]);
 
-  const goToNextReview = () => {
+  const goToNextReview = useCallback(() => {
     const nextPos = currentReviewPosition < reviewsWithImages.length - 1 ? currentReviewPosition + 1 : 0;
     onNavigate(reviewsWithImages[nextPos].firstImageIndex);
-  };
+  }, [currentReviewPosition, reviewsWithImages, onNavigate]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -481,7 +484,7 @@ function ImageGalleryModal({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentReviewPosition, reviewsWithImages, onClose, onNavigate]);
+  }, [onClose, goToPrevReview, goToNextReview]);
 
   const imageCount = review.images?.length || 0;
 
@@ -525,12 +528,13 @@ function ImageGalleryModal({
           <div className="flex-1 bg-slate-100 p-4 lg:p-6 flex items-center justify-center overflow-hidden">
             {/* Collage layouts based on image count */}
             {imageCount === 1 && (
-              <div className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="w-full h-full flex items-center justify-center relative">
+                <Image
                   src={review.images![0]}
                   alt={`${review.name}'s photo`}
-                  className="max-w-full max-h-full object-contain rounded-xl shadow-lg"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 800px"
+                  className="object-contain rounded-xl"
                 />
               </div>
             )}
@@ -538,13 +542,15 @@ function ImageGalleryModal({
             {imageCount === 2 && (
               <div className="w-full h-full flex gap-3 items-center justify-center">
                 {review.images!.map((imgSrc, idx) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={idx}
-                    src={imgSrc}
-                    alt={`${review.name}'s photo ${idx + 1}`}
-                    className="max-w-[48%] max-h-full object-contain rounded-xl shadow-lg"
-                  />
+                  <div key={idx} className="relative w-[48%] h-full">
+                    <Image
+                      src={imgSrc}
+                      alt={`${review.name}'s photo ${idx + 1}`}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 400px"
+                      className="object-contain rounded-xl"
+                    />
+                  </div>
                 ))}
               </div>
             )}
@@ -552,24 +558,27 @@ function ImageGalleryModal({
             {imageCount === 3 && (
               <div className="w-full h-full flex gap-3">
                 {/* Large image on left */}
-                <div className="flex-1 flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div className="flex-1 relative">
+                  <Image
                     src={review.images![0]}
                     alt={`${review.name}'s photo 1`}
-                    className="max-w-full max-h-full object-contain rounded-xl shadow-lg"
+                    fill
+                    sizes="(max-width: 1024px) 60vw, 500px"
+                    className="object-contain rounded-xl"
                   />
                 </div>
                 {/* Two stacked images on right */}
                 <div className="flex flex-col gap-3 justify-center w-[40%]">
                   {review.images!.slice(1).map((imgSrc, idx) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      key={idx}
-                      src={imgSrc}
-                      alt={`${review.name}'s photo ${idx + 2}`}
-                      className="max-w-full max-h-[48%] object-contain rounded-xl shadow-lg"
-                    />
+                    <div key={idx} className="relative h-[48%]">
+                      <Image
+                        src={imgSrc}
+                        alt={`${review.name}'s photo ${idx + 2}`}
+                        fill
+                        sizes="(max-width: 1024px) 40vw, 300px"
+                        className="object-contain rounded-xl"
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -578,12 +587,13 @@ function ImageGalleryModal({
             {imageCount >= 4 && (
               <div className="w-full h-full grid grid-cols-2 gap-3">
                 {review.images!.map((imgSrc, idx) => (
-                  <div key={idx} className="flex items-center justify-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                  <div key={idx} className="relative">
+                    <Image
                       src={imgSrc}
                       alt={`${review.name}'s photo ${idx + 1}`}
-                      className="max-w-full max-h-full object-contain rounded-xl shadow-lg"
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 400px"
+                      className="object-contain rounded-xl"
                     />
                   </div>
                 ))}
@@ -663,14 +673,13 @@ function ImageGalleryModal({
                 <button
                   key={idx}
                   onClick={() => onNavigate(idx)}
-                  className={`flex-shrink-0 w-14 h-14 lg:w-16 lg:h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`relative flex-shrink-0 w-14 h-14 lg:w-16 lg:h-16 rounded-lg overflow-hidden border-2 transition-all ${
                     isCurrentReview
                       ? 'border-brand-500 ring-2 ring-brand-500/30'
                       : 'border-transparent opacity-50 hover:opacity-100 hover:border-slate-300'
                   }`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img.src} alt="" className="w-full h-full object-cover" />
+                  <Image src={img.src} alt="" fill sizes="64px" className="object-cover" />
                 </button>
               );
             })}
