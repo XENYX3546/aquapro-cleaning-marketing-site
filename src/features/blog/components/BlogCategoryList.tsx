@@ -41,7 +41,7 @@ export function BlogCategoryList({
           className={cn(
             'px-4 py-2 text-sm font-medium rounded-full transition-colors',
             !activeSlug
-              ? 'bg-primary-600 text-white'
+              ? 'bg-primary-700 text-white'
               : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
           )}
         >
@@ -54,7 +54,7 @@ export function BlogCategoryList({
             className={cn(
               'px-4 py-2 text-sm font-medium rounded-full transition-colors',
               activeSlug === category.slug
-                ? 'bg-primary-600 text-white'
+                ? 'bg-primary-700 text-white'
                 : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
             )}
           >

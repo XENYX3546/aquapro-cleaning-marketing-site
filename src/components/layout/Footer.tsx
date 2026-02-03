@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Interior Services */}
           <div>
-            <h4 className="font-bold text-white mb-4 text-sm">
+            <h3 className="font-bold text-white mb-4 text-sm">
               Interior Cleaning
             </h4>
             <ul className="space-y-2.5">
@@ -95,7 +95,7 @@ export function Footer() {
 
           {/* Exterior Services */}
           <div>
-            <h4 className="font-bold text-white mb-4 text-sm">
+            <h3 className="font-bold text-white mb-4 text-sm">
               Exterior Cleaning
             </h4>
             <ul className="space-y-2.5">
@@ -114,7 +114,7 @@ export function Footer() {
 
           {/* Areas Covered */}
           <div>
-            <h4 className="font-bold text-white mb-4 text-sm">Areas Covered</h4>
+            <h3 className="font-bold text-white mb-4 text-sm">Areas Covered</h4>
             <ul className="space-y-2.5">
               {footerLocations.slice(0, 6).map((location) => (
                 <li key={location.slug}>
@@ -139,7 +139,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-bold text-white mb-4 text-sm">Company</h4>
+            <h3 className="font-bold text-white mb-4 text-sm">Company</h4>
             <ul className="space-y-2.5">
               <li>
                 <Link
