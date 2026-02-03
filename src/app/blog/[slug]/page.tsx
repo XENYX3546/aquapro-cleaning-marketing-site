@@ -204,6 +204,8 @@ export default async function BlogPostPage({ params }: PageProps) {
               className="object-cover"
               priority
               loading="eager"
+              fetchPriority="high"
+              decoding="sync"
             />
             {/* Gradient overlay for readability */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />

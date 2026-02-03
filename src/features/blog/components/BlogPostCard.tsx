@@ -33,6 +33,8 @@ export function BlogPostCard({ post, featured = false, priority = false }: BlogP
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             priority={priority}
             loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
+            decoding={priority ? 'sync' : 'async'}
           />
 
           {/* Gradient Overlay */}
