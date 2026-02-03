@@ -22,7 +22,7 @@ export function BlogSidebarCTA({ categories = [] }: BlogSidebarCTAProps) {
         <p className="text-primary-100 text-sm mb-4">{cta.description}</p>
         <Link
           href="/contact"
-          className="block w-full bg-white text-primary-600 font-semibold text-center py-3 px-4 rounded-lg hover:bg-primary-50 transition-colors"
+          className="block w-full bg-white text-primary-800 font-semibold text-center py-3 px-4 rounded-lg hover:bg-primary-50 transition-colors"
         >
           {cta.buttonText}
         </Link>
