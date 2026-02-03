@@ -246,7 +246,7 @@ export function Footer() {
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-slate-400 text-sm text-center md:text-left">
             <p>&copy; {currentYear} {siteConfig.legalName}. All rights reserved.</p>
-            <p className="text-slate-500 text-xs mt-1">Company No. {siteConfig.companyNumber} | Registered in England & Wales</p>
+            <p className="text-slate-400 text-xs mt-1">Company No. {siteConfig.companyNumber} | Registered in England & Wales</p>
           </div>
           <div className="flex gap-6 text-sm text-slate-400">
             {navigation.legal.map((link) => (

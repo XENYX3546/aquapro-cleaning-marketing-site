@@ -40,6 +40,7 @@ export function BlogPostPage({ post, category, relatedPosts }: BlogPostPageProps
               sizes="100vw"
               className="object-cover"
               priority
+              loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
           </div>
@@ -196,9 +197,9 @@ export function BlogPostPage({ post, category, relatedPosts }: BlogPostPageProps
 
               {post.author && (
                 <div className="mt-12 pt-8 border-t border-neutral-200">
-                  <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-4">
+                  <h2 className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-4">
                     About the Author
-                  </h3>
+                  </h2>
                   <BlogAuthorCard author={post.author} variant="full" showSocial />
                 </div>
               )}

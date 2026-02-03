@@ -32,6 +32,7 @@ export function BlogPostCard({ post, featured = false, priority = false }: BlogP
             sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             priority={priority}
+            loading={priority ? 'eager' : 'lazy'}
           />
 
           {/* Gradient Overlay */}
