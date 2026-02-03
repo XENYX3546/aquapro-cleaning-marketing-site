@@ -18,6 +18,11 @@ import {
   Droplets,
   CloudRain,
   AppWindow,
+  BedDouble,
+  Car,
+  Trees,
+  Sun,
+  Building2,
 } from 'lucide-react';
 
 export function Header() {
@@ -59,10 +64,10 @@ export function Header() {
   }, []);
 
   const interiorServices = services.filter((s) =>
-    ['carpet-cleaning', 'upholstery-cleaning', 'stain-removal'].includes(s.id)
+    ['carpet-cleaning', 'upholstery-cleaning', 'stain-removal', 'mattress-cleaning'].includes(s.id)
   );
   const exteriorServices = services.filter((s) =>
-    ['roof-cleaning', 'pressure-washing', 'gutter-cleaning', 'window-cleaning'].includes(s.id)
+    ['roof-cleaning', 'pressure-washing', 'gutter-cleaning', 'window-cleaning', 'driveway-cleaning', 'patio-cleaning', 'solar-panel-cleaning', 'conservatory-cleaning'].includes(s.id)
   );
 
   return (
@@ -148,6 +153,7 @@ export function Header() {
                                 {service.id === 'carpet-cleaning' && <Brush className="w-4 h-4" />}
                                 {service.id === 'upholstery-cleaning' && <Sofa className="w-4 h-4" />}
                                 {service.id === 'stain-removal' && <Sparkles className="w-4 h-4" />}
+                                {service.id === 'mattress-cleaning' && <BedDouble className="w-4 h-4" />}
                               </span>
                             </div>
                             <div className="text-[15px] font-bold text-slate-700 group-hover/item:text-brand-700 transition-colors">
@@ -182,6 +188,10 @@ export function Header() {
                                 {service.id === 'pressure-washing' && <Droplets className="w-4 h-4" />}
                                 {service.id === 'gutter-cleaning' && <CloudRain className="w-4 h-4" />}
                                 {service.id === 'window-cleaning' && <AppWindow className="w-4 h-4" />}
+                                {service.id === 'driveway-cleaning' && <Car className="w-4 h-4" />}
+                                {service.id === 'patio-cleaning' && <Trees className="w-4 h-4" />}
+                                {service.id === 'solar-panel-cleaning' && <Sun className="w-4 h-4" />}
+                                {service.id === 'conservatory-cleaning' && <Building2 className="w-4 h-4" />}
                               </span>
                             </div>
                             <div className="text-[15px] font-bold text-slate-700 group-hover/item:text-brand-700 transition-colors">

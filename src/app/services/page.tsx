@@ -5,7 +5,6 @@ import { Container, Section, Card, Icon, AnimatedSection } from '@/components/ui
 import { Breadcrumbs, ServiceClusterNav, CrossHubLinks } from '@/components/seo';
 import { services, siteConfig, type Service } from '@/lib/constants';
 import { ContactSection } from '@/features/home/client';
-import { CTASection } from '@/features/home/server';
 
 // Comprehensive metadata for services hub page
 export const metadata: Metadata = {
@@ -142,14 +141,17 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesFaqJsonLd) }}
       />
-      <Section className="bg-gradient-to-b from-primary-50/50 to-white">
+      <Section className="bg-slate-50 border-b border-slate-200">
         <Container>
           <Breadcrumbs items={breadcrumbItems} />
-          <AnimatedSection className="text-center max-w-2xl mx-auto">
-            <h1 className="text-[2rem] md:text-[2.5rem] font-bold text-neutral-900">
-              Our Professional Services
+          <AnimatedSection className="text-center max-w-3xl mx-auto">
+            <span className="text-brand-600 font-bold tracking-widest uppercase text-sm mb-3 block">
+              What We Offer
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Our Professional <span className="text-brand-500">Services</span>
             </h1>
-            <p className="mt-6 text-lg text-neutral-600">
+            <p className="mt-6 text-lg text-slate-600 leading-relaxed">
               From deep carpet cleaning to roof restoration, we provide comprehensive
               cleaning solutions for homes and businesses across Essex.
             </p>
@@ -172,7 +174,6 @@ export default function ServicesPage() {
       <CrossHubLinks currentHub="services" variant="section" />
 
       <ContactSection />
-      <CTASection />
     </LandingLayout>
   );
 }
@@ -181,32 +182,32 @@ function ServiceCard({ service }: { service: Service }) {
   return (
     <Link href={`/services/${service.slug}`} className="block h-full group">
       <Card hover className="h-full">
-        <div className="w-14 h-14 bg-primary-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-200 transition-colors">
+        <div className="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-100 transition-colors shadow-sm">
           <Icon
             name={service.icon as Parameters<typeof Icon>[0]['name']}
             size={28}
-            className="text-primary-700"
+            className="text-brand-600"
           />
         </div>
-        <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
+        <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-neutral-900 group-hover:text-brand-700 transition-colors">
           {service.name}
         </h3>
         <p className="mt-2 text-neutral-600">
           {service.description}
         </p>
         <div className="mt-4">
-          <h3 className="text-sm font-medium text-neutral-900 mb-2">Ideal for:</h3>
+          <h4 className="text-sm font-medium text-neutral-900 mb-2">Ideal for:</h4>
           <ul className="space-y-1">
             {service.idealFor.slice(0, 3).map((item) => (
               <li key={item} className="flex items-center gap-2 text-sm text-neutral-500">
-                <Icon name="check" size={12} className="text-primary-700" />
+                <Icon name="check" size={12} className="text-brand-600" />
                 {item}
               </li>
             ))}
           </ul>
         </div>
         <div className="mt-6 pt-4 border-t border-neutral-100">
-          <span className="text-sm font-medium text-primary-700 group-hover:text-primary-700 flex items-center gap-1">
+          <span className="text-sm font-medium text-brand-600 group-hover:text-brand-700 flex items-center gap-1">
             Learn more about {service.shortName}
             <Icon name="arrow-right" size={14} />
           </span>

@@ -18,6 +18,9 @@ import {
   DynamicAvatar,
   ShareProfileButton,
 } from '@/features/blog';
+
+// Force dynamic rendering to ensure filtering works
+export const dynamic = 'force-dynamic';
 import { LandingLayout } from '@/components/layout';
 import { siteConfig } from '@/lib/constants';
 

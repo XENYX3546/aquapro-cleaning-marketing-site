@@ -15,11 +15,11 @@ export function CrossHubLinks({
     if (currentHub === 'services') {
       return (
         <div className="flex items-center justify-center gap-2 py-4">
-          <MapPin className="w-4 h-4 text-primary-700" />
+          <MapPin className="w-4 h-4 text-brand-600" />
           <span className="text-neutral-600">Looking for services in your area?</span>
           <Link
             href="/areas"
-            className="inline-flex items-center gap-1 text-primary-700 font-medium hover:text-primary-700"
+            className="inline-flex items-center gap-1 text-brand-600 font-medium hover:text-brand-700"
           >
             View all {locations.length} locations
             <ArrowRight className="w-4 h-4" />
@@ -30,11 +30,11 @@ export function CrossHubLinks({
 
     return (
       <div className="flex items-center justify-center gap-2 py-4">
-        <Wrench className="w-4 h-4 text-primary-700" />
+        <Wrench className="w-4 h-4 text-brand-600" />
         <span className="text-neutral-600">Want to learn more about our services?</span>
         <Link
           href="/services"
-          className="inline-flex items-center gap-1 text-primary-700 font-medium hover:text-primary-700"
+          className="inline-flex items-center gap-1 text-brand-600 font-medium hover:text-brand-700"
         >
           View all {services.length} services
           <ArrowRight className="w-4 h-4" />
@@ -46,19 +46,21 @@ export function CrossHubLinks({
   // Section variant - more prominent
   if (currentHub === 'services') {
     return (
-      <section className="py-12 bg-primary-50">
+      <section className="py-16 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <MapPin className="w-10 h-10 text-primary-700 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-neutral-900 mb-2">
-            Find Services in Your Area
+          <div className="w-14 h-14 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center mx-auto mb-5 shadow-sm">
+            <MapPin className="w-7 h-7" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+            Find Services in <span className="text-brand-500">Your Area</span>
           </h2>
-          <p className="text-neutral-600 mb-6 max-w-xl mx-auto">
+          <p className="text-slate-600 mb-8 max-w-xl mx-auto leading-relaxed">
             We cover {locations.length}+ locations across Essex and surrounding areas.
             Find your local team and get a free quote.
           </p>
           <Link
             href="/areas"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-brand-600 text-white font-bold rounded-lg hover:bg-brand-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
           >
             Browse All Locations
             <ArrowRight className="w-4 h-4" />
@@ -69,19 +71,21 @@ export function CrossHubLinks({
   }
 
   return (
-    <section className="py-12 bg-primary-50">
+    <section className="py-16 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <Wrench className="w-10 h-10 text-primary-700 mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-neutral-900 mb-2">
-          Explore Our Services
+        <div className="w-14 h-14 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center mx-auto mb-5 shadow-sm">
+          <Wrench className="w-7 h-7" />
+        </div>
+        <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+          Explore Our <span className="text-brand-500">Services</span>
         </h2>
-        <p className="text-neutral-600 mb-6 max-w-xl mx-auto">
+        <p className="text-slate-600 mb-8 max-w-xl mx-auto leading-relaxed">
           From carpet cleaning to roof moss removal, we offer {services.length} professional
           cleaning services for your home and business.
         </p>
         <Link
           href="/services"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+          className="inline-flex items-center gap-2 px-8 py-3.5 bg-brand-600 text-white font-bold rounded-lg hover:bg-brand-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
           View All Services
           <ArrowRight className="w-4 h-4" />

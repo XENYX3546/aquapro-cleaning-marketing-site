@@ -10,6 +10,8 @@ type BlogRelatedPostsProps = {
 
 function RelatedPostCard({ post }: { post: BlogPostSummary }) {
   const hasImage = Boolean(post.featuredImageUrl);
+  // Use small (640px) for related post cards
+  const cardImageUrl = post.featuredImageVariants?.small ?? post.featuredImageUrl;
 
   // Card with cover image as background
   if (hasImage) {
@@ -21,7 +23,7 @@ function RelatedPostCard({ post }: { post: BlogPostSummary }) {
         >
           {/* Background Image */}
           <Image
-            src={post.featuredImageUrl!}
+            src={cardImageUrl!}
             alt={post.featuredImageAlt || post.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

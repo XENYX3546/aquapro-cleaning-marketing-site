@@ -100,7 +100,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en-GB" className={inter.variable}>
       <head>
         {/* DNS prefetch for faster resolution */}
         <link rel="dns-prefetch" href="https://app.zuviaone.com" />

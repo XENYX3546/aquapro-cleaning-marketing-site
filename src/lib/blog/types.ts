@@ -1,5 +1,13 @@
 // Blog API Types - matching the Zuvia Blog API response structures
 
+/** Responsive image variants for srcset support */
+export interface ImageVariants {
+  large: string;    // 1920px
+  medium: string;   // 1024px
+  small: string;    // 640px
+  thumbnail: string; // 320px
+}
+
 export interface PostAuthor {
   id: string;
   displayName: string;
@@ -27,6 +35,7 @@ export interface BlogPost {
   publishedAt: string | null;
   scheduledAt: string | null;
   featuredImageUrl: string | null;
+  featuredImageVariants: ImageVariants | null;
   featuredImageMediaId: string | null;
   featuredImageAlt: string | null;
   featuredImageCaption: string | null;
@@ -64,6 +73,7 @@ export interface BlogPostSummary {
   publishedAt: string | null;
   scheduledAt: string | null;
   featuredImageUrl: string | null;
+  featuredImageVariants: ImageVariants | null;
   featuredImageMediaId: string | null;
   featuredImageAlt: string | null;
   isFeatured: boolean;
@@ -125,15 +135,25 @@ export interface PaginationMeta {
   hasMore: boolean;
 }
 
+/** SEO pagination links for rel="next" and rel="prev" */
+export interface PaginationLinks {
+  self: string;
+  first: string;
+  last?: string;
+  next?: string;
+  prev?: string;
+}
+
 export interface ResponseMeta {
   requestId: string;
   timestamp: string;
   pagination?: PaginationMeta;
+  links?: PaginationLinks;
 }
 
 export interface PaginatedResponse<T> {
   data: T[];
-  meta: ResponseMeta & { pagination: PaginationMeta };
+  meta: ResponseMeta & { pagination: PaginationMeta; links?: PaginationLinks };
 }
 
 export interface SingleResponse<T> {

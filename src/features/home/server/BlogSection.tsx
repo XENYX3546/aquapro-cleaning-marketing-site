@@ -67,7 +67,7 @@ export async function BlogSection() {
                 <Link href={postPath} className="relative h-48 overflow-hidden block">
                   {post.featuredImageUrl ? (
                     <Image
-                      src={post.featuredImageUrl}
+                      src={post.featuredImageVariants?.medium ?? post.featuredImageUrl}
                       alt={post.featuredImageAlt || post.title}
                       fill
                       className="object-cover transform group-hover:scale-105 transition-transform duration-700"

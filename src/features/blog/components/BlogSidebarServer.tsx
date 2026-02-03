@@ -59,7 +59,7 @@ export async function BlogSidebarServer({
                 <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-neutral-100">
                   {post.featuredImageUrl ? (
                     <Image
-                      src={post.featuredImageUrl}
+                      src={post.featuredImageVariants?.thumbnail ?? post.featuredImageUrl}
                       alt={post.title}
                       fill
                       sizes="64px"

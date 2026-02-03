@@ -34,7 +34,7 @@ export function BlogPostPage({ post, category, relatedPosts }: BlogPostPageProps
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src={post.featuredImageUrl}
+              src={post.featuredImageVariants?.large ?? post.featuredImageUrl}
               alt={post.featuredImageAlt || post.title}
               fill
               sizes="100vw"

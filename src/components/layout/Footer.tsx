@@ -17,10 +17,10 @@ import { siteConfig, navigation, services, locations, ctaLinks } from '@/lib/con
 // Top 10 locations for footer
 const footerLocations = locations.slice(0, 10);
 const interiorServices = services.filter((s) =>
-  ['carpet-cleaning', 'upholstery-cleaning', 'stain-removal'].includes(s.id)
+  ['carpet-cleaning', 'upholstery-cleaning', 'stain-removal', 'mattress-cleaning'].includes(s.id)
 );
 const exteriorServices = services.filter((s) =>
-  ['roof-cleaning', 'pressure-washing', 'gutter-cleaning', 'window-cleaning'].includes(s.id)
+  ['roof-cleaning', 'pressure-washing', 'gutter-cleaning', 'window-cleaning', 'driveway-cleaning', 'patio-cleaning', 'solar-panel-cleaning', 'conservatory-cleaning'].includes(s.id)
 );
 
 export function Footer() {

@@ -13,6 +13,8 @@ type BlogPostCardProps = {
 export function BlogPostCard({ post, featured = false, priority = false }: BlogPostCardProps) {
   const hasImage = Boolean(post.featuredImageUrl);
   const primaryCategory = post.categories?.[0];
+  // Use medium (1024px) for cards instead of large (1920px)
+  const cardImageUrl = post.featuredImageVariants?.medium ?? post.featuredImageUrl;
 
   // Card with cover image as background
   if (hasImage) {
@@ -26,7 +28,7 @@ export function BlogPostCard({ post, featured = false, priority = false }: BlogP
         >
           {/* Background Image */}
           <Image
-            src={post.featuredImageUrl!}
+            src={cardImageUrl!}
             alt={post.featuredImageAlt || post.title}
             fill
             sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}

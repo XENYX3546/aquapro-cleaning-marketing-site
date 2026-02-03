@@ -197,7 +197,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src={post.featuredImageUrl}
+              src={post.featuredImageVariants?.large ?? post.featuredImageUrl}
               alt={post.featuredImageAlt || post.title}
               fill
               sizes="100vw"

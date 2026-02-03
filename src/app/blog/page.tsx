@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { getCategories } from '@/lib/blog';
+import { getCategories, getPosts } from '@/lib/blog';
 import {
   BlogHero,
   BlogSearch,
@@ -11,33 +11,72 @@ import {
 import { LandingLayout } from '@/components/layout';
 import { siteConfig } from '@/lib/constants';
 
-export const metadata: Metadata = {
-  title: 'Blog - Cleaning Tips & Expert Advice',
-  description:
-    'Tips, guides, and insights to help you maintain your property. Expert cleaning advice from the Aquapro Cleaning team.',
-  keywords: [
-    'cleaning tips',
-    'cleaning advice',
-    'cleaning guides',
-    'window cleaning tips',
-    'exterior cleaning',
-    'property maintenance',
-    'cleaning blog',
-  ],
-  openGraph: {
-    title: 'Blog - Cleaning Tips & Expert Advice | Aquapro Cleaning',
-    description:
-      'Tips, guides, and insights to help you maintain your property.',
-    type: 'website',
-    url: `${siteConfig.url}/blog`,
-  },
-  alternates: {
-    canonical: `${siteConfig.url}/blog`,
-    types: {
-      'application/rss+xml': `${siteConfig.url}/blog/feed.xml`,
-    },
-  },
+// Force dynamic rendering to ensure filtering works
+export const dynamic = 'force-dynamic';
+
+type BlogPageProps = {
+  searchParams: Promise<{
+    page?: string;
+    q?: string;
+    tag?: string;
+  }>;
 };
+
+// Dynamic metadata with SEO pagination links
+export async function generateMetadata({ searchParams }: BlogPageProps): Promise<Metadata> {
+  const params = await searchParams;
+  const page = params.page ? Number.parseInt(params.page, 10) : 1;
+
+  // Build canonical URL with page param
+  const canonicalUrl = page > 1
+    ? `${siteConfig.url}/blog?page=${page}`
+    : `${siteConfig.url}/blog`;
+
+  return {
+    title: 'Blog - Cleaning Tips & Expert Advice',
+    description:
+      'Tips, guides, and insights to help you maintain your property. Expert cleaning advice from the Aquapro Cleaning team.',
+    keywords: [
+      'cleaning tips',
+      'cleaning advice',
+      'cleaning guides',
+      'window cleaning tips',
+      'exterior cleaning',
+      'property maintenance',
+      'cleaning blog',
+    ],
+    openGraph: {
+      title: 'Blog - Cleaning Tips & Expert Advice | Aquapro Cleaning',
+      description:
+        'Tips, guides, and insights to help you maintain your property.',
+      type: 'website',
+      url: canonicalUrl,
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      types: {
+        'application/rss+xml': `${siteConfig.url}/blog/feed.xml`,
+      },
+    },
+  };
+}
+
+// SEO pagination link tags component
+function PaginationLinks({ page, hasMore }: { page: number; hasMore: boolean }) {
+  const prevUrl = page > 1
+    ? page === 2
+      ? `${siteConfig.url}/blog`
+      : `${siteConfig.url}/blog?page=${page - 1}`
+    : null;
+  const nextUrl = hasMore ? `${siteConfig.url}/blog?page=${page + 1}` : null;
+
+  return (
+    <>
+      {prevUrl && <link rel="prev" href={prevUrl} />}
+      {nextUrl && <link rel="next" href={nextUrl} />}
+    </>
+  );
+}
 
 // Schema for blog listing
 function BlogListSchema() {
@@ -83,28 +122,26 @@ function getPageDescription(searchQuery?: string, tag?: string): string {
   return 'Tips, guides, and insights to help you maintain your property.';
 }
 
-type BlogPageProps = {
-  searchParams: Promise<{
-    page?: string;
-    q?: string;
-    tag?: string;
-  }>;
-};
-
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const params = await searchParams;
   const page = params.page ? Number.parseInt(params.page, 10) : 1;
   const searchQuery = params.q || undefined;
   const tag = params.tag || undefined;
 
-  // Get categories for filter pills (with error handling)
+  // Get categories and posts for filter pills and pagination (with error handling)
   let categories: Awaited<ReturnType<typeof getCategories>>['data'] = [];
+  let hasMorePosts = false;
+
   try {
-    const categoriesResponse = await getCategories();
+    const [categoriesResponse, postsResponse] = await Promise.all([
+      getCategories(),
+      getPosts({ page, pageSize: 12, tag }),
+    ]);
     categories = Array.isArray(categoriesResponse?.data) ? categoriesResponse.data : [];
+    hasMorePosts = postsResponse.meta.pagination.hasMore;
   } catch {
-    // If API fails, continue with empty categories
-    console.error('Failed to fetch blog categories');
+    // If API fails, continue with defaults
+    console.error('Failed to fetch blog data');
   }
 
   const pageTitle = getPageTitle(searchQuery, tag);
@@ -112,6 +149,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <LandingLayout>
+      <PaginationLinks page={page} hasMore={hasMorePosts} />
       <BlogListSchema />
 
       {/* Hero with Search */}

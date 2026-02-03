@@ -11,6 +11,9 @@ import {
 import { LandingLayout } from '@/components/layout';
 import { siteConfig } from '@/lib/constants';
 
+// Force dynamic rendering to ensure category filtering works
+export const dynamic = 'force-dynamic';
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ page?: string }>;

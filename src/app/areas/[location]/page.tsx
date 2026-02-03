@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { LandingLayout } from '@/components/layout';
-import { Container, Section, Button, Icon, AnimatedSection, Card } from '@/components/ui';
+import { Container, Section, Icon, AnimatedSection, Card, ReviewsSection } from '@/components/ui';
 import { Breadcrumbs, ServiceAreaMap } from '@/components/seo';
 import {
   services,
@@ -12,6 +13,7 @@ import {
   siteConfig,
   ctaLinks,
   reviewStats,
+  getReviewsForLocation,
   getAllReviews,
 } from '@/lib/constants';
 import { ContactSection } from '@/features/home/client';
@@ -128,19 +130,19 @@ export default async function LocationPage({ params }: PageProps) {
             {/* Left column - Content */}
             <div className="animate-hero-stagger">
               {/* Location badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full mb-6">
-                <Icon name="map-pin" size={18} className="text-primary-700" />
-                <span className="text-sm font-semibold text-primary-700">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 border border-brand-100 rounded-full mb-6">
+                <Icon name="map-pin" size={18} className="text-brand-600" />
+                <span className="text-sm font-semibold text-brand-700">
                   {location.postcodeAreas?.join(', ') || location.county}
                 </span>
               </div>
 
-              <h1 className="text-[2rem] md:text-[2.5rem] font-bold text-neutral-900 tracking-tight leading-[1.1]">
+              <h1 className="text-[2rem] md:text-[2.5rem] font-extrabold text-slate-900 tracking-tight leading-[1.1]">
                 {isCounty ? 'Professional ' : ''}Cleaning Services
-                <span className="block text-primary-700">{isCounty ? `Across ${location.name}` : `in ${location.name}`}</span>
+                <span className="block text-brand-500">{isCounty ? `Across ${location.name}` : `in ${location.name}`}</span>
               </h1>
 
-              <p className="mt-6 text-lg md:text-xl text-neutral-500 max-w-xl leading-relaxed">
+              <p className="mt-6 text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed">
                 {isCounty
                   ? `Expert carpet cleaning, pressure washing, roof moss removal, gutter cleaning & more ${location.localHook}. Serving all major towns including Chelmsford, Southend, Colchester & Basildon.`
                   : `Professional carpet, pressure washing, roof, window & sofa cleaning ${location.localHook}. Fully insured, 5-star rated.`
@@ -149,46 +151,54 @@ export default async function LocationPage({ params }: PageProps) {
 
               {/* CTA */}
               <div className="mt-8 flex flex-col sm:flex-row items-start gap-4">
-                <Button href={ctaLinks.quote} size="lg">
+                <Link
+                  href={ctaLinks.quote}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-cta hover:bg-cta-hover text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                >
                   Get Your Free Quote
-                </Button>
+                  <Icon name="arrow-right" size={16} />
+                </Link>
                 <a
                   href={ctaLinks.call}
-                  className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 font-medium transition-colors"
+                  className="flex items-center gap-2 text-slate-600 hover:text-slate-900 font-medium transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center">
-                    <Icon name="phone" size={18} className="text-neutral-700" />
+                  <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                    <Icon name="phone" size={18} className="text-slate-700" />
                   </div>
                   <span>{siteConfig.contact.phone}</span>
                 </a>
               </div>
 
               {/* Trust strip */}
-              <div className="mt-10 pt-6 border-t border-neutral-100">
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-neutral-500">
+              <div className="mt-10 pt-6 border-t border-slate-100">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-500">
                   <span className="flex items-center gap-2">
                     <Icon name="star" size={18} className="text-amber-400 fill-amber-400" />
                     {reviewStats.averageRating} Rated
                   </span>
                   <span className="flex items-center gap-2">
-                    <Icon name="shield-check" size={18} className="text-primary-700" />
+                    <Icon name="shield-check" size={18} className="text-brand-600" />
                     Fully Insured
                   </span>
                   <span className="flex items-center gap-2">
-                    <Icon name="users" size={18} className="text-primary-700" />
+                    <Icon name="users" size={18} className="text-brand-600" />
                     {isCounty ? `Covering All ${location.name}` : `Local ${location.county} Business`}
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Right column - Image placeholder */}
+            {/* Right column - Hero Image */}
             <div className="hidden lg:block">
-              <div className="aspect-[4/3] bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl flex items-center justify-center">
-                <div className="text-center text-primary-300">
-                  <Icon name="map-pin" size={64} className="mx-auto mb-4" />
-                  <p className="text-sm font-medium">{location.name} Image</p>
-                </div>
+              <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/roof-clean-before-after-single-image.jpg"
+                  alt={`Professional cleaning services in ${location.name}`}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
             </div>
           </div>
@@ -199,10 +209,13 @@ export default async function LocationPage({ params }: PageProps) {
       <Section className="bg-white">
         <Container>
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-[1.5rem] md:text-[1.75rem] font-bold text-neutral-900">
-              Our Services in {location.name}
+            <span className="text-brand-600 font-bold tracking-widest uppercase text-sm mb-3 block">
+              Available Services
+            </span>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Our Services in <span className="text-brand-500">{location.name}</span>
             </h2>
-            <p className="mt-4 text-neutral-600">
+            <p className="mt-4 text-slate-600">
               Click a service to learn more and get a free quote
             </p>
           </AnimatedSection>
@@ -215,21 +228,21 @@ export default async function LocationPage({ params }: PageProps) {
                 className="block"
               >
                 <Card hover className="h-full group">
-                  <div className="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-100 transition-colors">
+                  <div className="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-100 transition-colors shadow-sm">
                     <Icon
                       name={service.icon as Parameters<typeof Icon>[0]['name']}
                       size={28}
-                      className="text-primary-700"
+                      className="text-brand-600"
                     />
                   </div>
-                  <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
+                  <h3 className="text-[1.25rem] md:text-[1.375rem] font-semibold text-slate-900 group-hover:text-brand-700 transition-colors">
                     {service.name}
                   </h3>
-                  <p className="mt-2 text-neutral-600 text-base">
+                  <p className="mt-2 text-slate-600 text-base">
                     {service.description}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-neutral-100">
-                    <span className="text-sm font-semibold text-primary-700 group-hover:text-primary-700 flex items-center gap-1">
+                  <div className="mt-4 pt-4 border-t border-slate-100">
+                    <span className="text-sm font-semibold text-brand-600 group-hover:text-brand-700 flex items-center gap-1">
                       {service.name} in {location.name}
                       <Icon name="arrow-right" size={14} className="group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -241,8 +254,19 @@ export default async function LocationPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      {/* Featured Review */}
-      <FeaturedReview />
+      {/* Reviews Section */}
+      <ReviewsSection
+        reviews={(() => {
+          const locationReviews = getReviewsForLocation(location.slug);
+          return locationReviews.length > 0 ? locationReviews : getAllReviews();
+        })()}
+        moreReviews={getAllReviews()}
+        locationSlug={location.slug}
+        variant="slate"
+        tagline="Customer Reviews"
+        title={<>What Our <span className="text-brand-500">Customers</span> Say</>}
+        subtitle={`Real reviews from homeowners across Essex who used our cleaning services.`}
+      />
 
       {/* Nearby Areas with Map Background */}
       <Section className="relative overflow-hidden min-h-[300px]">
@@ -252,10 +276,10 @@ export default async function LocationPage({ params }: PageProps) {
 
         <Container className="relative z-[2]">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-neutral-900 mb-2">
+            <h3 className="text-2xl font-extrabold text-slate-900 mb-2">
               {isCounty ? `Towns & Cities in ${location.name}` : `More Services in ${location.name}`}
             </h3>
-            <p className="text-neutral-600">
+            <p className="text-slate-600">
               {isCounty
                 ? `We provide professional cleaning services across all of ${location.name}`
                 : `Serving ${location.name} and nearby areas in ${location.county}`
@@ -269,7 +293,7 @@ export default async function LocationPage({ params }: PageProps) {
                 <Link
                   key={loc.slug}
                   href={`/areas/${loc.slug}`}
-                  className="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-700 transition-colors shadow-sm border border-neutral-200"
+                  className="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-700 transition-colors shadow-sm border border-slate-200"
                 >
                   {loc.name}
                 </Link>
@@ -278,9 +302,9 @@ export default async function LocationPage({ params }: PageProps) {
           )}
 
           {!isCounty && location.postcodeAreas && location.postcodeAreas.length > 0 && (
-            <div className="max-w-md mx-auto p-4 bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-neutral-200 text-center">
-              <p className="text-sm text-neutral-600">
-                <span className="font-semibold text-neutral-800">Postcodes covered:</span>{' '}
+            <div className="max-w-md mx-auto p-4 bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-slate-200 text-center">
+              <p className="text-sm text-slate-600">
+                <span className="font-semibold text-slate-800">Postcodes covered:</span>{' '}
                 {location.postcodeAreas.join(', ')}
               </p>
             </div>
@@ -290,39 +314,6 @@ export default async function LocationPage({ params }: PageProps) {
 
       {/* Contact Section */}
       <ContactSection />
-
-      {/* CTA Section */}
-      <Section className="bg-primary-600">
-        <Container>
-          <AnimatedSection className="max-w-2xl mx-auto text-center">
-            <h2 className="text-[1.5rem] md:text-[1.75rem] font-bold text-white">
-              Need Cleaning Services in {location.name}?
-            </h2>
-            <p className="mt-4 text-lg text-primary-100">
-              Get a free, no-obligation quote today. We&apos;re local, fully insured,
-              and committed to exceptional results.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                href={ctaLinks.quote}
-                size="lg"
-                className="bg-white text-primary-700 hover:bg-neutral-100"
-              >
-                Get a Free Quote
-              </Button>
-              <Button
-                href={ctaLinks.call}
-                variant="ghost"
-                size="lg"
-                className="ring-2 ring-inset ring-white text-white hover:bg-white/10"
-              >
-                <Icon name="phone" size={18} className="mr-2" />
-                {siteConfig.contact.phone}
-              </Button>
-            </div>
-          </AnimatedSection>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }
@@ -390,37 +381,3 @@ function LocationSchema({ location }: { location: ReturnType<typeof getLocationB
   );
 }
 
-function FeaturedReview() {
-  // Get top priority review (real verified Google review)
-  const topReview = getAllReviews().find(r => r.priority) || getAllReviews()[0];
-
-  if (!topReview) {
-    return null;
-  }
-
-  return (
-    <Section className="bg-primary-50 border-y border-primary-100">
-      <Container>
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-sm font-medium text-primary-700 mb-3">
-            Verified Google Review
-          </p>
-          <div className="flex justify-center gap-1 mb-4">
-            {[...Array(5)].map((_, i) => (
-              <Icon key={i} name="star" size={20} className="text-amber-400 fill-amber-400" />
-            ))}
-          </div>
-          <blockquote className="text-xl text-neutral-800">
-            &ldquo;{topReview.text.length > 200 ? topReview.text.slice(0, 200).trim() + '...' : topReview.text}&rdquo;
-          </blockquote>
-          <p className="mt-4 font-semibold text-neutral-900">
-            {topReview.name}
-          </p>
-          {topReview.reviewer.isLocalGuide && (
-            <p className="text-sm text-primary-700 mt-1">Local Guide</p>
-          )}
-        </div>
-      </Container>
-    </Section>
-  );
-}
