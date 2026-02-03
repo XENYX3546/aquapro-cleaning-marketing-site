@@ -10,14 +10,12 @@ import { reviewStatsDisplay } from '@/lib/constants';
 const HERO_BG = "/images/blake-van-image.jpg";
 
 const Logos = () => (
-  <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center lg:justify-start gap-6 sm:gap-8 pt-8">
-    <span className="text-slate-500 font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase whitespace-nowrap">
+  <div className="flex flex-col items-center lg:items-start gap-4 pt-8">
+    <span className="text-slate-500 font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase">
       Approved & Accredited By
     </span>
 
-    <div className="hidden sm:block w-px h-8 bg-slate-700" />
-
-    <div className="flex flex-wrap justify-center gap-6 sm:gap-8 items-center">
+    <div className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-8 items-center">
       {/* Google Guaranteed */}
       <div className="flex flex-col items-center group cursor-default">
         <div className="flex items-center gap-1.5 opacity-90 group-hover:opacity-100 transition-opacity">

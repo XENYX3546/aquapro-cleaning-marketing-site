@@ -19,7 +19,8 @@ export default function TermsPage() {
     <LegalLayout title="Terms & Conditions" lastUpdated="January 2026">
       <p>
         These Terms and Conditions (&quot;Terms&quot;) govern your use of cleaning services provided by
-        <strong> {siteConfig.legalName}</strong> (&quot;Company&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;),
+        <strong> {siteConfig.legalName}</strong> (Company No. {siteConfig.companyNumber}),
+        (&quot;Company&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;),
         a company registered in England and Wales.
       </p>
       <p>
@@ -216,6 +217,7 @@ export default function TermsPage() {
       <div className="contact-card">
         <ul>
           <li><strong>Company:</strong> {siteConfig.legalName}</li>
+          <li><strong>Company Number:</strong> {siteConfig.companyNumber}</li>
           <li><strong>Email:</strong> {siteConfig.contact.email}</li>
           <li><strong>Phone:</strong> {siteConfig.contact.phone}</li>
           <li><strong>Website:</strong> {siteConfig.url}</li>

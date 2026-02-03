@@ -18,6 +18,7 @@ export const siteConfig = {
   // Business details for trust signals
   established: 2020,
   coverage: 'Essex & Surrounding Areas',
+  companyNumber: '15891310',
 } as const;
 
 // Customer statistics - single source of truth

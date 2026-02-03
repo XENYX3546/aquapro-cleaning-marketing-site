@@ -18,7 +18,8 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalLayout title="Privacy Policy" lastUpdated="January 2026">
       <p>
-        <strong>{siteConfig.legalName}</strong> (&quot;Company&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is committed
+        <strong>{siteConfig.legalName}</strong> (Company No. {siteConfig.companyNumber}),
+        (&quot;Company&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is committed
         to protecting your privacy. This Privacy Policy explains how we collect, use, and
         safeguard your information when you use our website and cleaning services.
       </p>
@@ -28,11 +29,13 @@ export default function PrivacyPolicyPage() {
       </p>
 
       <h2>1. Data Controller Information</h2>
-      <p>{siteConfig.legalName} is the data controller responsible for your personal data.</p>
+      <p>{siteConfig.legalName} (Company No. {siteConfig.companyNumber}) is the data controller responsible for your personal data.</p>
 
       <div className="contact-card">
         <p><strong>Contact Details</strong></p>
         <ul>
+          <li><strong>Company:</strong> {siteConfig.legalName}</li>
+          <li><strong>Company Number:</strong> {siteConfig.companyNumber}</li>
           <li><strong>Email:</strong> {siteConfig.contact.email}</li>
           <li><strong>Phone:</strong> {siteConfig.contact.phone}</li>
           <li><strong>Website:</strong> {siteConfig.url}</li>
