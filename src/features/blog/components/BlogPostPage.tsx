@@ -22,7 +22,7 @@ export function BlogPostPage({ post, category, relatedPosts }: BlogPostPageProps
   const breadcrumbs = [
     { label: 'Home', href: '/' },
     { label: 'Blog', href: '/blog' },
-    { label: category.name, href: `/${category.slug}` },
+    { label: category.name, href: `/blog/category/${category.slug}` },
     { label: post.title },
   ];
 

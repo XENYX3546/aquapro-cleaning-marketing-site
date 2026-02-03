@@ -203,10 +203,6 @@ export async function getAllPosts(): Promise<BlogPostSummary[]> {
 
 // Helper to get post URL path
 export function getPostPath(post: BlogPostSummary | BlogPost): string {
-  const category = post.categories?.[0];
-  if (category) {
-    return `/${category.slug}/${post.slug}`;
-  }
   return `/blog/${post.slug}`;
 }
 

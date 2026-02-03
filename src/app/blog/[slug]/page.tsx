@@ -43,12 +43,9 @@ function getOgImages(ogImageUrl: string | null, featuredImageUrl: string | null)
 export async function generateStaticParams() {
   try {
     const posts = await getAllPosts();
-    // Only generate params for posts WITHOUT categories (they go to /blog/[slug])
-    return posts
-      .filter((post) => !post.categories || post.categories.length === 0)
-      .map((post) => ({
-        slug: post.slug,
-      }));
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
   } catch {
     return [];
   }
@@ -61,11 +58,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     const postResponse = await getPost(slug);
     const post = postResponse.data;
-
-    // If post has categories, it should be accessed via /[category]/[slug] instead
-    if (post.categories && post.categories.length > 0) {
-      return { title: 'Page Not Found' };
-    }
 
     const title = post.metaTitle || post.title;
     const description = post.metaDescription || post.excerpt || '';
@@ -164,16 +156,19 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  // If post has categories, redirect to the proper URL
-  if (post.categories && post.categories.length > 0) {
-    notFound();
-  }
-
-  const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Blog', href: '/blog' },
-    { label: post.title },
-  ];
+  const primaryCategory = post.categories?.[0];
+  const breadcrumbs = primaryCategory
+    ? [
+        { label: 'Home', href: '/' },
+        { label: 'Blog', href: '/blog' },
+        { label: primaryCategory.name, href: `/blog/category/${primaryCategory.slug}` },
+        { label: post.title },
+      ]
+    : [
+        { label: 'Home', href: '/' },
+        { label: 'Blog', href: '/blog' },
+        { label: post.title },
+      ];
 
   return (
     <LandingLayout>
