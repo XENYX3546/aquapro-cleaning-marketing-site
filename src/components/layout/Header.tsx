@@ -212,6 +212,12 @@ export function Header() {
                 About
               </Link>
               <Link
+                href="/blog"
+                className="text-sm font-medium text-slate-300 hover:text-white transition-colors py-2"
+              >
+                Blog
+              </Link>
+              <Link
                 href="/contact"
                 className="text-sm font-medium text-slate-300 hover:text-white transition-colors py-2"
               >
@@ -373,6 +379,13 @@ export function Header() {
             className="block px-4 py-3 rounded-xl text-base font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
           >
             About Us
+          </Link>
+          <Link
+            href="/blog"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-4 py-3 rounded-xl text-base font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+          >
+            Blog
           </Link>
           <Link
             href="/contact"

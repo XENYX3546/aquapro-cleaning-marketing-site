@@ -24,11 +24,16 @@ import {
   ServiceMobileLeadForm,
   ServiceAbout,
   ServiceGuarantees,
-  ServiceFinalCTA,
   ServiceStickyCTA,
   ServiceMiniCTA,
 } from '@/features/services/client';
 import { ContactSection } from '@/features/home/client';
+import {
+  matchBlogRoute,
+  getAllBlogPostsForStaticParams,
+  getRelatedPosts,
+} from '@/lib/blog';
+import { BlogPostPage } from '@/features/blog';
 
 type PageProps = {
   params: Promise<{
@@ -39,16 +44,67 @@ type PageProps = {
 
 export async function generateStaticParams() {
   const params: { service: string; location: string }[] = [];
+
+  // Add service-location combinations
   for (const service of services) {
     for (const location of locations) {
       params.push({ service: service.slug, location: location.slug });
     }
   }
+
+  // Add blog category-post combinations
+  try {
+    const blogParams = await getAllBlogPostsForStaticParams();
+    for (const { category, slug } of blogParams) {
+      params.push({ service: category, location: slug });
+    }
+  } catch {
+    // Blog API might not be available during build
+    console.warn('Could not fetch blog posts for static params');
+  }
+
   return params;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { service: serviceSlug, location: locationSlug } = await params;
+
+  // First, check if this is a blog route
+  const blogMatch = await matchBlogRoute(serviceSlug, locationSlug);
+  if (blogMatch) {
+    const { post, category } = blogMatch;
+    const title = post.metaTitle || post.title;
+    const description = post.metaDescription || post.excerpt || '';
+    const ogImage = post.ogImageUrl || post.featuredImageUrl;
+
+    return {
+      title,
+      description,
+      keywords: post.metaKeywords || post.tags?.join(', ') || '',
+      authors: post.author ? [{ name: post.author.displayName }] : undefined,
+      openGraph: {
+        title: post.ogTitle || title,
+        description: post.ogDescription || description,
+        type: 'article',
+        url: `${siteConfig.url}/${category.slug}/${post.slug}`,
+        images: ogImage ? [{ url: ogImage }] : undefined,
+        publishedTime: post.publishedAt || undefined,
+        authors: post.author ? [post.author.displayName] : undefined,
+        tags: post.tags || [],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.ogTitle || title,
+        description: post.ogDescription || description,
+        images: ogImage ? [ogImage] : undefined,
+      },
+      alternates: {
+        canonical: post.canonicalUrl || `${siteConfig.url}/${category.slug}/${post.slug}`,
+      },
+    };
+  }
+
+  // Otherwise, handle as service-location page
   const service = services.find((s) => s.slug === serviceSlug);
   const location = getLocationBySlug(locationSlug);
 
@@ -228,6 +284,105 @@ function generateSchemas(service: Service, location: Location) {
 
 export default async function ServiceLocationPage({ params }: PageProps) {
   const { service: serviceSlug, location: locationSlug } = await params;
+
+  // First, check if this is a blog route
+  const blogMatch = await matchBlogRoute(serviceSlug, locationSlug);
+  if (blogMatch) {
+    const { post, category } = blogMatch;
+
+    // Fetch related posts
+    let relatedPosts: Awaited<ReturnType<typeof getRelatedPosts>>['data'] = [];
+    try {
+      const relatedResponse = await getRelatedPosts(post.slug, 3);
+      relatedPosts = relatedResponse.data;
+    } catch {
+      // Related posts not available
+    }
+
+    // Generate blog post JSON-LD
+    const blogPostSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      image: post.featuredImageUrl,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt,
+      author: post.author
+        ? {
+            '@type': 'Person',
+            name: post.author.displayName,
+            image: post.author.avatarUrl,
+          }
+        : undefined,
+      publisher: {
+        '@type': 'Organization',
+        name: siteConfig.name,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${siteConfig.url}/logo.png`,
+        },
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `${siteConfig.url}/${category.slug}/${post.slug}`,
+      },
+      wordCount: post.wordCount,
+      articleSection: category.name,
+      keywords: post.tags?.join(', ') || '',
+    };
+
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: siteConfig.url,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Blog',
+          item: `${siteConfig.url}/blog`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: category.name,
+          item: `${siteConfig.url}/${category.slug}`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 4,
+          name: post.title,
+          item: `${siteConfig.url}/${category.slug}/${post.slug}`,
+        },
+      ],
+    };
+
+    return (
+      <LandingLayout>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        <BlogPostPage
+          post={post}
+          category={category}
+          relatedPosts={relatedPosts}
+        />
+      </LandingLayout>
+    );
+  }
+
+  // Otherwise, handle as service-location page
   const service = services.find((s) => s.slug === serviceSlug);
   const location = getLocationBySlug(locationSlug);
 
@@ -273,7 +428,6 @@ export default async function ServiceLocationPage({ params }: PageProps) {
 
       <ServiceAbout service={service} location={location} />
       <ServiceGuarantees service={service} location={location} />
-      <ServiceFinalCTA service={service} location={location} />
 
       {/* Contact Section */}
       <ContactSection serviceId={service.id} />

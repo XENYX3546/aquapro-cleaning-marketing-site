@@ -1,7 +1,8 @@
 import { type MetadataRoute } from 'next';
 import { siteConfig, services, locations } from '@/lib/constants';
+import { getAllPosts, getPostPath } from '@/lib/blog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
 
   // Static pages
@@ -80,5 +81,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticPages, ...servicePages, ...locationPages, ...serviceLocationPages];
+  // Blog pages
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const posts = await getAllPosts();
+    blogPages = posts.map((post) => ({
+      url: `${baseUrl}${getPostPath(post)}`,
+      lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.publishedAt || ''),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    }));
+    // Add main blog page
+    blogPages.unshift({
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
+    });
+  } catch {
+    // Blog API unavailable, skip blog pages
+  }
+
+  return [...staticPages, ...servicePages, ...locationPages, ...serviceLocationPages, ...blogPages];
 }

@@ -44,6 +44,7 @@
   ],
   "exclude": [
     "node_modules",
-    "site-to-copy"
+    "site-to-copy",
+    "blog-to-copy"
   ]
 }

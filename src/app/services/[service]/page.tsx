@@ -11,7 +11,6 @@ import {
   ServiceMobileLeadForm,
   ServiceAbout,
   ServiceGuarantees,
-  ServiceFinalCTA,
   ServiceStickyCTA,
   ServiceMiniCTA,
 } from '@/features/services/client';
@@ -200,7 +199,6 @@ export default async function ServicePage({ params }: Props) {
 
       <ServiceAbout service={service} />
       <ServiceGuarantees service={service} />
-      <ServiceFinalCTA service={service} />
 
       {/* Contact Section */}
       <ContactSection serviceId={service.id} />

@@ -30,9 +30,9 @@ export function Footer() {
     <footer className="bg-slate-900 text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-10 pb-12">
           {/* Brand Column */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-1">
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="inline-block mb-4 group">
               <Image
                 src="/white-aquapro-logo.png"
@@ -137,39 +137,79 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Company */}
           <div>
-            <h4 className="font-bold text-white mb-4 text-sm">Contact Us</h4>
-            <ul className="space-y-3">
+            <h4 className="font-bold text-white mb-4 text-sm">Company</h4>
+            <ul className="space-y-2.5">
               <li>
-                <a
-                  href={siteConfig.contact.phoneHref}
-                  className="flex items-center gap-2 text-slate-400 hover:text-white text-sm transition-colors"
+                <Link
+                  href="/about"
+                  className="text-slate-400 hover:text-white text-sm transition-colors"
                 >
-                  <Phone className="w-4 h-4 text-brand-500" />
-                  {siteConfig.contact.phone}
-                </a>
+                  About Us
+                </Link>
               </li>
               <li>
-                <a
-                  href={`mailto:${siteConfig.contact.email}`}
-                  className="flex items-center gap-2 text-slate-400 hover:text-white text-sm transition-colors"
+                <Link
+                  href="/blog"
+                  className="text-slate-400 hover:text-white text-sm transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-brand-500" />
-                  {siteConfig.contact.email}
-                </a>
+                  Blog
+                </Link>
               </li>
-              <li className="flex items-start gap-2 text-slate-400 text-sm">
-                <MapPin className="w-4 h-4 text-brand-500 mt-0.5" />
-                <span>{siteConfig.coverage}</span>
+              <li>
+                <Link
+                  href="/careers"
+                  className="text-slate-400 hover:text-white text-sm transition-colors"
+                >
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-slate-400 hover:text-white text-sm transition-colors"
+                >
+                  Contact
+                </Link>
               </li>
             </ul>
+          </div>
 
+        </div>
+
+        {/* Contact CTA Card */}
+        <div className="mb-10 bg-slate-800/80 rounded-xl p-5 border border-white/5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Contact Info */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-8 gap-y-3">
+              <a
+                href={siteConfig.contact.phoneHref}
+                className="flex items-center gap-2 text-white hover:text-brand-400 transition-colors"
+              >
+                <Phone className="w-4 h-4 text-brand-500" />
+                <span className="font-semibold text-sm">{siteConfig.contact.phone}</span>
+              </a>
+              <a
+                href={`mailto:${siteConfig.contact.email}`}
+                className="flex items-center gap-2 text-white hover:text-brand-400 transition-colors"
+              >
+                <Mail className="w-4 h-4 text-brand-500" />
+                <span className="font-semibold text-sm">{siteConfig.contact.email}</span>
+              </a>
+              <div className="flex items-center gap-2 text-slate-400">
+                <MapPin className="w-4 h-4 text-slate-500" />
+                <span className="text-sm">{siteConfig.coverage}</span>
+              </div>
+            </div>
+
+            {/* CTA Button */}
             <Link
               href={ctaLinks.quote}
-              className="inline-flex items-center gap-2 mt-6 bg-cta hover:bg-cta-hover text-white text-sm font-bold px-4 py-2.5 rounded-lg transition-colors"
+              className="flex-shrink-0 bg-cta hover:bg-cta-hover text-white font-bold px-5 py-2.5 rounded-lg transition-colors flex items-center gap-2 text-sm"
             >
-              Get a Quote <ArrowRight className="w-3.5 h-3.5" />
+              Get a Free Quote
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

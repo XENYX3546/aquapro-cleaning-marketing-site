@@ -24,6 +24,39 @@ const nextConfig: NextConfig = {
         hostname: 'litter.catbox.moe',
         pathname: '/**',
       },
+      // Blog/CMS image sources
+      {
+        protocol: 'https',
+        hostname: 'app.zuviaone.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.zuviaone.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.zuviaone.com',
+        pathname: '/**',
+      },
+      // Common CDN providers for blog images
+      {
+        protocol: 'https',
+        hostname: '**.cloudinary.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.imgix.net',
+        pathname: '/**',
+      },
+      // Tigris/Fly.io storage (used by Zuvia)
+      {
+        protocol: 'https',
+        hostname: '**.fly.storage.tigris.dev',
+        pathname: '/**',
+      },
     ],
   },
 };
