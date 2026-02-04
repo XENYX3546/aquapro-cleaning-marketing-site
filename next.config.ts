@@ -3,10 +3,12 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   reactCompiler: true,
+  transpilePackages: [],
   experimental: {
     optimizeCss: true,
     inlineCss: true,
     turbopackFileSystemCacheForDev: true,
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   images: {
     formats: ['image/avif', 'image/webp'],
