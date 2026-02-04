@@ -3,9 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import {
   getRelatedServices,
   getCrossClusterServices,
-  getServiceCluster,
   getLocationBySlug,
-  clusterNames,
   type Location,
   type Service,
 } from '@/lib/constants';
@@ -40,9 +38,6 @@ export function ServiceCrossLinks({
   const sameClusterServices = getRelatedServices(currentServiceId);
   // Then get cross-cluster services
   const crossClusterServices = getCrossClusterServices(currentServiceId, 3);
-
-  const cluster = getServiceCluster(currentServiceId);
-  const _clusterName = cluster ? clusterNames[cluster] : '';
 
   if (variant === 'compact') {
     const allServices = [...sameClusterServices, ...crossClusterServices];
