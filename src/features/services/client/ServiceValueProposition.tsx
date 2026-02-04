@@ -233,9 +233,13 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
       }
     };
 
-    updateWidth();
+    // Defer initial measurement to avoid forced reflow
+    const rafId = requestAnimationFrame(updateWidth);
     window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', updateWidth);
+    };
   }, []);
 
   const handleMove = useCallback((clientX: number) => {
@@ -332,7 +336,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                 alt={`After ${service.name.toLowerCase()}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={65}
+                quality={50}
                 className="object-cover"
                 draggable={false}
               />
@@ -356,7 +360,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                     alt={`Before ${service.name.toLowerCase()}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    quality={65}
+                    quality={50}
                     className="object-cover"
                     draggable={false}
                   />
