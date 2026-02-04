@@ -265,7 +265,7 @@ export default async function LocationPage({ params }: PageProps) {
         variant="slate"
         tagline="Customer Reviews"
         title={<>What Our <span className="text-brand-500">Customers</span> Say</>}
-        subtitle={`Real reviews from homeowners across Essex who used our cleaning services.`}
+        subtitle="Real reviews from homeowners across Essex who used our cleaning services."
       />
 
       {/* Nearby Areas with Map Background */}

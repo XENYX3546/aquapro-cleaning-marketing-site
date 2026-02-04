@@ -299,9 +299,9 @@ export function ReviewsSection({
               const estimateHeight = (review: Review): number => {
                 let h = 120; // base: header + stars + padding
                 h += Math.ceil(review.text.length / 40) * 20; // ~20px per line of text
-                if (review.images && review.images.length > 0) h += 180; // image grid
-                if (review.reviewer.isLocalGuide) h += 28; // badge
-                if (review.location) h += 28; // location pill
+                if (review.images && review.images.length > 0) { h += 180; } // image grid
+                if (review.reviewer.isLocalGuide) { h += 28; } // badge
+                if (review.location) { h += 28; } // location pill
                 return h;
               };
 

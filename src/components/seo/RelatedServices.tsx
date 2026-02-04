@@ -4,7 +4,6 @@ import {
   getRelatedServices,
   getServiceCluster,
   clusterNames,
-  type Service,
   type Location,
 } from '@/lib/constants';
 

@@ -42,7 +42,7 @@ export function ServiceCrossLinks({
   const crossClusterServices = getCrossClusterServices(currentServiceId, 3);
 
   const cluster = getServiceCluster(currentServiceId);
-  const clusterName = cluster ? clusterNames[cluster] : '';
+  const _clusterName = cluster ? clusterNames[cluster] : '';
 
   if (variant === 'compact') {
     const allServices = [...sameClusterServices, ...crossClusterServices];
