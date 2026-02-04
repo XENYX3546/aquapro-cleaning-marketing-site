@@ -7,17 +7,17 @@ import { blogPosts } from '@/lib/constants';
 
 export function BlogSection() {
   return (
-    <section id="blog" className="py-20 md:py-28 bg-slate-50">
+    <section id="blog" className="py-16 lg:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-slate-500 font-bold tracking-widest uppercase text-sm block mb-3">
+        <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">
             Our Blog
           </span>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
             Expert Tips & <span className="text-brand-500">Advice</span>
-          </h3>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          </h2>
+          <p className="text-slate-600 text-base md:text-lg">
             Stay informed with the latest cleaning tips, maintenance advice, and
             industry insights from our team of experts.
           </p>
@@ -56,7 +56,7 @@ export function BlogSection() {
                   {post.title}
                 </h4>
 
-                <p className="text-slate-500 text-sm leading-relaxed flex-grow mb-4">
+                <p className="text-slate-600 text-sm leading-relaxed flex-grow mb-4">
                   {post.excerpt}
                 </p>
 

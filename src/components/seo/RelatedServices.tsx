@@ -29,72 +29,38 @@ export function RelatedServices({
   const clusterName = cluster ? clusterNames[cluster] : 'Related';
 
   return (
-    <section className="py-12 bg-neutral-50">
+    <div className="border-t border-neutral-200 bg-neutral-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showTitle && (
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">
+          <div className="text-center mb-5">
+            <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-widest">
               More {clusterName} Services
-            </h2>
-            <p className="mt-2 text-neutral-600">
-              {location
-                ? `Complete your cleaning in ${location.name}`
-                : 'Complete your home cleaning'}
-            </p>
+            </h3>
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-wrap justify-center gap-2">
           {relatedServices.map((service) => (
-            <RelatedServiceCard
+            <Link
               key={service.id}
-              service={service}
-              location={location}
-            />
+              href={location ? `/${service.slug}/${location.slug}` : `/services/${service.slug}`}
+              className="px-4 py-2 text-sm bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-full text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 transition-colors shadow-sm"
+            >
+              {service.shortName}
+            </Link>
           ))}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-4">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-primary-700 font-medium hover:text-primary-700 transition-colors"
+            className="inline-flex items-center gap-1 text-xs text-neutral-500 hover:text-neutral-700 transition-colors"
           >
             View all services
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
       </div>
-    </section>
-  );
-}
-
-function RelatedServiceCard({
-  service,
-  location,
-}: {
-  service: Service;
-  location?: Location;
-}) {
-  const href = location
-    ? `/${service.slug}/${location.slug}`
-    : `/services/${service.slug}`;
-
-  return (
-    <Link
-      href={href}
-      className="group bg-white rounded-xl p-6 border border-neutral-200 hover:border-primary-300 hover:shadow-md transition-all"
-    >
-      <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
-        {service.name}
-        {location && <span className="text-neutral-500"> in {location.name}</span>}
-      </h3>
-      <p className="mt-2 text-sm text-neutral-600 line-clamp-2">
-        {service.description}
-      </p>
-      <div className="mt-4 flex items-center gap-1 text-sm font-medium text-primary-700 group-hover:text-primary-700">
-        Learn more
-        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-      </div>
-    </Link>
+    </div>
   );
 }

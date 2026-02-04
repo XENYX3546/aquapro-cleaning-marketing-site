@@ -6,6 +6,187 @@ import { Check, ChevronLeft, ChevronRight, Shield, TrendingUp, CalendarCheck } f
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 
+// Service-specific section content for CRO optimization
+type ServiceSectionContent = {
+  eyebrow: string;
+  headline: string;
+  highlightWord: string;
+  description: string;
+  sliderHint: string;
+  inclusions: string[];
+};
+
+const serviceSectionContent: Record<string, ServiceSectionContent> = {
+  'roof-cleaning': {
+    eyebrow: 'See It To Believe It',
+    headline: 'Bring Your Roof Back to',
+    highlightWord: 'Life',
+    description: 'Drag the slider to see how our roof cleaners safely remove 100% of moss, algae, and black stains — transforming your roof in just 1 day. Many homeowners add £10,000–£20,000 to their property value with nothing more than a professional roof clean.',
+    sliderHint: 'Drag to see the transformation',
+    inclusions: [
+      'Free drone survey and expert advice at every step',
+      'Specialist roof clean with 5-year moss-free guarantee',
+      'Free gutter clean and all waste removed',
+    ],
+  },
+  'carpet-cleaning': {
+    eyebrow: 'Real Results',
+    headline: 'See The',
+    highlightWord: 'Transformation',
+    description: 'Your carpets will look, feel, and smell like new — or we re-clean for free. Our carpet cleaners use deep extraction to remove what vacuuming leaves behind: embedded dirt, allergens, and stubborn stains.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'Deep hot water extraction clean',
+      'Free deodoriser treatment included',
+      'Pre-treatment of all stains and high-traffic areas',
+    ],
+  },
+  'upholstery-cleaning': {
+    eyebrow: 'Real Results',
+    headline: 'See The',
+    highlightWord: 'Transformation',
+    description: 'Your sofas and furniture will look, feel, and smell like new — or we re-clean for free. Our upholstery cleaners remove embedded dirt, pet odours, and years of use from all fabric types.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'Deep extraction cleaning for all fabrics',
+      'Pet odour and stain treatment',
+      'Safe for leather, velvet, and delicate materials',
+    ],
+  },
+  'driveway-cleaning': {
+    eyebrow: 'Kerb Appeal Restored',
+    headline: 'Transform Your',
+    highlightWord: 'Driveway',
+    description: 'Our driveway cleaners remove years of moss, oil stains, and grime in just hours. A professional driveway clean instantly boosts your home\'s kerb appeal and can add thousands to your property value.',
+    sliderHint: 'Drag to see the difference',
+    inclusions: [
+      'Commercial-grade pressure washing',
+      'Re-sanding for block paving included',
+      'Optional sealing for lasting protection',
+    ],
+  },
+  'patio-cleaning': {
+    eyebrow: 'Outdoor Living Restored',
+    headline: 'Revive Your',
+    highlightWord: 'Patio',
+    description: 'Bring your outdoor space back to life. Our patio cleaners remove green algae, black spot, and years of weathering — leaving your patio ready for summer entertaining.',
+    sliderHint: 'Drag to see the difference',
+    inclusions: [
+      'Safe for all stone types including sandstone',
+      'Black spot and algae treatment',
+      'Optional sealing to protect and enhance',
+    ],
+  },
+  'window-cleaning': {
+    eyebrow: 'Crystal Clear Results',
+    headline: 'Sparkling',
+    highlightWord: 'Windows',
+    description: 'Our window cleaners use pure water technology to deliver a streak-free finish that lasts longer than traditional cleaning. Frames and sills included at no extra cost.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'Pure water fed pole system',
+      'Frames and sills cleaned free',
+      'Reaches up to 4 storeys safely',
+    ],
+  },
+  'gutter-cleaning': {
+    eyebrow: 'Protect Your Property',
+    headline: 'Clear, Free-Flowing',
+    highlightWord: 'Gutters',
+    description: 'Our gutter cleaners use high-reach vacuum systems to clear leaves, moss, and debris — all from the ground. No ladders on your property, just clear gutters that flow freely.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'High-reach vacuum system',
+      'Before and after camera footage',
+      'All downpipes checked and cleared',
+    ],
+  },
+  'solar-panel-cleaning': {
+    eyebrow: 'Maximise Your Investment',
+    headline: 'Restore Your Panel',
+    highlightWord: 'Efficiency',
+    description: 'Dirty panels lose up to 30% efficiency. Our solar panel cleaners use pure water and soft brushes to safely remove bird droppings, dust, and grime — restoring your panels to peak performance.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'Pure water cleaning — no chemicals',
+      'Safe for all panel types',
+      'Won\'t void your warranty',
+    ],
+  },
+  'conservatory-cleaning': {
+    eyebrow: 'Let The Light Back In',
+    headline: 'Crystal Clear',
+    highlightWord: 'Conservatory',
+    description: 'Our conservatory cleaners remove green algae, moss, and grime from your roof, glass, and frames — restoring natural light and making your conservatory feel brand new again.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'Roof, glass, and frames all cleaned',
+      'Safe for polycarbonate and glass roofs',
+      'Conservatory gutters cleared free',
+    ],
+  },
+  'mattress-cleaning': {
+    eyebrow: 'Sleep Healthier',
+    headline: 'A Fresher Night\'s',
+    highlightWord: 'Sleep',
+    description: 'Our mattress cleaners remove dust mites, allergens, sweat, and stains that build up over time. Wake up fresher on a professionally cleaned and sanitised mattress.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'Deep extraction and sanitisation',
+      'Dust mite and allergen removal',
+      'Urine and stain treatment',
+    ],
+  },
+  'stain-removal': {
+    eyebrow: 'Stubborn Stains Gone',
+    headline: 'Expert Stain',
+    highlightWord: 'Removal',
+    description: 'Red wine, coffee, pet accidents — our stain removal specialists tackle the toughest stains on carpets and upholstery. Priority bookings available for fresh spills.',
+    sliderHint: 'Drag to compare',
+    inclusions: [
+      'All stain types treated',
+      'Priority bookings for urgent spills',
+      'Safe for all fabrics',
+    ],
+  },
+  'pressure-washing': {
+    eyebrow: 'Powerful Results',
+    headline: 'Surface',
+    highlightWord: 'Transformation',
+    description: 'Our pressure washing specialists remove years of moss, algae, oil, and grime from driveways, patios, and decking. Adjustable pressure means no damage to your surfaces.',
+    sliderHint: 'Drag to see the difference',
+    inclusions: [
+      'Commercial-grade equipment',
+      'Adjustable pressure for all surfaces',
+      'Re-sanding for block paving included',
+    ],
+  },
+};
+
+function getServiceContent(serviceSlug: string, serviceName: string, location?: { name: string }): ServiceSectionContent {
+  const content = serviceSectionContent[serviceSlug];
+  if (content) {
+    // Add location to description if provided
+    if (location) {
+      return {
+        ...content,
+        description: content.description.replace(' — ', ` in ${location.name} — `),
+      };
+    }
+    return content;
+  }
+
+  // Default fallback
+  return {
+    eyebrow: 'Real Results',
+    headline: 'See The',
+    highlightWord: 'Transformation',
+    description: `Your ${serviceName.toLowerCase().replace('&', 'and')} will look like new${location ? ` in ${location.name}` : ''} — or we re-clean for free.`,
+    sliderHint: 'Drag to compare',
+    inclusions: [],
+  };
+}
+
 // Before/After image pairs by service type
 const beforeAfterImages: Record<string, { before: string; after: string }[]> = {
   'carpet-cleaning': [
@@ -41,6 +222,9 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
 
   // Get service-specific before/after images
   const { before: beforeImage, after: afterImage } = getServiceImages(service.slug);
+
+  // Get service-specific content for CRO
+  const sectionContent = getServiceContent(service.slug, service.name, location);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -97,7 +281,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
   const afterLabelOpacity = sliderPosition > 95 ? 0 : 1;
   const beforeLabelOpacity = sliderPosition < 5 ? 0 : 1;
 
-  // Dynamic benefits based on service
+  // Dynamic benefits based on service (pairs: [0]/[1], [2]/[3], [4]/[5])
   const valueBenefits = [
     {
       icon: <Shield className="w-5 h-5" strokeWidth={2} />,
@@ -106,28 +290,28 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
     },
     {
       icon: <CalendarCheck className="w-5 h-5" strokeWidth={2} />,
-      title: "Satisfaction Guaranteed",
-      description: "100% satisfaction guarantee on every job we complete."
+      title: service.benefits[2] || "Satisfaction Guaranteed",
+      description: service.benefits[3] || "100% satisfaction guarantee on every job we complete."
     },
     {
       icon: <TrendingUp className="w-5 h-5" strokeWidth={2} />,
-      title: "Boosts Property Value",
-      description: "Professional cleaning instantly improves your property's appearance."
+      title: service.benefits[4] || "Boosts Property Value",
+      description: service.benefits[5] || "Professional cleaning instantly improves your property's appearance."
     }
   ];
 
   return (
-    <section className="pt-12 pb-10 lg:pt-20 lg:pb-12 bg-white font-sans overflow-hidden">
+    <section className="py-16 lg:py-24 bg-white font-sans overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Centered Header */}
-        <div className="text-center mb-10 lg:mb-12 max-w-3xl mx-auto">
-          <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-2">Real Results</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-3 tracking-tight leading-tight">
-            See The <span className="text-[#1B9CB6]">Transformation</span>
+        <div className="text-center mb-12 lg:mb-16 max-w-3xl mx-auto">
+          <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">{sectionContent.eyebrow}</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            {sectionContent.headline} <span className="text-[#1B9CB6]">{sectionContent.highlightWord}</span>
           </h2>
-          <p className="text-lg text-slate-500 leading-relaxed max-w-lg mx-auto">
-             Dramatic results you can see. Professional {service.name.toLowerCase()}{location ? ` in ${location.name}` : ''} that makes a difference.
+          <p className="text-slate-600 text-base md:text-lg mt-4 max-w-2xl mx-auto">
+             {sectionContent.description}
           </p>
         </div>
 
@@ -211,7 +395,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
 
             {/* Mobile-only interaction hint */}
             <div className="lg:hidden text-center mt-3 text-xs text-slate-500 font-medium flex items-center justify-center gap-2">
-              <ChevronLeft className="w-3 h-3" /> Drag to compare <ChevronRight className="w-3 h-3" />
+              <ChevronLeft className="w-3 h-3" /> {sectionContent.sliderHint} <ChevronRight className="w-3 h-3" />
             </div>
           </div>
 
@@ -227,7 +411,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                   </div>
                   <div className="pt-0.5">
                     <h3 className="text-slate-900 font-bold text-lg mb-0.5">{benefit.title}</h3>
-                    <p className="text-slate-500 text-[15px] leading-relaxed">
+                    <p className="text-slate-600 text-sm leading-relaxed">
                       {benefit.description}
                     </p>
                   </div>
@@ -240,12 +424,12 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                {/* Decorative accent */}
                <div className="absolute top-0 right-0 w-20 h-20 bg-[#1B9CB6]/5 rounded-bl-full -mr-4 -mt-4" />
 
-               <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2 relative z-10 text-[15px] uppercase tracking-wide">
+               <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2 relative z-10 text-sm uppercase tracking-wide">
                  What&apos;s Included:
                </h3>
                <ul className="space-y-3 relative z-10">
-                  {service.features.slice(0, 3).map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-slate-700 text-sm font-medium">
+                  {(sectionContent.inclusions.length > 0 ? sectionContent.inclusions : service.features.slice(0, 3)).map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-slate-600 text-sm">
                       <div className="w-5 h-5 rounded-full bg-[#1B9CB6] flex items-center justify-center shrink-0 mt-0.5">
                         <Check className="w-3 h-3 text-white stroke-[3px]" />
                       </div>

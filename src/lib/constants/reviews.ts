@@ -32,6 +32,8 @@ export type ReviewLocation = {
   postcodeArea: string;
 };
 
+export type ReviewSource = 'google' | 'facebook';
+
 export type Review = {
   id: number;
   name: string;
@@ -48,6 +50,10 @@ export type Review = {
   priority?: boolean;
   /** Location data for SEO personalization - shows location pill on review */
   location?: ReviewLocation;
+  /** Profile image path for reviewer (optional) */
+  profileImage?: string;
+  /** Review source platform (defaults to 'google') */
+  source?: ReviewSource;
 };
 
 export type ServiceReviewsMap = {
@@ -114,6 +120,32 @@ export function isNewReview(timestamp: string, referenceDate?: Date): boolean {
 // =============================================================================
 export const reviews: Review[] = [
   {
+    id: 150,
+    name: 'Molly Young',
+    initial: 'M',
+    bg: 'bg-pink-600',
+    rating: 5,
+    text: "Had Aquapro over to clean my filthy carpets, having 2 small children and 2 dogs cream carpet wasn't going to last long! But it came up lovely, friendly bunch and 100% recommend. Thank you!",
+    timestamp: '2025-06-01',
+    reviewer: { reviewCount: 0, photoCount: 0, isLocalGuide: false },
+    services: ['carpet-cleaning'],
+    source: 'facebook',
+    profileImage: '/review-profile-images/molly-young.webp',
+  },
+  {
+    id: 149,
+    name: 'Katherine Carroll',
+    initial: 'K',
+    bg: 'bg-indigo-600',
+    rating: 5,
+    text: '100% recommend. Looks like a new roof. Very pleased',
+    timestamp: '2025-06-01',
+    reviewer: { reviewCount: 0, photoCount: 0, isLocalGuide: false },
+    services: ['roof-cleaning'],
+    source: 'facebook',
+    profileImage: '/review-profile-images/katherine-carroll.webp',
+  },
+  {
     id: 145,
     name: 'Ian',
     initial: 'I',
@@ -155,6 +187,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 5, photoCount: 0, isLocalGuide: false },
     services: ['carpet-cleaning', 'upholstery-cleaning'],
     location: { postcodeArea: 'CM8' },
+    profileImage: '/review-profile-images/jorn-eidehall.webp',
     ownerReply: {
       text: "Thanks Björn, really pleased you're happy with the results. Andy will be glad to hear everything is looking like new again 😊",
       timestamp: '2026-02-01',
@@ -175,6 +208,18 @@ export const reviews: Review[] = [
       text: "Thank you Angelina, we're really glad you're happy with the clean and the final result.",
       timestamp: '2026-02-01',
     },
+  },
+  {
+    id: 146,
+    name: 'Matt Capener',
+    initial: 'M',
+    bg: 'bg-cyan-600',
+    rating: 5,
+    text: 'Used AquaPro carpet cleaning for first time. Heavily stained carpet but the results were excellent. Highly recommended',
+    timestamp: '2026-01-13',
+    reviewer: { reviewCount: 7, photoCount: 0, isLocalGuide: false },
+    services: ['carpet-cleaning', 'stain-removal'],
+    profileImage: '/review-profile-images/matt-carpener.webp',
   },
   {
     id: 141,
@@ -263,6 +308,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 57, photoCount: 160, isLocalGuide: true },
     services: ['carpet-cleaning', 'upholstery-cleaning'],
     location: { postcodeArea: 'CO15' },
+    profileImage: '/review-profile-images/peter-edwards.webp',
     ownerReply: {
       text: "Thank you Peter, really pleased you're happy with the results. Andy will appreciate the feedback.",
       timestamp: '2026-02-01',
@@ -280,6 +326,7 @@ export const reviews: Review[] = [
     services: ['carpet-cleaning', 'stain-removal'],
     location: { postcodeArea: 'CM1' },
     priority: true,
+    profileImage: '/review-profile-images/charne-banger.webp',
     ownerReply: {
       text: "Thanks Charné, we're delighted you're happy with the carpets. Andy always aims to keep things clear and comfortable throughout the job.",
       timestamp: '2026-02-01',
@@ -334,6 +381,7 @@ export const reviews: Review[] = [
       '/review-images/upholstery-cleaning/peter-bodset-upholstery-3.jpg',
     ],
     priority: true,
+    profileImage: '/review-profile-images/peter-bodset-profile.webp',
     ownerReply: {
       text: "Thank you Peter, really pleased you're happy with the service and results. Your recommendation means a lot to us.",
       timestamp: '2026-02-01',
@@ -350,6 +398,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 57, photoCount: 18, isLocalGuide: true },
     services: ['carpet-cleaning'],
     location: { postcodeArea: 'RM16' },
+    profileImage: '/review-profile-images/nigel-belbeck.webp',
     ownerReply: {
       text: "Thanks Nigel, much appreciated. We'd be happy to help again.",
       timestamp: '2026-02-01',
@@ -434,6 +483,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 3, photoCount: 0, isLocalGuide: false },
     services: ['carpet-cleaning'],
     location: { postcodeArea: 'SS2' },
+    profileImage: '/review-profile-images/maf-ayodele.webp',
     ownerReply: {
       text: "Thank you for the great feedback. We're glad you were happy with both the service and the results.",
       timestamp: '2026-02-01',
@@ -549,6 +599,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 30, photoCount: 65, isLocalGuide: true },
     services: ['carpet-cleaning'],
     priority: true,
+    profileImage: '/review-profile-images/andrew-cohen.webp',
     ownerReply: {
       text: "Appreciate the review, Andrew! We're delighted with the results and would be more than happy to help with any other cleaning services in the future",
       timestamp: '2025-09-22',
@@ -571,6 +622,7 @@ export const reviews: Review[] = [
       '/review-images/pressure-washing/dm-4.jpg',
     ],
     priority: true,
+    profileImage: '/review-profile-images/dm-profile.webp',
     ownerReply: {
       text: "Thanks so much for your review. We're really pleased with the results of this job and look forward to working with you again!",
       timestamp: '2025-09-22',
@@ -604,6 +656,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 2, photoCount: 0, isLocalGuide: false },
     services: ['roof-cleaning'],
     location: { postcodeArea: 'SS7' },
+    profileImage: '/review-profile-images/james-bryan.webp',
     ownerReply: {
       text: "Thank you for your review, James! We're so pleased to hear you're happy with the roof cleaning results. Our team always makes sure to leave everything spotless, so it's great that you noticed. We truly appreciate your recommendation and look forward to helping again in the future!",
       timestamp: '2025-09-22',
@@ -702,6 +755,7 @@ export const reviews: Review[] = [
     timestamp: '2025-08-18',
     reviewer: { reviewCount: 4, photoCount: 0, isLocalGuide: false },
     services: ['roof-cleaning', 'gutter-cleaning'],
+    profileImage: '/review-profile-images/saifans-world.webp',
     ownerReply: {
       text: "Thanks so much for your feedback! We're thrilled you're happy with the roof and gutter clean — Blake and Dan always do their best to leave everything looking spotless",
       timestamp: '2025-09-22',
@@ -740,6 +794,7 @@ export const reviews: Review[] = [
       '/review-images/pressure-washing/russell-pullen.png',
       '/review-images/pressure-washing/russell-pullen-2.jpg',
     ],
+    profileImage: '/review-profile-images/russell-pullen-profile.webp',
     ownerReply: {
       text: "Thank you Andrew, we really appreciate the detailed feedback and are glad everything went smoothly.",
       timestamp: '2026-02-01',
@@ -1001,6 +1056,7 @@ export const reviews: Review[] = [
     timestamp: '2025-06-16',
     reviewer: { reviewCount: 1, photoCount: 0, isLocalGuide: false },
     services: ['carpet-cleaning', 'stain-removal'],
+    profileImage: '/review-profile-images/andrew-v.webp',
     ownerReply: {
       text: "Thanks Andrew, really glad you're happy with the results. Great to hear the carpets came up clean and fresh — appreciate the recommendation.",
       timestamp: '2026-02-01',
@@ -1019,6 +1075,7 @@ export const reviews: Review[] = [
     images: [
       '/review-images/upholstery-cleaning/hana-bailey-upholstery-1.jpg',
     ],
+    profileImage: '/review-profile-images/hana-bailey.webp',
     ownerReply: {
       text: "Thank you Hana, really appreciate it. Glad you're happy with the job and thanks for recommending us to friends and family.",
       timestamp: '2026-02-01',
@@ -1114,6 +1171,7 @@ export const reviews: Review[] = [
     timestamp: '2025-06-02',
     reviewer: { reviewCount: 2, photoCount: 0, isLocalGuide: false },
     services: ['general'],
+    profileImage: '/review-profile-images/paul-alderson.webp',
     ownerReply: {
       text: "Thanks Paul 👍 really appreciate the review 🙏",
       timestamp: '2026-02-01',
@@ -1145,6 +1203,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 2, photoCount: 0, isLocalGuide: false },
     services: ['carpet-cleaning', 'upholstery-cleaning'],
     priority: true,
+    profileImage: '/review-profile-images/lewis-taylor.webp',
     ownerReply: {
       text: "Thanks Lewis, really appreciate that. Glad you're happy with the results and the reliability — means a lot.",
       timestamp: '2026-02-01',
@@ -1223,6 +1282,7 @@ export const reviews: Review[] = [
     timestamp: '2025-05-12',
     reviewer: { reviewCount: 4, photoCount: 0, isLocalGuide: false },
     services: ['general'],
+    profileImage: '/review-profile-images/olakunle-olaitan.webp',
     ownerReply: {
       text: "Thank you Olakunle, glad everything went smoothly and on time. Appreciate the recommendation.",
       timestamp: '2026-02-01',
@@ -1289,6 +1349,18 @@ export const reviews: Review[] = [
     },
   },
   {
+    id: 148,
+    name: 'Janice Tyrrell',
+    initial: 'J',
+    bg: 'bg-rose-600',
+    rating: 5,
+    text: 'Over the moon with the results of my drive. Work was by professionally done and Blake and his partner went over and above what I expected - thank you 5*',
+    timestamp: '2025-05-03',
+    reviewer: { reviewCount: 0, photoCount: 0, isLocalGuide: false },
+    services: ['pressure-washing'],
+    profileImage: '/review-profile-images/janice-tyrrell.webp',
+  },
+  {
     id: 74,
     name: 'WJET',
     initial: 'W',
@@ -1333,6 +1405,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 12, photoCount: 2, isLocalGuide: false },
     services: ['carpet-cleaning', 'stain-removal'],
     priority: true,
+    profileImage: '/review-profile-images/ruth-oven.webp',
     ownerReply: {
       text: "Thanks Ruth, really appreciate the feedback. Andy will be pleased to hear everything was handled respectfully and the results were a big improvement.",
       timestamp: '2026-02-01',
@@ -1348,6 +1421,7 @@ export const reviews: Review[] = [
     timestamp: '2025-04-28',
     reviewer: { reviewCount: 14, photoCount: 18, isLocalGuide: true },
     services: ['pressure-washing'],
+    profileImage: '/review-profile-images/kathrynmarie88.webp',
     ownerReply: {
       text: "Thank you so much for the review. Really glad you're happy with the patio and drive work — we appreciate the support.",
       timestamp: '2026-02-01',
@@ -1363,6 +1437,7 @@ export const reviews: Review[] = [
     timestamp: '2025-04-21',
     reviewer: { reviewCount: 7, photoCount: 5, isLocalGuide: false },
     services: ['general'],
+    profileImage: '/review-profile-images/ken-teasell.webp',
     ownerReply: {
       text: "Thanks Ken, really appreciate it. Glad you were happy with the service and we'd be happy to help again.",
       timestamp: '2026-02-01',
@@ -1439,6 +1514,7 @@ export const reviews: Review[] = [
     timestamp: '2025-04-07',
     reviewer: { reviewCount: 5, photoCount: 3, isLocalGuide: false },
     services: ['carpet-cleaning'],
+    profileImage: '/review-profile-images/sarah-p.webp',
     ownerReply: {
       text: "Thanks Sarah, really pleased you're happy with the results. Appreciate the recommendation.",
       timestamp: '2026-02-01',
@@ -1477,6 +1553,18 @@ export const reviews: Review[] = [
       text: "Thank you Sophy, really glad you're happy with the patio and the service.",
       timestamp: '2026-02-01',
     },
+  },
+  {
+    id: 147,
+    name: 'Storm Auro',
+    initial: 'S',
+    bg: 'bg-violet-600',
+    rating: 5,
+    text: 'Blake and Dan were incredibly helpful from the scope of services to the works completed on the patio clean and gutter cleaning.',
+    timestamp: '2025-04-03',
+    reviewer: { reviewCount: 11, photoCount: 8, isLocalGuide: false },
+    services: ['pressure-washing', 'gutter-cleaning'],
+    profileImage: '/review-profile-images/storm-auro.webp',
   },
   {
     id: 62,
@@ -1536,6 +1624,7 @@ export const reviews: Review[] = [
     timestamp: '2025-03-31',
     reviewer: { reviewCount: 7, photoCount: 3, isLocalGuide: false },
     services: ['general'],
+    profileImage: '/review-profile-images/marco-fratila.webp',
     ownerReply: {
       text: "Thank you Marco, really appreciate the feedback. Glad everything was punctual and you were happy with the service.",
       timestamp: '2026-02-01',
@@ -1551,6 +1640,7 @@ export const reviews: Review[] = [
     timestamp: '2025-03-24',
     reviewer: { reviewCount: 2, photoCount: 0, isLocalGuide: false },
     services: ['upholstery-cleaning'],
+    profileImage: '/review-profile-images/deborah-carini.webp',
     ownerReply: {
       text: "Thanks Deborah, really appreciate the review. Glad you were kept informed, and even with the extra pass on the white fabric, we're pleased it came up like new in the end.",
       timestamp: '2026-02-01',
@@ -1581,6 +1671,7 @@ export const reviews: Review[] = [
     timestamp: '2025-03-17',
     reviewer: { reviewCount: 3, photoCount: 1, isLocalGuide: false },
     services: ['roof-cleaning'],
+    profileImage: '/review-profile-images/dan-sharpe.webp',
     ownerReply: {
       text: "Thanks Dan, really pleased you're happy with the roof clean and that everything was left spotless afterwards.",
       timestamp: '2026-02-01',
@@ -1626,6 +1717,7 @@ export const reviews: Review[] = [
     timestamp: '2025-03-10',
     reviewer: { reviewCount: 16, photoCount: 2, isLocalGuide: true },
     services: ['carpet-cleaning'],
+    profileImage: '/review-profile-images/daniel-childs.webp',
     ownerReply: {
       text: "Thank you Daniel, really appreciate the feedback. Great to hear the carpets came up like new and smelling fresh.",
       timestamp: '2026-02-01',
@@ -1658,10 +1750,10 @@ export const reviews: Review[] = [
     services: ['upholstery-cleaning', 'carpet-cleaning'],
     images: [
       '/review-images/upholstery-cleaning/ahmet-deveci-1.jpg',
-      '/review-images/upholstery-cleaning/ahmet-deveci-2.jpg',
       '/review-images/upholstery-cleaning/ahmet-deveci-3.jpg',
     ],
     priority: true,
+    profileImage: '/review-profile-images/ahmet-deveci.webp',
     ownerReply: {
       text: "Thank you so much for your review Ahmet. We're glad you're happy with your clean.",
       timestamp: '2025-06-02',
@@ -1737,6 +1829,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 7, photoCount: 0, isLocalGuide: false },
     services: ['roof-cleaning'],
     priority: true,
+    profileImage: '/review-profile-images/luke-mulholland.webp',
   },
   {
     id: 44,
@@ -2360,6 +2453,7 @@ const RELATED_SERVICES: Record<ServiceId, ServiceId[]> = {
  * - priority flag: +10000 (manual quality override)
  * - has images: +1000 (visual proof)
  * - local guide: +100 (credibility)
+ * - has profile picture: +75 (face builds trust, but doesn't override stronger signals)
  * - reviewer count: +min(count, 50) (established reviewer)
  * - recency: tiny bonus for tiebreaking
  */
@@ -2368,6 +2462,7 @@ function computeReviewScore(r: Review): number {
     (r.priority ? 10000 : 0) +
     (r.images?.length ? 1000 : 0) +
     (r.reviewer.isLocalGuide ? 100 : 0) +
+    (r.profileImage ? 75 : 0) +
     Math.min(r.reviewer.reviewCount, 50) +
     (new Date(r.timestamp).getTime() / 1e15) // tiny recency tiebreaker
   );
@@ -2377,9 +2472,9 @@ function computeReviewScore(r: Review): number {
 // PRE-COMPUTED DATA (runs once at module load)
 // =============================================================================
 
-/** Displayable reviews: has text, has owner reply, rating >= 4 */
+/** Displayable reviews: has text, rating >= 4 */
 const displayableReviews = reviews.filter(
-  (r) => r.text.length > 0 && r.ownerReply !== undefined && r.rating >= 4
+  (r) => r.text.length > 0 && r.rating >= 4
 );
 
 /** Pre-computed scores for each displayable review (avoids recomputation) */

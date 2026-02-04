@@ -8,4 +8,5 @@ export { ServiceAbout } from './ServiceAbout';
 export { ServiceGuarantees } from './ServiceGuarantees';
 export { ServiceMobileLeadForm } from './ServiceMobileLeadForm';
 export { ServiceStickyCTA } from './ServiceStickyCTA';
+export { ServiceFullWidthCTA } from './ServiceFullWidthCTA';
 export { ServiceMiniCTA } from './ServiceMiniCTA';

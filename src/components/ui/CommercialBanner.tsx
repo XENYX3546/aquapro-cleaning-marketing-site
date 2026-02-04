@@ -34,8 +34,7 @@ export function CommercialBanner() {
             </div>
 
             <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-5 leading-tight">
-              Commercial Exterior & <br />
-              Interior Cleaning
+              Commercial Exterior & Interior Cleaning
             </h3>
 
             <p className="text-slate-300 text-base md:text-lg leading-relaxed">

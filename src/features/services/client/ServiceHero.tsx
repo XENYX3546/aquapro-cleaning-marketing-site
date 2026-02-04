@@ -126,20 +126,18 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
               {location ? (
                 <>
-                  {service.name} <br />
-                  <span className="text-[#1B9CB6]">in {location.name}</span>
+                  {service.name} <span className="text-[#1B9CB6]">in {location.name}</span>
                 </>
               ) : hasCustomHero ? (
                 <>
-                  {service.hero!.headline} <br />
+                  {service.hero!.headline}{' '}
                   {service.hero!.subheadline && (
-                    <span className="text-[#1B9CB6]">{service.hero!.subheadline}</span>
+                    <span className="text-[#2ABED2]">{service.hero!.subheadline}</span>
                   )}
                 </>
               ) : (
                 <>
-                  Professional <br />
-                  <span className="text-[#1B9CB6]">{service.name}</span>
+                  Professional <span className="text-[#1B9CB6]">{service.name}</span>
                 </>
               )}
             </h1>
@@ -147,7 +145,7 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
             {/* Subtext */}
             <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               {location
-                ? `Professional ${service.name.toLowerCase()} ${location.localHook}. ${localTeamText}`
+                ? `Professional ${service.name.toLowerCase()} ${location.localHook}${location.postcodeAreas && location.postcodeAreas.length > 0 ? ` — covering ${location.postcodeAreas.join(', ')} postcodes` : ''}. Done right, first time — or we re-clean free. ${localTeamText}`
                 : hasCustomHero
                   ? service.hero!.description
                   : service.description
@@ -178,7 +176,7 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
           {/* Right Column: Lead Form */}
           <div className="lg:col-span-5">
              <LeadForm
-               title={location ? `Get My Free Quote in ${location.name}` : hasCustomHero ? service.hero!.formTitle : `Get My Free ${service.shortName} Quote`}
+               title={location ? `Get My Free Quote in ${location.name}` : hasCustomHero ? service.hero!.formTitle : `Get My Free ${service.name} Quote`}
                subtitle={location
                  ? `Fast, fixed-price ${service.name.toLowerCase()} quote for ${location.name}.`
                  : `Get a fast, fixed-price quote for ${service.name.toLowerCase()}.`

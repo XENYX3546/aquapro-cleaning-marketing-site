@@ -43,8 +43,7 @@ export function AboutHero() {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
-              Professional Cleaning <br />
-              <span className="text-brand-500">With a Personal Touch</span>
+              Professional Cleaning <span className="text-brand-500">With a Personal Touch</span>
             </h1>
 
             {/* Subtext */}

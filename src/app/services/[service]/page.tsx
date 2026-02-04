@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ReviewsSection } from '@/components/ui';
+import { ReviewsSection, FAQSection } from '@/components/ui';
 import { LandingLayout } from '@/components/layout';
 import { RelatedServices, ServiceLocationLinks } from '@/components/seo';
 import { getServiceBySlug, getAllServiceSlugs, siteConfig, reviewStats, getServiceSpecificReviews, getAllReviewsForService } from '@/lib/constants';
@@ -12,7 +12,7 @@ import {
   ServiceAbout,
   ServiceGuarantees,
   ServiceStickyCTA,
-  ServiceMiniCTA,
+  ServiceFullWidthCTA,
 } from '@/features/services/client';
 import { ContactSection } from '@/features/home/client';
 
@@ -188,10 +188,9 @@ export default async function ServicePage({ params }: Props) {
         reviews={getServiceSpecificReviews(service.id)}
         moreReviews={getAllReviewsForService(service.id)}
         tagline={`${service.shortName} Reviews`}
-        title={<>What Our <span className="text-brand-500">{service.shortName}</span> Customers Say</>}
+        title={<>What Our <span className="text-brand-500">{service.name}</span> Customers Say</>}
         subtitle={`Real reviews from Essex homeowners who used our ${service.name.toLowerCase()} service.`}
       />
-      <ServiceMiniCTA />
       <ServiceHowItWorks service={service} />
 
       {/* Mobile-only Lead Form after process */}
@@ -202,6 +201,18 @@ export default async function ServicePage({ params }: Props) {
 
       {/* Contact Section */}
       <ContactSection serviceId={service.id} />
+
+      {/* FAQ Section */}
+      {service.faqs && service.faqs.length > 0 && (
+        <FAQSection
+          faqs={service.faqs}
+          tagline={`${service.shortName} FAQs`}
+          title={<>Frequently Asked <span className="text-brand-500">Questions</span></>}
+        />
+      )}
+
+      {/* Full Width CTA */}
+      <ServiceFullWidthCTA service={service} />
 
       {/* Related services from same cluster */}
       <RelatedServices currentServiceId={service.id} />

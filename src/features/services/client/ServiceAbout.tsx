@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { ShieldCheck, Users, Clock, Award, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Users, Award, Star, ArrowRight } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay, customerStatsDisplay } from '@/lib/constants';
@@ -16,13 +16,20 @@ interface ServiceAboutProps {
 // Mobile trust stats component
 function MobileTrustStats() {
   return (
-    <section className="lg:hidden py-12 bg-white border-b border-slate-100 font-sans">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-8">
-          <span className="text-slate-500 font-bold tracking-widest uppercase text-xs block mb-2">
+    <section className="lg:hidden py-16 bg-white font-sans relative">
+      {/* Subtle background texture */}
+      <div
+        className="absolute inset-0 opacity-[0.08] pointer-events-none will-change-transform"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
+      <div className="max-w-7xl mx-auto px-6 relative">
+        <div className="text-center mb-12">
+          <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">
             Why Choose Us
           </span>
-          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             Trusted by <span className="text-[#1B9CB6]">{customerStatsDisplay.totalCustomersPlus} Customers</span>
           </h2>
         </div>
@@ -31,10 +38,10 @@ function MobileTrustStats() {
           {/* Stat 1 */}
           <div className="bg-slate-50 rounded-xl p-4 text-center">
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
-              <Clock className="w-5 h-5" strokeWidth={2} />
+              <Award className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">10+ Years</h3>
-            <p className="text-slate-500 text-xs">Experience</p>
+            <h3 className="font-bold text-slate-900 text-sm">Trained Pros</h3>
+            <p className="text-slate-500 text-xs">Certified Team</p>
           </div>
 
           {/* Stat 2 */}
@@ -49,7 +56,7 @@ function MobileTrustStats() {
           {/* Stat 3 */}
           <div className="bg-slate-50 rounded-xl p-4 text-center">
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
-              <Award className="w-5 h-5" strokeWidth={2} />
+              <Star className="w-5 h-5" strokeWidth={2} />
             </div>
             <h3 className="font-bold text-slate-900 text-sm">5 Star Rated</h3>
             <p className="text-slate-500 text-xs">{reviewStatsDisplay.totalReviews} Reviews</p>
@@ -85,8 +92,15 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
     <MobileTrustStats />
 
     {/* Desktop About Section */}
-    <section className="hidden lg:block py-24 bg-white border-b border-slate-100 font-sans">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="hidden lg:block py-24 bg-white font-sans relative">
+      {/* Subtle background texture */}
+      <div
+        className="absolute inset-0 opacity-[0.08] pointer-events-none will-change-transform"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
+      <div className="max-w-7xl mx-auto px-6 relative">
         <div className="flex gap-20 items-center">
 
           {/* Left Column: Image */}
@@ -111,16 +125,15 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                 <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">
                    {location ? `Serving ${location.name}` : 'Why Choose Us'}
                 </span>
-                <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
-                   Expert {service.name}{locationText} <br/>
-                   <span className="text-[#1B9CB6]">You Can Trust</span>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+                   Expert {service.name}{locationText} <span className="text-[#1B9CB6]">You Can Trust</span>
                 </h2>
-                <div className="space-y-6 text-slate-500 text-lg leading-relaxed font-normal">
+                <div className="space-y-4 text-slate-600 text-base md:text-lg">
                    <p>
-                      At Aquapro, we&apos;ve built our reputation on delivering exceptional {service.name.toLowerCase()} results{locationText}. Our trained professionals use the latest equipment and techniques to ensure outstanding outcomes every time.
+                      Over {customerStatsDisplay.totalCustomersPlus} Essex homeowners trust us for {service.name.toLowerCase()}. Commercial-grade equipment. Trained technicians. Done right, first time.
                    </p>
                    <p>
-                      We understand that your property deserves the best care. That&apos;s why we invest in professional-grade equipment and eco-friendly solutions that deliver results without compromising on safety.
+                      Free re-clean if not satisfied. Fully insured. No hidden fees.{location?.postcodeAreas && location.postcodeAreas.length > 0 ? ` We cover all ${location.postcodeAreas.join(', ')} postcodes.` : ''}
                    </p>
                 </div>
              </div>
@@ -130,11 +143,11 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                 {/* Stat 1 */}
                 <div className="flex items-start gap-4">
                    <div className="w-12 h-12 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center shrink-0">
-                      <Clock className="w-6 h-6" strokeWidth={2} />
+                      <Award className="w-6 h-6" strokeWidth={2} />
                    </div>
                    <div>
-                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">10+ Years</h3>
-                      <p className="text-slate-500 text-sm">Experience</p>
+                      <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">Trained Pros</h3>
+                      <p className="text-slate-500 text-sm">Certified Team</p>
                    </div>
                 </div>
 
@@ -152,7 +165,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                 {/* Stat 3 */}
                 <div className="flex items-start gap-4">
                    <div className="w-12 h-12 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center shrink-0">
-                      <Award className="w-6 h-6" strokeWidth={2} />
+                      <Star className="w-6 h-6" strokeWidth={2} />
                    </div>
                    <div>
                       <h3 className="font-bold text-slate-900 text-lg leading-none mb-1">5 Star Rated</h3>

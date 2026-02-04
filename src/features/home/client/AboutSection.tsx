@@ -6,7 +6,7 @@ import { reviewStatsDisplay, customerStatsDisplay } from '@/lib/constants';
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-16 md:py-24 bg-white overflow-hidden">
+    <section id="about" className="py-16 lg:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-20 items-center">
           {/* Image Side - Left */}
@@ -30,16 +30,16 @@ export function AboutSection() {
 
           {/* Text Side - Right */}
           <div className="order-1 lg:order-2">
-            <span className="text-slate-500 font-bold tracking-widest uppercase text-sm mb-3 block">
+            <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">
               About Aquapro
             </span>
 
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-6">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
               Dedicated to Excellence in <br className="hidden lg:block" />
               <span className="text-brand-500">Exterior Cleaning</span>
             </h2>
 
-            <p className="text-lg text-slate-600 leading-relaxed mb-8">
+            <p className="text-slate-600 text-base md:text-lg mb-8">
               Founded on the principles of reliability, quality, and customer
               satisfaction, Aquapro has grown to become the trusted choice for
               homeowners and businesses alike.
@@ -113,7 +113,7 @@ export function AboutSection() {
                   <div className="font-bold text-slate-900 text-xl leading-none mb-1">
                     10+ Years
                   </div>
-                  <div className="text-sm font-medium text-slate-500">
+                  <div className="text-slate-500 text-sm">
                     Experience
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export function AboutSection() {
                   <div className="font-bold text-slate-900 text-xl leading-none mb-1">
                     {customerStatsDisplay.totalCustomersShort} Clients
                   </div>
-                  <div className="text-sm font-medium text-slate-500">
+                  <div className="text-slate-500 text-sm">
                     Happy Customers
                   </div>
                 </div>
@@ -143,7 +143,7 @@ export function AboutSection() {
                   <div className="font-bold text-slate-900 text-xl leading-none mb-1">
                     5 Star Rated
                   </div>
-                  <div className="text-sm font-medium text-slate-500">
+                  <div className="text-slate-500 text-sm">
                     {reviewStatsDisplay.totalReviews} Reviews
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export function AboutSection() {
                   <div className="font-bold text-slate-900 text-xl leading-none mb-1">
                     Fully Insured
                   </div>
-                  <div className="text-sm font-medium text-slate-500">
+                  <div className="text-slate-500 text-sm">
                     100% Protection
                   </div>
                 </div>

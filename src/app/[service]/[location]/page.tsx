@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { Container, ReviewsSection } from '@/components/ui';
+import { ReviewsSection, FAQSection } from '@/components/ui';
 import { LandingLayout } from '@/components/layout';
 import { ServiceCrossLinks } from '@/components/seo';
 import {
@@ -25,7 +24,7 @@ import {
   ServiceAbout,
   ServiceGuarantees,
   ServiceStickyCTA,
-  ServiceMiniCTA,
+  ServiceFullWidthCTA,
 } from '@/features/services/client';
 import { ContactSection } from '@/features/home/client';
 
@@ -60,7 +59,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const isCounty = location.isCounty;
   const title = isCounty
-    ? `${service.name} in ${location.name} | Professional ${service.shortName} Services | ${siteConfig.name}`
+    ? `${service.name} in ${location.name} | Professional ${service.name} Services | ${siteConfig.name}`
     : `${service.name} in ${location.name} | ${siteConfig.name}`;
   const description = isCounty
     ? `Professional ${service.name.toLowerCase()} services across ${location.name}. ${service.benefits[0]}. Serving Chelmsford, Southend, Colchester, Basildon & all ${location.name} towns. Fully insured, ${reviewStatsDisplay.starRating} rated. Free quotes!`
@@ -265,10 +264,9 @@ export default async function ServiceLocationPage({ params }: PageProps) {
           moreReviews={getAllReviewsForService(service.id)}
           locationSlug={location.slug}
           tagline={`${service.shortName} Reviews`}
-          title={<>What <span className="text-brand-500">{location.name}</span> Customers Say</>}
+          title={<>Loved by <span className="text-brand-500">{location.name}</span> Locals</>}
           subtitle={`Real reviews from ${location.name} homeowners who used our ${service.name.toLowerCase()} service.`}
         />
-        <ServiceMiniCTA />
         <ServiceHowItWorks service={service} location={location} />
         <ServiceMobileLeadForm service={service} location={location} />
         <ServiceAbout service={service} location={location} />
@@ -277,15 +275,25 @@ export default async function ServiceLocationPage({ params }: PageProps) {
         {/* Contact Section */}
         <ContactSection serviceId={service.id} />
 
-        {/* Cross-links to related services in this location */}
+        {/* FAQ Section */}
+        {service.faqs && service.faqs.length > 0 && (
+          <FAQSection
+            faqs={service.faqs}
+            tagline={`${service.shortName} FAQs`}
+            title={<>Frequently Asked <span className="text-brand-500">Questions</span></>}
+          />
+        )}
+
+        {/* Full Width CTA */}
+        <ServiceFullWidthCTA service={service} location={location} />
+
+        {/* Cross-links & nearby areas */}
         <ServiceCrossLinks
           location={location}
           currentServiceId={service.id}
+          service={service}
           variant="full"
         />
-
-        {/* Nearby areas */}
-        <NearbyAreasFooter service={service} location={location} />
 
         <ServiceStickyCTA service={service} location={location} />
       </LandingLayout>
@@ -296,71 +304,3 @@ export default async function ServiceLocationPage({ params }: PageProps) {
   notFound();
 }
 
-function NearbyAreasFooter({ service, location }: { service: Service; location: Location }) {
-  const nearbyLocations = location.nearbyAreas
-    .slice(0, 6)
-    .map(slug => getLocationBySlug(slug))
-    .filter(Boolean) as Location[];
-
-  return (
-    <div className="border-t border-neutral-200 bg-neutral-50 py-12">
-      <Container>
-        <div className="text-center space-y-8">
-          {/* Section Title */}
-          <div>
-            <h3 className="text-xl font-bold text-neutral-900 mb-2">
-              {service.shortName} in Nearby Areas
-            </h3>
-            <p className="text-neutral-600 text-sm">
-              We also provide {service.name.toLowerCase()} services in these locations
-            </p>
-          </div>
-
-          {/* Nearby areas for same service */}
-          <div className="flex flex-wrap justify-center gap-2">
-            {nearbyLocations.map((loc) => (
-              <Link
-                key={loc.slug}
-                href={`/${service.slug}/${loc.slug}`}
-                className="px-4 py-2 text-sm bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-full text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 transition-colors shadow-sm"
-              >
-                {loc.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Parent page links */}
-          <div className="pt-6 border-t border-neutral-200/50 flex flex-wrap justify-center gap-4 text-sm">
-            <Link
-              href={`/services/${service.slug}`}
-              className="text-primary-700 hover:text-primary-700 font-medium"
-            >
-              More about {service.shortName}
-            </Link>
-            <span className="text-neutral-300">|</span>
-            <Link
-              href={`/areas/${location.slug}`}
-              className="text-primary-700 hover:text-primary-700 font-medium"
-            >
-              All services in {location.name}
-            </Link>
-            <span className="text-neutral-300">|</span>
-            <Link
-              href="/services"
-              className="text-neutral-600 hover:text-neutral-800"
-            >
-              All services
-            </Link>
-            <span className="text-neutral-300">|</span>
-            <Link
-              href="/areas"
-              className="text-neutral-600 hover:text-neutral-800"
-            >
-              All areas
-            </Link>
-          </div>
-        </div>
-      </Container>
-    </div>
-  );
-}

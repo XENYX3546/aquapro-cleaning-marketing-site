@@ -30,17 +30,17 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="process" className="py-24 bg-slate-50 border-t border-slate-200">
+    <section id="process" className="py-16 lg:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-slate-500 font-bold tracking-widest uppercase text-sm mb-3 block">
+        <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">
             How It Works
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
             Professional Cleaning,{' '}
             <span className="text-brand-500">Made Simple</span>
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
             Whether you need interior deep cleaning or complete exterior
             restoration, our seamless process ensures minimal disruption and
             maximum results.
@@ -69,7 +69,7 @@ export function HowItWorks() {
                   {step.title}
                 </h3>
 
-                <p className="text-slate-600 leading-relaxed text-sm">
+                <p className="text-slate-600 text-sm leading-relaxed">
                   {step.description}
                 </p>
               </div>

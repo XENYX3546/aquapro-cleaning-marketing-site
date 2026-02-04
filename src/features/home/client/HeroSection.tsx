@@ -47,8 +47,7 @@ export function HeroSection() {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
-              Complete Interior & <br />
-              <span className="text-brand-500">Exterior Cleaning Solutions</span>
+              Complete Interior & <span className="text-brand-500">Exterior Cleaning Solutions</span>
             </h1>
 
             {/* Subtext */}

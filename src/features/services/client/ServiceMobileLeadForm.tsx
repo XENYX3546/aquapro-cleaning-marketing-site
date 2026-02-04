@@ -15,7 +15,7 @@ export function ServiceMobileLeadForm({ service, location }: ServiceMobileLeadFo
       <div className="max-w-md mx-auto">
         <LeadForm
           id="mobile-mid-form"
-          title={location ? `Get My Free Quote in ${location.name}` : `Get My Free ${service.shortName} Quote`}
+          title={location ? `Get My Free Quote in ${location.name}` : `Get My Free ${service.name} Quote`}
           subtitle={location
             ? `Professional ${service.name.toLowerCase()} in ${location.name}. Fast & free quote.`
             : `Professional ${service.name.toLowerCase()}. Fast & free quote.`

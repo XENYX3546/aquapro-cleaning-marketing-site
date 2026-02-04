@@ -31,7 +31,7 @@ function ReviewsCTACard() {
         <h3 className="text-xl font-bold text-white mb-2">
           Join {customerStatsDisplay.totalCustomersPlus} Happy Customers
         </h3>
-        <p className="text-white/80 text-sm mb-5 leading-relaxed">
+        <p className="text-white/80 text-sm leading-relaxed mb-5">
           See why Essex homeowners trust us with their properties. Get your free, no-obligation quote today.
         </p>
 
@@ -65,14 +65,14 @@ function ReviewText({ text }: { text: string }) {
   const shouldTruncate = text.length > REVIEW_TRUNCATE_LENGTH;
 
   if (!shouldTruncate) {
-    return <p className="text-slate-600 text-[15px] leading-relaxed">{text}</p>;
+    return <p className="text-slate-600 text-sm leading-relaxed">{text}</p>;
   }
 
   const displayText = isExpanded ? text : text.slice(0, REVIEW_TRUNCATE_LENGTH).trim() + '...';
 
   return (
     <div>
-      <p className="text-slate-600 text-[15px] leading-relaxed">{displayText}</p>
+      <p className="text-slate-600 text-sm leading-relaxed">{displayText}</p>
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="mt-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
@@ -103,6 +103,23 @@ const GOOGLE_G_LOGO = (
     />
   </svg>
 );
+
+const FACEBOOK_F_LOGO = (
+  <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
+    <path
+      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+      fill="#1877F2"
+    />
+  </svg>
+);
+
+function ReviewSourceBadge({ source = 'google' }: { source?: 'google' | 'facebook' }) {
+  return (
+    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full p-[1px] shadow-sm border border-slate-100 z-10">
+      {source === 'facebook' ? FACEBOOK_F_LOGO : GOOGLE_G_LOGO}
+    </div>
+  );
+}
 
 export type ReviewsSectionProps = {
   /**
@@ -229,19 +246,24 @@ export function ReviewsSection({
   return (
     <>
       <section
-        className={`pt-12 pb-12 md:pt-20 md:pb-20 ${bgClass} font-sans relative ${className}`}
+        className={`py-16 lg:py-24 ${bgClass} font-sans relative ${className}`}
       >
-        <div className="max-w-7xl mx-auto px-6">
+        {/* Subtle background texture - organic scattered dots */}
+        <div
+          className="absolute inset-0 opacity-[0.08] pointer-events-none will-change-transform"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+        <div className="max-w-7xl mx-auto px-6 relative">
           {/* Header Section */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 lg:mb-16">
             <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">
               {tagline}
             </span>
-            <div className="flex flex-col items-center justify-center gap-2 mb-4">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-                {title || defaultTitle}
-              </h2>
-            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+              {title || defaultTitle}
+            </h2>
 
             <div className="flex flex-col items-center gap-2">
               <div className="flex items-center gap-2">
@@ -256,33 +278,50 @@ export function ReviewsSection({
                   ))}
                 </div>
               </div>
-              <p className="text-slate-600 text-base max-w-2xl mx-auto">
+              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
                 {subtitle}
               </p>
             </div>
           </div>
 
-          {/* Masonry Grid Container - using flexbox columns to prevent reflow jumping */}
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Distribute reviews into columns */}
+          {/* Mobile Layout: Single column with all reviews */}
+          <div className="md:hidden flex flex-col gap-6">
+            {displayReviews.map((review) => (
+              <ReviewCard key={review.id} review={review} onImageClick={handleImageClick} />
+            ))}
+            <ReviewsCTACard />
+          </div>
+
+          {/* Desktop Layout: Masonry grid with columns */}
+          <div className="hidden md:flex md:flex-row gap-6">
             {(() => {
-              // On mobile: 1 column, tablet: 2 columns, desktop: 3 columns
-              // We render all 3 but hide extras on smaller screens
+              // Estimate card height based on content to balance columns
+              const estimateHeight = (review: Review): number => {
+                let h = 120; // base: header + stars + padding
+                h += Math.ceil(review.text.length / 40) * 20; // ~20px per line of text
+                if (review.images && review.images.length > 0) h += 180; // image grid
+                if (review.reviewer.isLocalGuide) h += 28; // badge
+                if (review.location) h += 28; // location pill
+                return h;
+              };
+
               const columns: (typeof displayReviews)[] = [[], [], []];
-              displayReviews.forEach((review, i) => {
-                columns[i % 3].push(review);
+              const columnHeights = [0, 0, 0];
+
+              // Balanced distribution across columns
+              displayReviews.forEach((review) => {
+                const shortestIdx = columnHeights.indexOf(Math.min(...columnHeights));
+                columns[shortestIdx].push(review);
+                columnHeights[shortestIdx] += estimateHeight(review);
               });
 
-              // Find the column with fewest reviews (for CTA placement)
-              const shortestColIndex = columns.reduce((minIdx, col, idx, arr) =>
-                col.length < arr[minIdx].length ? idx : minIdx, 0);
+              // CTA goes in shortest column
+              const shortestColIndex = columnHeights.indexOf(Math.min(...columnHeights));
 
               return columns.map((columnReviews, colIndex) => (
                 <div
                   key={colIndex}
                   className={`flex-1 flex flex-col gap-6 ${
-                    colIndex === 1 ? 'hidden md:flex' : ''
-                  } ${
                     colIndex === 2 ? 'hidden lg:flex' : ''
                   }`}
                 >
@@ -333,16 +372,26 @@ function ReviewCard({ review, onImageClick }: { review: Review; onImageClick: (s
       {/* Review Header: Avatar & Info */}
       <div className="flex items-start gap-4 mb-4">
         <div className="relative flex-shrink-0">
-          {/* Avatar */}
-          <div
-            className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg text-white ${review.bg}`}
-          >
-            {review.initial}
-          </div>
-          {/* Google G Badge */}
-          <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full p-[3px] shadow-sm border border-slate-100 z-10">
-            {GOOGLE_G_LOGO}
-          </div>
+          {/* Avatar - Profile image or fallback to initial */}
+          {review.profileImage ? (
+            <div className="w-10 h-10 rounded-full overflow-hidden">
+              <Image
+                src={review.profileImage}
+                alt={review.name}
+                width={40}
+                height={40}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ) : (
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-base text-white ${review.bg}`}
+            >
+              {review.initial}
+            </div>
+          )}
+          {/* Source Badge (Google/Facebook) */}
+          <ReviewSourceBadge source={review.source} />
         </div>
 
         <div className="pt-0.5 min-w-0 flex-1">
@@ -499,6 +548,13 @@ function ImageGalleryModal({
         className="relative bg-white rounded-2xl md:rounded-3xl shadow-2xl w-full h-full overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Subtle background texture */}
+        <div
+          className="absolute inset-0 opacity-[0.08] pointer-events-none z-0 will-change-transform"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
         {/* Close button */}
         <button
           onClick={onClose}
@@ -612,14 +668,24 @@ function ImageGalleryModal({
             {/* Reviewer header */}
             <div className="flex items-start gap-3 mb-4">
               <div className="relative flex-shrink-0">
-                <div
-                  className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white ${review.bg}`}
-                >
-                  {review.initial}
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full p-[3px] shadow-sm border border-slate-100 z-10">
-                  {GOOGLE_G_LOGO}
-                </div>
+                {review.profileImage ? (
+                  <div className="w-9 h-9 rounded-full overflow-hidden">
+                    <Image
+                      src={review.profileImage}
+                      alt={review.name}
+                      width={36}
+                      height={36}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm text-white ${review.bg}`}
+                  >
+                    {review.initial}
+                  </div>
+                )}
+                <ReviewSourceBadge source={review.source} />
               </div>
 
               <div className="pt-0.5 min-w-0 flex-1">

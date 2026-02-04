@@ -88,8 +88,7 @@ export function AboutStory() {
             </div>
 
             <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-              Setting the Standard <br />
-              in <span className="text-brand-500">Exterior Cleaning</span>
+              Setting the Standard in <span className="text-brand-500">Exterior Cleaning</span>
             </h2>
 
             <p className="text-slate-600 text-lg leading-relaxed mb-6">
