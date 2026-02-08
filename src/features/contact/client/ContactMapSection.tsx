@@ -13,7 +13,7 @@ const viewData = {
   },
   exterior: {
     title: 'Exterior Cleaning Coverage',
-    description: 'Extensive coverage across Essex and surrounding counties for all exterior cleaning services including roof, pressure washing, and gutter cleaning.',
+    description: 'Extensive coverage across Essex and surrounding counties for all exterior cleaning services including roof cleaning, pressure washing, and gutter cleaning.',
     mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1270069.1125708574!2d-0.3807010203125!3d51.76485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d89760d54c8bf1%3A0xab0b9d60e893a6dd!2sEssex%2C%20UK!5e0!3m2!1sen!2sus!4v1706000000000!5m2!1sen!2sus',
   },
 };
@@ -56,7 +56,7 @@ export function ContactMapSection() {
             Service Areas
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight mb-8">
-            Our <span className="text-primary-700">Locations & Coverage</span>
+            Aquapro Cleaning <span className="text-primary-700">Coverage Areas</span>
           </h2>
 
           {/* Tab Buttons */}

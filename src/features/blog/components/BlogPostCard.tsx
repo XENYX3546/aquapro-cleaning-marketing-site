@@ -15,6 +15,9 @@ export function BlogPostCard({ post, featured = false, priority = false }: BlogP
   const primaryCategory = post.categories?.[0];
   // Use medium (1024px) for cards instead of large (1920px)
   const cardImageUrl = post.featuredImageVariants?.medium ?? post.featuredImageUrl;
+  // Contextual alt text: prepend category for better image-text vector convergence
+  const imageAlt = post.featuredImageAlt
+    || (primaryCategory ? `${primaryCategory.name}: ${post.title}` : post.title);
 
   // Card with cover image as background
   if (hasImage) {
@@ -29,7 +32,7 @@ export function BlogPostCard({ post, featured = false, priority = false }: BlogP
           {/* Background Image */}
           <Image
             src={cardImageUrl!}
-            alt={post.featuredImageAlt || post.title}
+            alt={imageAlt}
             fill
             sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
             className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -88,7 +91,7 @@ export function BlogPostCard({ post, featured = false, priority = false }: BlogP
                     className="rounded-full ring-1 ring-white/20 flex-shrink-0"
                   />
                 )}
-                <span className="text-white/80 truncate max-w-[120px]">{post.author?.displayName}</span>
+                <span className="text-white/80 font-medium truncate max-w-[120px]">{post.author?.displayName}</span>
                 <span className="flex-shrink-0">·</span>
                 <time dateTime={post.publishedAt || ''} className="flex-shrink-0">{formatPostDate(post.publishedAt)}</time>
               </div>

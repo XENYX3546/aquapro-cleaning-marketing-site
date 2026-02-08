@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { getCategories, getPosts } from '@/lib/blog';
+import { getCategories, getPosts, getPostPath } from '@/lib/blog';
+import type { BlogPostSummary } from '@/lib/blog';
 import {
   BlogHero,
   BlogSearch,
@@ -11,8 +12,10 @@ import {
 import { LandingLayout } from '@/components/layout';
 import { siteConfig } from '@/lib/constants';
 
-// Force dynamic rendering to ensure filtering works
-export const dynamic = 'force-dynamic';
+// ISR: cache for 5 minutes then revalidate in background
+// searchParams usage already opts into dynamic rendering per-request,
+// but revalidate allows edge caching between revalidations (better TTFB for crawlers)
+export const revalidate = 300;
 
 type BlogPageProps = {
   searchParams: Promise<{
@@ -78,19 +81,38 @@ function PaginationLinks({ page, hasMore }: { page: number; hasMore: boolean }) 
   );
 }
 
-// Schema for blog listing
-function BlogListSchema() {
+// Enhanced schema for blog listing with BlogPosting stubs
+function BlogListSchema({ posts }: { posts: BlogPostSummary[] }) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
     name: `${siteConfig.name} Blog`,
     description: 'Tips, guides, and insights for property maintenance.',
     url: `${siteConfig.url}/blog`,
+    inLanguage: 'en-GB',
     publisher: {
       '@type': 'Organization',
+      '@id': `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
     },
+    ...(posts.length > 0 && {
+      blogPost: posts.slice(0, 10).map((post) => ({
+        '@type': 'BlogPosting',
+        headline: post.title,
+        url: `${siteConfig.url}${getPostPath(post)}`,
+        datePublished: post.publishedAt,
+        ...(post.author && {
+          author: {
+            '@type': 'Person',
+            name: post.author.displayName,
+          },
+        }),
+        ...(post.featuredImageUrl && {
+          image: post.featuredImageVariants?.medium ?? post.featuredImageUrl,
+        }),
+      })),
+    }),
   };
 
   return (
@@ -128,8 +150,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const searchQuery = params.q || undefined;
   const tag = params.tag || undefined;
 
-  // Get categories and posts for filter pills and pagination (with error handling)
+  // Get categories and posts for filter pills, pagination, and schema
   let categories: Awaited<ReturnType<typeof getCategories>>['data'] = [];
+  let posts: BlogPostSummary[] = [];
   let hasMorePosts = false;
 
   try {
@@ -138,6 +161,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       getPosts({ page, pageSize: 12, tag }),
     ]);
     categories = Array.isArray(categoriesResponse?.data) ? categoriesResponse.data : [];
+    posts = Array.isArray(postsResponse?.data) ? postsResponse.data : [];
     hasMorePosts = postsResponse.meta.pagination.hasMore;
   } catch {
     // If API fails, continue with defaults
@@ -150,7 +174,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <LandingLayout>
       <PaginationLinks page={page} hasMore={hasMorePosts} />
-      <BlogListSchema />
+      <BlogListSchema posts={posts} />
 
       {/* Hero with Search */}
       <BlogHero

@@ -4,7 +4,7 @@ import { siteConfig } from '@/lib/constants';
 const contactCards = [
   {
     icon: 'phone' as const,
-    title: 'Call Support',
+    title: 'Call Us',
     description: 'Mon-Sat from 8am to 5pm.\nWe aim to answer all calls.',
     action: {
       label: siteConfig.contact.phone,
@@ -15,7 +15,7 @@ const contactCards = [
   {
     icon: 'mail' as const,
     title: 'Email Us',
-    description: 'For general inquiries and\ncommercial contracts.',
+    description: 'For general enquiries and\ncommercial contracts.',
     action: {
       label: siteConfig.contact.email,
       href: `mailto:${siteConfig.contact.email}`,

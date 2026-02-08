@@ -100,6 +100,7 @@ export const locations: Location[] = [
     nearbyAreas: ['benfleet', 'thundersley', 'hadleigh'],
     localHook: 'across the entire island community',
     postcodeAreas: ['SS8'],
+    commonProblems: ['island flooding risk leaving silt on ground floors', 'sea wall salt spray on windows', 'estuary damp accelerating mould indoors'],
   },
   {
     slug: 'grays',
@@ -108,6 +109,7 @@ export const locations: Location[] = [
     nearbyAreas: ['tilbury', 'stanford-le-hope', 'chafford-hundred', 'south-ockendon'],
     localHook: 'throughout Grays and Thurrock',
     postcodeAreas: ['RM17', 'RM20'],
+    commonProblems: ['A13 traffic soot settling on render', 'Thames-side humidity accelerating mould', 'industrial area dust coating windows'],
   },
   {
     slug: 'stanford-le-hope',
@@ -132,6 +134,7 @@ export const locations: Location[] = [
     nearbyAreas: ['southend-on-sea', 'westcliff-on-sea', 'hadleigh', 'benfleet'],
     localHook: 'from Old Leigh to the Broadway',
     postcodeAreas: ['SS9'],
+    commonProblems: ['Old Leigh harbour salt air on windows', 'sand tracked up from the beach into carpets', 'seafront damp accelerating patio moss'],
   },
   {
     slug: 'westcliff-on-sea',
@@ -140,6 +143,7 @@ export const locations: Location[] = [
     nearbyAreas: ['southend-on-sea', 'leigh-on-sea', 'prittlewell'],
     localHook: 'along the clifftop and surrounding streets',
     postcodeAreas: ['SS0'],
+    commonProblems: ['clifftop wind driving salt onto render', 'sea air damp causing window frame grime', 'north-facing cliffs trapping moss on walls'],
   },
   {
     slug: 'rochford',
@@ -148,6 +152,7 @@ export const locations: Location[] = [
     nearbyAreas: ['rayleigh', 'hockley', 'southend-on-sea', 'great-wakering'],
     localHook: 'throughout the historic market town',
     postcodeAreas: ['SS4'],
+    commonProblems: ['river Roach damp encouraging indoor mould', 'market town foot traffic wearing shop carpets', 'low-lying area flooding leaving mud residue'],
   },
   {
     slug: 'hockley',
@@ -164,6 +169,7 @@ export const locations: Location[] = [
     nearbyAreas: ['heybridge', 'burnham-on-crouch', 'witham', 'danbury'],
     localHook: 'from the historic Hythe to the town centre',
     postcodeAreas: ['CM9'],
+    commonProblems: ['Blackwater estuary salt air on windows', 'Hythe waterfront humidity accelerating algae', 'tidal mud tracked from riverside walks'],
   },
   {
     slug: 'witham',
@@ -188,7 +194,7 @@ export const locations: Location[] = [
     nearbyAreas: ['wivenhoe', 'west-mersea', 'stanway', 'brightlingsea', 'dedham', 'marks-tey', 'rowhedge', 'tiptree'],
     localHook: 'across Britain\'s oldest recorded town',
     postcodeAreas: ['CO1', 'CO2', 'CO3', 'CO4'],
-    commonProblems: ['historic property care', 'garrison town pollution', 'university area turnovers'],
+    commonProblems: ['Roman wall stonework staining', 'university term-end carpet wear', 'garrison area soot buildup'],
   },
   {
     slug: 'clacton-on-sea',
@@ -197,6 +203,7 @@ export const locations: Location[] = [
     nearbyAreas: ['frinton-on-sea', 'walton-on-the-naze', 'jaywick', 'holland-on-sea'],
     localHook: 'along the coast and throughout the town',
     postcodeAreas: ['CO15', 'CO16'],
+    commonProblems: ['sea salt film on windows and frames', 'beach sand tracked deep into hallway carpets', 'coastal damp feeding moss on north-facing roofs'],
   },
   {
     slug: 'harlow',
@@ -205,6 +212,7 @@ export const locations: Location[] = [
     nearbyAreas: ['epping', 'north-weald', 'ongar'],
     localHook: 'across all areas of the new town',
     postcodeAreas: ['CM17', 'CM18', 'CM19', 'CM20'],
+    commonProblems: ['new town block paving sprouting weeds fast', 'construction dust in recently built homes', 'flat terrain rain pooling causing patio algae'],
   },
   {
     slug: 'epping',
@@ -213,6 +221,7 @@ export const locations: Location[] = [
     nearbyAreas: ['harlow', 'loughton', 'theydon-bois', 'north-weald'],
     localHook: 'from the High Street to the forest edges',
     postcodeAreas: ['CM16'],
+    commonProblems: ['Epping Forest leaf fall clogging gutters', 'tree canopy shade accelerating roof moss', 'forest pollen coating windows and driveways'],
   },
   {
     slug: 'loughton',
@@ -221,6 +230,7 @@ export const locations: Location[] = [
     nearbyAreas: ['chigwell', 'buckhurst-hill', 'epping', 'woodford'],
     localHook: 'throughout Loughton and Debden',
     postcodeAreas: ['IG10'],
+    commonProblems: ['forest-edge leaf debris blocking gutters every autumn', 'tree canopy shade driving moss on north-facing roofs', 'sap and bird droppings staining driveways'],
   },
   {
     slug: 'chigwell',
@@ -229,6 +239,7 @@ export const locations: Location[] = [
     nearbyAreas: ['loughton', 'woodford', 'buckhurst-hill', 'hainault'],
     localHook: 'across Chigwell and Grange Hill',
     postcodeAreas: ['IG7', 'IG8'],
+    commonProblems: ['tree-lined roads shedding leaves into gutters', 'sap and pollen staining block paving', 'shade from mature gardens causing rapid moss growth'],
   },
   // Additional Essex Towns
   {
@@ -238,7 +249,7 @@ export const locations: Location[] = [
     nearbyAreas: ['great-dunmow', 'braintree', 'halstead'],
     localHook: 'throughout the historic market town and surrounding villages',
     postcodeAreas: ['CB10', 'CB11'],
-    commonProblems: ['period property maintenance', 'thatched roof moss', 'historic stonework cleaning'],
+    commonProblems: ['thatched roof moss and lichen', 'lime mortar sensitivity on old walls', 'pollen buildup from surrounding farmland'],
   },
   {
     slug: 'great-dunmow',
@@ -263,7 +274,7 @@ export const locations: Location[] = [
     nearbyAreas: ['maldon', 'southminster', 'rochford'],
     localHook: 'along the waterfront and throughout the town',
     postcodeAreas: ['CM0'],
-    commonProblems: ['salt air corrosion', 'algae from river proximity', 'boat storage area cleaning'],
+    commonProblems: ['Crouch estuary salt air corroding gutters', 'river humidity accelerating algae on render', 'tidal mud tracked from waterfront onto floors'],
   },
   {
     slug: 'frinton-on-sea',
@@ -281,6 +292,7 @@ export const locations: Location[] = [
     nearbyAreas: ['frinton-on-sea', 'clacton-on-sea', 'colchester'],
     localHook: 'across the seaside town and surrounding area',
     postcodeAreas: ['CO14'],
+    commonProblems: ['Naze cliff salt spray corroding gutters', 'coastal wind driving sand into carpet pile', 'seafront humidity accelerating roof moss'],
   },
   {
     slug: 'manningtree',
@@ -298,7 +310,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'brightlingsea', 'rowhedge', 'alresford'],
     localHook: 'across the historic port town and university area',
     postcodeAreas: ['CO7'],
-    commonProblems: ['river proximity dampness', 'student accommodation turnovers', 'period property maintenance'],
+    commonProblems: ['river Colne damp causing indoor mould', 'student flat end-of-tenancy carpet stains', 'tidal mud tracked onto driveways'],
   },
   {
     slug: 'west-mersea',
@@ -307,7 +319,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'brightlingsea', 'rowhedge', 'tollesbury'],
     localHook: 'across Mersea Island and the waterfront',
     postcodeAreas: ['CO5'],
-    commonProblems: ['salt spray damage', 'coastal weather exposure', 'holiday home maintenance'],
+    commonProblems: ['salt spray corroding guttering', 'coastal wind driving sand into carpet pile', 'island humidity accelerating moss growth'],
   },
   {
     slug: 'stanway',
@@ -316,7 +328,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'copford', 'marks-tey', 'tiptree'],
     localHook: 'throughout Stanway and the retail park area',
     postcodeAreas: ['CO3'],
-    commonProblems: ['new build estates', 'construction dust', 'block paving maintenance'],
+    commonProblems: ['construction dust settling in new-build carpets', 'block paving weed growth within two years', 'render staining quickly on new estates'],
   },
   {
     slug: 'brightlingsea',
@@ -325,7 +337,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'wivenhoe', 'west-mersea', 'thorrington'],
     localHook: 'across the sailing town and harbour area',
     postcodeAreas: ['CO7'],
-    commonProblems: ['marine environment exposure', 'algae growth from humidity', 'yacht club property maintenance'],
+    commonProblems: ['harbour salt spray on windows', 'algae growth from estuary humidity', 'boat yard dust settling on patios'],
   },
   {
     slug: 'dedham',
@@ -334,7 +346,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'manningtree', 'ardleigh', 'lawford'],
     localHook: 'in the heart of Constable Country',
     postcodeAreas: ['CO7'],
-    commonProblems: ['heritage building care', 'listed property requirements', 'rural mud and debris'],
+    commonProblems: ['river Stour damp encouraging moss on roofs', 'country lane mud tracked onto floors', 'listed building lime mortar sensitivity'],
   },
   {
     slug: 'marks-tey',
@@ -343,7 +355,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'stanway', 'copford', 'kelvedon'],
     localHook: 'across the village and commuter area',
     postcodeAreas: ['CO6'],
-    commonProblems: ['railway proximity soot', 'A12 pollution buildup', 'commuter property maintenance'],
+    commonProblems: ['railway soot settling on render', 'A12 road film on windows and gutters', 'heavy goods traffic vibration loosening roof moss'],
   },
   {
     slug: 'rowhedge',
@@ -352,7 +364,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'wivenhoe', 'fingringhoe', 'abberton'],
     localHook: 'along the River Colne waterfront',
     postcodeAreas: ['CO5'],
-    commonProblems: ['riverside dampness', 'flood risk property care', 'boat yard proximity'],
+    commonProblems: ['River Colne damp accelerating mould', 'tidal flood residue on ground floors', 'riverside moss on north-facing walls'],
   },
   {
     slug: 'great-horkesley',
@@ -361,7 +373,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'boxted', 'west-bergholt', 'dedham'],
     localHook: 'throughout the village and surrounding countryside',
     postcodeAreas: ['CO6'],
-    commonProblems: ['rural property maintenance', 'agricultural dust', 'large driveways'],
+    commonProblems: ['agricultural dust coating windows and sills', 'country lane mud on driveways after rain', 'exposed hilltop wind driving moss growth'],
   },
   {
     slug: 'boxted',
@@ -370,7 +382,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'great-horkesley', 'dedham', 'langham'],
     localHook: 'across the village and rural surroundings',
     postcodeAreas: ['CO4'],
-    commonProblems: ['country lane mud', 'farmland dust', 'period property care'],
+    commonProblems: ['farmland dust settling on conservatory roofs', 'country lane mud ground into hallway carpets', 'north-facing moss from dense tree cover'],
   },
   {
     slug: 'ardleigh',
@@ -379,7 +391,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'dedham', 'manningtree', 'great-bromley'],
     localHook: 'throughout the village and A12 corridor',
     postcodeAreas: ['CO7'],
-    commonProblems: ['main road pollution', 'reservoir area humidity', 'commuter property upkeep'],
+    commonProblems: ['A12 road spray film on windows', 'reservoir humidity accelerating algae on patios', 'heavy rain runoff staining block paving'],
   },
   {
     slug: 'thorpe-le-soken',
@@ -388,7 +400,6 @@ export const locations: Location[] = [
     nearbyAreas: ['clacton-on-sea', 'frinton-on-sea', 'colchester', 'weeley'],
     localHook: 'across the village and Tendring countryside',
     postcodeAreas: ['CO16'],
-    commonProblems: ['coastal proximity', 'rural property maintenance', 'retirement property care'],
   },
   {
     slug: 'west-bergholt',
@@ -397,7 +408,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'great-horkesley', 'marks-tey', 'fordham'],
     localHook: 'throughout the village and surrounding heathland',
     postcodeAreas: ['CO6'],
-    commonProblems: ['heathland debris', 'tree coverage moss growth', 'village green proximity'],
+    commonProblems: ['heathland pollen coating cars and driveways', 'tree canopy shade causing rapid moss growth', 'leaf fall clogging gutters every autumn'],
   },
   {
     slug: 'layer-de-la-haye',
@@ -406,7 +417,7 @@ export const locations: Location[] = [
     nearbyAreas: ['colchester', 'abberton', 'birch', 'tiptree'],
     localHook: 'near Abberton Reservoir and the surrounding countryside',
     postcodeAreas: ['CO2'],
-    commonProblems: ['reservoir humidity', 'wildlife area debris', 'rural lane mud'],
+    commonProblems: ['reservoir humidity accelerating algae growth', 'bird droppings from nearby nature reserve', 'muddy lane runoff staining driveways'],
   },
   {
     slug: 'waltham-abbey',
@@ -440,7 +451,7 @@ export const locations: Location[] = [
     nearbyAreas: ['hornchurch', 'upminster', 'ilford', 'dagenham', 'brentwood'],
     localHook: 'across Romford and the London Borough of Havering',
     postcodeAreas: ['RM1', 'RM2', 'RM3', 'RM7'],
-    commonProblems: ['urban pollution buildup', 'high traffic area stains', 'commercial property cleaning'],
+    commonProblems: ['A12 traffic soot on render and fascias', 'high street pollution film on shop fronts', 'heavy foot traffic staining entrance carpets'],
   },
   {
     slug: 'hornchurch',
@@ -465,7 +476,7 @@ export const locations: Location[] = [
     nearbyAreas: ['romford', 'barking', 'woodford', 'chigwell'],
     localHook: 'across Ilford and the London Borough of Redbridge',
     postcodeAreas: ['IG1', 'IG2', 'IG3', 'IG4', 'IG5', 'IG6'],
-    commonProblems: ['urban grime', 'traffic pollution', 'commercial frontage cleaning'],
+    commonProblems: ['traffic pollution grime on windows', 'road salt staining driveways in winter', 'high-density housing trapping damp and mould'],
   },
   {
     slug: 'woodford',
@@ -474,6 +485,7 @@ export const locations: Location[] = [
     nearbyAreas: ['loughton', 'chigwell', 'ilford', 'wanstead'],
     localHook: 'throughout Woodford Green and South Woodford',
     postcodeAreas: ['IG8', 'E18'],
+    commonProblems: ['tree-lined streets clogging gutters with leaves', 'forest-edge shade driving algae on fences', 'mature garden debris staining patios'],
   },
   {
     slug: 'barking',
@@ -531,6 +543,7 @@ export const locations: Location[] = [
     nearbyAreas: ['chelmsford', 'maldon', 'south-woodham-ferrers'],
     localHook: 'across the hilltop village and surrounding countryside',
     postcodeAreas: ['CM3'],
+    commonProblems: ['hilltop wind exposure driving rain into render', 'dense woodland leaf fall clogging gutters', 'clay soil staining driveways after heavy rain'],
   },
   {
     slug: 'writtle',
@@ -580,7 +593,7 @@ export const locations: Location[] = [
     nearbyAreas: ['leyton', 'east-ham', 'ilford', 'wanstead'],
     localHook: 'across Stratford and the Olympic Park area',
     postcodeAreas: ['E15', 'E20'],
-    commonProblems: ['new build cleaning', 'post-construction dust', 'high-rise window cleaning'],
+    commonProblems: ['post-construction dust in new-build carpets', 'Olympic Park pollen and tree debris', 'high-rise window grime from city air'],
   },
   {
     slug: 'walthamstow',
@@ -589,7 +602,7 @@ export const locations: Location[] = [
     nearbyAreas: ['leyton', 'leytonstone', 'chingford', 'woodford'],
     localHook: 'from the Village to Blackhorse Road',
     postcodeAreas: ['E17'],
-    commonProblems: ['Victorian property maintenance', 'period feature cleaning', 'narrow street access'],
+    commonProblems: ['Victorian sash window grime buildup', 'narrow street trapping moss on north walls', 'market area foot traffic wearing carpets fast'],
   },
   {
     slug: 'leyton',
@@ -640,7 +653,7 @@ export const locations: Location[] = [
     nearbyAreas: ['loughton', 'chigwell', 'woodford', 'theydon-bois'],
     localHook: 'throughout the affluent commuter town',
     postcodeAreas: ['IG9'],
-    commonProblems: ['tree coverage debris', 'large property maintenance', 'period home care'],
+    commonProblems: ['tree canopy shedding leaves into gutters', 'forest shade causing moss on roof tiles', 'sap and pollen staining driveways'],
   },
   {
     slug: 'shenfield',
@@ -649,7 +662,6 @@ export const locations: Location[] = [
     nearbyAreas: ['brentwood', 'hutton', 'ingatestone', 'billericay'],
     localHook: 'across Shenfield and the Elizabeth Line corridor',
     postcodeAreas: ['CM15'],
-    commonProblems: ['commuter property upkeep', 'large driveways', 'executive home maintenance'],
   },
   {
     slug: 'chingford',
@@ -658,7 +670,7 @@ export const locations: Location[] = [
     nearbyAreas: ['walthamstow', 'loughton', 'woodford', 'buckhurst-hill'],
     localHook: 'from Chingford Mount to the Epping Forest edge',
     postcodeAreas: ['E4'],
-    commonProblems: ['forest debris', 'period property care', 'green algae from tree cover'],
+    commonProblems: ['Epping Forest leaf fall blocking gutters', 'tree shade driving green algae on render', 'forest pollen coating conservatory glass'],
   },
   {
     slug: 'rainham',
@@ -667,7 +679,7 @@ export const locations: Location[] = [
     nearbyAreas: ['hornchurch', 'dagenham', 'grays', 'purfleet'],
     localHook: 'across Rainham and the marshes area',
     postcodeAreas: ['RM13'],
-    commonProblems: ['industrial area pollution', 'marshland humidity', 'new development cleaning'],
+    commonProblems: ['industrial fallout film on windows', 'marshland damp accelerating mould growth', 'Thames-side salt air corroding guttering'],
   },
   {
     slug: 'great-baddow',
@@ -676,7 +688,7 @@ export const locations: Location[] = [
     nearbyAreas: ['chelmsford', 'danbury', 'sandon', 'galleywood'],
     localHook: 'throughout Great Baddow and the Chelmsford suburbs',
     postcodeAreas: ['CM2'],
-    commonProblems: ['suburban family home cleaning', 'school run traffic grime', 'established garden debris'],
+    commonProblems: ['established garden trees clogging gutters', 'school-run traffic grime on front driveways', 'clay soil tracked onto carpets after rain'],
   },
   {
     slug: 'broomfield',
@@ -685,7 +697,6 @@ export const locations: Location[] = [
     nearbyAreas: ['chelmsford', 'writtle', 'springfield', 'great-waltham'],
     localHook: 'near Broomfield Hospital and the village centre',
     postcodeAreas: ['CM1'],
-    commonProblems: ['hospital area traffic', 'village property maintenance', 'rural edge cleaning'],
   },
   {
     slug: 'springfield',
@@ -694,7 +705,7 @@ export const locations: Location[] = [
     nearbyAreas: ['chelmsford', 'broomfield', 'boreham', 'little-waltham'],
     localHook: 'across Springfield and Barnes Mill',
     postcodeAreas: ['CM1', 'CM2'],
-    commonProblems: ['new estate maintenance', 'river proximity dampness', 'family home cleaning'],
+    commonProblems: ['river Chelmer damp on ground-floor carpets', 'new estate block paving sprouting weeds fast', 'builder dust settling in recently finished homes'],
   },
   {
     slug: 'coggeshall',
@@ -703,7 +714,7 @@ export const locations: Location[] = [
     nearbyAreas: ['braintree', 'kelvedon', 'colchester', 'marks-tey'],
     localHook: 'throughout the historic wool town',
     postcodeAreas: ['CO6'],
-    commonProblems: ['timber-framed building care', 'historic property maintenance', 'antique shop frontage'],
+    commonProblems: ['timber-framed buildings trapping damp and mould', 'narrow street moss on shaded walls', 'Colne Valley humidity staining render'],
   },
   {
     slug: 'shoeburyness',
@@ -712,7 +723,7 @@ export const locations: Location[] = [
     nearbyAreas: ['southend-on-sea', 'thorpe-bay', 'great-wakering', 'rochford'],
     localHook: 'from the garrison to East Beach',
     postcodeAreas: ['SS3'],
-    commonProblems: ['military area heritage', 'extreme coastal exposure', 'sand and salt damage'],
+    commonProblems: ['extreme coastal salt spray on windows', 'beach sand ground deep into carpet pile', 'north-facing roofs thick with sea-damp moss'],
   },
   // Southend Area Additions
   {
@@ -722,7 +733,7 @@ export const locations: Location[] = [
     nearbyAreas: ['southend-on-sea', 'shoeburyness', 'westcliff-on-sea'],
     localHook: 'along the prestigious seafront and gardens',
     postcodeAreas: ['SS1'],
-    commonProblems: ['coastal salt spray', 'large property maintenance', 'beach proximity sand'],
+    commonProblems: ['seafront salt film on windows and frames', 'beach sand tracked through hallway carpets', 'coastal damp accelerating patio algae'],
   },
   {
     slug: 'prittlewell',
@@ -731,7 +742,6 @@ export const locations: Location[] = [
     nearbyAreas: ['southend-on-sea', 'westcliff-on-sea', 'rochford', 'eastwood'],
     localHook: 'near the historic priory and town centre',
     postcodeAreas: ['SS2'],
-    commonProblems: ['urban residential cleaning', 'priory area heritage', 'high street proximity'],
   },
   {
     slug: 'great-wakering',
@@ -749,7 +759,7 @@ export const locations: Location[] = [
     nearbyAreas: ['rayleigh', 'hockley', 'rochford', 'south-woodham-ferrers'],
     localHook: 'along the River Crouch waterfront',
     postcodeAreas: ['SS5'],
-    commonProblems: ['riverside dampness', 'boat owners property care', 'flood risk awareness'],
+    commonProblems: ['River Crouch damp causing indoor mould', 'riverside moss covering fences and patios', 'flood-risk area silt staining ground floors'],
   },
   {
     slug: 'hawkwell',
@@ -758,7 +768,6 @@ export const locations: Location[] = [
     nearbyAreas: ['hockley', 'rayleigh', 'rochford', 'ashingdon'],
     localHook: 'throughout Hawkwell village and surroundings',
     postcodeAreas: ['SS5'],
-    commonProblems: ['village property maintenance', 'commuter home upkeep', 'green space debris'],
   },
   // Thurrock Additions
   {
@@ -768,7 +777,6 @@ export const locations: Location[] = [
     nearbyAreas: ['grays', 'upminster', 'rainham', 'aveley'],
     localHook: 'across South Ockendon and Belhus',
     postcodeAreas: ['RM15'],
-    commonProblems: ['new development areas', 'industrial proximity', 'family estate cleaning'],
   },
   {
     slug: 'chafford-hundred',
@@ -777,7 +785,6 @@ export const locations: Location[] = [
     nearbyAreas: ['grays', 'lakeside', 'south-ockendon', 'west-thurrock'],
     localHook: 'throughout the modern Lakeside development',
     postcodeAreas: ['RM16'],
-    commonProblems: ['new build maintenance', 'retail park proximity', 'modern estate upkeep'],
   },
   {
     slug: 'chadwell-st-mary',
@@ -786,7 +793,7 @@ export const locations: Location[] = [
     nearbyAreas: ['tilbury', 'grays', 'stanford-le-hope', 'orsett'],
     localHook: 'across the village and towards Tilbury',
     postcodeAreas: ['RM16'],
-    commonProblems: ['village property care', 'Thames proximity humidity', 'industrial area fallout'],
+    commonProblems: ['Thames proximity humidity feeding mould', 'industrial area soot settling on render', 'heavy clay soil staining driveways'],
   },
   // Tendring Coast Additions
   {
@@ -796,7 +803,7 @@ export const locations: Location[] = [
     nearbyAreas: ['clacton-on-sea', 'holland-on-sea', 'st-osyth'],
     localHook: 'across the coastal community',
     postcodeAreas: ['CO15'],
-    commonProblems: ['extreme coastal exposure', 'sea wall proximity', 'salt damage prevention'],
+    commonProblems: ['extreme salt spray eroding window seals', 'coastal damp driving mould in ground-floor rooms', 'beach sand ground deep into carpet fibres'],
   },
   {
     slug: 'holland-on-sea',
@@ -805,7 +812,7 @@ export const locations: Location[] = [
     nearbyAreas: ['clacton-on-sea', 'frinton-on-sea', 'great-clacton'],
     localHook: 'along the seafront and residential streets',
     postcodeAreas: ['CO15'],
-    commonProblems: ['coastal erosion area', 'retirement property care', 'sea air corrosion'],
+    commonProblems: ['sea air corroding metal guttering', 'coastal wind driving salt onto windows', 'damp from sea proximity accelerating moss'],
   },
   {
     slug: 'dovercourt',
@@ -814,7 +821,7 @@ export const locations: Location[] = [
     nearbyAreas: ['harwich', 'parkeston', 'ramsey', 'manningtree'],
     localHook: 'across Dovercourt Bay and the town centre',
     postcodeAreas: ['CO12'],
-    commonProblems: ['beach front exposure', 'Victorian property maintenance', 'ferry terminal proximity'],
+    commonProblems: ['salt spray from the bay corroding fascias', 'Victorian render trapping damp and algae', 'ferry port pollution film on windows'],
   },
   {
     slug: 'mistley',
@@ -823,7 +830,6 @@ export const locations: Location[] = [
     nearbyAreas: ['manningtree', 'harwich', 'lawford', 'bradfield'],
     localHook: 'along the historic quayside and village',
     postcodeAreas: ['CO11'],
-    commonProblems: ['riverside swan area', 'historic maltings maintenance', 'quayside property care'],
   },
   {
     slug: 'weeley',
@@ -832,7 +838,6 @@ export const locations: Location[] = [
     nearbyAreas: ['clacton-on-sea', 'thorpe-le-soken', 'great-bentley', 'little-clacton'],
     localHook: 'throughout Weeley village and Heath area',
     postcodeAreas: ['CO16'],
-    commonProblems: ['rural village maintenance', 'holiday park proximity', 'agricultural dust'],
   },
   // Central Essex Additions
   {
@@ -842,7 +847,7 @@ export const locations: Location[] = [
     nearbyAreas: ['maldon', 'witham', 'tolleshunt-darcy', 'goldhanger'],
     localHook: 'from Heybridge Basin to the town centre',
     postcodeAreas: ['CM9'],
-    commonProblems: ['canal basin humidity', 'boat owner property care', 'estuary proximity'],
+    commonProblems: ['Blackwater estuary damp accelerating moss', 'canal basin humidity staining render', 'tidal creek mud tracked onto driveways'],
   },
   {
     slug: 'southminster',
@@ -851,7 +856,7 @@ export const locations: Location[] = [
     nearbyAreas: ['burnham-on-crouch', 'maldon', 'tillingham', 'bradwell-on-sea'],
     localHook: 'across the Dengie Peninsula village',
     postcodeAreas: ['CM0'],
-    commonProblems: ['remote peninsula location', 'agricultural surroundings', 'coastal wind exposure'],
+    commonProblems: ['Dengie Peninsula coastal wind exposure', 'agricultural dust coating windows and roofs', 'flat terrain flooding leaving silt residue'],
   },
   {
     slug: 'hatfield-peverel',
@@ -860,7 +865,7 @@ export const locations: Location[] = [
     nearbyAreas: ['witham', 'chelmsford', 'maldon', 'terling'],
     localHook: 'throughout the village and station area',
     postcodeAreas: ['CM3'],
-    commonProblems: ['A12 corridor pollution', 'commuter property upkeep', 'village character maintenance'],
+    commonProblems: ['A12 road spray film on front windows', 'train line soot settling on roofs', 'clay soil staining driveways after heavy rain'],
   },
   {
     slug: 'stock',
@@ -869,7 +874,7 @@ export const locations: Location[] = [
     nearbyAreas: ['billericay', 'ingatestone', 'chelmsford', 'galleywood'],
     localHook: 'across the picturesque village',
     postcodeAreas: ['CM4'],
-    commonProblems: ['affluent village homes', 'large rural properties', 'country lane mud'],
+    commonProblems: ['country lane mud ground into hall carpets', 'mature garden trees dropping sap on patios', 'exposed hilltop wind accelerating roof moss'],
   },
   // West Essex Additions
   {
@@ -879,7 +884,7 @@ export const locations: Location[] = [
     nearbyAreas: ['epping', 'loughton', 'buckhurst-hill', 'abridge'],
     localHook: 'on the edge of Epping Forest',
     postcodeAreas: ['CM16'],
-    commonProblems: ['forest debris and leaves', 'affluent property maintenance', 'green village upkeep'],
+    commonProblems: ['Epping Forest leaves clogging gutters every autumn', 'tree canopy shade driving moss on roofs', 'forest pollen settling on driveways and cars'],
   },
   {
     slug: 'north-weald',
@@ -888,7 +893,7 @@ export const locations: Location[] = [
     nearbyAreas: ['epping', 'harlow', 'ongar', 'thornwood'],
     localHook: 'near the historic airfield and village',
     postcodeAreas: ['CM16', 'CM17'],
-    commonProblems: ['airfield area dust', 'market proximity', 'rural property care'],
+    commonProblems: ['airfield dust settling on nearby rooftops', 'market-day mud tracked onto drives and carpets', 'rural lane runoff staining paving after storms'],
   },
   {
     slug: 'hainault',
@@ -897,7 +902,7 @@ export const locations: Location[] = [
     nearbyAreas: ['chigwell', 'ilford', 'romford', 'woodford'],
     localHook: 'near Hainault Forest and the residential areas',
     postcodeAreas: ['IG6', 'IG7'],
-    commonProblems: ['forest edge debris', 'tube line proximity', 'suburban estate maintenance'],
+    commonProblems: ['Hainault Forest leaf fall blocking gutters', 'tree shade causing green algae on fences', 'forest-edge pollen coating conservatory roofs'],
   },
   // Brentwood Area Addition
   {
@@ -907,7 +912,6 @@ export const locations: Location[] = [
     nearbyAreas: ['brentwood', 'shenfield', 'billericay', 'ingrave'],
     localHook: 'across Hutton village and Mount area',
     postcodeAreas: ['CM13'],
-    commonProblems: ['golf course proximity', 'large executive homes', 'established garden maintenance'],
   },
   // ===== Closing the Gap: All Referenced nearbyAreas =====
   // Basildon/South Essex Area

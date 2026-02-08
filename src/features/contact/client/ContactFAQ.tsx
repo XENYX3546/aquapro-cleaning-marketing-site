@@ -7,26 +7,26 @@ const faqData = [
   {
     question: 'What areas do you cover?',
     answer:
-      'We cover all of Essex and the surrounding counties, including Greater London for commercial contracts.',
+      'Aquapro Cleaning covers all of Essex and the surrounding counties, including Greater London for commercial contracts.',
   },
   {
-    question: 'How does the quoting work?',
+    question: 'How does the quoting process work?',
     answer:
-      'Simply fill out our online form with your details. For most standard jobs, we can give you a price immediately or within the hour. For larger commercial projects, we may need to visit the site.',
+      'Simply fill out the online form with your details. For most standard jobs, we can provide a price immediately or within the hour. For larger commercial projects, a site visit may be required.',
   },
   {
     question: 'Are quotes free?',
-    answer: 'Yes, 100%. All our quotes are free and come with no obligation to book.',
+    answer: 'Yes, 100%. All quotes are free and come with no obligation to book.',
   },
   {
     question: 'Are you registered and insured?',
     answer:
-      "Absolutely. We hold full public liability insurance up to £5m and employer's liability insurance. Copies of our certificates are available on request.",
+      "Absolutely. Aquapro Cleaning holds full public liability insurance up to \u00A35m and employer\u2019s liability insurance. Copies of certificates are available on request.",
   },
   {
     question: 'What are your hours of operation?',
     answer:
-      'Our phone lines are open Monday to Saturday, 8am to 5pm. Our cleaning teams can operate outside these hours for commercial contracts to minimize disruption.',
+      'Our phone lines are open Monday to Saturday, 8am to 5pm. Cleaning teams can operate outside these hours for commercial contracts to minimise disruption.',
   },
   {
     question: 'What payment methods do you accept?',
@@ -36,22 +36,22 @@ const faqData = [
   {
     question: 'Do you take away waste?',
     answer:
-      'Yes, we remove all moss, debris, and waste resulting from our cleaning process. We are licensed waste carriers.',
+      'Yes, Aquapro Cleaning removes all moss, debris, and waste resulting from the cleaning process. We are licensed waste carriers.',
   },
   {
     question: 'Do you take on commercial work?',
     answer:
-      'Yes, a significant portion of our business is commercial. We work with schools, offices, property management companies, and local councils.',
+      'Yes, a significant portion of our business is commercial. We work with schools, offices, property management companies, and local councils across Essex.',
   },
   {
     question: 'Are your staff certified or licensed?',
     answer:
-      'All our technicians are fully trained, vetted, and wear full uniform. We are certified for working at heights and use professional-grade equipment.',
+      'All technicians are fully trained, vetted, and wear full uniform. Aquapro Cleaning is certified for working at heights and uses professional-grade equipment.',
   },
   {
     question: 'Do you work with historic or delicate buildings?',
     answer:
-      "Yes. We use 'Soft Wash' technology for delicate surfaces like render, historic stone, and older roofs, which cleans effectively without the risk of high-pressure damage.",
+      "Yes. We use Soft Wash technology for delicate surfaces like render, historic stone, and older roofs, which cleans effectively without the risk of high-pressure damage.",
   },
 ];
 
@@ -70,7 +70,7 @@ export function ContactFAQ() {
             Common Questions
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight">
-            Frequently Asked <span className="text-primary-700">Questions</span>
+            Aquapro Cleaning <span className="text-primary-700">FAQ</span>
           </h2>
         </div>
 

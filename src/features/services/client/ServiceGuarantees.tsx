@@ -3,6 +3,7 @@
 import { ShieldCheck, CalendarCheck, Umbrella, Wallet, Clock, PawPrint, Home, Sparkles, RefreshCw } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
+import { getServiceKeywords } from '@/lib/constants';
 
 type Guarantee = {
   icon: React.ReactNode;
@@ -26,7 +27,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <Umbrella className="w-6 h-6" strokeWidth={1.5} />,
       title: "£5M Public Liability",
-      description: "Fully insured with £5 million cover. Your property is protected — though we've never had to use it."
+      description: "Fully insured with £5 million cover. Your property is protected, though we've never had to use it."
     },
     {
       icon: <Wallet className="w-6 h-6" strokeWidth={1.5} />,
@@ -85,7 +86,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Safe for All Fabrics",
-      description: "Leather, velvet, linen, microfibre — our upholstery cleaner handles all fabric types without damage."
+      description: "Leather, velvet, linen, microfibre. Our upholstery cleaner handles all fabric types without damage."
     },
     {
       icon: <Umbrella className="w-6 h-6" strokeWidth={1.5} />,
@@ -117,7 +118,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "No Surface Damage",
-      description: "We adjust pressure for every surface — block paving, concrete, wood. No damage, ever."
+      description: "We adjust pressure for every surface: block paving, concrete, wood. No damage, ever."
     },
     {
       icon: <Umbrella className="w-6 h-6" strokeWidth={1.5} />,
@@ -144,7 +145,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Like-New Results Guarantee",
-      description: "Your driveway will look transformed — or our driveway cleaners come back and re-clean for free."
+      description: "Your driveway will look transformed, or our driveway cleaners come back and re-clean for free."
     },
     {
       icon: <Sparkles className="w-6 h-6" strokeWidth={1.5} />,
@@ -176,12 +177,12 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Like-New Results Guarantee",
-      description: "Your patio will look transformed — or our patio cleaners come back and re-clean for free."
+      description: "Your patio will look transformed, or our patio cleaners come back and re-clean for free."
     },
     {
       icon: <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Safe for All Stone Types",
-      description: "Indian sandstone, porcelain, limestone, slate — our patio cleaner handles all surfaces safely."
+      description: "Indian sandstone, porcelain, limestone, slate. Our patio cleaner handles all surfaces safely."
     },
     {
       icon: <Umbrella className="w-6 h-6" strokeWidth={1.5} />,
@@ -208,7 +209,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Streak-Free Guarantee",
-      description: "Crystal clear windows with no streaks — or our window cleaners come back and fix it."
+      description: "Crystal clear windows with no streaks, or our window cleaners come back and fix it."
     },
     {
       icon: <Sparkles className="w-6 h-6" strokeWidth={1.5} />,
@@ -240,7 +241,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Clear Flow Guarantee",
-      description: "Your gutters will flow freely — or our gutter cleaners come back and clear them again for free."
+      description: "Your gutters will flow freely, or our gutter cleaners come back and clear them again for free."
     },
     {
       icon: <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />,
@@ -277,7 +278,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "No Chemicals, No Scratches",
-      description: "Pure water solar panel cleaning only — the manufacturer-approved method. Safe for all panels."
+      description: "Pure water solar panel cleaning only, the manufacturer-approved method. Safe for all panels."
     },
     {
       icon: <Umbrella className="w-6 h-6" strokeWidth={1.5} />,
@@ -304,12 +305,12 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Crystal Clear Guarantee",
-      description: "Your conservatory will be spotless — or our conservatory cleaners come back and clean it again for free."
+      description: "Your conservatory will be spotless, or our conservatory cleaners come back and clean it again for free."
     },
     {
       icon: <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Safe for All Roof Types",
-      description: "Polycarbonate, glass, UPVC — our conservatory cleaner handles all materials without damage."
+      description: "Polycarbonate, glass, UPVC. Our conservatory cleaner handles all materials without damage."
     },
     {
       icon: <Umbrella className="w-6 h-6" strokeWidth={1.5} />,
@@ -336,7 +337,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />,
       title: "Fresher Sleep Guarantee",
-      description: "Your mattress will be fresh and sanitised — or our mattress cleaners come back and re-clean for free."
+      description: "Your mattress will be fresh and sanitised, or our mattress cleaners come back and re-clean for free."
     },
     {
       icon: <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />,
@@ -361,7 +362,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <PawPrint className="w-6 h-6" strokeWidth={1.5} />,
       title: "Safe for All Mattress Types",
-      description: "Memory foam, spring, hybrid — we clean all mattresses safely and effectively."
+      description: "Memory foam, spring, hybrid. We clean all mattresses safely and effectively."
     }
   ],
   'stain-removal': [
@@ -441,8 +442,10 @@ interface ServiceGuaranteesProps {
   location?: Location;
 }
 
-export function ServiceGuarantees({ service, location: _location }: ServiceGuaranteesProps) {
+export function ServiceGuarantees({ service, location }: ServiceGuaranteesProps) {
   const guarantees = getGuarantees(service.slug);
+  const keywords = getServiceKeywords(service.slug);
+  const variation = keywords.variations[2] ?? keywords.primary;
 
   return (
     <section className="py-16 lg:py-24 bg-white relative">
@@ -458,9 +461,14 @@ export function ServiceGuarantees({ service, location: _location }: ServiceGuara
         {/* Header */}
         <div className="text-center mb-12 lg:mb-16 max-w-3xl mx-auto">
           <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">Peace of Mind</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Our {service.name} <span className="text-[#1B9CB6]">Guarantee</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Our {variation} <span className="text-[#1B9CB6]">Guarantee</span>
           </h2>
+          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
+            {location
+              ? <>Every {location.name} customer is backed by these promises — no exceptions.</>
+              : `Every customer is backed by these promises — no exceptions.`}
+          </p>
         </div>
 
         {/* Cards Grid */}

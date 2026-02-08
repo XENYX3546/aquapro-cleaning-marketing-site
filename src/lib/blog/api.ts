@@ -61,6 +61,7 @@ export async function getPosts(params: {
   page?: number;
   pageSize?: number;
   category?: string;
+  author?: string;
   tag?: string;
 } = {}): Promise<PaginatedResponse<BlogPostSummary>> {
   const searchParams = new URLSearchParams();
@@ -72,6 +73,9 @@ export async function getPosts(params: {
   }
   if (params.category) {
     searchParams.set('category', params.category);
+  }
+  if (params.author) {
+    searchParams.set('author', params.author);
   }
   if (params.tag) {
     searchParams.set('tag', params.tag);

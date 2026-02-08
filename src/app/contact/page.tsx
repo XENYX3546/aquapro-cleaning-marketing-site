@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { siteConfig, reviewStats } from '@/lib/constants';
+import { siteConfig } from '@/lib/constants';
 import { LandingLayout } from '@/components/layout';
 import { ReviewsSection, ExpertHelpCTA } from '@/components/ui';
 import { ContactInfoCards } from '@/features/contact/server';
@@ -10,21 +10,22 @@ import {
 } from '@/features/contact/client';
 
 export const metadata: Metadata = {
-  title: `Contact Us | Get a Free Quote | ${siteConfig.name}`,
-  description: `Contact ${siteConfig.name} for professional cleaning services in Essex. Get a free, no-obligation quote. Call ${siteConfig.contact.phone} or fill out our online form.`,
+  title: `Contact ${siteConfig.name} | Free Quote | Essex Cleaning Services`,
+  description: `Contact Aquapro Cleaning for a free, no-obligation quote. Call ${siteConfig.contact.phone} or use our online form. Aquapro Cleaning provides professional interior and exterior cleaning services across Essex and East London.`,
   keywords: [
-    'contact cleaning services Essex',
-    'free cleaning quote',
+    'contact Aquapro Cleaning',
+    'Aquapro Cleaning phone number',
+    'Aquapro Cleaning email',
+    'free cleaning quote Essex',
     'cleaning services near me',
     'Essex cleaning company contact',
-    'get a cleaning quote',
   ],
   alternates: {
     canonical: `${siteConfig.url}/contact`,
   },
   openGraph: {
-    title: `Contact Us | Get a Free Quote | ${siteConfig.name}`,
-    description: `Contact ${siteConfig.name} for professional cleaning services in Essex. Get a free, no-obligation quote.`,
+    title: `Contact ${siteConfig.name} | Free Quote | Essex Cleaning Services`,
+    description: `Contact Aquapro Cleaning for a free, no-obligation quote. Professional interior and exterior cleaning services across Essex and East London.`,
     url: `${siteConfig.url}/contact`,
     siteName: siteConfig.name,
     type: 'website',
@@ -32,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Contact Us | ${siteConfig.name}`,
-    description: `Get a free, no-obligation quote for professional cleaning services in Essex.`,
+    title: `Contact ${siteConfig.name} | Free Quote`,
+    description: `Contact Aquapro Cleaning for a free, no-obligation quote. Professional cleaning services across Essex.`,
   },
 };
 
@@ -45,38 +46,7 @@ const jsonLd = {
   description: `Contact page for ${siteConfig.name} - Professional cleaning services in Essex`,
   url: `${siteConfig.url}/contact`,
   mainEntity: {
-    '@type': 'LocalBusiness',
-    name: siteConfig.name,
-    telephone: siteConfig.contact.phone,
-    email: siteConfig.contact.email,
-    url: siteConfig.url,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Hyacinths, The Avenue',
-      addressLocality: 'North Fambridge',
-      addressRegion: 'Essex',
-      postalCode: 'CM3 6LZ',
-      addressCountry: 'GB',
-    },
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: '08:00',
-        closes: '17:00',
-      },
-    ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: String(reviewStats.averageRating),
-      reviewCount: String(reviewStats.totalReviews),
-      bestRating: String(reviewStats.bestRating),
-      worstRating: String(reviewStats.worstRating),
-    },
-    areaServed: {
-      '@type': 'State',
-      name: 'Essex',
-    },
+    '@id': `${siteConfig.url}/#organization`,
   },
 };
 
@@ -100,7 +70,7 @@ const breadcrumbJsonLd = {
   ],
 };
 
-// FAQ Structured Data for rich snippets
+// FAQ Structured Data for rich snippets — all 10 FAQs
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -110,7 +80,15 @@ const faqJsonLd = {
       name: 'What areas do you cover?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We cover all of Essex and the surrounding counties, including Greater London for commercial contracts.',
+        text: 'Aquapro Cleaning covers all of Essex and the surrounding counties, including Greater London for commercial contracts.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does the quoting process work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Simply fill out the online form with your details. For most standard jobs, we can provide a price immediately or within the hour. For larger commercial projects, a site visit may be required.',
       },
     },
     {
@@ -118,7 +96,7 @@ const faqJsonLd = {
       name: 'Are quotes free?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, 100%. All our quotes are free and come with no obligation to book.',
+        text: 'Yes, 100%. All quotes are free and come with no obligation to book.',
       },
     },
     {
@@ -126,7 +104,7 @@ const faqJsonLd = {
       name: 'Are you registered and insured?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Absolutely. We hold full public liability insurance up to £5m and employer's liability insurance. Copies of our certificates are available on request.",
+        text: "Absolutely. Aquapro Cleaning holds full public liability insurance up to £5m and employer's liability insurance. Copies of certificates are available on request.",
       },
     },
     {
@@ -134,7 +112,23 @@ const faqJsonLd = {
       name: 'What are your hours of operation?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Our phone lines are open Monday to Saturday, 8am to 5pm. Our cleaning teams can operate outside these hours for commercial contracts to minimize disruption.',
+        text: 'Our phone lines are open Monday to Saturday, 8am to 5pm. Cleaning teams can operate outside these hours for commercial contracts to minimise disruption.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What payment methods do you accept?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We accept all major credit/debit cards, bank transfers (BACS), and cash. Payment is typically due upon completion of the work.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you take away waste?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, Aquapro Cleaning removes all moss, debris, and waste resulting from the cleaning process. We are licensed waste carriers.',
       },
     },
     {
@@ -142,7 +136,23 @@ const faqJsonLd = {
       name: 'Do you take on commercial work?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, a significant portion of our business is commercial. We work with schools, offices, property management companies, and local councils.',
+        text: 'Yes, a significant portion of our business is commercial. We work with schools, offices, property management companies, and local councils across Essex.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are your staff certified or licensed?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'All technicians are fully trained, vetted, and wear full uniform. Aquapro Cleaning is certified for working at heights and uses professional-grade equipment.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you work with historic or delicate buildings?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. We use Soft Wash technology for delicate surfaces like render, historic stone, and older roofs, which cleans effectively without the risk of high-pressure damage.",
       },
     },
   ],

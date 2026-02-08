@@ -38,10 +38,10 @@ export function CommercialBanner() {
             </h3>
 
             <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-              We provide comprehensive cleaning contracts for schools, offices,
-              and businesses. From external cladding and grounds maintenance to
-              internal office cleaning and deep cleans. Fully insured with RAMS
-              provided.
+              Aquapro Cleaning provides comprehensive cleaning contracts for
+              schools, offices, and businesses. From external cladding and
+              grounds maintenance to internal office cleaning and deep cleans.
+              Fully insured with RAMS provided.
             </p>
           </div>
 

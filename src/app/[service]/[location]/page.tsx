@@ -15,6 +15,8 @@ import {
   type Service,
   type Location,
   type ServiceId,
+  getServiceKeywords,
+  getLocationProfile,
 } from '@/lib/constants';
 import {
   ServiceHero,
@@ -25,6 +27,7 @@ import {
   ServiceGuarantees,
   ServiceStickyCTA,
   ServiceFullWidthCTA,
+  RugCleaningSection,
 } from '@/features/services/client';
 import { ContactSection } from '@/features/home/client';
 
@@ -58,27 +61,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const isCounty = location.isCounty;
+  const seoKeywords = getServiceKeywords(service.slug);
+  const primary = seoKeywords.primary;
+  const v0 = (seoKeywords.variations[0] ?? primary).toLowerCase();
+
   const title = isCounty
-    ? `${service.name} in ${location.name} | Professional ${service.name} Services | ${siteConfig.name}`
-    : `${service.name} in ${location.name} | ${siteConfig.name}`;
+    ? `${primary} ${location.name} | Professional ${primary} Services | ${siteConfig.name}`
+    : `${primary} ${location.name} | ${siteConfig.name}`;
   const description = isCounty
-    ? `Professional ${service.name.toLowerCase()} services across ${location.name}. ${service.benefits[0]}. Serving Chelmsford, Southend, Colchester, Basildon & all ${location.name} towns. Fully insured, ${reviewStatsDisplay.starRating} rated. Free quotes!`
-    : `Expert ${service.name.toLowerCase()} services in ${location.name}, ${location.county}. ${service.benefits[0]}. Local ${location.county} team, fully insured with ${reviewStatsDisplay.starRating} rating. Free quotes - call today!`;
+    ? `Professional ${primary.toLowerCase()} services across ${location.name}. ${service.benefits[0]}. Serving Chelmsford, Southend, Colchester, Basildon & all ${location.name} towns. Fully insured, ${reviewStatsDisplay.starRating} rated. Free quotes!`
+    : `Expert ${primary.toLowerCase()} services ${location.name}, ${location.county}. ${service.benefits[0]}. Local ${location.county} team, fully insured with ${reviewStatsDisplay.starRating} rating. Free quotes - call today!`;
   const keywords = isCounty
     ? [
-        `${service.name.toLowerCase()} ${location.name}`,
-        `${service.name.toLowerCase()} services ${location.name}`,
-        `professional ${service.name.toLowerCase()} ${location.name}`,
-        `best ${service.name.toLowerCase()} ${location.name}`,
-        `${service.name.toLowerCase()} company ${location.name}`,
-        `${location.name} ${service.name.toLowerCase()}`,
+        `${primary.toLowerCase()} ${location.name}`,
+        `${v0} services ${location.name}`,
+        `professional ${primary.toLowerCase()} ${location.name}`,
+        `best ${v0} ${location.name}`,
+        `${primary.toLowerCase()} company ${location.name}`,
+        `${location.name} ${v0}`,
       ]
     : [
-        `${service.name.toLowerCase()} ${location.name}`,
-        `${service.name.toLowerCase()} ${location.county}`,
-        `${service.name.toLowerCase()} near me`,
-        `professional ${service.name.toLowerCase()} ${location.name}`,
-        `best ${service.name.toLowerCase()} ${location.county}`,
+        `${primary.toLowerCase()} ${location.name}`,
+        `${v0} ${location.county}`,
+        `${primary.toLowerCase()} near me`,
+        `professional ${v0} ${location.name}`,
+        `best ${primary.toLowerCase()} ${location.county}`,
         `${location.name} cleaning services`,
       ];
 
@@ -101,7 +108,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: `${siteConfig.url}/og-image.png`,
           width: 1200,
           height: 630,
-          alt: `${service.name} in ${location.name} - ${siteConfig.name}`,
+          alt: `${primary} ${location.name} - ${siteConfig.name}`,
         },
       ],
     },
@@ -115,27 +122,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 // JSON-LD Structured Data
-function generateSchemas(service: Service, location: Location) {
+function generateSchemas(service: Service, location: Location, allFaqs: { question: string; answer: string }[]) {
   const isCounty = location.isCounty;
+  const primary = getServiceKeywords(service.slug).primary;
 
-  const businessSchema = {
+  const serviceSchema = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${siteConfig.url}/${service.slug}/${location.slug}#business`,
-    name: siteConfig.name,
-    description: isCounty
-      ? `Professional ${service.name.toLowerCase()} services across ${location.name}`
-      : `Professional ${service.name.toLowerCase()} in ${location.name}, ${location.county}`,
+    '@type': 'Service',
+    name: `${primary} ${location.name}`,
     url: `${siteConfig.url}/${service.slug}/${location.slug}`,
-    telephone: siteConfig.contact.phone,
-    email: siteConfig.contact.email,
-    priceRange: '££',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: String(reviewStats.averageRating),
-      reviewCount: String(reviewStats.totalReviews),
-      bestRating: String(reviewStats.bestRating),
-      worstRating: String(reviewStats.worstRating),
+    description: isCounty
+      ? `Professional ${primary.toLowerCase()} services across ${location.name} county`
+      : `Professional ${primary.toLowerCase()} services ${location.name}, ${location.county}`,
+    provider: {
+      '@id': `${siteConfig.url}/#organization`,
     },
     areaServed: isCounty
       ? {
@@ -148,29 +148,13 @@ function generateSchemas(service: Service, location: Location) {
           name: location.name,
           containedInPlace: { '@type': 'AdministrativeArea', name: location.county },
         },
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'North Fambridge',
-      addressRegion: 'Essex',
-      postalCode: 'CM3 6LZ',
-      addressCountry: 'GB',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: String(reviewStats.averageRating),
+      reviewCount: String(reviewStats.totalReviews),
+      bestRating: String(reviewStats.bestRating),
+      worstRating: String(reviewStats.worstRating),
     },
-  };
-
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: `${service.name} in ${location.name}`,
-    description: isCounty
-      ? `Professional ${service.name.toLowerCase()} services across ${location.name} county`
-      : `Professional ${service.name.toLowerCase()} services in ${location.name}, ${location.county}`,
-    provider: {
-      '@type': 'LocalBusiness',
-      name: siteConfig.name,
-    },
-    areaServed: isCounty
-      ? { '@type': 'AdministrativeArea', name: location.name }
-      : { '@type': 'City', name: location.name },
   };
 
   const breadcrumbSchema = {
@@ -198,7 +182,7 @@ function generateSchemas(service: Service, location: Location) {
       {
         '@type': 'ListItem',
         position: 4,
-        name: `${service.name} in ${location.name}`,
+        name: `${primary} ${location.name}`,
         item: `${siteConfig.url}/${service.slug}/${location.slug}`,
       },
     ],
@@ -207,24 +191,55 @@ function generateSchemas(service: Service, location: Location) {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: `Do you cover ${location.name}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `Yes, we provide ${service.name.toLowerCase()} throughout ${location.name} and surrounding areas in ${location.county}.`,
-        },
-      },
-      ...service.faqs.slice(0, 3).map((faq) => ({
-        '@type': 'Question',
-        name: faq.question,
-        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-      })),
-    ],
+    mainEntity: allFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
   };
 
-  return { businessSchema, serviceSchema, faqSchema, breadcrumbSchema };
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${primary} ${location.name}`,
+    url: `${siteConfig.url}/${service.slug}/${location.slug}`,
+    datePublished: siteConfig.contentFirstPublished,
+    dateModified: siteConfig.contentLastUpdated,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
+
+  return { serviceSchema, faqSchema, breadcrumbSchema, webPageSchema };
+}
+
+function getLocationFAQs(service: Service, location: Location) {
+  const primary = getServiceKeywords(service.slug).primary;
+  const profile = getLocationProfile(location);
+  const nearbyNames = location.nearbyAreas
+    .slice(0, 4)
+    .map((slug) => getLocationBySlug(slug)?.name)
+    .filter(Boolean);
+
+  const faqs: { question: string; answer: string }[] = [
+    {
+      question: `Do you cover ${location.name} for ${primary.toLowerCase()}?`,
+      answer: `Yes — we work ${location.localHook}${nearbyNames.length > 0 ? ` and also cover ${nearbyNames.join(', ')}` : ''}. Same team, same equipment, same fixed pricing wherever you are in ${location.county}.`,
+    },
+  ];
+
+  // Uses profile.commonProblems which falls back to archetype defaults — every location gets this FAQ
+  if (profile.commonProblems.length > 0) {
+    const [first, ...rest] = profile.commonProblems;
+    faqs.push({
+      question: `Why do ${location.name} homes need ${primary.toLowerCase()}?`,
+      answer: `The area is known for ${first}${rest.length > 0 ? `, along with ${rest.join(' and ')}` : ''}. Left untreated these get worse over time — a professional ${primary.toLowerCase()} sorts it in one visit.`,
+    });
+  }
+
+  return faqs;
 }
 
 export default async function ServiceLocationPage({ params }: PageProps) {
@@ -236,66 +251,62 @@ export default async function ServiceLocationPage({ params }: PageProps) {
 
   // If it's a valid service/location, render service page (skip blog API check)
   if (service && location) {
-    const { businessSchema, serviceSchema, faqSchema, breadcrumbSchema } = generateSchemas(service, location);
+    const locationFaqs = getLocationFAQs(service, location);
+    const allFaqs = [...locationFaqs, ...service.faqs];
+    const { serviceSchema, faqSchema, breadcrumbSchema, webPageSchema } = generateSchemas(service, location, allFaqs);
 
     return (
       <LandingLayout>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-
-        <ServiceHero service={service} location={location} />
-        <ServiceValueProposition service={service} location={location} />
-        <ReviewsSection
-          reviews={getReviewsForServiceAndLocation(service.id as ServiceId, location.slug)}
-          moreReviews={getAllReviewsForService(service.id)}
-          locationSlug={location.slug}
-          tagline={`${service.shortName} Reviews`}
-          title={<>Loved by <span className="text-brand-500">{location.name}</span> Locals</>}
-          subtitle={`Real reviews from ${location.name} homeowners who used our ${service.name.toLowerCase()} service.`}
-        />
-        <ServiceHowItWorks service={service} location={location} />
-        <ServiceMobileLeadForm service={service} location={location} />
-        <ServiceAbout service={service} location={location} />
-        <ServiceGuarantees service={service} location={location} />
-
-        {/* Contact Section */}
-        <ContactSection serviceId={service.id} />
-
-        {/* FAQ Section */}
-        {service.faqs && service.faqs.length > 0 && (
-          <FAQSection
-            faqs={service.faqs}
-            tagline={`${service.shortName} FAQs`}
-            title={<>Frequently Asked <span className="text-brand-500">Questions</span></>}
+        <article>
+          <ServiceHero service={service} location={location} />
+          <ServiceValueProposition service={service} location={location} />
+          <ReviewsSection
+            reviews={getReviewsForServiceAndLocation(service.id as ServiceId, location.slug)}
+            moreReviews={getAllReviewsForService(service.id)}
+            locationSlug={location.slug}
+            tagline={`${service.shortName} Reviews`}
+            title={<>Loved by <span className="text-brand-500">{location.name}</span> Locals</>}
+            subtitle={`Real reviews from ${location.name} homeowners who used ${siteConfig.name} for ${getServiceKeywords(service.slug).variations[5]?.toLowerCase() ?? service.name.toLowerCase()}.`}
           />
-        )}
+          <ServiceHowItWorks service={service} location={location} />
+          {service.slug === 'carpet-cleaning' && <RugCleaningSection location={location} />}
+          <ServiceMobileLeadForm service={service} location={location} />
+          <ServiceAbout service={service} location={location} />
+          <ServiceGuarantees service={service} location={location} />
 
-        {/* Full Width CTA */}
-        <ServiceFullWidthCTA service={service} location={location} />
+          {/* Contact Section */}
+          <ContactSection serviceId={service.id} />
 
-        {/* Cross-links & nearby areas */}
-        <ServiceCrossLinks
-          location={location}
-          currentServiceId={service.id}
-          service={service}
-          variant="full"
-        />
+          {/* FAQ Section */}
+          {allFaqs.length > 0 && (
+            <FAQSection
+              faqs={allFaqs}
+              tagline={`${service.shortName} FAQs`}
+              title={<>Frequently Asked <span className="text-brand-500">Questions</span></>}
+            />
+          )}
+
+          {/* Full Width CTA */}
+          <ServiceFullWidthCTA service={service} location={location} />
+        </article>
+
+        {/* Cross-links & nearby areas — aside for semantic separation */}
+        <aside>
+          <ServiceCrossLinks
+            location={location}
+            currentServiceId={service.id}
+            service={service}
+            variant="full"
+          />
+        </aside>
 
         <ServiceStickyCTA service={service} location={location} />
+
+        {/* JSON-LD structured data — placed after content so first meaningful tokens appear earlier in DOM */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, faqSchema, breadcrumbSchema, webPageSchema]) }}
+        />
       </LandingLayout>
     );
   }

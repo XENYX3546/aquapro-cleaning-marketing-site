@@ -138,11 +138,11 @@ export function CareersJobBoard({
               lines open 8am-5pm Mon-Sat.{' '}
               <br className="hidden md:inline" />
               Or email{' '}
-              <span className="font-bold text-slate-900">careers@aquapro.co.uk</span>
+              <span className="font-bold text-slate-900">bookings@aquapro.co.uk</span>
             </p>
 
             <a
-              href="mailto:careers@aquapro.co.uk"
+              href="mailto:bookings@aquapro.co.uk"
               className="bg-cta hover:bg-cta-hover text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 text-base md:text-lg shadow-cta/20"
             >
               Join our Talent Network <ArrowRight size={20} />

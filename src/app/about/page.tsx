@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 import { LandingLayout } from '@/components/layout';
-import { CommercialBanner, ReviewsSection, ExpertHelpCTA } from '@/components/ui';
+import { CommercialBanner, ReviewsSection } from '@/components/ui';
 import { AboutHero, AboutStory } from '@/components/about';
 import { ContactSection } from '@/features/home/client';
-import { siteConfig, reviewStats, customerStatsDisplay } from '@/lib/constants';
+import { siteConfig, customerStatsDisplay } from '@/lib/constants';
 
 // SEO Metadata
 export const metadata: Metadata = {
-  title: `About Us | ${siteConfig.name} - Professional Exterior Cleaning in Essex`,
+  title: `About ${siteConfig.name} | Professional Cleaning in Essex`,
   description: `Learn about ${siteConfig.name} - over 10 years of experience delivering professional exterior cleaning services in Essex. Fully insured, 5-star rated, and trusted by ${customerStatsDisplay.totalCustomersPlus} happy customers.`,
   keywords: [
     'about aquapro',
@@ -50,32 +50,11 @@ export const metadata: Metadata = {
 function AboutStructuredData() {
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: siteConfig.name,
-    legalName: siteConfig.legalName,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
-    description: siteConfig.description,
-    foundingDate: siteConfig.established.toString(),
-    areaServed: {
-      '@type': 'Place',
-      name: siteConfig.coverage,
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: siteConfig.contact.phone,
-      contactType: 'customer service',
-      email: siteConfig.contact.email,
-      areaServed: 'GB',
-      availableLanguage: 'English',
-    },
-    sameAs: [siteConfig.social.facebook, siteConfig.social.instagram],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: String(reviewStats.averageRating),
-      reviewCount: String(reviewStats.totalReviews),
-      bestRating: String(reviewStats.bestRating),
-      worstRating: String(reviewStats.worstRating),
+    '@type': 'AboutPage',
+    name: `About ${siteConfig.name}`,
+    url: `${siteConfig.url}/about`,
+    mainEntity: {
+      '@id': `${siteConfig.url}/#organization`,
     },
   };
 
@@ -135,9 +114,6 @@ export default function AboutPage() {
 
       {/* Contact Section */}
       <ContactSection />
-
-      {/* Expert CTA */}
-      <ExpertHelpCTA />
     </LandingLayout>
   );
 }

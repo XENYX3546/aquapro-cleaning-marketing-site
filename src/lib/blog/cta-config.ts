@@ -12,7 +12,7 @@ export type CTAConfig = {
 export const DEFAULT_CTA: CTAConfig = {
   headline: 'Ready for a Sparkling Clean?',
   description:
-    'Join hundreds of satisfied customers in Brisbane & Gold Coast who trust AquaPro for their professional cleaning needs.',
+    'Join hundreds of satisfied customers across Essex who trust Aquapro Cleaning for their professional cleaning needs.',
   buttonText: 'Get a Free Quote',
   features: [
     'Pressure washing & soft washing',
@@ -39,12 +39,12 @@ export const CATEGORY_CTAS: Record<string, CTAConfig> = {
     ],
   },
   'solar-cleaning': {
-    headline: 'Maximize Your Solar Efficiency',
+    headline: 'Maximise Your Solar Efficiency',
     description:
       'Dirty panels lose up to 30% efficiency. Our professional cleaning restores peak performance.',
     buttonText: 'Book Solar Cleaning',
     features: [
-      'Deionized water cleaning',
+      'Deionised water cleaning',
       'No harsh chemicals',
       'Performance guarantee',
       'Regular maintenance plans',
@@ -67,11 +67,11 @@ export const CATEGORY_CTAS: Record<string, CTAConfig> = {
   'house-washing': {
     headline: 'Restore Your Home\'s Beauty',
     description:
-      'Gentle soft washing removes mold, mildew, and grime without damaging your home.',
+      'Gentle soft washing removes mould, mildew, and grime without damaging your home.',
     buttonText: 'Get House Washing Quote',
     features: [
       'Safe soft wash technique',
-      'Kills mold & mildew',
+      'Kills mould & mildew',
       'Extends paint life',
       'Roof cleaning available',
       'Environmentally friendly',

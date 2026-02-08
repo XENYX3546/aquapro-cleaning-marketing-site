@@ -88,19 +88,19 @@ export function AboutStory() {
             </div>
 
             <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-              Setting the Standard in <span className="text-brand-500">Exterior Cleaning</span>
+              The <span className="text-brand-500">Aquapro</span> Story
             </h2>
 
             <p className="text-slate-600 text-lg leading-relaxed mb-6">
-              What started as a small family operation has grown into
-              Essex&apos;s most trusted exterior cleaning service. We believe in
-              doing the job right the first time, using the best technology
-              available.
+              Aquapro Cleaning started as a small family operation and has grown
+              into Essex&apos;s most trusted cleaning service. Aquapro believes in
+              doing the job right the first time, using the best equipment and
+              techniques available.
             </p>
             <p className="text-slate-600 text-lg leading-relaxed mb-8">
-              From delicate heritage roofs to commercial industrial units, our
-              certified technicians bring the same level of care and attention
-              to detail to every project.
+              From delicate heritage roofs to commercial industrial units,
+              Aquapro&apos;s certified technicians bring the same level of care and
+              attention to detail to every project across Essex and East London.
             </p>
 
             {/* CTA Button */}

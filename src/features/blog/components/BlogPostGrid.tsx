@@ -26,7 +26,7 @@ export async function BlogPostGrid({
     // Use search if query provided, otherwise regular getPosts
     const response = q
       ? await searchPosts({ q, page, pageSize: limit, category, author, tag })
-      : await getPosts({ page, pageSize: limit, category, tag });
+      : await getPosts({ page, pageSize: limit, category, author, tag });
 
     const { data: posts, meta: { pagination } } = response;
 

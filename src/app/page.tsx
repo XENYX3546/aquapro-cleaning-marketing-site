@@ -113,8 +113,7 @@ const servicesCatalogJsonLd = {
       description: service.description,
       url: `${siteConfig.url}/services/${service.slug}`,
       provider: {
-        '@type': 'LocalBusiness',
-        name: siteConfig.name,
+        '@id': `${siteConfig.url}/#organization`,
       },
     },
   })),

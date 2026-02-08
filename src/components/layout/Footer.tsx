@@ -43,8 +43,9 @@ export function Footer() {
               />
             </Link>
             <p className="text-slate-400 text-sm mb-6 max-w-xs">
-              Professional interior and exterior cleaning services throughout
-              Essex. Fully insured, reliable, and delivering exceptional results.
+              Aquapro Cleaning provides professional interior and exterior
+              cleaning services throughout Essex and East London. Fully insured,
+              family-run, and trusted by thousands of customers.
             </p>
 
             {/* Social Links */}
@@ -69,6 +70,19 @@ export function Footer() {
                   aria-label="Instagram"
                 >
                   <Instagram className="w-4 h-4" />
+                </a>
+              )}
+              {siteConfig.social.tiktok && (
+                <a
+                  href={siteConfig.social.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 bg-white/10 hover:bg-brand-500 rounded-lg flex items-center justify-center transition-colors"
+                  aria-label="TikTok"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.1a8.16 8.16 0 0 0 4.76 1.52v-3.4c-.72 0-1.94-.18-1-.53z" />
+                  </svg>
                 </a>
               )}
             </div>

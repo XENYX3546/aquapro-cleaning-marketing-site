@@ -12,6 +12,10 @@ function RelatedPostCard({ post }: { post: BlogPostSummary }) {
   const hasImage = Boolean(post.featuredImageUrl);
   // Use small (640px) for related post cards
   const cardImageUrl = post.featuredImageVariants?.small ?? post.featuredImageUrl;
+  const primaryCategory = post.categories?.[0];
+  // Contextual alt text: prepend category for better image-text vector convergence
+  const imageAlt = post.featuredImageAlt
+    || (primaryCategory ? `${primaryCategory.name}: ${post.title}` : post.title);
 
   // Card with cover image as background
   if (hasImage) {
@@ -24,7 +28,7 @@ function RelatedPostCard({ post }: { post: BlogPostSummary }) {
           {/* Background Image */}
           <Image
             src={cardImageUrl!}
-            alt={post.featuredImageAlt || post.title}
+            alt={imageAlt}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -40,7 +44,7 @@ function RelatedPostCard({ post }: { post: BlogPostSummary }) {
             </h3>
 
             <div className="mt-3 flex items-center justify-between text-sm text-white/70">
-              <span>{post.author?.displayName}</span>
+              <span className="font-medium">{post.author?.displayName}</span>
               {post.readingTimeMinutes && (
                 <span>{formatReadingTime(post.readingTimeMinutes)}</span>
               )}
@@ -70,7 +74,7 @@ function RelatedPostCard({ post }: { post: BlogPostSummary }) {
         )}
 
         <div className="mt-4 flex items-center justify-between text-sm text-neutral-500">
-          <span>{post.author?.displayName}</span>
+          <span className="font-medium text-neutral-700">{post.author?.displayName}</span>
           {post.readingTimeMinutes && (
             <span>{formatReadingTime(post.readingTimeMinutes)}</span>
           )}

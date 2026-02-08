@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
+import { getServiceKeywords, authorityLinkMap } from '@/lib/constants';
 
 const DEFAULT_IMAGE_URL = "/images/blake-van-image.jpg";
 const ROOF_CLEANING_VIDEO_ID = "9XtCPtQDPE8";
@@ -12,8 +13,12 @@ interface ServiceHowItWorksProps {
   location?: Location;
 }
 
-export function ServiceHowItWorks({ service }: ServiceHowItWorksProps) {
+export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps) {
   const isRoofCleaning = service.id === 'roof-cleaning';
+  const keywords = getServiceKeywords(service.slug);
+  const variation = keywords.variations[0] ?? keywords.primary;
+  const specs = Object.entries(keywords.specs);
+  const authority = authorityLinkMap[service.slug];
 
   return (
     <section className="py-16 lg:py-24 bg-slate-50">
@@ -23,10 +28,12 @@ export function ServiceHowItWorks({ service }: ServiceHowItWorksProps) {
         <div className="text-center mb-12 lg:mb-16">
           <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">Our Process</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
-            How {service.name} <span className="text-[#1B9CB6]">Works</span>
+            How {variation} <span className="text-[#1B9CB6]">Works</span>
           </h2>
           <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
-            We make {service.name.toLowerCase()} hassle-free from start to finish. Professional results every time.
+            {location
+              ? <>{location.name} homeowners choose our {variation.toLowerCase()} for hassle-free results from start to finish.</>
+              : `We make ${variation.toLowerCase()} hassle-free from start to finish. Professional results every time.`}
           </p>
         </div>
 
@@ -87,6 +94,27 @@ export function ServiceHowItWorks({ service }: ServiceHowItWorksProps) {
             </div>
           ))}
         </div>
+
+        {/* Service Specs — structured key-value pairs for tidbit extraction */}
+        {specs.length > 0 && (
+          <div className="max-w-3xl mx-auto mt-12 lg:mt-16">
+            <h3 className="text-lg font-bold text-slate-900 mb-4">Service Details</h3>
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+              {specs.map(([key, value]) => (
+                <div key={key} className="flex flex-col py-2 border-b border-slate-100">
+                  <dt className="text-xs font-bold text-slate-400 uppercase tracking-wider">{key}</dt>
+                  <dd className="text-sm font-medium text-slate-800 mt-0.5">{value}</dd>
+                </div>
+              ))}
+            </dl>
+            {authority && (
+              <p className="text-xs text-slate-400 mt-4">
+                {authority.context} —{' '}
+                <a href={authority.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-600">{authority.label}</a>
+              </p>
+            )}
+          </div>
+        )}
 
       </div>
     </section>

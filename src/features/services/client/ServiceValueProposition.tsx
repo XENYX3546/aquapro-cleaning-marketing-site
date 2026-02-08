@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Check, ChevronLeft, ChevronRight, Shield, TrendingUp, CalendarCheck } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
+import { getLocationProfile } from '@/lib/constants/location-profiles';
 
 // Service-specific section content for CRO optimization
 type ServiceSectionContent = {
@@ -21,7 +22,7 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     eyebrow: 'See It To Believe It',
     headline: 'Bring Your Roof Back to',
     highlightWord: 'Life',
-    description: 'Drag the slider to see how our roof cleaners safely remove 100% of moss, algae, and black stains — transforming your roof in just 1 day. Many homeowners add £10,000–£20,000 to their property value with nothing more than a professional roof clean.',
+    description: 'Drag the slider to see how our roof cleaners safely remove 100% of moss, algae, and black stains, transforming your roof in just 1 day. Many homeowners add £10,000–£20,000 to their property value with nothing more than a professional roof clean.',
     sliderHint: 'Drag to see the transformation',
     inclusions: [
       'Free drone survey and expert advice at every step',
@@ -31,9 +32,9 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
   },
   'carpet-cleaning': {
     eyebrow: 'Real Results',
-    headline: 'See The',
-    highlightWord: 'Transformation',
-    description: 'Your carpets will look, feel, and smell like new — or we re-clean for free. Our carpet cleaners use deep extraction to remove what vacuuming leaves behind: embedded dirt, allergens, and stubborn stains.',
+    headline: 'See Before &',
+    highlightWord: 'After',
+    description: 'Your carpets will look, feel, and smell like new, or we re-clean for free. Our carpet cleaners use deep extraction to remove what vacuuming leaves behind: embedded dirt, allergens, and stubborn stains.',
     sliderHint: 'Drag to compare',
     inclusions: [
       'Deep hot water extraction clean',
@@ -43,9 +44,9 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
   },
   'upholstery-cleaning': {
     eyebrow: 'Real Results',
-    headline: 'See The',
-    highlightWord: 'Transformation',
-    description: 'Your sofas and furniture will look, feel, and smell like new — or we re-clean for free. Our upholstery cleaners remove embedded dirt, pet odours, and years of use from all fabric types.',
+    headline: 'See Before &',
+    highlightWord: 'After',
+    description: 'Your sofas and furniture will look, feel, and smell like new, or we re-clean for free. Our upholstery cleaners remove embedded dirt, pet odours, and years of use from all fabric types.',
     sliderHint: 'Drag to compare',
     inclusions: [
       'Deep extraction cleaning for all fabrics',
@@ -69,7 +70,7 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     eyebrow: 'Outdoor Living Restored',
     headline: 'Revive Your',
     highlightWord: 'Patio',
-    description: 'Bring your outdoor space back to life. Our patio cleaners remove green algae, black spot, and years of weathering — leaving your patio ready for summer entertaining.',
+    description: 'Bring your outdoor space back to life. Our patio cleaners remove green algae, black spot, and years of weathering, leaving your patio ready for summer entertaining.',
     sliderHint: 'Drag to see the difference',
     inclusions: [
       'Safe for all stone types including sandstone',
@@ -93,7 +94,7 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     eyebrow: 'Protect Your Property',
     headline: 'Clear, Free-Flowing',
     highlightWord: 'Gutters',
-    description: 'Our gutter cleaners use high-reach vacuum systems to clear leaves, moss, and debris — all from the ground. No ladders on your property, just clear gutters that flow freely.',
+    description: 'Our gutter cleaners use high-reach vacuum systems to clear leaves, moss, and debris, all from the ground. No ladders on your property, just clear gutters that flow freely.',
     sliderHint: 'Drag to compare',
     inclusions: [
       'High-reach vacuum system',
@@ -105,10 +106,10 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     eyebrow: 'Maximise Your Investment',
     headline: 'Restore Your Panel',
     highlightWord: 'Efficiency',
-    description: 'Dirty panels lose up to 30% efficiency. Our solar panel cleaners use pure water and soft brushes to safely remove bird droppings, dust, and grime — restoring your panels to peak performance.',
+    description: 'Dirty panels lose up to 30% efficiency. Our solar panel cleaners use pure water and soft brushes to safely remove bird droppings, dust, and grime, restoring your panels to peak performance.',
     sliderHint: 'Drag to compare',
     inclusions: [
-      'Pure water cleaning — no chemicals',
+      'Pure water cleaning, no chemicals',
       'Safe for all panel types',
       'Won\'t void your warranty',
     ],
@@ -117,7 +118,7 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     eyebrow: 'Let The Light Back In',
     headline: 'Crystal Clear',
     highlightWord: 'Conservatory',
-    description: 'Our conservatory cleaners remove green algae, moss, and grime from your roof, glass, and frames — restoring natural light and making your conservatory feel brand new again.',
+    description: 'Our conservatory cleaners remove green algae, moss, and grime from your roof, glass, and frames, restoring natural light and making your conservatory feel brand new again.',
     sliderHint: 'Drag to compare',
     inclusions: [
       'Roof, glass, and frames all cleaned',
@@ -141,7 +142,7 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     eyebrow: 'Stubborn Stains Gone',
     headline: 'Expert Stain',
     highlightWord: 'Removal',
-    description: 'Red wine, coffee, pet accidents — our stain removal specialists tackle the toughest stains on carpets and upholstery. Priority bookings available for fresh spills.',
+    description: 'Red wine, coffee, pet accidents... our stain removal specialists tackle the toughest stains on carpets and upholstery. Priority bookings available for fresh spills.',
     sliderHint: 'Drag to compare',
     inclusions: [
       'All stain types treated',
@@ -163,31 +164,23 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
   },
 };
 
-function getServiceContent(serviceSlug: string, serviceName: string, location?: { name: string }): ServiceSectionContent {
+function getServiceContent(serviceSlug: string, serviceName: string): ServiceSectionContent {
   const content = serviceSectionContent[serviceSlug];
-  if (content) {
-    // Add location to description if provided
-    if (location) {
-      return {
-        ...content,
-        description: content.description.replace(' — ', ` in ${location.name} — `),
-      };
-    }
-    return content;
-  }
+  if (content) return content;
 
   // Default fallback
   return {
     eyebrow: 'Real Results',
     headline: 'See The',
     highlightWord: 'Transformation',
-    description: `Your ${serviceName.toLowerCase().replace('&', 'and')} will look like new${location ? ` in ${location.name}` : ''} — or we re-clean for free.`,
+    description: `Your ${serviceName.toLowerCase().replace('&', 'and')} will look like new, or we re-clean for free.`,
     sliderHint: 'Drag to compare',
     inclusions: [],
   };
 }
 
 // Before/After image pairs by service type
+// Services with multiple pairs assign different images per archetype for visual differentiation
 const beforeAfterImages: Record<string, { before: string; after: string }[]> = {
   'carpet-cleaning': [
     { before: '/images/carpet-cleaning-before.jpg', after: '/images/carpet-cleaning-after.jpg' },
@@ -203,10 +196,19 @@ const beforeAfterImages: Record<string, { before: string; after: string }[]> = {
   ],
 };
 
-function getServiceImages(serviceSlug: string) {
+// Archetype-based image index selection — different areas show different before/after photos
+// when multiple image pairs are available for a service
+const archetypeImageIndex: Record<string, number> = {
+  coastal: 1, estuary: 1, thames: 1,
+  forest: 0, 'new-build': 0, historic: 1,
+  commuter: 0, rural: 1, urban: 0,
+};
+
+function getServiceImages(serviceSlug: string, archetype?: string) {
   const images = beforeAfterImages[serviceSlug] || beforeAfterImages.default;
-  // Return first pair (could randomize or cycle through pairs)
-  return images[0];
+  if (images.length <= 1 || !archetype) return images[0];
+  const idx = archetypeImageIndex[archetype] ?? 0;
+  return images[idx % images.length];
 }
 
 interface ServiceValuePropositionProps {
@@ -220,11 +222,12 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
 
-  // Get service-specific before/after images
-  const { before: beforeImage, after: afterImage } = getServiceImages(service.slug);
-
   // Get service-specific content for CRO
-  const sectionContent = getServiceContent(service.slug, service.name, location);
+  const sectionContent = getServiceContent(service.slug, service.name);
+  const profile = location ? getLocationProfile(location) : null;
+
+  // Get service-specific before/after images (archetype varies the image shown)
+  const { before: beforeImage, after: afterImage } = getServiceImages(service.slug, profile?.archetype);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -317,6 +320,11 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
           <p className="text-slate-600 text-base md:text-lg mt-4 max-w-2xl mx-auto">
              {sectionContent.description}
           </p>
+          {profile && location && (
+            <p className="text-slate-500 text-sm md:text-base mt-3 max-w-2xl mx-auto">
+              {location.name} properties — typically {profile.housingStock} — face {profile.environmentalFactors.slice(0, 2).join(' and ')}, which makes regular professional cleaning essential. The area&apos;s {profile.waterHardness} water leaves mineral residue that builds up over time.
+            </p>
+          )}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center lg:items-stretch">

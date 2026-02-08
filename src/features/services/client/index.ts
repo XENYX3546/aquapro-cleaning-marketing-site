@@ -10,3 +10,4 @@ export { ServiceMobileLeadForm } from './ServiceMobileLeadForm';
 export { ServiceStickyCTA } from './ServiceStickyCTA';
 export { ServiceFullWidthCTA } from './ServiceFullWidthCTA';
 export { ServiceMiniCTA } from './ServiceMiniCTA';
+export { RugCleaningSection } from './RugCleaningSection';

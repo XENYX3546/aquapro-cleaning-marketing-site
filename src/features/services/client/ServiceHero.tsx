@@ -5,7 +5,7 @@ import { Star, Check } from 'lucide-react';
 import { LeadForm } from '@/components/ui/LeadForm';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
-import { reviewStatsDisplay } from '@/lib/constants';
+import { reviewStatsDisplay, getServiceKeywords, siteConfig } from '@/lib/constants';
 
 const HERO_BG = "/images/blake-van-image.jpg";
 
@@ -82,8 +82,12 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
   // Custom hero content
   const hasCustomHero = !!service.hero && !location;
 
+  // SEO keyword strategy — PRIMARY keyword in H1 and hero description
+  const keywords = getServiceKeywords(service.slug);
+  const primary = keywords.primary;
+
   // Location-aware text
-  const locationText = location ? ` in ${location.name}` : '';
+  const locationText = location ? ` ${location.name}` : '';
   const localTeamText = location ? `Local ${location.county} team.` : '';
 
   return (
@@ -92,7 +96,7 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
       <div className="absolute inset-0 z-0 bg-slate-800">
         <Image
           src={HERO_BG}
-          alt={`Professional ${service.name}${locationText}`}
+          alt={`Professional ${primary}${locationText}`}
           fill
           priority
           fetchPriority="high"
@@ -120,13 +124,15 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
                   ))}
                 </div>
                 <span className="text-slate-300 text-xs lg:text-sm font-medium">{reviewStatsDisplay.averageRating} based on {reviewStatsDisplay.totalReviews} verified reviews</span>
+                <span className="text-slate-500 text-xs font-medium hidden sm:inline">·</span>
+                <span className="text-slate-400 text-xs font-medium hidden sm:inline">Updated {new Date(siteConfig.contentLastUpdated).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
               {location ? (
                 <>
-                  {service.name} <span className="text-[#1B9CB6]">in {location.name}</span>
+                  {primary} <span className="text-[#1B9CB6]">{location.name}</span>
                 </>
               ) : hasCustomHero ? (
                 <>
@@ -137,15 +143,26 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
                 </>
               ) : (
                 <>
-                  Professional <span className="text-[#1B9CB6]">{service.name}</span>
+                  Professional <span className="text-[#1B9CB6]">{primary}</span>
                 </>
               )}
             </h1>
 
+            {/* BLUF pricing + availability */}
+            {location && service.startingFrom && (
+              <p className="text-sm lg:text-base font-semibold text-white/90 mb-4 lg:mb-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 px-4 sm:px-0">
+                <span className="text-[#2ABED2]">{service.startingFrom}</span>
+                <span className="text-slate-400">·</span>
+                <span>Same-week availability</span>
+                <span className="text-slate-400">·</span>
+                <span>Free quotes in 2 minutes</span>
+              </p>
+            )}
+
             {/* Subtext */}
-            <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
+            <p className="text-lg lg:text-xl font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               {location
-                ? `Professional ${service.name.toLowerCase()} ${location.localHook}${location.postcodeAreas && location.postcodeAreas.length > 0 ? ` — covering ${location.postcodeAreas.join(', ')} postcodes` : ''}. Done right, first time — or we re-clean free. ${localTeamText}`
+                ? <><strong className="font-semibold text-white">{siteConfig.name} provides professional {primary.toLowerCase()} {location.name}</strong>, {location.localHook}{location.postcodeAreas && location.postcodeAreas.length > 0 ? `, covering ${location.postcodeAreas.join(', ')} postcodes` : ''}. Done right, first time, or we re-clean free. {localTeamText}</>
                 : hasCustomHero
                   ? service.hero!.description
                   : service.description
@@ -176,10 +193,10 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
           {/* Right Column: Lead Form */}
           <div className="lg:col-span-5">
              <LeadForm
-               title={location ? `Get My Free Quote in ${location.name}` : hasCustomHero ? service.hero!.formTitle : `Get My Free ${service.name} Quote`}
+               title={location ? `Get My Free ${location.name} Quote` : hasCustomHero ? service.hero!.formTitle : `Get My Free ${primary} Quote`}
                subtitle={location
-                 ? `Fast, fixed-price ${service.name.toLowerCase()} quote for ${location.name}.`
-                 : `Get a fast, fixed-price quote for ${service.name.toLowerCase()}.`
+                 ? `Fast, fixed-price ${(keywords.variations[4] ?? primary).toLowerCase()} quote for ${location.name}.`
+                 : `Get a fast, fixed-price quote for ${primary.toLowerCase()}.`
                }
                trustBadges={hasCustomHero ? service.hero!.trustBadges : undefined}
              />

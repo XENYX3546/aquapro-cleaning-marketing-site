@@ -12,13 +12,18 @@ export const siteConfig = {
     email: 'bookings@aquapro.co.uk',
   },
   social: {
-    facebook: 'https://facebook.com/aquaprocleaning',
-    instagram: 'https://instagram.com/aquaprocleaning',
+    facebook: 'https://www.facebook.com/p/Aquapro-Cleaning-61565606906517/',
+    instagram: 'https://www.instagram.com/aquapro.cleaning/',
+    tiktok: 'https://www.tiktok.com/@aquapro.cleaning',
   },
   // Business details for trust signals
-  established: 2020,
+  established: 2024,
+  foundingDate: '2024-08-12',
   coverage: 'Essex & Surrounding Areas',
   companyNumber: '15891310',
+  // Dates for WebPage schema — update contentLastUpdated when making real content changes
+  contentFirstPublished: '2025-09-01',
+  contentLastUpdated: '2026-02-06',
 } as const;
 
 // Customer statistics - single source of truth
@@ -57,7 +62,7 @@ export const navigation = {
     { label: 'Contact', href: '/contact' },
   ],
   services: [
-    { label: 'Carpet & Rug Cleaning', href: '/services/carpet-cleaning' },
+    { label: 'Carpet Cleaning', href: '/services/carpet-cleaning' },
     { label: 'Sofa & Upholstery Cleaning', href: '/services/upholstery-cleaning' },
     { label: 'Pressure Washing', href: '/services/pressure-washing' },
     { label: 'Roof Cleaning & Moss Removal', href: '/services/roof-cleaning' },

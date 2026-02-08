@@ -43,15 +43,15 @@ export function AboutHero() {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
-              Professional Cleaning <span className="text-brand-500">With a Personal Touch</span>
+              About <span className="text-brand-500">Aquapro Cleaning</span>
             </h1>
 
             {/* Subtext */}
             <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
-              We are a team of dedicated cleaning professionals committed to
-              restoring the beauty of your property. Fully insured, highly
-              trained, and trusted by hundreds of local businesses and
-              homeowners.
+              Aquapro Cleaning is a family-run cleaning company based in Essex,
+              dedicated to restoring the beauty of your property. Fully insured,
+              highly trained, and trusted by thousands of local businesses and
+              homeowners across Essex and East London.
             </p>
 
             {/* Badges Section */}

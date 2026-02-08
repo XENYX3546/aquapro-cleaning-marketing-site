@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { ReviewsSection, FAQSection } from '@/components/ui';
 import { LandingLayout } from '@/components/layout';
 import { RelatedServices, ServiceLocationLinks } from '@/components/seo';
-import { getServiceBySlug, getAllServiceSlugs, siteConfig, reviewStats, getServiceSpecificReviews, getAllReviewsForService } from '@/lib/constants';
+import { getServiceBySlug, getAllServiceSlugs, siteConfig, getServiceSpecificReviews, getAllReviewsForService } from '@/lib/constants';
 import {
   ServiceHero,
   ServiceValueProposition,
@@ -13,6 +13,7 @@ import {
   ServiceGuarantees,
   ServiceStickyCTA,
   ServiceFullWidthCTA,
+  RugCleaningSection,
 } from '@/features/services/client';
 import { ContactSection } from '@/features/home/client';
 
@@ -74,34 +75,12 @@ function generateServiceSchema(service: ReturnType<typeof getServiceBySlug>) {
     name: service.name,
     description: service.description,
     provider: {
-      '@type': 'LocalBusiness',
-      name: siteConfig.name,
-      telephone: siteConfig.contact.phone,
-      email: siteConfig.contact.email,
-      url: siteConfig.url,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'North Fambridge',
-        addressRegion: 'Essex',
-        postalCode: 'CM3 6LZ',
-        addressCountry: 'GB',
-      },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: String(reviewStats.averageRating),
-        reviewCount: String(reviewStats.totalReviews),
-        bestRating: String(reviewStats.bestRating),
-        worstRating: String(reviewStats.worstRating),
-      },
+      '@id': `${siteConfig.url}/#organization`,
     },
     areaServed: {
-      '@type': 'GeoCircle',
-      geoMidpoint: {
-        '@type': 'GeoCoordinates',
-        latitude: 51.6356,
-        longitude: 0.6756,
-      },
-      geoRadius: '50000',
+      '@type': 'AdministrativeArea',
+      name: 'Essex',
+      containedInPlace: { '@type': 'Country', name: 'United Kingdom' },
     },
   };
 }
@@ -192,6 +171,7 @@ export default async function ServicePage({ params }: Props) {
         subtitle={`Real reviews from Essex homeowners who used our ${service.name.toLowerCase()} service.`}
       />
       <ServiceHowItWorks service={service} />
+      {service.slug === 'carpet-cleaning' && <RugCleaningSection />}
 
       {/* Mobile-only Lead Form after process */}
       <ServiceMobileLeadForm service={service} />

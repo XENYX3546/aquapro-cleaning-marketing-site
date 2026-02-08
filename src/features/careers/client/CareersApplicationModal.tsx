@@ -48,7 +48,7 @@ export function CareersApplicationModal({ job, onClose }: CareersApplicationModa
 
   if (!job) {return null;}
 
-  const emailAddress = 'careers@aquapro-cleaning.co.uk';
+  const emailAddress = 'bookings@aquapro.co.uk';
   const emailSubject = `Application for ${job.title} - ${job.location}`;
   const emailBody = `Dear Hiring Team,%0D%0A%0D%0AI am writing to apply for the ${job.title} position based in ${job.location}.%0D%0A%0D%0APlease find my CV attached.%0D%0A%0D%0ABest regards,`;
   const mailtoLink = `mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`;

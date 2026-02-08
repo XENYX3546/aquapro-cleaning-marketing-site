@@ -11,8 +11,8 @@ import {
 import { LandingLayout } from '@/components/layout';
 import { siteConfig } from '@/lib/constants';
 
-// Force dynamic rendering to ensure category filtering works
-export const dynamic = 'force-dynamic';
+// ISR: cache for 5 minutes then revalidate in background
+export const revalidate = 300;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -36,8 +36,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   try {
-    const categoryResponse = await getCategory(slug);
+    const [categoryResponse, postsResponse] = await Promise.all([
+      getCategory(slug),
+      getPosts({ category: slug, pageSize: 1 }),
+    ]);
     const category = categoryResponse.data;
+    const postCount = postsResponse.meta.pagination.total;
 
     const title = category.metaTitle || `${category.name} Articles`;
     const description =
@@ -48,6 +52,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title,
       description,
+      // Noindex thin category pages with fewer than 3 posts to prevent soft 404 / quality dilution
+      ...(postCount < 3 && {
+        robots: { index: false, follow: true },
+      }),
       alternates: {
         canonical: `${siteConfig.url}/blog/category/${slug}`,
       },

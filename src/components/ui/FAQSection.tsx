@@ -4,22 +4,6 @@ import { useState } from 'react';
 import { PlusCircle, MinusCircle } from 'lucide-react';
 import { faqData as defaultFaqData } from '@/lib/constants';
 
-// Generate FAQ Schema JSON-LD
-function generateFAQSchema(faqs: FAQItem[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
-}
-
 export type FAQItem = {
   question: string;
   answer: string;
@@ -71,15 +55,9 @@ export function FAQSection({
     </>
   );
 
-  const faqSchema = generateFAQSchema(faqs);
-
   return (
     <section className={`${paddingClass} ${bgClass} ${className}`}>
-      {/* FAQ Schema JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      {/* FAQPage schema is rendered at page level to avoid duplicates */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 lg:mb-16">
           <span className="text-slate-500 font-bold tracking-widest uppercase text-xs sm:text-sm block mb-3">

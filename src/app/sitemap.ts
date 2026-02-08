@@ -90,6 +90,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.publishedAt || ''),
       changeFrequency: 'weekly' as const,
       priority: 0.6,
+      ...(post.featuredImageUrl && {
+        images: [post.featuredImageVariants?.large ?? post.featuredImageUrl],
+      }),
     }));
     // Add main blog page
     blogPages.unshift({

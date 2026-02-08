@@ -80,12 +80,10 @@ const servicesCollectionJsonLd = {
         description: service.description,
         url: `${siteConfig.url}/services/${service.slug}`,
         provider: {
-          '@type': 'LocalBusiness',
-          name: siteConfig.name,
-          telephone: siteConfig.contact.phone,
+          '@id': `${siteConfig.url}/#organization`,
         },
         areaServed: {
-          '@type': 'State',
+          '@type': 'AdministrativeArea',
           name: 'Essex',
         },
       },

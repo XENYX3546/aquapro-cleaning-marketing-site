@@ -172,7 +172,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 0, photoCount: 0, isLocalGuide: false },
     services: ['gutter-cleaning', 'pressure-washing'],
     ownerReply: {
-      text: "Thanks Simon, we really appreciate the recommendation. Glad you were happy with the gutter, fascia and conservatory roof clean — Dan & Blake will be pleased to hear your feedback.",
+      text: "Thanks Simon, we really appreciate the recommendation. Glad you were happy with the gutter, fascia and conservatory roof clean. Dan & Blake will be pleased to hear your feedback.",
       timestamp: '2026-02-01',
     },
   },
@@ -277,7 +277,7 @@ export const reviews: Review[] = [
     services: ['general'],
     location: { postcodeArea: 'CM3' },
     ownerReply: {
-      text: "Thank you Donna for taking the time to leave a review — much appreciated.",
+      text: "Thank you Donna for taking the time to leave a review. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -437,7 +437,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 7, photoCount: 0, isLocalGuide: false },
     services: ['carpet-cleaning', 'upholstery-cleaning'],
     ownerReply: {
-      text: "Thanks very much for the recommendation — we really appreciate it.",
+      text: "Thanks very much for the recommendation, we really appreciate it.",
       timestamp: '2026-02-01',
     },
   },
@@ -501,7 +501,7 @@ export const reviews: Review[] = [
     services: ['general'],
     location: { postcodeArea: 'SS9' },
     ownerReply: {
-      text: "Thank you Natalie for leaving a review — much appreciated.",
+      text: "Thank you Natalie for leaving a review. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -568,7 +568,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 0, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thank you for leaving a review — much appreciated.",
+      text: "Thank you for leaving a review. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -757,7 +757,7 @@ export const reviews: Review[] = [
     services: ['roof-cleaning', 'gutter-cleaning'],
     profileImage: '/review-profile-images/saifans-world.webp',
     ownerReply: {
-      text: "Thanks so much for your feedback! We're thrilled you're happy with the roof and gutter clean — Blake and Dan always do their best to leave everything looking spotless",
+      text: "Thanks so much for your feedback! We're thrilled you're happy with the roof and gutter clean. Blake and Dan always do their best to leave everything looking spotless",
       timestamp: '2025-09-22',
     },
   },
@@ -976,7 +976,7 @@ export const reviews: Review[] = [
     services: ['gutter-cleaning'],
     priority: true,
     ownerReply: {
-      text: "Thank you so much for the kind words — we're really glad we could help.",
+      text: "Thank you so much for the kind words, we're really glad we could help.",
       timestamp: '2026-02-01',
     },
   },
@@ -1012,7 +1012,7 @@ export const reviews: Review[] = [
     location: { postcodeArea: 'CM1' },
     services: ['upholstery-cleaning'],
     ownerReply: {
-      text: "Thanks Nikki, really appreciate the review. Glad you were happy with the mattress clean — thanks as well for recommending us, it means a lot 👏",
+      text: "Thanks Nikki, really appreciate the review. Glad you were happy with the mattress clean. Thanks as well for recommending us, it means a lot 👏",
       timestamp: '2026-02-01',
     },
   },
@@ -1022,7 +1022,7 @@ export const reviews: Review[] = [
     initial: 'A',
     bg: 'bg-indigo-700',
     rating: 5,
-    text: "Brilliant service from Andy at Aqua Pro! I had a stubborn coffee stain on the carpet that I thought was there for good, but he got it looking like new again. He was friendly, professional, quick, and thorough—clearly knows his stuff. Would definitely recommend to anyone looking for a reliable carpet cleaning service.",
+    text: "Brilliant service from Andy at Aqua Pro! I had a stubborn coffee stain on the carpet that I thought was there for good, but he got it looking like new again. He was friendly, professional, quick, and thorough. Clearly knows his stuff. Would definitely recommend to anyone looking for a reliable carpet cleaning service.",
     timestamp: '2025-06-23',
     reviewer: { reviewCount: 4, photoCount: 0, isLocalGuide: false },
     services: ['carpet-cleaning', 'stain-removal'],
@@ -1058,7 +1058,7 @@ export const reviews: Review[] = [
     services: ['carpet-cleaning', 'stain-removal'],
     profileImage: '/review-profile-images/andrew-v.webp',
     ownerReply: {
-      text: "Thanks Andrew, really glad you're happy with the results. Great to hear the carpets came up clean and fresh — appreciate the recommendation.",
+      text: "Thanks Andrew, really glad you're happy with the results. Great to hear the carpets came up clean and fresh. Appreciate the recommendation.",
       timestamp: '2026-02-01',
     },
   },
@@ -1092,7 +1092,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 11, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Neil for the 5 stars — much appreciated.",
+      text: "Thanks Neil for the 5 stars. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -1157,7 +1157,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 57, photoCount: 2, isLocalGuide: true },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Graham — much appreciated.",
+      text: "Thanks Graham. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -1188,7 +1188,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 4, photoCount: 1, isLocalGuide: false },
     services: ['pressure-washing'],
     ownerReply: {
-      text: "Thank you Denise, glad you're happy with the conservatory roof clean — appreciate the review.",
+      text: "Thank you Denise, glad you're happy with the conservatory roof clean. Appreciate the review.",
       timestamp: '2026-02-01',
     },
   },
@@ -1205,7 +1205,7 @@ export const reviews: Review[] = [
     priority: true,
     profileImage: '/review-profile-images/lewis-taylor.webp',
     ownerReply: {
-      text: "Thanks Lewis, really appreciate that. Glad you're happy with the results and the reliability — means a lot.",
+      text: "Thanks Lewis, really appreciate that. Glad you're happy with the results and the reliability. Means a lot.",
       timestamp: '2026-02-01',
     },
   },
@@ -1250,7 +1250,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 1, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Martin for the 5 stars — much appreciated.",
+      text: "Thanks Martin for the 5 stars. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -1268,7 +1268,7 @@ export const reviews: Review[] = [
       '/review-images/general/matthew-wyatt.jpg',
     ],
     ownerReply: {
-      text: "Thank you so much Matthew — we really appreciate the kind words. We're glad the communication stood out and that you were happy with the service from start to finish. Thanks again for the recommendation, it means a lot to us.",
+      text: "Thank you so much Matthew, we really appreciate the kind words. We're glad the communication stood out and that you were happy with the service from start to finish. Thanks again for the recommendation, it means a lot to us.",
       timestamp: '2026-02-01',
     },
   },
@@ -1314,7 +1314,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 0, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks for the 5 stars — much appreciated.",
+      text: "Thanks for the 5 stars. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -1371,7 +1371,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 62, photoCount: 3, isLocalGuide: true },
     services: ['general'],
     ownerReply: {
-      text: "Thanks very much — really appreciate the kind words and recommendation.",
+      text: "Thanks very much, really appreciate the kind words and recommendation.",
       timestamp: '2026-02-01',
     },
   },
@@ -1423,7 +1423,7 @@ export const reviews: Review[] = [
     services: ['pressure-washing'],
     profileImage: '/review-profile-images/kathrynmarie88.webp',
     ownerReply: {
-      text: "Thank you so much for the review. Really glad you're happy with the patio and drive work — we appreciate the support.",
+      text: "Thank you so much for the review. Really glad you're happy with the patio and drive work. We appreciate the support.",
       timestamp: '2026-02-01',
     },
   },
@@ -1470,7 +1470,7 @@ export const reviews: Review[] = [
     services: ['roof-cleaning', 'gutter-cleaning', 'window-cleaning'],
     priority: true,
     ownerReply: {
-      text: "Thank you Peter, really appreciate the detailed feedback. Glad you're happy with the roof clean and treatment — and that everything was left tidy afterwards.",
+      text: "Thank you Peter, really appreciate the detailed feedback. Glad you're happy with the roof clean and treatment, and that everything was left tidy afterwards.",
       timestamp: '2026-02-01',
     },
   },
@@ -1485,7 +1485,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 1, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Mike, really appreciate the review. Great to hear the panel clean made a noticeable difference — glad you were happy with the service.",
+      text: "Thanks Mike, really appreciate the review. Great to hear the panel clean made a noticeable difference. Glad you were happy with the service.",
       timestamp: '2026-02-01',
     },
   },
@@ -1577,7 +1577,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 2, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Mark, really appreciate the detailed review. Glad you felt looked after from start to finish — and thank you for the support.",
+      text: "Thanks Mark, really appreciate the detailed review. Glad you felt looked after from start to finish, and thank you for the support.",
       timestamp: '2026-02-01',
     },
   },
@@ -1595,7 +1595,7 @@ export const reviews: Review[] = [
       '/review-images/general/scott-lyle.jpg',
     ],
     ownerReply: {
-      text: "Thanks Scott, really appreciate it — glad you're happy with the results.",
+      text: "Thanks Scott, really appreciate it. Glad you're happy with the results.",
       timestamp: '2026-02-01',
     },
   },
@@ -1610,7 +1610,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 1, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Chris for the 5 stars — much appreciated.",
+      text: "Thanks Chris for the 5 stars. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -1657,7 +1657,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 1, photoCount: 0, isLocalGuide: false },
     services: ['carpet-cleaning', 'upholstery-cleaning'],
     ownerReply: {
-      text: "Thank you Mary, really appreciate it — glad you were happy with the clean.",
+      text: "Thank you Mary, really appreciate it. Glad you were happy with the clean.",
       timestamp: '2026-02-01',
     },
   },
@@ -1688,7 +1688,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 2, photoCount: 0, isLocalGuide: false },
     services: ['upholstery-cleaning', 'stain-removal'],
     ownerReply: {
-      text: "Thank you Kay, really appreciate the honest feedback. Glad you were happy with the results — and thanks for mentioning the drying time as well.",
+      text: "Thank you Kay, really appreciate the honest feedback. Glad you were happy with the results, and thanks for mentioning the drying time as well.",
       timestamp: '2026-02-01',
     },
   },
@@ -1703,7 +1703,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 3, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Jeff for the 5 stars — much appreciated.",
+      text: "Thanks Jeff for the 5 stars. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },
@@ -1734,7 +1734,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 3, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Carol, I'm really sorry to hear this — especially given your circumstances. That's not the experience we want anyone to have. Please email us at bookings@aquapro.co.uk with the date of the job and your address, and I'll look into this with the team and come back to you directly.",
+      text: "Carol, I'm really sorry to hear this, especially given your circumstances. That's not the experience we want anyone to have. Please email us at bookings@aquapro.co.uk with the date of the job and your address, and I'll look into this with the team and come back to you directly.",
       timestamp: '2026-02-01',
     },
   },
@@ -1770,7 +1770,7 @@ export const reviews: Review[] = [
     reviewer: { reviewCount: 0, photoCount: 0, isLocalGuide: false },
     services: ['general'],
     ownerReply: {
-      text: "Thanks Megan for the 5 stars — much appreciated.",
+      text: "Thanks Megan for the 5 stars. Much appreciated.",
       timestamp: '2026-02-01',
     },
   },

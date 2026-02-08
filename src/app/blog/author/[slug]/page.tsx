@@ -19,8 +19,8 @@ import {
   ShareProfileButton,
 } from '@/features/blog';
 
-// Force dynamic rendering to ensure filtering works
-export const dynamic = 'force-dynamic';
+// ISR: cache for 5 minutes then revalidate in background
+export const revalidate = 300;
 import { LandingLayout } from '@/components/layout';
 import { siteConfig } from '@/lib/constants';
 
@@ -62,8 +62,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   try {
-    const response = await getAuthor(slug);
+    const [response, postsResponse] = await Promise.all([
+      getAuthor(slug),
+      getAuthorPosts(slug, { pageSize: 1 }),
+    ]);
     const author = response.data;
+    const postCount = postsResponse.meta.pagination.total;
 
     const title = `${author.displayName} - Author`;
     const description = author.bio || buildAuthorDescription(author);
@@ -71,6 +75,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title,
       description,
+      // Noindex author pages with no published posts to prevent thin/soft-404 indexing
+      ...(postCount === 0 && {
+        robots: { index: false, follow: true },
+      }),
       alternates: {
         canonical: `${siteConfig.url}/blog/author/${slug}`,
       },

@@ -4,6 +4,7 @@ export { BlogHero } from './BlogHero';
 export { BlogSearch } from './BlogSearch';
 export { BlogCategoryList } from './BlogCategoryList';
 export { BlogSidebarCTA } from './BlogSidebarCTA';
+export { BlogSidebarTOC } from './BlogSidebarTOC';
 export { BlogPostContent } from './BlogPostContent';
 export { BlogAuthorCard } from './BlogAuthorCard';
 export { BlogTagList } from './BlogTagList';

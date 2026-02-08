@@ -112,12 +112,14 @@ export function ContactHero() {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
-              Complete Interior & <span className="text-[#1B9CB6]">Exterior Cleaning Solutions</span>
+              Contact <span className="text-[#1B9CB6]">Aquapro Cleaning</span>
             </h1>
 
             {/* Subtext */}
             <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
-              From sparkling windows to pristine offices, we restore every inch of your property. Professional, reliable, and fully insured services for homes and businesses.
+              Aquapro Cleaning provides professional interior and exterior cleaning
+              services across Essex and East London. Call {siteConfig.contact.phone} or
+              request a free, no-obligation quote using the form.
             </p>
 
             {/* Logos Section - Accreditations */}

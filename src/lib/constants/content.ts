@@ -24,7 +24,7 @@ export const faqData = [
   {
     question: 'What are your hours of operation?',
     answer:
-      'Our phone lines are open Monday to Saturday, 8am to 5pm. Our cleaning teams can operate outside these hours for commercial contracts to minimize disruption.',
+      'Our phone lines are open Monday to Saturday, 8am to 5pm. Our cleaning teams can operate outside these hours for commercial contracts to minimise disruption.',
   },
   {
     question: 'What payment methods do you accept?',
@@ -76,7 +76,7 @@ export const blogPosts = [
     id: 3,
     title: 'Preparing Your Driveway for Winter',
     excerpt:
-      'Winter frost can wreak havoc on dirty driveways. Find out how professional cleaning and sealing can prevent cracks and keep your curb appeal high all season.',
+      'Winter frost can wreak havoc on dirty driveways. Find out how professional cleaning and sealing can prevent cracks and keep your kerb appeal high all season.',
     date: 'Nov 02, 2023',
     image: '/images/blake-van-image.jpg',
     category: 'Seasonal Tips',

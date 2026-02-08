@@ -74,8 +74,50 @@ function processContentWithReferences(html: string): { content: string; referenc
   return { content: processedContent, references };
 }
 
+type TocHeading = {
+  id: string;
+  text: string;
+  level: number;
+};
+
+/**
+ * Extracts h2/h3 headings from HTML, injects IDs, and returns TOC data
+ */
+function extractHeadingsAndInjectIds(html: string): { content: string; headings: TocHeading[] } {
+  const headings: TocHeading[] = [];
+  const usedIds = new Set<string>();
+
+  const content = html.replace(
+    /<(h[23])([^>]*)>([\s\S]*?)<\/\1>/gi,
+    (_match, tag: string, attrs: string, innerHtml: string) => {
+      const text = innerHtml.replace(/<[^>]*>/g, '').trim();
+      let baseId = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .slice(0, 60);
+
+      // Deduplicate IDs
+      let id = baseId;
+      let counter = 1;
+      while (usedIds.has(id)) {
+        id = `${baseId}-${counter++}`;
+      }
+      usedIds.add(id);
+
+      const level = tag.toLowerCase() === 'h2' ? 2 : 3;
+      headings.push({ id, text, level });
+
+      return `<${tag}${attrs} id="${id}">${innerHtml}</${tag}>`;
+    }
+  );
+
+  return { content, headings };
+}
+
 type BlogPostContentProps = {
   content: string;
+  excerpt?: string | null;
   className?: string;
 };
 
@@ -83,11 +125,35 @@ type BlogPostContentProps = {
  * Renders HTML blog content with proper styling.
  * External links are converted to citation-style references.
  */
-export function BlogPostContent({ content, className }: BlogPostContentProps) {
-  const { content: processedContent, references } = useMemo(
-    () => processContentWithReferences(content),
-    [content]
+export function BlogPostContent({ content, excerpt, className }: BlogPostContentProps) {
+  const { content: processedContent, references, headings, keyTakeaway } = useMemo(
+    () => {
+      const refResult = processContentWithReferences(content);
+      const headingResult = extractHeadingsAndInjectIds(refResult.content);
+      let finalContent = headingResult.content;
+      let takeaway: string | null = null;
+
+      // Extract the full first paragraph as key takeaway, then strip it from content
+      if (excerpt) {
+        const firstPMatch = finalContent.match(/^\s*<p[\s>]([\s\S]*?)<\/p>/);
+        if (firstPMatch) {
+          // Strip HTML tags to get plain text
+          takeaway = firstPMatch[1].replace(/<[^>]*>/g, '').trim();
+          finalContent = finalContent.replace(/^(\s*<p[\s>][\s\S]*?<\/p>)/, '');
+        }
+      }
+
+      return {
+        content: finalContent,
+        references: refResult.references,
+        headings: headingResult.headings,
+        keyTakeaway: takeaway,
+      };
+    },
+    [content, excerpt]
   );
+
+  const showToc = headings.length >= 3;
 
   // Auto-expand references when clicking a reference link
   useEffect(() => {
@@ -106,6 +172,51 @@ export function BlogPostContent({ content, className }: BlogPostContentProps) {
 
   return (
     <div className={className}>
+      {/* Key Takeaways — hidden on mobile to save above-the-fold space */}
+      {keyTakeaway && (
+        <div className="mb-8 p-6 bg-primary-50 rounded-xl border border-primary-100">
+          <p className="text-xs font-semibold text-primary-700 uppercase tracking-wide mb-2">
+            Key takeaway
+          </p>
+          <p className="text-xl leading-relaxed font-medium text-neutral-900">
+            {keyTakeaway}
+          </p>
+        </div>
+      )}
+
+      {/* Table of Contents — mobile/tablet only; collapsed by default to save space */}
+      {showToc && (
+        <details className="mb-8 bg-neutral-50 rounded-xl border border-neutral-200 lg:hidden group">
+          <summary className="flex items-center justify-between cursor-pointer list-none select-none p-4">
+            <span className="text-sm font-semibold text-neutral-900 uppercase tracking-wide">
+              In this article
+            </span>
+            <svg
+              className="w-4 h-4 text-neutral-400 transition-transform group-open:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <nav aria-label="Table of contents" className="px-4 pb-4">
+            <ol className="space-y-1.5 text-sm">
+              {headings.filter((h) => h.level === 2).map((heading) => (
+                <li key={heading.id}>
+                  <a
+                    href={`#${heading.id}`}
+                    className="text-neutral-600 hover:text-primary-600 transition-colors leading-snug block"
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </details>
+      )}
+
       {/* Article Content */}
       <div
         className={cn(
@@ -114,8 +225,8 @@ export function BlogPostContent({ content, className }: BlogPostContentProps) {
           // Headings - tighter rhythm for better flow
           'prose-headings:font-semibold prose-headings:text-neutral-900',
           'prose-h1:text-3xl prose-h1:mt-10 prose-h1:mb-4',
-          'prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-3',
-          'prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-2',
+          'prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-3 prose-h2:scroll-mt-24',
+          'prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-2 prose-h3:scroll-mt-24',
           'prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-2',
           // Paragraphs - neutral-800 for better contrast (WCAG AAA)
           'prose-p:text-neutral-800 prose-p:leading-relaxed',
@@ -146,6 +257,10 @@ export function BlogPostContent({ content, className }: BlogPostContentProps) {
           'prose-hr:border-neutral-200 prose-hr:my-8',
           // Strong/Bold
           'prose-strong:text-neutral-900 prose-strong:font-semibold',
+          // Definition lists — structured key-value for tidbit extraction
+          '[&_dl]:my-6 [&_dl]:space-y-4',
+          '[&_dt]:font-semibold [&_dt]:text-neutral-900',
+          '[&_dd]:text-neutral-700 [&_dd]:ml-4 [&_dd]:mb-4',
           // Reference styling
           '[&_.reference-number]:text-xs [&_.reference-number]:ml-0.5 [&_.reference-number]:relative [&_.reference-number]:-top-1',
           '[&_.reference-link]:text-neutral-500 [&_.reference-link]:no-underline [&_.reference-link]:hover:text-neutral-700'

@@ -110,6 +110,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://app.zuviaone.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
         <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="anonymous" />
+        {/* Preconnect to blog image CDN for faster LCP */}
+        <link rel="preconnect" href="https://polished-forest-1255.fly.storage.tigris.dev" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://polished-forest-1255.fly.storage.tigris.dev" />
         {/* Structured Data */}
         <LocalBusinessSchema />
         <WebSiteSchema />
@@ -135,6 +138,15 @@ function LocalBusinessSchema() {
     description: siteConfig.description,
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
+    foundingDate: siteConfig.foundingDate,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Hyacinths, The Avenue',
+      addressLocality: 'North Fambridge',
+      addressRegion: 'Essex',
+      postalCode: 'CM3 6LZ',
+      addressCountry: 'GB',
+    },
     areaServed: {
       '@type': 'GeoCircle',
       geoMidpoint: {
@@ -152,20 +164,15 @@ function LocalBusinessSchema() {
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         opens: '08:00',
-        closes: '18:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Saturday',
-        opens: '09:00',
-        closes: '16:00',
+        closes: '17:00',
       },
     ],
     sameAs: [
       siteConfig.social.facebook,
       siteConfig.social.instagram,
+      siteConfig.social.tiktok,
     ],
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -182,8 +189,16 @@ function LocalBusinessSchema() {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Carpet & Rug Cleaning',
-            description: 'Professional carpet cleaning with hot water extraction. Stain removal, pet odour elimination, free stain protection.',
+            name: 'Carpet Cleaning',
+            description: 'Professional carpet cleaning with hot water extraction. Stain removal, pet odour elimination, and free stain protection.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Upholstery Cleaning',
+            description: 'Professional sofa, couch, and fabric furniture cleaning. Leather conditioning and fabric protection.',
           },
         },
         {
@@ -191,7 +206,7 @@ function LocalBusinessSchema() {
           itemOffered: {
             '@type': 'Service',
             name: 'Pressure Washing',
-            description: 'High-pressure cleaning for driveways, patios, and decking',
+            description: 'Commercial-grade pressure washing for driveways, patios, decking, and hard surfaces.',
           },
         },
         {
@@ -199,7 +214,7 @@ function LocalBusinessSchema() {
           itemOffered: {
             '@type': 'Service',
             name: 'Roof Cleaning & Moss Removal',
-            description: 'Professional roof moss removal with biocide treatment. Manual scraping and soft washing for all tile types.',
+            description: 'Professional roof moss removal with biocide treatment. Soft washing for clay, concrete, and slate tiles.',
           },
         },
         {
@@ -207,15 +222,63 @@ function LocalBusinessSchema() {
           itemOffered: {
             '@type': 'Service',
             name: 'Window Cleaning',
-            description: 'Crystal clear window cleaning using pure water technology',
+            description: 'Streak-free window cleaning using pure deionised water technology. Frames and sills included.',
           },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Sofa & Upholstery Cleaning',
-            description: 'Professional sofa cleaning, couch cleaning, and fabric furniture cleaning',
+            name: 'Gutter Cleaning',
+            description: 'High-reach vacuum gutter cleaning with before and after camera footage. No ladders required.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Stain Removal',
+            description: 'Targeted stain removal for carpets and upholstery. Red wine, coffee, pet urine, and emergency callouts.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Driveway Cleaning',
+            description: 'Professional driveway cleaning for block paving, concrete, and tarmac. Re-sanding and sealing available.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Patio Cleaning',
+            description: 'Professional patio cleaning for Indian sandstone, porcelain, and natural stone. Black spot and algae removal.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Solar Panel Cleaning',
+            description: 'Pure water solar panel cleaning to restore up to 30% lost efficiency. Safe for all panel types.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Conservatory Cleaning',
+            description: 'Complete conservatory cleaning for roofs, glass panels, and UPVC frames. Polycarbonate and glass specialist.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Mattress Cleaning',
+            description: 'Professional mattress cleaning to remove dust mites, allergens, stains, and odours. All sizes and types.',
           },
         },
       ],
@@ -242,6 +305,14 @@ function WebSiteSchema() {
       '@id': `${siteConfig.url}/#organization`,
     },
     inLanguage: 'en-GB',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteConfig.url}/blog?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   return (
