@@ -5,6 +5,7 @@ import { Container, Section, Icon, AnimatedSection } from '@/components/ui';
 import { Breadcrumbs, CrossHubLinks } from '@/components/seo';
 import { locations, services, siteConfig, getLocationBySlug, customerStatsDisplay, reviewStats } from '@/lib/constants';
 import { ContactSection } from '@/features/home/client';
+import { AreasGrid } from './AreasGrid';
 
 export const metadata: Metadata = {
   title: `Areas We Cover in Essex & East London | ${siteConfig.name}`,
@@ -186,43 +187,19 @@ export default function AreasPage() {
         </Container>
       </Section>
 
-      {/* Regional Grid */}
+      {/* Regional Grid with Service Selector */}
       <Section className="bg-white">
         <Container>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {regions.map((region) => {
-              const townLocations = region.towns
+          <AreasGrid
+            regions={regions.map((region) => ({
+              name: region.name,
+              towns: region.towns
                 .map(slug => getLocationBySlug(slug))
-                .filter((loc): loc is NonNullable<ReturnType<typeof getLocationBySlug>> => !!loc);
-
-              return (
-                <div
-                  key={region.name}
-                  className="bg-neutral-50 rounded-xl p-6 border border-neutral-200"
-                >
-                  <div className="flex items-center gap-2 mb-4">
-                    <Icon name="map-pin" size={20} className="text-primary-700" />
-                    <h2 className="text-lg font-semibold text-neutral-900">
-                      {region.name}
-                    </h2>
-                  </div>
-
-                  <ul className="space-y-2">
-                    {townLocations.map((location) => (
-                      <li key={location.slug}>
-                        <Link
-                          href={`/carpet-cleaning/${location.slug}`}
-                          className="text-sm text-neutral-700 hover:text-primary-700 transition-colors"
-                        >
-                          {location.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
+                .filter((loc): loc is NonNullable<ReturnType<typeof getLocationBySlug>> => !!loc)
+                .map(loc => ({ slug: loc.slug, name: loc.name })),
+            }))}
+            services={services.map(s => ({ slug: s.slug, shortName: s.shortName }))}
+          />
 
           <p className="text-center text-sm text-neutral-500 mt-8">
             Don&apos;t see your area? We likely still cover it.{' '}
