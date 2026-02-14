@@ -59,13 +59,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }));
 
-  // Location hub pages (/areas/[location] - 25 pages)
-  const locationPages: MetadataRoute.Sitemap = locations.map((location) => ({
-    url: `${baseUrl}/areas/${location.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
+  // Location hub pages removed — service×location pages cover all location targeting
+  const locationPages: MetadataRoute.Sitemap = [];
 
   // Service x Location pages (programmatic SEO - 200 pages)
   // URL structure: /[service]/[location] (e.g., /carpet-cleaning/chelmsford)

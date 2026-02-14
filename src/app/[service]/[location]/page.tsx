@@ -239,6 +239,12 @@ function getLocationFAQs(service: Service, location: Location) {
     });
   }
 
+  // "Near me" FAQ — targets local search intent
+  faqs.push({
+    question: `Where can I find ${primary.toLowerCase()} near me in ${location.name}?`,
+    answer: `${siteConfig.name} is a local, family-run ${primary.toLowerCase()} company covering all of ${location.name}${location.postcodeAreas && location.postcodeAreas.length > 0 ? ` including ${location.postcodeAreas.join(', ')} postcodes` : ''}. We bring professional, truck-mounted equipment directly to your door — no need to travel or drop off. Book online or call for a free, no-obligation quote.`,
+  });
+
   return faqs;
 }
 

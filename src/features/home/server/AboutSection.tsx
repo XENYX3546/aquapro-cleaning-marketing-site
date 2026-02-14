@@ -113,10 +113,10 @@ export function AboutSection() {
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 text-xl leading-none mb-1">
-                    10+ Years
+                    Est. 2024
                   </div>
                   <div className="text-sm font-medium text-slate-500">
-                    Experience
+                    Family Business
                   </div>
                 </div>
               </div>

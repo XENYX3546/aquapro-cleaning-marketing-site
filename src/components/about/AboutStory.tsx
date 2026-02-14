@@ -118,10 +118,10 @@ export function AboutStory() {
             <div className="flex flex-wrap gap-8 border-y border-slate-200 py-8">
               <div>
                 <div className="text-3xl font-extrabold text-slate-900 mb-1">
-                  10+
+                  2024
                 </div>
                 <div className="text-xs text-slate-500 font-bold uppercase tracking-wide">
-                  Years Active
+                  Established
                 </div>
               </div>
               <div className="w-px bg-slate-200 h-auto hidden sm:block" />

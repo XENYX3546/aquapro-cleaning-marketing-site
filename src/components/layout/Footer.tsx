@@ -133,7 +133,7 @@ export function Footer() {
               {footerLocations.slice(0, 6).map((location) => (
                 <li key={location.slug}>
                   <Link
-                    href={`/areas/${location.slug}`}
+                    href={`/carpet-cleaning/${location.slug}`}
                     className="text-slate-400 hover:text-white text-sm transition-colors"
                   >
                     {location.name}

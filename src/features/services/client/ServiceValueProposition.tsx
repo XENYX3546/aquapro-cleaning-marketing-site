@@ -34,7 +34,7 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     eyebrow: 'Real Results',
     headline: 'See Before &',
     highlightWord: 'After',
-    description: 'Your carpets will look, feel, and smell like new, or we re-clean for free. Our carpet cleaners use deep extraction to remove what vacuuming leaves behind: embedded dirt, allergens, and stubborn stains.',
+    description: 'Your carpets will look, feel, and smell like new, or we re-clean for free. Our carpet cleaners use truck-mounted hot water extraction machines that clean at over 150°C, removing up to 98% of embedded dirt, allergens, and stubborn stains that regular vacuuming leaves behind.',
     sliderHint: 'Drag to compare',
     inclusions: [
       'Deep hot water extraction clean',
@@ -322,7 +322,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
           </p>
           {profile && location && (
             <p className="text-slate-500 text-sm md:text-base mt-3 max-w-2xl mx-auto">
-              {location.name} properties — typically {profile.housingStock} — face {profile.environmentalFactors.slice(0, 2).join(' and ')}, which makes regular professional cleaning essential. The area&apos;s {profile.waterHardness} water leaves mineral residue that builds up over time.
+              Most properties around {location.name} feature {profile.housingStock}, leaving them particularly susceptible to {profile.environmentalFactors.slice(0, 2).join(' and ')}. Combine that with the area&apos;s {profile.waterHardness} water — which gradually deposits minerals on surfaces and fibres — and you can see why regular deep cleaning makes such a difference here.
             </p>
           )}
         </div>
@@ -341,7 +341,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
               {/* Clean Image (Right Side / Background) */}
               <Image
                 src={afterImage}
-                alt={`After ${service.name.toLowerCase()}`}
+                alt={`Clean carpet after professional ${service.name.toLowerCase()} — stains and dirt removed`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 quality={50}
@@ -365,7 +365,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
                 <div className="absolute inset-0" style={{ width: containerWidth || '100%' }}>
                   <Image
                     src={beforeImage}
-                    alt={`Before ${service.name.toLowerCase()}`}
+                    alt={`Stained carpet before professional ${service.name.toLowerCase()}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     quality={50}

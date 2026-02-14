@@ -58,7 +58,7 @@ export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps)
             <div className="relative aspect-video w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50">
               <Image
                 src={service.image || DEFAULT_IMAGE_URL}
-                alt={`${service.name} Process`}
+                alt={`Professional ${service.name.toLowerCase()} equipment and process in action`}
                 fill
                 sizes="(max-width: 768px) 100vw, 768px"
                 quality={75}

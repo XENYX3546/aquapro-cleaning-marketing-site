@@ -41,8 +41,8 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <Award className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">Trained Pros</h3>
-            <p className="text-slate-500 text-xs">Certified Team</p>
+            <h3 className="font-bold text-slate-900 text-sm">Certified Technicians</h3>
+            <p className="text-slate-500 text-xs">City &amp; Guilds Qualified</p>
           </div>
 
           {/* Stat 2 */}
@@ -50,7 +50,7 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <Users className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">{customerStatsDisplay.totalCustomersShort} Clients</h3>
+            <h3 className="font-bold text-slate-900 text-sm">{customerStatsDisplay.totalCustomersShort} Served</h3>
             <p className="text-slate-500 text-xs">Happy Customers</p>
           </div>
 
@@ -59,8 +59,8 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <Star className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">5 Star Rated</h3>
-            <p className="text-slate-500 text-xs">{reviewStatsDisplay.totalReviews} Reviews</p>
+            <h3 className="font-bold text-slate-900 text-sm">{reviewStatsDisplay.averageRating} Rating</h3>
+            <p className="text-slate-500 text-xs">{reviewStatsDisplay.totalReviews} Verified Reviews</p>
           </div>
 
           {/* Stat 4 */}
@@ -68,8 +68,8 @@ function MobileTrustStats() {
             <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B9CB6] flex items-center justify-center mx-auto mb-2">
               <ShieldCheck className="w-5 h-5" strokeWidth={2} />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">Fully Insured</h3>
-            <p className="text-slate-500 text-xs">100% Protection</p>
+            <h3 className="font-bold text-slate-900 text-sm">£5M Insured</h3>
+            <p className="text-slate-500 text-xs">Full Liability Cover</p>
           </div>
         </div>
       </div>
@@ -132,37 +132,39 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
                    {location ? `Serving ${location.name}` : 'Why Choose Us'}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
-                   Expert {variation}{locationText} <span className="text-[#1B9CB6]">You Can Trust</span>
+                  {location
+                    ? <>Trusted by <span className="text-[#1B9CB6]">{location.name} Homeowners</span></>
+                    : <>{variation} <span className="text-[#1B9CB6]">You Can Trust</span></>}
                 </h2>
                 <p className="text-slate-600 text-lg md:text-xl mb-4">
-                   Over {customerStatsDisplay.totalCustomersPlus} Essex homeowners trust <strong className="font-semibold text-slate-900">{siteConfig.name}</strong> for <strong className="font-semibold text-slate-900">{variation.toLowerCase()}</strong>. Commercial-grade equipment. Trained technicians. Done right, first time.
+                   {siteConfig.name} has looked after over {customerStatsDisplay.totalCustomersPlus} homeowners{location ? ` across ${location.county}` : ''}, earning a reputation as a dependable, family-run <strong className="font-semibold text-slate-900">{service.name.toLowerCase()} company</strong>. Every visit is carried out by trained, insured technicians who bring commercial-grade equipment — not the rental machines you&apos;d find at the supermarket.
                 </p>
                 <div className="space-y-3 text-slate-600 text-base md:text-lg">
                    {profile && profile.commonProblems.length > 0 && (
                      <p>
-                       <strong className="font-semibold text-slate-800">{location!.name}</strong> homeowners often deal with {profile.commonProblems.join(', ')} — our {variation.toLowerCase()} tackles all of it.
+                       In <strong className="font-semibold text-slate-800">{location!.name}</strong>, the most common issues we encounter are {profile.commonProblems.join(', ')}. These tend to worsen gradually when left untreated, but a thorough deep clean makes a visible difference straight away.
                      </p>
                    )}
                    {profile && (
                      <p>
-                       Most homes here are {profile.housingStock}. The area&apos;s {profile.waterHardness} water leaves mineral deposits that affect everything from carpets to exterior surfaces — professional cleaning removes what regular maintenance can&apos;t.
+                       The housing around {location!.name} is largely {profile.housingStock}, and the area&apos;s {profile.waterHardness} water leaves behind mineral deposits that regular hoovering and wiping can&apos;t shift. A professional-grade extraction reaches deep into fibres and surfaces to pull out what day-to-day maintenance misses.
                      </p>
                    )}
                    <p>
-                      Free re-clean if not satisfied. Fully insured. No hidden fees.{location?.postcodeAreas && location.postcodeAreas.length > 0 ? ` We cover all ${location.postcodeAreas.join(', ')} postcodes.` : ''}
+                      We stand behind every job with a satisfaction guarantee, full public liability insurance, and transparent fixed pricing with no hidden charges.{location?.postcodeAreas && location.postcodeAreas.length > 0 ? ` Our team covers all ${location.postcodeAreas.join(', ')} postcodes.` : ''}
                    </p>
                    {neighbors.length > 0 && (
                      <p>
-                       Our service covers <strong className="font-semibold text-slate-800">{neighbors.slice(0, 3).join(', ')}</strong> and {neighbors[3] ?? neighbors[0]} — everything your property needs.
+                       Beyond the core clean, our technicians are skilled in <strong className="font-semibold text-slate-800">{neighbors.slice(0, 3).join(', ')}</strong>{neighbors[3] ? `, and ${neighbors[3]}` : ''} — so whatever condition your property is in, we have the tools and the know-how to sort it.
                      </p>
                    )}
                    {related.length >= 2 && location && (
                      <p>
-                       Many of our {location.name} {variation.toLowerCase()} customers also book{' '}
+                       Quite a few of our {location.name} customers book{' '}
                        <Link href={`/${related[0].slug}/${location.slug}`} className="text-[#1B9CB6] font-semibold hover:underline">{related[0].label}</Link>
                        {' '}and{' '}
                        <Link href={`/${related[1].slug}/${location.slug}`} className="text-[#1B9CB6] font-semibold hover:underline">{related[1].label}</Link>
-                       {' '}at the same time — same team, one visit.
+                       {' '}alongside their {service.name.toLowerCase()} — same team, same equipment, and usually cheaper than booking separately.
                      </p>
                    )}
                 </div>

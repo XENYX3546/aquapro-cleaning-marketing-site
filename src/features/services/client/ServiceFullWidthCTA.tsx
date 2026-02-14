@@ -20,18 +20,19 @@ export function ServiceFullWidthCTA({ service, location }: ServiceFullWidthCTAPr
 
   const keywords = getServiceKeywords(service.slug);
   const variation = keywords.variations[3] ?? keywords.primary;
-  const locationText = location ? ` ${location.name}` : '';
 
   return (
     <section className="bg-slate-900 py-12 lg:py-16">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-3">
-          Ready for Professional {variation}{locationText}?
+          {location
+            ? <>Book Your {service.name} in <span className="text-[#2ABED2]">{location.name}</span></>
+            : `Ready for ${variation}?`}
         </h2>
         <p className="text-slate-300 text-base md:text-lg mb-8 max-w-2xl mx-auto">
           {location
-            ? <>{location.name} residents get fixed pricing, no hidden fees, and a free re-clean if not satisfied.</>
-            : `Fixed pricing. No hidden fees. Free re-clean if not satisfied.`}
+            ? <>Join thousands of {location.name} homeowners who already trust us with their properties. Transparent pricing, no surprises, and a guarantee that puts you in control.</>
+            : `Thousands of homeowners already trust us. Transparent pricing, no surprises, and a guarantee that puts you in control.`}
         </p>
 
         <button

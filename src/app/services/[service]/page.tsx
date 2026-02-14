@@ -78,9 +78,8 @@ function generateServiceSchema(service: ReturnType<typeof getServiceBySlug>) {
       '@id': `${siteConfig.url}/#organization`,
     },
     areaServed: {
-      '@type': 'AdministrativeArea',
-      name: 'Essex',
-      containedInPlace: { '@type': 'Country', name: 'United Kingdom' },
+      '@type': 'Country',
+      name: 'United Kingdom',
     },
   };
 }
@@ -168,7 +167,7 @@ export default async function ServicePage({ params }: Props) {
         moreReviews={getAllReviewsForService(service.id)}
         tagline={`${service.shortName} Reviews`}
         title={<>What Our <span className="text-brand-500">{service.name}</span> Customers Say</>}
-        subtitle={`Real reviews from Essex homeowners who used our ${service.name.toLowerCase()} service.`}
+        subtitle={`Real reviews from homeowners who used our ${service.name.toLowerCase()} service.`}
       />
       <ServiceHowItWorks service={service} />
       {service.slug === 'carpet-cleaning' && <RugCleaningSection />}

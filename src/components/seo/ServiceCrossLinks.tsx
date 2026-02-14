@@ -60,10 +60,10 @@ export function ServiceCrossLinks({
         </div>
         <div className="mt-3">
           <Link
-            href={`/areas/${location.slug}`}
+            href="/areas"
             className="inline-flex items-center gap-1 text-xs text-neutral-500 hover:text-neutral-700"
           >
-            All services in {location.name}
+            All areas we cover
             <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
@@ -183,10 +183,6 @@ export function ServiceCrossLinks({
               <span>·</span>
             </>
           )}
-          <Link href={`/areas/${location.slug}`} className="hover:text-neutral-600 transition-colors">
-            All services in {location.name}
-          </Link>
-          <span>·</span>
           <Link href="/services" className="hover:text-neutral-600 transition-colors">
             All services
           </Link>

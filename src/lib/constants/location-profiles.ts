@@ -128,54 +128,42 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
 // ── Slug → archetype mapping ────────────────────────────────────────────────
 
 const coastalSlugs = [
-  'southend-on-sea', 'leigh-on-sea', 'westcliff-on-sea', 'shoeburyness', 'thorpe-bay',
-  'clacton-on-sea', 'frinton-on-sea', 'walton-on-the-naze', 'harwich', 'dovercourt',
-  'jaywick', 'holland-on-sea', 'west-mersea', 'brightlingsea', 'point-clear',
-  'great-wakering', 'barling', 'foulness', 'st-osyth', 'great-clacton',
-  'parkeston', 'ramsey',
+  'southend-on-sea', 'leigh-on-sea', 'westcliff-on-sea',
+  'clacton-on-sea', 'frinton-on-sea', 'walton-on-the-naze', 'harwich',
+  'west-mersea', 'brightlingsea',
 ];
 
 const estuarySlugs = [
-  'canvey-island', 'maldon', 'heybridge', 'burnham-on-crouch', 'wivenhoe',
-  'rowhedge', 'hullbridge', 'manningtree', 'tollesbury', 'goldhanger',
-  'salcott', 'south-woodham-ferrers', 'mistley', 'alresford', 'fingringhoe',
-  'langenhoe', 'peldon', 'wrabness', 'thorrington',
+  'canvey-island', 'maldon', 'burnham-on-crouch', 'wivenhoe',
+  'manningtree', 'south-woodham-ferrers',
 ];
 
 const thamesSlugs = [
-  'grays', 'tilbury', 'stanford-le-hope', 'corringham', 'chadwell-st-mary',
-  'purfleet', 'west-thurrock', 'rainham', 'south-ockendon', 'aveley',
+  'grays', 'tilbury', 'stanford-le-hope', 'rainham',
 ];
 
 const forestSlugs = [
-  'epping', 'loughton', 'chigwell', 'buckhurst-hill', 'theydon-bois',
-  'chingford', 'hainault', 'woodford', 'waltham-abbey', 'abridge',
-  'coopersale', 'thornwood',
+  'epping', 'loughton', 'chigwell', 'buckhurst-hill',
+  'chingford', 'woodford', 'waltham-abbey',
 ];
 
 const newBuildSlugs = [
-  'basildon', 'harlow', 'stanway', 'chafford-hundred', 'springfield',
-  'stratford', 'pitsea', 'laindon', 'lakeside',
+  'basildon', 'harlow', 'stratford',
 ];
 
 const historicSlugs = [
   'chelmsford', 'colchester', 'saffron-walden', 'rochford', 'witham',
-  'braintree', 'coggeshall', 'bocking', 'essex',
+  'braintree', 'coggeshall', 'essex',
 ];
 
 const urbanSlugs = [
   'romford', 'hornchurch', 'upminster', 'ilford', 'barking', 'dagenham',
-  'walthamstow', 'leyton', 'leytonstone', 'east-ham', 'wanstead',
-  'manor-park', 'forest-gate', 'woodgrange-park',
+  'walthamstow', 'leyton', 'east-ham', 'wanstead',
 ];
 
 const commuterSlugs = [
   'brentwood', 'billericay', 'wickford', 'rayleigh', 'benfleet',
-  'hockley', 'ingatestone', 'shenfield', 'hadleigh', 'thundersley',
-  'marks-tey', 'hatfield-peverel', 'great-baddow', 'broomfield', 'prittlewell',
-  'hawkwell', 'south-benfleet', 'eastwood', 'shotgate', 'great-burstead',
-  'hutton', 'pilgrims-hatch', 'warley', 'galleywood', 'boreham',
-  'langdon-hills',
+  'hockley', 'ingatestone',
 ];
 
 // Everything else defaults to 'rural'

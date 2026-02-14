@@ -41,23 +41,23 @@ export const metadata: Metadata = {
 const regions = [
   {
     name: 'Southend & South Essex',
-    towns: ['southend-on-sea', 'leigh-on-sea', 'westcliff-on-sea', 'rayleigh', 'rochford', 'hockley', 'shoeburyness'],
+    towns: ['southend-on-sea', 'leigh-on-sea', 'westcliff-on-sea', 'rayleigh', 'rochford', 'hockley'],
   },
   {
     name: 'Basildon & Surroundings',
-    towns: ['basildon', 'wickford', 'benfleet', 'canvey-island', 'hadleigh', 'thundersley', 'pitsea'],
+    towns: ['basildon', 'wickford', 'benfleet', 'canvey-island', 'billericay'],
   },
   {
-    name: 'Billericay & Brentwood',
-    towns: ['billericay', 'brentwood', 'shenfield', 'ingatestone', 'hutton'],
+    name: 'Brentwood & Mid Essex',
+    towns: ['brentwood', 'ingatestone', 'danbury', 'south-woodham-ferrers'],
   },
   {
-    name: 'Chelmsford & Mid Essex',
-    towns: ['chelmsford', 'south-woodham-ferrers', 'danbury', 'writtle', 'great-baddow', 'broomfield'],
+    name: 'Chelmsford',
+    towns: ['chelmsford'],
   },
   {
     name: 'Colchester & North Essex',
-    towns: ['colchester', 'wivenhoe', 'west-mersea', 'brightlingsea', 'tiptree', 'dedham', 'stanway'],
+    towns: ['colchester', 'wivenhoe', 'west-mersea', 'brightlingsea', 'tiptree', 'dedham'],
   },
   {
     name: 'Tendring & Coast',
@@ -65,15 +65,15 @@ const regions = [
   },
   {
     name: 'Braintree & Witham',
-    towns: ['braintree', 'witham', 'halstead', 'coggeshall', 'kelvedon'],
+    towns: ['braintree', 'witham', 'halstead', 'coggeshall'],
   },
   {
     name: 'Maldon & Dengie',
-    towns: ['maldon', 'burnham-on-crouch', 'heybridge', 'southminster'],
+    towns: ['maldon', 'burnham-on-crouch'],
   },
   {
     name: 'Thurrock',
-    towns: ['grays', 'stanford-le-hope', 'tilbury', 'south-ockendon', 'chafford-hundred', 'purfleet'],
+    towns: ['grays', 'stanford-le-hope', 'tilbury'],
   },
   {
     name: 'Epping Forest & West Essex',
@@ -85,7 +85,7 @@ const regions = [
   },
   {
     name: 'East London',
-    towns: ['romford', 'hornchurch', 'upminster', 'ilford', 'woodford', 'stratford', 'walthamstow', 'barking', 'dagenham', 'chingford'],
+    towns: ['romford', 'hornchurch', 'upminster', 'ilford', 'woodford', 'stratford', 'walthamstow', 'barking', 'dagenham', 'chingford', 'leyton', 'east-ham', 'wanstead', 'rainham'],
   },
 ];
 
@@ -102,7 +102,7 @@ const areasJsonLd = {
   },
 };
 
-// LocalBusiness with area served at county level (not 188 individual cities)
+// LocalBusiness with area served at county level (not individual cities)
 const localBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -211,7 +211,7 @@ export default function AreasPage() {
                     {townLocations.map((location) => (
                       <li key={location.slug}>
                         <Link
-                          href={`/areas/${location.slug}`}
+                          href={`/carpet-cleaning/${location.slug}`}
                           className="text-sm text-neutral-700 hover:text-primary-700 transition-colors"
                         >
                           {location.name}

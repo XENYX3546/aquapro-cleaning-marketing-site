@@ -69,7 +69,7 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
     {
       icon: <Clock className="w-6 h-6" strokeWidth={1.5} />,
       title: "Dry in Hours, Not Days",
-      description: "Our extraction system removes 95% of moisture. Walk on your carpets the same day."
+      description: "Our truck-mounted extraction system removes 95% of moisture, cutting standard drying time from 24 hours to under 4. Walk on your carpets the same day."
     },
     {
       icon: <PawPrint className="w-6 h-6" strokeWidth={1.5} />,

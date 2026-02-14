@@ -88,7 +88,6 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
 
   // Location-aware text
   const locationText = location ? ` ${location.name}` : '';
-  const localTeamText = location ? `Local ${location.county} team.` : '';
 
   return (
     <div className="relative bg-[#0F172A] pt-8 pb-6 md:pb-12 lg:py-24 overflow-hidden">
@@ -162,7 +161,7 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
             {/* Subtext */}
             <p className="text-lg lg:text-xl font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               {location
-                ? <><strong className="font-semibold text-white">{siteConfig.name} provides professional {primary.toLowerCase()} {location.name}</strong>, {location.localHook}{location.postcodeAreas && location.postcodeAreas.length > 0 ? `, covering ${location.postcodeAreas.join(', ')} postcodes` : ''}. Done right, first time, or we re-clean free. {localTeamText}</>
+                ? <><strong className="font-semibold text-white">{siteConfig.name} delivers professional {primary.toLowerCase()} across {location.name}</strong>, {location.localHook}{location.postcodeAreas && location.postcodeAreas.length > 0 ? `, covering ${location.postcodeAreas.join(', ')} postcodes` : ''}. If it&apos;s not right, we come back and re-clean at no extra cost — that&apos;s our promise as your local {location.county} team.</>
                 : hasCustomHero
                   ? service.hero!.description
                   : service.description

@@ -1,4 +1,6 @@
 import type { NextConfig } from 'next';
+import { services } from './src/lib/constants/services';
+import { locations } from './src/lib/constants/locations';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -9,6 +11,15 @@ const nextConfig: NextConfig = {
     inlineCss: true,
     turbopackFileSystemCacheForDev: true,
     optimizePackageImports: ['lucide-react', 'framer-motion'],
+  },
+  async redirects() {
+    return services.flatMap((service) =>
+      locations.map((location) => ({
+        source: `/${service.slug}-${location.slug}`,
+        destination: `/${service.slug}/${location.slug}`,
+        permanent: true,
+      }))
+    );
   },
   images: {
     formats: ['image/avif', 'image/webp'],
