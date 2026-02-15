@@ -13,13 +13,22 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   async redirects() {
-    return services.flatMap((service) =>
-      locations.map((location) => ({
-        source: `/${service.slug}-${location.slug}`,
-        destination: `/${service.slug}/${location.slug}`,
+    return [
+      // Old blog URL pattern: /post/{slug} → /blog/{slug}
+      {
+        source: '/post/:slug',
+        destination: '/blog/:slug',
         permanent: true,
-      }))
-    );
+      },
+      // Old service×location pattern: /carpet-cleaning-basildon → /carpet-cleaning/basildon
+      ...services.flatMap((service) =>
+        locations.map((location) => ({
+          source: `/${service.slug}-${location.slug}`,
+          destination: `/${service.slug}/${location.slug}`,
+          permanent: true,
+        }))
+      ),
+    ];
   },
   images: {
     formats: ['image/avif', 'image/webp'],
