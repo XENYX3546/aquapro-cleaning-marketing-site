@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone } from 'lucide-react';
+import { Phone, CalendarCheck } from 'lucide-react';
 import { siteConfig } from '@/lib/constants';
+import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 
@@ -11,7 +12,7 @@ interface ServiceStickyCTAProps {
   location?: Location;
 }
 
-export function ServiceStickyCTA({ service: _service, location: _location }: ServiceStickyCTAProps) {
+export function ServiceStickyCTA({ service, location: _location }: ServiceStickyCTAProps) {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -69,12 +70,19 @@ export function ServiceStickyCTA({ service: _service, location: _location }: Ser
           <Phone className="w-4 h-4" />
           {siteConfig.contact.phone}
         </button>
-        <button
-          onClick={scrollToForm}
-          className="flex-1 bg-[#E30663] text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-[#C20555]"
-        >
-          See My Price
-        </button>
+        {service.selfBookable ? (
+          <BookOnlineButton className="flex-1 bg-[#1B9CB6] text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-[#158a9e] flex items-center justify-center gap-2">
+            <CalendarCheck className="w-4 h-4" />
+            Book Online
+          </BookOnlineButton>
+        ) : (
+          <button
+            onClick={scrollToForm}
+            className="flex-1 bg-[#E30663] text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-[#C20555]"
+          >
+            See My Price
+          </button>
+        )}
       </div>
     </>
   );

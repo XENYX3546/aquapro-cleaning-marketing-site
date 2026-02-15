@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { Star, Check } from 'lucide-react';
+import { Star, Check, CalendarCheck } from 'lucide-react';
 import { LeadForm } from '@/components/ui/LeadForm';
+import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay, getServiceKeywords, siteConfig } from '@/lib/constants';
@@ -181,6 +182,16 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
                 ))}
               </ul>
             </div>
+
+            {/* Book Online CTA — self-bookable services only */}
+            {service.selfBookable && (
+              <div className="flex justify-center lg:justify-start mt-6 lg:mt-8 mb-2 lg:mb-0">
+                <BookOnlineButton className="inline-flex items-center gap-2.5 border-2 border-[#2ABED2]/50 hover:border-[#2ABED2] bg-[#2ABED2]/10 hover:bg-[#2ABED2] text-white font-bold py-3 px-7 rounded-xl shadow-lg hover:shadow-xl transition-all text-base group">
+                  <CalendarCheck className="w-5 h-5 text-[#2ABED2] group-hover:text-white transition-colors" />
+                  <span>Book Online Now</span>
+                </BookOnlineButton>
+              </div>
+            )}
 
             {/* Desktop Only: Actual Logos */}
             <div className="hidden lg:block">

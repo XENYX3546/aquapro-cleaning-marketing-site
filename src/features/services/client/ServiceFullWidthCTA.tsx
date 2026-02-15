@@ -1,6 +1,7 @@
 'use client';
 
-import { ArrowRight, Star, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Star, ShieldCheck, CalendarCheck } from 'lucide-react';
+import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay, customerStatsDisplay, getServiceKeywords } from '@/lib/constants';
@@ -35,13 +36,25 @@ export function ServiceFullWidthCTA({ service, location }: ServiceFullWidthCTAPr
             : `Thousands of homeowners already trust us. Transparent pricing, no surprises, and a guarantee that puts you in control.`}
         </p>
 
-        <button
-          onClick={scrollToQuoteForm}
-          className="inline-flex items-center gap-3 bg-cta hover:bg-cta-hover text-white font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-lg mb-8"
-        >
-          Get My Free Quote
-          <ArrowRight className="w-5 h-5" />
-        </button>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <button
+            onClick={scrollToQuoteForm}
+            className="inline-flex items-center gap-3 bg-cta hover:bg-cta-hover text-white font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-lg"
+          >
+            Get My Free Quote
+            <ArrowRight className="w-5 h-5" />
+          </button>
+
+          {service.selfBookable && (
+            <>
+              <span className="text-slate-500 text-sm font-medium hidden sm:block">or</span>
+              <BookOnlineButton className="inline-flex items-center gap-2.5 border-2 border-[#2ABED2]/50 hover:border-[#2ABED2] hover:bg-[#2ABED2] text-[#2ABED2] hover:text-white font-bold py-4 px-8 rounded-xl transition-all transform hover:-translate-y-0.5 text-lg group">
+                <CalendarCheck className="w-5 h-5" />
+                <span>Book Online</span>
+              </BookOnlineButton>
+            </>
+          )}
+        </div>
 
         <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
           <div className="flex items-center gap-1.5">
