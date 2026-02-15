@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { siteConfig, ctaLinks, services } from '@/lib/constants';
+import { siteConfig, services } from '@/lib/constants';
+import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
 import { cn } from '@/lib/utils';
 import {
   Menu,
@@ -245,13 +246,10 @@ export function Header() {
               >
                 <Phone className="h-5 w-5" />
               </a>
-              <Link
-                href={ctaLinks.quote}
-                className="bg-cta hover:bg-cta-hover text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-cta/25 transform hover:-translate-y-0.5 flex items-center gap-2 group"
-              >
-                Get Free Quote
+              <BookOnlineButton className="bg-cta hover:bg-cta-hover text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-cta/25 transform hover:-translate-y-0.5 flex items-center gap-2 group">
+                Get Quote & Book Online
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </BookOnlineButton>
             </div>
 
             {/* Mobile Actions */}
@@ -408,14 +406,12 @@ export function Header() {
 
         {/* Sticky Bottom CTA */}
         <div className="border-t border-white/10 bg-slate-900 p-4 pb-8">
-          <Link
-            href={ctaLinks.quote}
-            onClick={() => setMobileMenuOpen(false)}
+          <BookOnlineButton
             className="w-full bg-cta active:bg-cta-hover text-white px-6 py-4 rounded-xl font-bold text-base shadow-lg flex items-center justify-center gap-2 mb-3"
           >
-            Get Free Quote
+            Get Quote & Book Online
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </BookOnlineButton>
 
           <a
             href={siteConfig.contact.phoneHref}

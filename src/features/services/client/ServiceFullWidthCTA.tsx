@@ -45,10 +45,10 @@ export function ServiceFullWidthCTA({ service, location }: ServiceFullWidthCTAPr
             <ArrowRight className="w-5 h-5" />
           </button>
 
-          {service.selfBookable && (
+          {service.slug === 'carpet-cleaning' && (
             <>
               <span className="text-slate-500 text-sm font-medium hidden sm:block">or</span>
-              <BookOnlineButton className="inline-flex items-center gap-2.5 border-2 border-[#2ABED2]/50 hover:border-[#2ABED2] hover:bg-[#2ABED2] text-[#2ABED2] hover:text-white font-bold py-4 px-8 rounded-xl transition-all transform hover:-translate-y-0.5 text-lg group">
+              <BookOnlineButton className="inline-flex items-center gap-2.5 bg-cta hover:bg-cta-hover text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-lg">
                 <CalendarCheck className="w-5 h-5" />
                 <span>Book Online</span>
               </BookOnlineButton>

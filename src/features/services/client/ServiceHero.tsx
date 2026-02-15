@@ -183,10 +183,10 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
               </ul>
             </div>
 
-            {/* Book Online CTA — self-bookable services only */}
-            {service.selfBookable && (
+            {/* Book Online CTA — carpet cleaning only */}
+            {service.slug === 'carpet-cleaning' && (
               <div className="flex justify-center lg:justify-start mt-6 lg:mt-8 mb-2 lg:mb-0">
-                <BookOnlineButton className="inline-flex items-center gap-2.5 border-2 border-[#2ABED2]/50 hover:border-[#2ABED2] bg-[#2ABED2]/10 hover:bg-[#2ABED2] text-white font-bold py-3 px-7 rounded-xl shadow-lg hover:shadow-xl transition-all text-base group">
+                <BookOnlineButton className="inline-flex items-center gap-2.5 bg-cta hover:bg-cta-hover text-white font-bold py-3 px-7 rounded-xl shadow-lg hover:shadow-xl transition-all text-base group">
                   <CalendarCheck className="w-5 h-5 text-[#2ABED2] group-hover:text-white transition-colors" />
                   <span>Book Online Now</span>
                 </BookOnlineButton>

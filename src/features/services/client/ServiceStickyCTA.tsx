@@ -70,8 +70,8 @@ export function ServiceStickyCTA({ service, location: _location }: ServiceSticky
           <Phone className="w-4 h-4" />
           {siteConfig.contact.phone}
         </button>
-        {service.selfBookable ? (
-          <BookOnlineButton className="flex-1 bg-[#1B9CB6] text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-[#158a9e] flex items-center justify-center gap-2">
+        {service.slug === 'carpet-cleaning' ? (
+          <BookOnlineButton className="flex-1 bg-cta text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-cta-hover flex items-center justify-center gap-2">
             <CalendarCheck className="w-4 h-4" />
             Book Online
           </BookOnlineButton>
