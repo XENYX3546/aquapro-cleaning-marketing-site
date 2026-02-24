@@ -41,6 +41,8 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
       'sea salt film building up on windows and fascias',
       'coastal damp driving moss and algae on roofs and patios',
       'sand and grit tracked into carpets and hallways',
+      'sea salt spray corroding gutters and downpipes',
+      'coastal humidity accelerating damp and mould indoors',
     ],
   },
   estuary: {
@@ -51,6 +53,8 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
       'riverside humidity encouraging mould and damp indoors',
       'tidal silt and mud staining driveways and ground floors',
       'estuary salt air corroding gutters and fascias',
+      'waterfront humidity driving algae on roofs and patios',
+      'mud tracked onto carpets and hallway flooring from riverside walks',
     ],
   },
   thames: {
@@ -61,6 +65,8 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
       'Thames-side humidity accelerating mould and damp',
       'industrial and road dust settling on windows and roofs',
       'heavy traffic soot coating render and fascias',
+      'road grime and debris clogging gutters',
+      'foot traffic wearing carpets and entrance areas',
     ],
   },
   forest: {
@@ -71,6 +77,8 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
       'heavy leaf fall clogging gutters every autumn',
       'tree canopy shade driving moss on roofs and fences',
       'pollen and sap coating driveways and windows',
+      'muddy boots tracking leaf debris onto carpets and hallways',
+      'dense tree cover encouraging damp and mould indoors',
     ],
   },
   'new-build': {
@@ -81,6 +89,8 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
       'construction dust settling in new carpets and upholstery',
       'block paving weed growth within the first couple of years',
       'render staining quickly on modern estates',
+      'construction debris clogging gutters on new estates',
+      'new-build windows filming over quickly from settling dust',
     ],
   },
   historic: {
@@ -91,6 +101,8 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
       'older properties trapping damp and encouraging mould',
       'town centre foot traffic wearing carpets and entrance areas',
       'mature street trees shedding leaves into gutters',
+      'moss and algae building up on period property roofs and patios',
+      'town centre pollution leaving grime on windows and render',
     ],
   },
   commuter: {
@@ -100,7 +112,9 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
     defaultProblems: [
       'heavy foot traffic wearing carpets and hallway flooring',
       'mature garden trees shedding leaves into gutters',
-      'established driveways collecting moss, oil, and tyre marks',
+      'established driveways collecting moss and tyre marks',
+      'school-run traffic film building up on windows',
+      'garden pollen and sap coating patio slabs and conservatory glass',
     ],
   },
   rural: {
@@ -108,9 +122,11 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
     housingStock: 'period cottages, farmhouses, and country homes',
     environmentalFactors: ['agricultural dust', 'country lane mud', 'exposed to weather'],
     defaultProblems: [
-      'country lane mud tracked onto floors after rain',
+      'country lane mud tracked onto carpets and floors after rain',
       'agricultural dust settling on windows and roofs',
       'exposed location catching wind-driven moss and algae',
+      'fallen branches and debris blocking gutters after storms',
+      'rural damp encouraging mould in older properties',
     ],
   },
   urban: {
@@ -121,6 +137,8 @@ const archetypeDefaults: Record<AreaArchetype, ArchetypeDefaults> = {
       'traffic pollution grime building up on windows and render',
       'high-density housing trapping damp and mould',
       'road dust and dirt settling on all exterior surfaces',
+      'urban moss and debris blocking gutters',
+      'foot traffic and city grime wearing carpets and hallway flooring',
     ],
   },
 };
@@ -197,17 +215,63 @@ export function getArchetype(slug: string): AreaArchetype {
 }
 
 /** Get enriched profile for a location, merging explicit data with archetype defaults */
-export function getLocationProfile(location: Location): LocationProfile {
+export function getLocationProfile(location: Location, serviceSlug?: string): LocationProfile {
   const archetype = getArchetype(location.slug);
   const defaults = archetypeDefaults[archetype];
+
+  const explicitProblems = location.commonProblems && location.commonProblems.length > 0
+    ? location.commonProblems
+    : defaults.defaultProblems;
+
+  let problems = explicitProblems;
+  if (serviceSlug) {
+    // Try filtering explicit location problems for this service
+    const filtered = matchProblemsForService(explicitProblems, serviceSlug);
+    if (filtered.length > 0) {
+      problems = filtered;
+    } else {
+      // No explicit matches — try archetype defaults for this service instead
+      const archetypeFiltered = matchProblemsForService(defaults.defaultProblems, serviceSlug);
+      problems = archetypeFiltered.length > 0 ? archetypeFiltered : explicitProblems;
+    }
+  }
 
   return {
     archetype,
     waterHardness: defaults.waterHardness,
     housingStock: defaults.housingStock,
     environmentalFactors: defaults.environmentalFactors,
-    commonProblems: location.commonProblems && location.commonProblems.length > 0
-      ? location.commonProblems
-      : defaults.defaultProblems,
+    commonProblems: problems,
   };
+}
+
+// Service-to-keyword mapping for filtering location problems by relevance
+// Multi-word phrases use substring matching; single words use word-boundary matching
+const serviceKeywordMap: Record<string, string[]> = {
+  'carpet-cleaning': ['carpet', 'floor', 'hallway', 'tracked onto', 'foot traffic', 'indoor', 'tenancy', 'pet odour', 'mud tracked', 'dust settling in', 'boots'],
+  'upholstery-cleaning': ['carpet', 'indoor', 'upholstery', 'sofa', 'furniture', 'pet odour', 'dust settling in', 'tenancy', 'soft furnishing', 'odour'],
+  'stain-removal': ['carpet', 'stain', 'floor', 'tracked onto', 'mud tracked', 'pet odour', 'pet stain', 'indoor', 'tenancy'],
+  'mattress-cleaning': ['indoor', 'damp', 'mould', 'humidity', 'allergen', 'dust mite'],
+  'roof-cleaning': ['roof', 'moss', 'algae', 'lichen', 'tile', 'canopy shade', 'exposed'],
+  'gutter-cleaning': ['gutter', 'leaf', 'leaves', 'downpipe', 'clogging', 'blocking', 'shedding', 'debris', 'fascia', 'overflow', 'corroding'],
+  'window-cleaning': ['window', 'glass', 'salt film', 'salt spray', 'dust settling on', 'grime', 'pollution', 'soot', 'pollen coating', 'film on'],
+  'pressure-washing': ['driveway', 'patio', 'path', 'block paving', 'tarmac', 'weed', 'oil stain', 'tyre', 'exterior surface', 'forecourt'],
+  'patio-cleaning': ['patio', 'slab', 'stone', 'algae', 'moss', 'black spot', 'outdoor', 'rain pooling'],
+  'driveway-cleaning': ['driveway', 'block paving', 'weed', 'oil stain', 'tyre', 'moss', 'tarmac'],
+  'conservatory-cleaning': ['conservatory', 'glass', 'algae', 'pollen', 'bird', 'humidity', 'damp', 'moss'],
+  'solar-panel-cleaning': ['solar', 'panel', 'pollen', 'bird', 'salt film', 'salt spray', 'sap', 'coating'],
+  'render-cleaning': ['render', 'wall', 'fascia', 'soot', 'pollution', 'render staining'],
+};
+
+function matchProblemsForService(problems: string[], serviceSlug: string): string[] {
+  const keywords = serviceKeywordMap[serviceSlug];
+  if (!keywords) return problems;
+
+  return problems.filter(problem => {
+    const lower = problem.toLowerCase();
+    return keywords.some(kw => {
+      if (kw.includes(' ')) return lower.includes(kw);
+      return new RegExp(`\\b${kw}\\b`).test(lower);
+    });
+  });
 }

@@ -124,8 +124,6 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
                   ))}
                 </div>
                 <span className="text-slate-300 text-xs lg:text-sm font-medium">{reviewStatsDisplay.averageRating} based on {reviewStatsDisplay.totalReviews} verified reviews</span>
-                <span className="text-slate-500 text-xs font-medium hidden sm:inline">·</span>
-                <span className="text-slate-400 text-xs font-medium hidden sm:inline">Updated {new Date(siteConfig.contentLastUpdated).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</span>
             </div>
 
             {/* Headline */}
@@ -148,21 +146,10 @@ export function ServiceHero({ service, location }: ServiceHeroProps) {
               )}
             </h1>
 
-            {/* BLUF pricing + availability */}
-            {location && service.startingFrom && (
-              <p className="text-sm lg:text-base font-semibold text-white/90 mb-4 lg:mb-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 px-4 sm:px-0">
-                <span className="text-[#2ABED2]">{service.startingFrom}</span>
-                <span className="text-slate-400">·</span>
-                <span>Same-week availability</span>
-                <span className="text-slate-400">·</span>
-                <span>Free quotes in 2 minutes</span>
-              </p>
-            )}
-
             {/* Subtext */}
             <p className="text-lg lg:text-xl font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               {location
-                ? <><strong className="font-semibold text-white">{siteConfig.name} delivers professional {primary.toLowerCase()} across {location.name}</strong>, {location.localHook}{location.postcodeAreas && location.postcodeAreas.length > 0 ? `, covering ${location.postcodeAreas.join(', ')} postcodes` : ''}. If it&apos;s not right, we come back and re-clean at no extra cost — that&apos;s our promise as your local {location.county} team.</>
+                ? <><strong className="font-semibold text-white">{siteConfig.name} delivers professional {primary.toLowerCase()} across {location.name}</strong>, {location.localHook}{location.postcodeAreas && location.postcodeAreas.length > 0 ? `, covering ${location.postcodeAreas.join(', ')} postcodes` : ''}. If it&apos;s not right, we come back and re-clean at no extra cost. That&apos;s our promise as your local {location.county} team.</>
                 : hasCustomHero
                   ? service.hero!.description
                   : service.description

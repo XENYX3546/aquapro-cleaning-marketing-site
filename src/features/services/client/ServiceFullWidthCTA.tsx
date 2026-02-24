@@ -1,10 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { ArrowRight, Star, ShieldCheck, CalendarCheck } from 'lucide-react';
 import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
-import { reviewStatsDisplay, customerStatsDisplay, getServiceKeywords } from '@/lib/constants';
+import { reviewStatsDisplay, customerStatsDisplay, getServiceKeywords, relatedServiceMap } from '@/lib/constants';
 
 interface ServiceFullWidthCTAProps {
   service: Service;
@@ -21,6 +22,7 @@ export function ServiceFullWidthCTA({ service, location }: ServiceFullWidthCTAPr
 
   const keywords = getServiceKeywords(service.slug);
   const variation = keywords.variations[3] ?? keywords.primary;
+  const related = relatedServiceMap[service.slug] ?? [];
 
   return (
     <section className="bg-slate-900 py-12 lg:py-16">
@@ -31,9 +33,11 @@ export function ServiceFullWidthCTA({ service, location }: ServiceFullWidthCTAPr
             : `Ready for ${variation}?`}
         </h2>
         <p className="text-slate-300 text-base md:text-lg mb-8 max-w-2xl mx-auto">
-          {location
-            ? <>Join thousands of {location.name} homeowners who already trust us with their properties. Transparent pricing, no surprises, and a guarantee that puts you in control.</>
-            : `Thousands of homeowners already trust us. Transparent pricing, no surprises, and a guarantee that puts you in control.`}
+          {location && related.length >= 2
+            ? <>Many {location.name} customers also book <Link href={`/${related[0].slug}/${location.slug}`} className="text-[#2ABED2] font-semibold hover:underline">{related[0].label.toLowerCase()}</Link> and <Link href={`/${related[1].slug}/${location.slug}`} className="text-[#2ABED2] font-semibold hover:underline">{related[1].label.toLowerCase()}</Link> alongside their {service.name.toLowerCase()}, same team, same equipment, and usually cheaper than booking separately.</>
+            : location
+              ? <>Join thousands of {location.name} homeowners who already trust us with their properties. Transparent pricing, no surprises, and a guarantee that puts you in control.</>
+              : `Thousands of homeowners already trust us. Transparent pricing, no surprises, and a guarantee that puts you in control.`}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">

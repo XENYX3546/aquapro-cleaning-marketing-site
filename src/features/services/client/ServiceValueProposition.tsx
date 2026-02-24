@@ -227,7 +227,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
 
   // Get service-specific content for CRO
   const sectionContent = getServiceContent(service.slug, service.name);
-  const profile = location ? getLocationProfile(location) : null;
+  const profile = location ? getLocationProfile(location, service.slug) : null;
 
   // Get service-specific before/after images (archetype varies the image shown)
   const { before: beforeImage, after: afterImage } = getServiceImages(service.slug, profile?.archetype);
@@ -324,9 +324,16 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
              {sectionContent.description}
           </p>
           {profile && location && (
-            <p className="text-slate-500 text-sm md:text-base mt-3 max-w-2xl mx-auto">
-              Most properties around {location.name} feature {profile.housingStock}, leaving them particularly susceptible to {profile.environmentalFactors.slice(0, 2).join(' and ')}. Combine that with the area&apos;s {profile.waterHardness} water — which gradually deposits minerals on surfaces and fibres — and you can see why regular deep cleaning makes such a difference here.
-            </p>
+            <>
+              <p className="text-slate-500 text-sm md:text-base mt-3 max-w-2xl mx-auto">
+                Most properties around {location.name} feature {profile.housingStock}, leaving them particularly susceptible to {profile.environmentalFactors.slice(0, 2).join(' and ')}. Combine that with the area&apos;s {profile.waterHardness} water, which gradually deposits minerals on surfaces and fibres, and you can see why regular deep cleaning makes such a difference here.
+              </p>
+              {profile.commonProblems.length > 0 && (
+                <p className="text-slate-500 text-sm md:text-base mt-3 max-w-2xl mx-auto">
+                  In {location.name}, the most common issues we encounter are {profile.commonProblems.join(', ')}. These tend to worsen gradually when left untreated, but a thorough deep clean makes a visible difference straight away.
+                </p>
+              )}
+            </>
           )}
         </div>
 
@@ -344,7 +351,7 @@ export function ServiceValueProposition({ service, location }: ServiceValuePropo
               {/* Clean Image (Right Side / Background) */}
               <Image
                 src={afterImage}
-                alt={`Clean carpet after professional ${service.name.toLowerCase()} — stains and dirt removed`}
+                alt={`Clean carpet after professional ${service.name.toLowerCase()}, stains and dirt removed`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 quality={50}

@@ -217,7 +217,7 @@ function generateSchemas(service: Service, location: Location, allFaqs: { questi
 
 function getLocationFAQs(service: Service, location: Location) {
   const primary = getServiceKeywords(service.slug).primary;
-  const profile = getLocationProfile(location);
+  const profile = getLocationProfile(location, service.slug);
   const nearbyNames = location.nearbyAreas
     .slice(0, 4)
     .map((slug) => getLocationBySlug(slug)?.name)
@@ -226,7 +226,7 @@ function getLocationFAQs(service: Service, location: Location) {
   const faqs: { question: string; answer: string }[] = [
     {
       question: `Do you cover ${location.name} for ${primary.toLowerCase()}?`,
-      answer: `Yes — we work ${location.localHook}${nearbyNames.length > 0 ? ` and also cover ${nearbyNames.join(', ')}` : ''}. Same team, same equipment, same fixed pricing wherever you are in ${location.county}.`,
+      answer: `Yes. We work ${location.localHook}${nearbyNames.length > 0 ? ` and also cover ${nearbyNames.join(', ')}` : ''}. Same team, same equipment, same fixed pricing wherever you are in ${location.county}.`,
     },
   ];
 
@@ -235,14 +235,14 @@ function getLocationFAQs(service: Service, location: Location) {
     const [first, ...rest] = profile.commonProblems;
     faqs.push({
       question: `Why do ${location.name} homes need ${primary.toLowerCase()}?`,
-      answer: `The area is known for ${first}${rest.length > 0 ? `, along with ${rest.join(' and ')}` : ''}. Left untreated these get worse over time — a professional ${primary.toLowerCase()} sorts it in one visit.`,
+      answer: `The area is known for ${first}${rest.length > 0 ? `, along with ${rest.join(' and ')}` : ''}. Left untreated these get worse over time. A professional ${primary.toLowerCase()} sorts it in one visit.`,
     });
   }
 
   // "Near me" FAQ — targets local search intent
   faqs.push({
     question: `Where can I find ${primary.toLowerCase()} near me in ${location.name}?`,
-    answer: `${siteConfig.name} is a local, family-run ${primary.toLowerCase()} company covering all of ${location.name}${location.postcodeAreas && location.postcodeAreas.length > 0 ? ` including ${location.postcodeAreas.join(', ')} postcodes` : ''}. We bring professional, truck-mounted equipment directly to your door — no need to travel or drop off. Book online or call for a free, no-obligation quote.`,
+    answer: `${siteConfig.name} is a local, family-run ${primary.toLowerCase()} company covering all of ${location.name}${location.postcodeAreas && location.postcodeAreas.length > 0 ? ` including ${location.postcodeAreas.join(', ')} postcodes` : ''}. We bring professional, truck-mounted equipment directly to your door, no need to travel or drop off. Book online or call for a free, no-obligation quote.`,
   });
 
   return faqs;

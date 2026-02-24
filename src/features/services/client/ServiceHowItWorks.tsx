@@ -19,6 +19,7 @@ export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps)
   const variation = keywords.variations[0] ?? keywords.primary;
   const specs = Object.entries(keywords.specs);
   const authority = authorityLinkMap[service.slug];
+  const neighbors = keywords.semanticNeighbors;
 
   return (
     <section className="py-16 lg:py-24 bg-slate-50">
@@ -109,11 +110,18 @@ export function ServiceHowItWorks({ service, location }: ServiceHowItWorksProps)
             </dl>
             {authority && (
               <p className="text-xs text-slate-400 mt-4">
-                {authority.context} —{' '}
+                {authority.context},{' '}
                 <a href={authority.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-600">{authority.label}</a>
               </p>
             )}
           </div>
+        )}
+
+        {/* Related capabilities */}
+        {neighbors.length > 0 && (
+          <p className="text-slate-500 text-sm mt-6 max-w-3xl mx-auto">
+            Beyond the core clean, our technicians are also skilled in <strong className="font-medium text-slate-700">{neighbors.slice(0, 3).join(', ')}</strong>{neighbors[3] ? `, and ${neighbors[3]}` : ''}, so whatever condition your property is in, we have the tools and the know-how to sort it.
+          </p>
         )}
 
       </div>

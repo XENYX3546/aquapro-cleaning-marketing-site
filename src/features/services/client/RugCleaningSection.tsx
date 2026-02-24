@@ -5,7 +5,7 @@ import type { Location } from '@/lib/constants/locations';
 
 const rugTypes = [
   { name: 'Persian Rugs', detail: 'Hand-knotted wool and silk, colour-safe wash' },
-  { name: 'Oriental Rugs', detail: 'Chinese, Turkish, Indian — fibre-appropriate methods' },
+  { name: 'Oriental Rugs', detail: 'Chinese, Turkish, Indian, fibre-appropriate methods' },
   { name: 'Wool & Silk Rugs', detail: 'Low-moisture cleaning, no shrinkage or bleeding' },
   { name: 'Handmade & Antique Rugs', detail: 'Gentle hand-cleaning, fringe restoration' },
   { name: 'Area Rugs & Runners', detail: 'All sizes, including large living room rugs' },

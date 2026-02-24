@@ -75,7 +75,7 @@ export const serviceKeywordMap: Record<string, ServiceKeywords> = {
       'Pressure': 'Up to 3,000 PSI (adjusted per surface)',
       'Surfaces': 'Block paving, concrete, tarmac, brick, Indian stone',
       'Includes': 'Algae & moss treatment, weed removal, final rinse',
-      'Water Supply': 'Self-contained — we bring our own water',
+      'Water Supply': 'Self-contained, we bring our own water',
       'Add-Ons': 'Sealant application, re-sanding joints',
     },
   },
@@ -113,7 +113,7 @@ export const serviceKeywordMap: Record<string, ServiceKeywords> = {
     specs: {
       'Method': 'Pure water fed pole system',
       'Reach': 'Up to 4 storeys without ladders',
-      'Water': 'Deionised pure water — no chemicals, streak-free',
+      'Water': 'Deionised pure water, no chemicals, streak-free',
       'Includes': 'Glass, frames, sills, Velux windows',
       'Frequency': 'One-off or regular (4, 8, or 12 weekly)',
       'Access': 'No ladders or scaffolding needed',
@@ -132,7 +132,7 @@ export const serviceKeywordMap: Record<string, ServiceKeywords> = {
     semanticNeighbors: ['downpipe clearing', 'fascia cleaning', 'soffit cleaning', 'leaf guard', 'rainwater drainage', 'gutter repair'],
     specs: {
       'Method': 'High-reach vacuum system (SkyVac)',
-      'Reach': 'Up to 12 metres — no ladders required',
+      'Reach': 'Up to 12 metres, no ladders required',
       'Includes': 'Gutters, downpipes, hoppers, outlets',
       'Camera Check': 'Before & after CCTV footage provided',
       'Add-Ons': 'Fascia, soffit & cladding cleaning',
@@ -236,7 +236,7 @@ export const serviceKeywordMap: Record<string, ServiceKeywords> = {
       'Includes': 'Roof, glass panels, frames, guttering, seals',
       'Add-Ons': 'UPVC restoration, seal conditioning',
       'Result': 'Restores natural light transmission',
-      'Access': 'Specialist tools — no walking on the roof',
+      'Access': 'Specialist tools, no walking on the roof',
     },
   },
   'mattress-cleaning': {

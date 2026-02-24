@@ -308,7 +308,7 @@ export function BlogPostContent({ content, excerpt, className }: BlogPostContent
                       {ref.domain}
                     </a>
                     {ref.text && ref.text !== ref.domain && (
-                      <span className="text-neutral-500 ml-2">— {ref.text}</span>
+                      <span className="text-neutral-500 ml-2">· {ref.text}</span>
                     )}
                   </div>
                 </li>

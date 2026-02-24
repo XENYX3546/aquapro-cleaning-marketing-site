@@ -466,8 +466,8 @@ export function ServiceGuarantees({ service, location }: ServiceGuaranteesProps)
           </h2>
           <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
             {location
-              ? <>Every {location.name} customer is backed by these promises — no exceptions.</>
-              : `Every customer is backed by these promises — no exceptions.`}
+              ? <>We stand behind every job with a satisfaction guarantee, full public liability insurance, and transparent fixed pricing with no hidden charges. Every {location.name} customer is backed by these promises, no exceptions.{location.postcodeAreas && location.postcodeAreas.length > 0 ? ` Our team covers all ${location.postcodeAreas.join(', ')} postcodes.` : ''}</>
+              : `We stand behind every job with a satisfaction guarantee, full public liability insurance, and transparent fixed pricing with no hidden charges. Every customer is backed by these promises, no exceptions.`}
           </p>
         </div>
 
