@@ -34,13 +34,13 @@ export function CommercialBanner() {
             </div>
 
             <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-5 leading-tight">
-              Commercial Exterior & Interior Cleaning
+              Commercial Exterior Cleaning
             </h3>
 
             <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-              Aquapro Cleaning provides comprehensive cleaning contracts for
-              schools, offices, and businesses. From external cladding and
-              grounds maintenance to internal office cleaning and deep cleans.
+              Aquapro Cleaning provides comprehensive exterior cleaning contracts for
+              schools, offices, and businesses. From roof cleaning and external cladding
+              to driveway restoration and grounds maintenance.
               Fully insured with RAMS provided.
             </p>
           </div>

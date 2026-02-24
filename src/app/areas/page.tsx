@@ -9,7 +9,7 @@ import { AreasGrid } from './AreasGrid';
 
 export const metadata: Metadata = {
   title: `Areas We Cover in Essex & East London | ${siteConfig.name}`,
-  description: `Professional cleaning services across ${locations.length}+ locations in Essex and East London. Carpet cleaning, pressure washing, roof cleaning & more. Find your area and get a free quote.`,
+  description: `Professional exterior cleaning services across ${locations.length}+ locations in Essex and East London. Roof cleaning, pressure washing, driveway & patio cleaning, gutter cleaning & more. Find your area and get a free quote.`,
   alternates: {
     canonical: `${siteConfig.url}/areas`,
   },

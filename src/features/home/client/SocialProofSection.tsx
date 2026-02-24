@@ -13,11 +13,11 @@ const stats = [
 
 const testimonials = [
   {
-    quote: "Absolutely fantastic service! My carpets look brand new. The team was professional, punctual, and thorough. Highly recommend Aquapro Cleaning.",
+    quote: "Absolutely fantastic service! Our gutters were completely blocked and overflowing. The team was professional, punctual, and thorough. Highly recommend Aquapro Cleaning.",
     author: 'Sarah Thompson',
     locationSlug: 'basildon',
     location: 'Basildon',
-    service: 'Carpet Cleaning',
+    service: 'Gutter Cleaning',
   },
   {
     quote: "Best pressure washing service I've used. My driveway hadn't been cleaned in years and now it looks incredible. Will definitely use again.",
@@ -113,13 +113,13 @@ function TestimonialCard({
 }) {
   // Map service names to slugs
   const serviceSlugMap: Record<string, string> = {
-    'Carpet Cleaning': 'carpet-cleaning',
+    'Gutter Cleaning': 'gutter-cleaning',
     'Pressure Washing': 'pressure-washing',
     'Roof Cleaning': 'roof-cleaning',
-    'Window Cleaning': 'window-cleaning',
-    'Upholstery Cleaning': 'upholstery-cleaning',
+    'Driveway Cleaning': 'driveway-cleaning',
+    'Patio Cleaning': 'patio-cleaning',
   };
-  const serviceSlug = serviceSlugMap[testimonial.service] || 'carpet-cleaning';
+  const serviceSlug = serviceSlugMap[testimonial.service] || 'roof-cleaning';
 
   return (
     <div className="bg-white rounded-xl p-6 border border-neutral-200 shadow-sm">
@@ -228,7 +228,7 @@ function LocalAreaStrip() {
         {topLocations.map((location) => (
           <Link
             key={location.slug}
-            href={`/carpet-cleaning/${location.slug}`}
+            href={`/roof-cleaning/${location.slug}`}
             className="px-4 py-2 bg-white rounded-full text-sm font-medium text-neutral-700 border border-neutral-200 hover:border-primary-300 hover:text-primary-600 transition-colors"
           >
             {location.name}

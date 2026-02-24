@@ -30,13 +30,13 @@ export default function TermsPage() {
 
       <h2>1. Services</h2>
       <h3>1.1 Service Description</h3>
-      <p>We provide professional cleaning services including:</p>
+      <p>We provide professional exterior cleaning services including:</p>
       <ul>
-        <li>Carpet cleaning</li>
-        <li>Upholstery cleaning</li>
+        <li>Roof cleaning and moss removal</li>
         <li>Pressure washing</li>
-        <li>Roof cleaning</li>
-        <li>Window cleaning</li>
+        <li>Driveway cleaning</li>
+        <li>Patio cleaning</li>
+        <li>Gutter cleaning</li>
       </ul>
 
       <h3>1.2 Service Area</h3>

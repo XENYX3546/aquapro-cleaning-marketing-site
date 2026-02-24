@@ -124,52 +124,55 @@ export function Header() {
                 {/* Dropdown Content */}
                 <div
                   className={cn(
-                    'absolute left-1/2 -translate-x-1/2 top-full mt-6 w-[616px] rounded-2xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 transform origin-top overflow-hidden flex flex-col',
+                    'absolute left-1/2 -translate-x-1/2 top-full mt-6 rounded-2xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 transform origin-top overflow-hidden flex flex-col',
+                    interiorServices.length > 0 ? 'w-[616px]' : 'w-[340px]',
                     servicesOpen
                       ? 'opacity-100 visible translate-y-0'
                       : 'opacity-0 invisible translate-y-4 pointer-events-none'
                   )}
                 >
                   <div className="flex">
-                    {/* Left Column: Interior */}
-                    <div className="w-1/2 p-6 border-r border-slate-200">
-                      <div className="mb-5 pb-3 border-b border-slate-100">
-                        <span className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">
-                          Category
-                        </span>
-                        <span className="block text-base font-bold text-slate-900">
-                          Interior Cleaning
-                        </span>
+                    {/* Left Column: Interior (only if active interior services exist) */}
+                    {interiorServices.length > 0 && (
+                      <div className="w-1/2 p-6 border-r border-slate-200">
+                        <div className="mb-5 pb-3 border-b border-slate-100">
+                          <span className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">
+                            Category
+                          </span>
+                          <span className="block text-base font-bold text-slate-900">
+                            Interior Cleaning
+                          </span>
+                        </div>
+                        <div className="space-y-1">
+                          {interiorServices.map((service) => (
+                            <Link
+                              key={service.id}
+                              href={`/services/${service.slug}`}
+                              onClick={() => setServicesOpen(false)}
+                              className="flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-slate-50 transition-colors group/item"
+                            >
+                              <div className="flex-shrink-0 w-[34px] h-[34px] rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center group-hover/item:bg-brand-600 group-hover/item:text-white transition-colors duration-200">
+                                <span className="text-lg flex items-center justify-center">
+                                  {service.id === 'carpet-cleaning' && <Brush className="w-4 h-4" />}
+                                  {service.id === 'upholstery-cleaning' && <Sofa className="w-4 h-4" />}
+                                  {service.id === 'stain-removal' && <Sparkles className="w-4 h-4" />}
+                                  {service.id === 'mattress-cleaning' && <BedDouble className="w-4 h-4" />}
+                                </span>
+                              </div>
+                              <div className="text-[15px] font-bold text-slate-700 group-hover/item:text-brand-700 transition-colors">
+                                {service.name}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                      <div className="space-y-1">
-                        {interiorServices.map((service) => (
-                          <Link
-                            key={service.id}
-                            href={`/services/${service.slug}`}
-                            onClick={() => setServicesOpen(false)}
-                            className="flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-slate-50 transition-colors group/item"
-                          >
-                            <div className="flex-shrink-0 w-[34px] h-[34px] rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center group-hover/item:bg-brand-600 group-hover/item:text-white transition-colors duration-200">
-                              <span className="text-lg flex items-center justify-center">
-                                {service.id === 'carpet-cleaning' && <Brush className="w-4 h-4" />}
-                                {service.id === 'upholstery-cleaning' && <Sofa className="w-4 h-4" />}
-                                {service.id === 'stain-removal' && <Sparkles className="w-4 h-4" />}
-                                {service.id === 'mattress-cleaning' && <BedDouble className="w-4 h-4" />}
-                              </span>
-                            </div>
-                            <div className="text-[15px] font-bold text-slate-700 group-hover/item:text-brand-700 transition-colors">
-                              {service.name}
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
+                    )}
 
                     {/* Right Column: Exterior */}
-                    <div className="w-1/2 p-6 bg-slate-50/50">
+                    <div className={cn('p-6', interiorServices.length > 0 ? 'w-1/2 bg-slate-50/50' : 'w-full')}>
                       <div className="mb-5 pb-3 border-b border-slate-200">
                         <span className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">
-                          Category
+                          {interiorServices.length > 0 ? 'Category' : 'Our Services'}
                         </span>
                         <span className="block text-base font-bold text-slate-900">
                           Exterior Cleaning
@@ -342,22 +345,26 @@ export function Header() {
               )}
             >
               <div className="px-4 pb-4 space-y-1">
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 pt-2 pb-1">
-                  Interior
-                </div>
-                {interiorServices.map((service) => (
-                  <Link
-                    key={service.id}
-                    href={`/services/${service.slug}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-3 py-3 px-2 rounded-lg text-base text-slate-400 font-medium hover:text-white hover:bg-white/5 transition-colors"
-                  >
-                    {service.name}
-                  </Link>
-                ))}
+                {interiorServices.length > 0 && (
+                  <>
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 pt-2 pb-1">
+                      Interior
+                    </div>
+                    {interiorServices.map((service) => (
+                      <Link
+                        key={service.id}
+                        href={`/services/${service.slug}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 py-3 px-2 rounded-lg text-base text-slate-400 font-medium hover:text-white hover:bg-white/5 transition-colors"
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                  </>
+                )}
 
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-widest px-2 pt-4 pb-1">
-                  Exterior
+                <div className={cn('text-xs font-bold text-slate-500 uppercase tracking-widest px-2 pb-1', interiorServices.length > 0 ? 'pt-4' : 'pt-2')}>
+                  {interiorServices.length > 0 ? 'Exterior' : 'Our Services'}
                 </div>
                 {exteriorServices.map((service) => (
                   <Link

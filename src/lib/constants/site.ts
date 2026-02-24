@@ -3,7 +3,7 @@
 export const siteConfig = {
   name: 'Aquapro Cleaning',
   legalName: 'Aquapro Cleaning Limited',
-  description: 'Professional cleaning services in Essex. Carpet & rug cleaning, sofa & upholstery cleaning, pressure washing, roof moss removal, and window cleaning. Fully insured, family-run, and delivering sparkling results.',
+  description: 'Professional exterior cleaning services in Essex. Roof cleaning & moss removal, pressure washing, driveway cleaning, patio cleaning, and gutter cleaning. Fully insured, family-run, and delivering sparkling results.',
   shortDescription: 'Professional cleaning services in Essex',
   url: 'https://aquapro.co.uk',
   contact: {
@@ -62,11 +62,11 @@ export const navigation = {
     { label: 'Contact', href: '/contact' },
   ],
   services: [
-    { label: 'Carpet Cleaning', href: '/services/carpet-cleaning' },
-    { label: 'Sofa & Upholstery Cleaning', href: '/services/upholstery-cleaning' },
-    { label: 'Pressure Washing', href: '/services/pressure-washing' },
     { label: 'Roof Cleaning & Moss Removal', href: '/services/roof-cleaning' },
-    { label: 'Window Cleaning', href: '/services/window-cleaning' },
+    { label: 'Pressure Washing', href: '/services/pressure-washing' },
+    { label: 'Driveway Cleaning', href: '/services/driveway-cleaning' },
+    { label: 'Patio Cleaning', href: '/services/patio-cleaning' },
+    { label: 'Gutter Cleaning', href: '/services/gutter-cleaning' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '/privacy-policy' },

@@ -5,12 +5,12 @@ import { CareersPageClient } from './CareersPageClient';
 // SEO Metadata
 export const metadata: Metadata = {
   title: `Careers | Join Our Team | ${siteConfig.name}`,
-  description: `Join Essex's fastest-growing cleaning company. We're hiring exterior and interior cleaning specialists. Competitive pay, training, and benefits. Apply today!`,
+  description: `Join Essex's fastest-growing cleaning company. We're hiring exterior cleaning specialists. Competitive pay, training, and benefits. Apply today!`,
   keywords: [
     'cleaning jobs Essex',
     'exterior cleaning careers',
     'pressure washing jobs',
-    'carpet cleaning jobs',
+    'roof cleaning jobs',
     'cleaning technician jobs',
     'Aquapro careers',
     'cleaning company jobs Essex',

@@ -2,18 +2,17 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { Star, Phone, Mail, MapPin, Copy, Check, Clock, Lock } from 'lucide-react';
+import { Star, Phone, Mail, MapPin, Copy, Check } from 'lucide-react';
 import { siteConfig, reviewStatsDisplay } from '@/lib/constants';
 
 const HERO_BG = "/images/blake-window-cleaning.jpg";
 
 export function ContactHero() {
   const [copiedState, setCopiedState] = useState<string | null>(null);
-  const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
-  // Lazy load: only load widget when form is in viewport
+  // Lazy load: only load script when form is in viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -32,46 +31,21 @@ export function ContactHero() {
     return () => observer.disconnect();
   }, []);
 
-  // Load the Zuvia widget script only when visible
+  // Load the Elfsight platform script only when visible
   useEffect(() => {
     if (!isVisible) {
       return;
     }
 
-    const scriptSrc = 'https://app.zuviaone.com/api/public/widgets/02b58ca7-a579-49da-a6ae-d21620d7fee5/embed.js';
+    const scriptSrc = 'https://elfsightcdn.com/platform.js';
     const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
 
     if (!existingScript) {
       const script = document.createElement('script');
       script.src = scriptSrc;
-      script.defer = true;
-      script.onload = () => setWidgetLoaded(true);
+      script.async = true;
       document.body.appendChild(script);
-    } else {
-      setWidgetLoaded(true);
     }
-
-    // Add title to iframe for accessibility (3rd party widget doesn't include it)
-    const addIframeTitle = () => {
-      const iframe = formRef.current?.querySelector('iframe');
-      if (iframe && !iframe.title) {
-        iframe.title = 'Quote request form';
-      }
-    };
-
-    // Watch for iframe being added by the widget script
-    const observer = new MutationObserver(() => {
-      addIframeTitle();
-    });
-
-    if (formRef.current) {
-      observer.observe(formRef.current, { childList: true, subtree: true });
-    }
-
-    // Also try immediately in case iframe already exists
-    addIframeTitle();
-
-    return () => observer.disconnect();
   }, [isVisible]);
 
   const copyToClipboard = (text: string, id: string) => {
@@ -117,7 +91,7 @@ export function ContactHero() {
 
             {/* Subtext */}
             <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
-              Aquapro Cleaning provides professional interior and exterior cleaning
+              Aquapro Cleaning provides professional exterior cleaning
               services across Essex and East London. Call {siteConfig.contact.phone} or
               request a free, no-obligation quote using the form.
             </p>
@@ -189,65 +163,8 @@ export function ContactHero() {
               <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-2 text-center lg:text-left">Get a Free Quote</h2>
               <p className="text-slate-500 text-sm mb-5 lg:mb-6 text-center lg:text-left">Enter your details below for a fast, fixed price.</p>
 
-              {/* Zuvia Quote Request Widget */}
-              <div className="quote-request-widget-02b58ca7-a579-49da-a6ae-d21620d7fee5" />
-
-              {/* SSR Fallback Form - visible before widget loads, provides SEO content */}
-              {!widgetLoaded && (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Full Name"
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none bg-slate-50 text-sm"
-                    />
-                    <input
-                      type="text"
-                      name="postcode"
-                      placeholder="Postcode"
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none bg-slate-50 text-sm"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email Address"
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none bg-slate-50 text-sm"
-                    />
-                    <input
-                      type="tel"
-                      name="phone"
-                      placeholder="Phone Number"
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none bg-slate-50 text-sm"
-                    />
-                  </div>
-                  <textarea
-                    name="message"
-                    rows={3}
-                    placeholder="What service do you need? (e.g. Roof cleaning for 3 bed house)"
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none bg-slate-50 text-sm resize-none"
-                  />
-                  <button
-                    type="button"
-                    className="w-full bg-cta hover:bg-cta-hover text-white font-bold py-3.5 rounded-lg shadow-lg transition-colors text-base"
-                  >
-                    Get Your Free Quote
-                  </button>
-                  <div className="flex items-center justify-center gap-4 text-[11px] text-slate-500 font-medium">
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      <span>Takes under 60 seconds</span>
-                    </div>
-                    <span className="text-slate-300">•</span>
-                    <div className="flex items-center gap-1">
-                      <Lock className="w-3 h-3" />
-                      <span>No obligation quote</span>
-                    </div>
-                  </div>
-                </div>
-              )}
+              {/* Elfsight Contact Form */}
+              <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
 
               {/* Noscript fallback for crawlers and users without JS */}
               <noscript>

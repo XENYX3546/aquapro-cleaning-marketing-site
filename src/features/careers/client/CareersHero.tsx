@@ -46,7 +46,7 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/blake-van-image.jpg"
-            alt="Aquapro professional carpet cleaning"
+            alt="Aquapro professional exterior cleaning team"
             fill
             className="object-cover opacity-40 mix-blend-overlay"
             priority
@@ -73,12 +73,12 @@ export function CareersHero({ onJobSelect }: CareersHeroProps) {
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
-              Complete Exterior & <span className="text-brand-500">Interior Cleaning Solutions</span>
+              Professional <span className="text-brand-500">Exterior Cleaning Specialists</span>
             </h1>
 
             <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               Join Essex&apos;s fastest-growing cleaning company. We restore homes and
-              businesses to their original shine, from roofs to carpets.
+              businesses to their original shine, from roofs to driveways.
             </p>
 
             {/* Audience Tabs */}

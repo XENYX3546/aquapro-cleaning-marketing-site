@@ -11,7 +11,7 @@ import {
 
 export const metadata: Metadata = {
   title: `Contact ${siteConfig.name} | Free Quote | Essex Cleaning Services`,
-  description: `Contact Aquapro Cleaning for a free, no-obligation quote. Call ${siteConfig.contact.phone} or use our online form. Aquapro Cleaning provides professional interior and exterior cleaning services across Essex and East London.`,
+  description: `Contact Aquapro Cleaning for a free, no-obligation quote. Call ${siteConfig.contact.phone} or use our online form. Professional exterior cleaning services across Essex and East London.`,
   keywords: [
     'contact Aquapro Cleaning',
     'Aquapro Cleaning phone number',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `Contact ${siteConfig.name} | Free Quote | Essex Cleaning Services`,
-    description: `Contact Aquapro Cleaning for a free, no-obligation quote. Professional interior and exterior cleaning services across Essex and East London.`,
+    description: `Contact Aquapro Cleaning for a free, no-obligation quote. Professional exterior cleaning services across Essex and East London.`,
     url: `${siteConfig.url}/contact`,
     siteName: siteConfig.name,
     type: 'website',

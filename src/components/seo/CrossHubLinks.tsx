@@ -80,7 +80,7 @@ export function CrossHubLinks({
           Explore Our <span className="text-brand-500">Services</span>
         </h2>
         <p className="text-slate-600 mb-8 max-w-xl mx-auto leading-relaxed">
-          From carpet cleaning to roof moss removal, we offer {services.length} professional
+          From roof cleaning to driveway restoration, we offer {services.length} professional
           cleaning services for your home and business.
         </p>
         <Link

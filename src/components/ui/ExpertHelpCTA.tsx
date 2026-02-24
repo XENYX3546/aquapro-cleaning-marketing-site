@@ -99,7 +99,7 @@ export function ExpertHelpCTA({
             </h2>
 
             <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 max-w-md mx-auto">
-              Not sure what you need? From stubborn carpet stains to mossy roofs, we&apos;ll recommend the right solution for your home or business.
+              Not sure what you need? From mossy roofs to grimy driveways, we&apos;ll recommend the right solution for your home or business.
             </p>
 
             {variant === 'link' ? (

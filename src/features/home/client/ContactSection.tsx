@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Clock, Lock, Star, Copy, Check } from 'lucide-react';
+import { Phone, Mail, MapPin, Star, Copy, Check } from 'lucide-react';
 import { siteConfig, getServiceSpecificReviews, getAllReviews, type Review } from '@/lib/constants';
 
 const CopyButton = ({ text }: { text: string }) => {
@@ -149,27 +149,17 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
     || (serviceId ? getTopFittingReview(getServiceSpecificReviews(serviceId)) : null)
     || getTopFittingReview(getAllReviews());
 
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    postcode: '',
-    address: '',
-    message: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Thank you! Your quote request has been received. We will contact you shortly.');
-    setFormState({ name: '', email: '', phone: '', postcode: '', address: '', message: '' });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value
-    });
-  };
+  // Load the Elfsight platform script
+  useEffect(() => {
+    const scriptSrc = 'https://elfsightcdn.com/platform.js';
+    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = scriptSrc;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
 
   return (
     <section id="contact" className="py-16 lg:py-24 bg-white relative">
@@ -189,7 +179,7 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
                <div className="absolute inset-0 z-0">
                   <Image
                      src="/images/blake-van-image.jpg"
-                     alt="Aquapro professional carpet cleaning"
+                     alt="Aquapro professional exterior cleaning"
                      fill
                      className="object-cover"
                      sizes="(max-width: 1024px) 100vw, 50vw"
@@ -314,108 +304,8 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
                  <p className="text-slate-500 text-sm">{ctaConfig.formSubtitle}</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-
-                {/* Row 1: Full Name & Phone */}
-                <div className="grid grid-cols-2 gap-5">
-                  <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide ml-1">Name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Full Name"
-                        required
-                        value={formState.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50"
-                      />
-                  </div>
-                  <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide ml-1">Phone</label>
-                        <input
-                            type="tel"
-                            name="phone"
-                            required
-                            placeholder="Phone Number"
-                            value={formState.phone}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50"
-                        />
-                  </div>
-                </div>
-
-                {/* Row 2: Email */}
-                <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide ml-1">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="Email Address"
-                        value={formState.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50"
-                    />
-                </div>
-
-                {/* Row 3: Postcode & Address */}
-                <div className="grid grid-cols-2 gap-5">
-                  <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide ml-1">Postcode</label>
-                      <input
-                        type="text"
-                        name="postcode"
-                        placeholder="Postcode"
-                        value={formState.postcode}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50"
-                      />
-                  </div>
-                  <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide ml-1">Street Address</label>
-                      <input
-                        type="text"
-                        name="address"
-                        placeholder="Street Address"
-                        value={formState.address}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50"
-                      />
-                  </div>
-                </div>
-
-                {/* Row 4: Service Details */}
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide ml-1">Message</label>
-                  <textarea
-                    name="message"
-                    placeholder="Tell us about the service you need..."
-                    rows={4}
-                    value={formState.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50 resize-none"
-                   />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-cta hover:bg-cta-hover text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-lg"
-                >
-                  {ctaConfig.buttonText}
-                </button>
-
-                <div className="flex items-center justify-center gap-4 pt-2 text-xs text-slate-500 font-medium">
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>Takes under 60 seconds</span>
-                  </div>
-                  <span className="text-slate-300">•</span>
-                  <div className="flex items-center gap-1.5">
-                    <Lock className="w-3 h-3" />
-                    <span>No obligation quote</span>
-                  </div>
-                </div>
-              </form>
+              {/* Elfsight Contact Form */}
+              <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
             </div>
           </div>
         </div>

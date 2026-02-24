@@ -17,25 +17,18 @@ const BlogSection = dynamic(() => import('@/features/home/server/BlogSection').t
 // Comprehensive homepage metadata for SEO
 export const metadata: Metadata = {
   title: `Professional Cleaning Services in Essex | ${siteConfig.name}`,
-  description: `${siteConfig.name} offers professional interior and exterior cleaning services across Essex. Carpet cleaning, roof cleaning, pressure washing, window cleaning & more. Fully insured, 5-star rated. Get a free quote today!`,
+  description: `${siteConfig.name} offers professional exterior cleaning services across Essex. Roof cleaning, pressure washing, gutter cleaning, driveway & patio cleaning. Fully insured, 5-star rated. Get a free quote today!`,
   keywords: [
     'cleaning services Essex',
     'professional cleaners Essex',
-    'carpet cleaning Essex',
-    'professional carpet cleaners',
-    'carpet stain removal',
-    'rug cleaning Essex',
     'roof cleaning Essex',
     'roof moss removal Essex',
     'moss removal service',
     'pressure washing Essex',
-    'window cleaning Essex',
     'gutter cleaning Essex',
-    'sofa cleaning Essex',
-    'upholstery cleaning Essex',
-    'couch cleaning Essex',
+    'driveway cleaning Essex',
+    'patio cleaning Essex',
     'exterior cleaning Essex',
-    'interior cleaning Essex',
     'commercial cleaning Essex',
     'residential cleaning Essex',
   ],
@@ -44,7 +37,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `Professional Cleaning Services in Essex | ${siteConfig.name}`,
-    description: `Essex's trusted cleaning experts. Interior & exterior cleaning services for homes and businesses. Fully insured, 5-star rated. Free quotes available.`,
+    description: `Essex's trusted cleaning experts. Professional exterior cleaning services for homes and businesses. Fully insured, 5-star rated. Free quotes available.`,
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: 'website',
@@ -61,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Professional Cleaning Services in Essex | ${siteConfig.name}`,
-    description: `Essex's trusted cleaning experts. Interior & exterior cleaning for homes and businesses. Free quotes available.`,
+    description: `Essex's trusted cleaning experts. Professional exterior cleaning for homes and businesses. Free quotes available.`,
     images: [`${siteConfig.url}/og-image.png`],
   },
   robots: {

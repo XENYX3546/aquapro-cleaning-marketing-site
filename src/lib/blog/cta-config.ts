@@ -12,13 +12,13 @@ export type CTAConfig = {
 export const DEFAULT_CTA: CTAConfig = {
   headline: 'Ready for a Sparkling Clean?',
   description:
-    'Join hundreds of satisfied customers across Essex who trust Aquapro Cleaning for their professional cleaning needs.',
+    'Join hundreds of satisfied customers across Essex who trust Aquapro Cleaning for their professional exterior cleaning needs.',
   buttonText: 'Get a Free Quote',
   features: [
+    'Roof cleaning & moss removal',
     'Pressure washing & soft washing',
-    'Solar panel cleaning',
-    'Window cleaning',
-    'House washing',
+    'Driveway & patio cleaning',
+    'Gutter cleaning',
     'Free quotes & assessments',
   ],
 };

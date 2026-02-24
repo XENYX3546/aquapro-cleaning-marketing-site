@@ -9,14 +9,14 @@ const steps = [
     number: '01',
     title: 'Get Your Free Quote',
     description:
-      'Contact us for a tailored estimate. We use remote technology for exterior quotes and detailed consultations for interior projects to give you a fixed price.',
+      'Contact us for a tailored estimate. We use drone surveys and remote technology to assess your property and give you a fixed price, no obligation.',
     icon: ClipboardCheck,
   },
   {
     number: '02',
     title: 'The Specialist Clean',
     description:
-      'Our uniformed, fully insured team arrives on time with industrial-grade equipment. From steam cleaning carpets to soft-washing roofs, we handle it all.',
+      'Our uniformed, fully insured team arrives on time with commercial-grade equipment. From soft-washing roofs to pressure washing driveways, we handle it all.',
     icon: Sparkles,
   },
   {
@@ -41,9 +41,8 @@ export function HowItWorks() {
             <span className="text-brand-500">Made Simple</span>
           </h2>
           <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
-            Whether you need interior deep cleaning or complete exterior
-            restoration, our seamless process ensures minimal disruption and
-            maximum results.
+            Whether you need a roof clean, driveway restoration, or gutter clearance,
+            our seamless process ensures minimal disruption and maximum results.
           </p>
         </div>
 

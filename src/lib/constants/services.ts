@@ -33,6 +33,8 @@ export type Service = {
     formTitle: string;
     trustBadges?: string[];
   };
+  // Set to false to hide a service from the site without deleting it
+  enabled?: boolean;
 };
 
 export type ProcessStep = {
@@ -46,7 +48,7 @@ export type FAQ = {
   answer: string;
 };
 
-export const services: Service[] = [
+const _allServices: Service[] = [
   {
     id: 'carpet-cleaning',
     slug: 'carpet-cleaning',
@@ -54,6 +56,7 @@ export const services: Service[] = [
     shortName: 'Carpets',
     tagline: 'Professional Deep Clean with Stain Protection Included',
     selfBookable: true,
+    enabled: false,
     description: 'Professional carpet cleaning service for domestic and commercial properties. Hot water extraction removes stubborn stains, pet odours, and allergens. Family-run, fully insured, with 100% satisfaction guarantee.',
     longDescription: '<strong>Professional carpet cleaning</strong> that restores your carpets to like new condition. Our <strong>truck-mounted hot water extraction</strong> delivers the most thorough deep clean, far more powerful than portable cleaners. We remove <strong>stubborn stains, pet odours, and allergens</strong> with residue-free, eco-friendly solutions. <strong>Free stain protection treatment</strong> and deodoriser included. Family-run business with transparent pricing and no hidden fees.',
     icon: 'sparkles',
@@ -134,6 +137,7 @@ export const services: Service[] = [
     shortName: 'Sofas & Upholstery',
     tagline: 'Professional Sofa, Couch & Furniture Cleaning',
     selfBookable: true,
+    enabled: false,
     description: 'Professional sofa cleaning, couch cleaning, and upholstery cleaning for all fabric furniture. We clean sofas, settees, armchairs, recliners, and leather furniture.',
     longDescription: '<strong>Expert sofa and couch cleaning</strong> that removes embedded dirt, stains, and odours your vacuum can\'t reach. Whether you need a <strong>3-seater sofa cleaned</strong>, <strong>leather sofa restoration</strong>, or <strong>fabric armchair refresh</strong>, we handle all types. Safe for velvet, linen, cotton, microfibre, and leather.',
     icon: 'sofa',
@@ -362,6 +366,7 @@ export const services: Service[] = [
     shortName: 'Windows',
     tagline: 'Streak-Free, Every Time',
     selfBookable: true,
+    enabled: false,
     description: 'Crystal-clear window cleaning for homes and businesses using pure water technology.',
     longDescription: '<strong>Streak-free finish, no residue</strong>. Windows stay cleaner longer. <strong>Reaches up to 4 storeys safely</strong> from the ground. <strong>Frames and sills included</strong> at no extra cost.',
     icon: 'square',
@@ -515,6 +520,7 @@ export const services: Service[] = [
     shortName: 'Stain Removal',
     tagline: 'Stubborn Stains Eliminated',
     selfBookable: true,
+    enabled: false,
     description: 'Targeted treatment for stubborn stains on carpets, upholstery, and hard surfaces.',
     longDescription: 'Expert stain removal for red wine, coffee, pet accidents, and more. Emergency service available for fresh spills.',
     icon: 'sparkles',
@@ -739,6 +745,7 @@ export const services: Service[] = [
     shortName: 'Solar Panels',
     tagline: 'Maximise Your Solar Energy Output',
     selfBookable: false,
+    enabled: false,
     description: 'Professional solar panel cleaning to restore efficiency and maximise energy output. Safe pure water cleaning for all panel types. Improve performance by up to 30%.',
     longDescription: '<strong>Boost your solar panel efficiency</strong> with professional cleaning. Dirty panels can lose <strong>up to 30% of their energy output</strong> due to bird droppings, dust, pollen, and general grime. Our <strong>pure water cleaning system</strong> safely removes all contamination without scratching or damaging panels. <strong>No chemicals, no residue</strong>, just pure deionised water that dries spot-free. We clean <strong>roof-mounted and ground-mounted systems</strong> for homes and businesses.',
     icon: 'sun',
@@ -812,6 +819,7 @@ export const services: Service[] = [
     shortName: 'Conservatories',
     tagline: 'Crystal Clear Roof & Sparkling Glass',
     selfBookable: false,
+    enabled: false,
     description: 'Professional conservatory cleaning for roofs, glass panels, frames, and gutters. Remove green algae, bird droppings, and years of grime. Restore your conservatory to like-new condition.',
     longDescription: '<strong>Transform your conservatory</strong> with our complete cleaning service. We clean <strong>polycarbonate roofs, glass roofs, UPVC frames, and all glass panels</strong>. Remove <strong>green algae, moss, bird droppings, and built-up grime</strong> that blocks light and makes your conservatory look tired. Our <strong>pure water system</strong> leaves glass streak-free and frames sparkling. We also clean <strong>conservatory gutters</strong> to prevent overflow and damp issues.',
     icon: 'home',
@@ -886,6 +894,7 @@ export const services: Service[] = [
     shortName: 'Mattresses',
     tagline: 'Deep Clean for a Healthier Sleep',
     selfBookable: true,
+    enabled: false,
     description: 'Professional mattress cleaning to remove dust mites, allergens, stains, and odours. Deep sanitisation for a healthier night\'s sleep. All mattress sizes and types cleaned.',
     longDescription: '<strong>Sleep healthier with a professionally cleaned mattress</strong>. Your mattress harbours <strong>dust mites, dead skin, sweat, and allergens</strong> that vacuuming alone can\'t remove. Our <strong>deep extraction cleaning</strong> removes embedded dirt, <strong>sanitises against bacteria</strong>, and eliminates odours. We treat <strong>urine stains, sweat marks, and blood stains</strong> with specialist solutions. Safe for <strong>memory foam, spring, hybrid, and all mattress types</strong>. Wake up fresher.',
     icon: 'bed',
@@ -955,6 +964,12 @@ export const services: Service[] = [
     startingFrom: 'from £40',
   },
 ];
+
+// Active services only (enabled !== false) — used across the entire site
+export const services: Service[] = _allServices.filter(s => s.enabled !== false);
+
+// Full list including disabled services — for re-enabling later
+export const allServices: Service[] = _allServices;
 
 // Service Clusters for Internal Linking Strategy
 export type ServiceCluster = 'interior' | 'exterior';

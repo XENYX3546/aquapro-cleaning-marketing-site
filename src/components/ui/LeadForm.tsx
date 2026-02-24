@@ -44,44 +44,22 @@ export function LeadForm({
     return () => observer.disconnect();
   }, []);
 
-  // Load the Zuvia widget script only when visible
+  // Load the Elfsight platform script only when visible
   useEffect(() => {
     if (!isVisible) {
       return;
     }
 
-    const scriptSrc = 'https://app.zuviaone.com/api/public/widgets/02b58ca7-a579-49da-a6ae-d21620d7fee5/embed.js';
+    const scriptSrc = 'https://elfsightcdn.com/platform.js';
 
     // Check if script already exists
     const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
     if (!existingScript) {
       const script = document.createElement('script');
       script.src = scriptSrc;
-      script.defer = true;
+      script.async = true;
       document.body.appendChild(script);
     }
-
-    // Add title to iframe for accessibility (3rd party widget doesn't include it)
-    const addIframeTitle = () => {
-      const iframe = containerRef.current?.querySelector('iframe');
-      if (iframe && !iframe.title) {
-        iframe.title = 'Quote request form';
-      }
-    };
-
-    // Watch for iframe being added by the widget script
-    const observer = new MutationObserver(() => {
-      addIframeTitle();
-    });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current, { childList: true, subtree: true });
-    }
-
-    // Also try immediately in case iframe already exists
-    addIframeTitle();
-
-    return () => observer.disconnect();
   }, [isVisible]);
 
   return (
@@ -101,8 +79,8 @@ export function LeadForm({
         )}
       </div>
 
-      {/* Zuvia Quote Request Widget */}
-      <div className="quote-request-widget-02b58ca7-a579-49da-a6ae-d21620d7fee5" />
+      {/* Elfsight Contact Form */}
+      <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
     </div>
   );
 }

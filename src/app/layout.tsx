@@ -1,7 +1,7 @@
 import { Analytics } from '@vercel/analytics/next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { siteConfig, reviewStats } from '@/lib/constants';
+import { siteConfig, reviewStats, services } from '@/lib/constants';
 import type { Metadata, Viewport } from 'next';
 
 const inter = Inter({
@@ -28,23 +28,16 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     'cleaning services Essex',
-    'carpet cleaning',
-    'professional carpet cleaners',
-    'carpet stain removal',
-    'rug cleaning',
-    'sofa cleaning',
-    'upholstery cleaning',
-    'couch cleaning',
+    'exterior cleaning Essex',
     'pressure washing',
     'roof cleaning',
     'roof moss removal',
     'biocide treatment',
-    'window cleaning',
-    'professional cleaners',
-    'cleaning company Essex',
+    'gutter cleaning',
     'driveway cleaning',
     'patio cleaning',
-    'deep cleaning',
+    'professional cleaners',
+    'cleaning company Essex',
   ],
   authors: [{ name: siteConfig.legalName }],
   creator: siteConfig.legalName,
@@ -184,104 +177,14 @@ function LocalBusinessSchema() {
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Cleaning Services',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Carpet Cleaning',
-            description: 'Professional carpet cleaning with hot water extraction. Stain removal, pet odour elimination, and free stain protection.',
-          },
+      itemListElement: services.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: service.name,
+          description: service.description,
         },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Upholstery Cleaning',
-            description: 'Professional sofa, couch, and fabric furniture cleaning. Leather conditioning and fabric protection.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Pressure Washing',
-            description: 'Commercial-grade pressure washing for driveways, patios, decking, and hard surfaces.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Roof Cleaning & Moss Removal',
-            description: 'Professional roof moss removal with biocide treatment. Soft washing for clay, concrete, and slate tiles.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Window Cleaning',
-            description: 'Streak-free window cleaning using pure deionised water technology. Frames and sills included.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Gutter Cleaning',
-            description: 'High-reach vacuum gutter cleaning with before and after camera footage. No ladders required.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Stain Removal',
-            description: 'Targeted stain removal for carpets and upholstery. Red wine, coffee, pet urine, and emergency callouts.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Driveway Cleaning',
-            description: 'Professional driveway cleaning for block paving, concrete, and tarmac. Re-sanding and sealing available.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Patio Cleaning',
-            description: 'Professional patio cleaning for Indian sandstone, porcelain, and natural stone. Black spot and algae removal.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Solar Panel Cleaning',
-            description: 'Pure water solar panel cleaning to restore up to 30% lost efficiency. Safe for all panel types.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Conservatory Cleaning',
-            description: 'Complete conservatory cleaning for roofs, glass panels, and UPVC frames. Polycarbonate and glass specialist.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Mattress Cleaning',
-            description: 'Professional mattress cleaning to remove dust mites, allergens, stains, and odours. All sizes and types.',
-          },
-        },
-      ],
+      })),
     },
   };
 

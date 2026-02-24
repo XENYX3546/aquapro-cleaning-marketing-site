@@ -8,33 +8,26 @@ import { ContactSection } from '@/features/home/client';
 
 // Comprehensive metadata for services hub page
 export const metadata: Metadata = {
-  title: `Professional Cleaning Services | Interior & Exterior | ${siteConfig.name}`,
-  description: `Explore our professional cleaning services in Essex. Carpet cleaning, sofa & upholstery cleaning, pressure washing, roof cleaning, gutter cleaning & window cleaning. Fully insured, 5-star rated. Free quotes.`,
+  title: `Professional Exterior Cleaning Services | ${siteConfig.name}`,
+  description: `Explore our professional exterior cleaning services in Essex. Pressure washing, roof cleaning, gutter cleaning, driveway cleaning & patio cleaning. Fully insured, 5-star rated. Free quotes.`,
   keywords: [
     'cleaning services Essex',
-    'carpet cleaning services',
-    'professional carpet cleaners',
-    'carpet stain removal',
-    'rug cleaning services',
-    'sofa cleaning services',
-    'upholstery cleaning services',
-    'couch cleaning Essex',
     'pressure washing services',
     'roof cleaning services',
     'roof moss removal',
     'moss removal Essex',
     'gutter cleaning services',
-    'window cleaning services',
+    'driveway cleaning services',
+    'patio cleaning services',
     'professional cleaning company Essex',
-    'interior cleaning Essex',
     'exterior cleaning Essex',
   ],
   alternates: {
     canonical: `${siteConfig.url}/services`,
   },
   openGraph: {
-    title: `Professional Cleaning Services | ${siteConfig.name}`,
-    description: `Complete interior & exterior cleaning services in Essex. Carpet, upholstery, roof, pressure washing, gutter & window cleaning. Free quotes available.`,
+    title: `Professional Exterior Cleaning Services | ${siteConfig.name}`,
+    description: `Professional exterior cleaning services in Essex. Roof cleaning, pressure washing, gutter, driveway & patio cleaning. Free quotes available.`,
     url: `${siteConfig.url}/services`,
     siteName: siteConfig.name,
     type: 'website',
@@ -50,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Professional Cleaning Services | ${siteConfig.name}`,
-    description: `Complete interior & exterior cleaning services in Essex. Free quotes available.`,
+    title: `Professional Exterior Cleaning Services | ${siteConfig.name}`,
+    description: `Professional exterior cleaning services in Essex. Free quotes available.`,
     images: [`${siteConfig.url}/og-image.png`],
   },
 };
@@ -62,8 +55,8 @@ const servicesCollectionJsonLd = {
   '@type': 'CollectionPage',
   '@id': `${siteConfig.url}/services#webpage`,
   url: `${siteConfig.url}/services`,
-  name: `Professional Cleaning Services | ${siteConfig.name}`,
-  description: 'Complete range of professional interior and exterior cleaning services in Essex',
+  name: `Professional Exterior Cleaning Services | ${siteConfig.name}`,
+  description: 'Professional exterior cleaning services in Essex',
   isPartOf: {
     '@id': `${siteConfig.url}/#website`,
   },
@@ -101,7 +94,7 @@ const servicesFaqJsonLd = {
       name: 'What cleaning services do you offer?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: `We offer comprehensive interior and exterior cleaning services including: ${services.map(s => s.name).join(', ')}. All services are available across Essex.`,
+        text: `We offer professional exterior cleaning services including: ${services.map(s => s.name).join(', ')}. All services are available across Essex.`,
       },
     },
     {
@@ -150,8 +143,8 @@ export default function ServicesPage() {
               Our Professional <span className="text-brand-500">Services</span>
             </h1>
             <p className="mt-6 text-lg text-slate-600 leading-relaxed">
-              From deep carpet cleaning to roof restoration, we provide comprehensive
-              cleaning solutions for homes and businesses across Essex.
+              From roof restoration to driveway cleaning, we provide comprehensive
+              exterior cleaning solutions for homes and businesses across Essex.
             </p>
           </AnimatedSection>
         </Container>

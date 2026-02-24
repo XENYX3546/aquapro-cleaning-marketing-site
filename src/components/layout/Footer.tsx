@@ -22,6 +22,8 @@ const interiorServices = services.filter((s) =>
 const exteriorServices = services.filter((s) =>
   ['roof-cleaning', 'pressure-washing', 'gutter-cleaning', 'window-cleaning', 'driveway-cleaning', 'patio-cleaning', 'solar-panel-cleaning', 'conservatory-cleaning'].includes(s.id)
 );
+// Use first available service for area links
+const defaultServiceSlug = services[0]?.slug ?? 'roof-cleaning';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -43,7 +45,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-slate-400 text-sm mb-6 max-w-xs">
-              Aquapro Cleaning provides professional interior and exterior
+              Aquapro Cleaning provides professional exterior
               cleaning services throughout Essex and East London. Fully insured,
               family-run, and trusted by thousands of customers.
             </p>
@@ -88,24 +90,26 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Interior Services */}
-          <div>
-            <h3 className="font-bold text-white mb-4 text-sm">
-              Interior Cleaning
-            </h3>
-            <ul className="space-y-2.5">
-              {interiorServices.map((service) => (
-                <li key={service.id}>
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="text-slate-400 hover:text-white text-sm transition-colors"
-                  >
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Interior Services (only shown when active interior services exist) */}
+          {interiorServices.length > 0 && (
+            <div>
+              <h3 className="font-bold text-white mb-4 text-sm">
+                Interior Cleaning
+              </h3>
+              <ul className="space-y-2.5">
+                {interiorServices.map((service) => (
+                  <li key={service.id}>
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="text-slate-400 hover:text-white text-sm transition-colors"
+                    >
+                      {service.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Exterior Services */}
           <div>
@@ -133,7 +137,7 @@ export function Footer() {
               {footerLocations.slice(0, 6).map((location) => (
                 <li key={location.slug}>
                   <Link
-                    href={`/carpet-cleaning/${location.slug}`}
+                    href={`/${defaultServiceSlug}/${location.slug}`}
                     className="text-slate-400 hover:text-white text-sm transition-colors"
                   >
                     {location.name}

@@ -1,11 +1,23 @@
 'use client';
 
-import Link from 'next/link';
+import { useEffect } from 'react';
 import Image from 'next/image';
-import { Star, Clock, Lock } from 'lucide-react';
-import { ctaLinks, reviewStatsDisplay } from '@/lib/constants';
+import { Star } from 'lucide-react';
+import { reviewStatsDisplay } from '@/lib/constants';
 
 export function HeroSection() {
+  // Load the Elfsight platform script
+  useEffect(() => {
+    const scriptSrc = 'https://elfsightcdn.com/platform.js';
+    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = scriptSrc;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   return (
     <div
       id="hero"
@@ -15,7 +27,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/blake-window-cleaning.jpg"
-          alt="Aquapro professional window cleaning"
+          alt="Aquapro professional exterior cleaning"
           fill
           className="object-cover opacity-40 mix-blend-overlay"
           priority
@@ -47,14 +59,14 @@ export function HeroSection() {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-4 lg:mb-6">
-              Complete Interior & <span className="text-brand-500">Exterior Cleaning Solutions</span>
+              Professional <span className="text-brand-500">Exterior Cleaning Specialists</span>
             </h1>
 
             {/* Subtext */}
             <p className="text-base lg:text-lg font-medium text-slate-300 mb-8 lg:mb-12 max-w-lg sm:max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
-              From sparkling windows to pristine offices, we restore every inch
-              of your property. Professional, reliable, and fully insured
-              services for homes and businesses.
+              From roof restoration to driveway cleaning, we bring your property
+              back to life. Professional, reliable, and fully insured
+              exterior cleaning for homes and businesses.
             </p>
 
             {/* Logos Section - Accreditations */}
@@ -128,72 +140,8 @@ export function HeroSection() {
                 Enter your details below for a fast, fixed price.
               </p>
 
-              <form
-                className="space-y-3 lg:space-y-4"
-                action="/contact"
-                method="GET"
-              >
-                {/* Row 1: Full Name & Postcode */}
-                <div className="grid grid-cols-2 gap-3 lg:gap-4">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    className="w-full px-3 py-2.5 lg:px-4 lg:py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50 text-sm lg:text-base"
-                  />
-                  <input
-                    type="text"
-                    name="postcode"
-                    placeholder="Postcode"
-                    className="w-full px-3 py-2.5 lg:px-4 lg:py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50 text-sm lg:text-base"
-                  />
-                </div>
-
-                {/* Row 2: Email & Phone */}
-                <div className="grid grid-cols-2 gap-3 lg:gap-4">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    className="w-full px-3 py-2.5 lg:px-4 lg:py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50 text-sm lg:text-base"
-                  />
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    className="w-full px-3 py-2.5 lg:px-4 lg:py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50 text-sm lg:text-base"
-                  />
-                </div>
-
-                {/* Row 3: Service Details */}
-                <div>
-                  <textarea
-                    name="message"
-                    placeholder="What service do you need?"
-                    rows={3}
-                    className="w-full px-3 py-2.5 lg:px-4 lg:py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all bg-slate-50 resize-none text-sm lg:text-base"
-                   />
-                </div>
-
-                <Link
-                  href={ctaLinks.quote}
-                  className="block w-full bg-cta hover:bg-cta-hover text-white font-bold py-3 lg:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-base lg:text-lg text-center"
-                >
-                  Get Your Free Quote
-                </Link>
-
-                <div className="flex items-center justify-center gap-4 mt-3 lg:mt-4 text-xs text-slate-500 font-medium">
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>Takes under 60 seconds</span>
-                  </div>
-                  <span className="text-slate-300">•</span>
-                  <div className="flex items-center gap-1.5">
-                    <Lock className="w-3 h-3" />
-                    <span>No obligation quote</span>
-                  </div>
-                </div>
-              </form>
+              {/* Elfsight Contact Form */}
+              <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
             </div>
           </div>
         </div>
