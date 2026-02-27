@@ -75,7 +75,7 @@ export const serviceKeywordMap: Record<string, ServiceKeywords> = {
       'Pressure': 'Up to 3,000 PSI (adjusted per surface)',
       'Surfaces': 'Block paving, concrete, tarmac, brick, Indian stone',
       'Includes': 'Algae & moss treatment, weed removal, final rinse',
-      'Water Supply': 'Self-contained, we bring our own water',
+      'Water Usage': 'Efficient low-volume system, minimises water waste',
       'Add-Ons': 'Sealant application, re-sanding joints',
     },
   },

@@ -6,7 +6,17 @@ import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay, customerStatsDisplay, getServiceKeywords, siteConfig } from '@/lib/constants';
 
-const HOUSE_IMAGE = "/images/blake-window-cleaning.jpg";
+const FALLBACK_IMAGE = "/images/blake-window-cleaning.jpg";
+
+const serviceAboutImages: Record<string, string> = {
+  'roof-cleaning': '/images/aquapro-roof-clean-after.jpg',
+  'carpet-cleaning': '/images/carpet-cleaning-after.jpg',
+  'upholstery-cleaning': '/images/carpet-cleaning-after.jpg',
+  'pressure-washing': '/images/aquapro-pressure-wash-after.jpg',
+  'driveway-cleaning': '/images/aquapro-pressure-wash-after.jpg',
+  'patio-cleaning': '/images/aquapro-pressure-wash-after.jpg',
+  'gutter-cleaning': '/images/gutter-cleaning-after.jpg',
+};
 
 interface ServiceAboutProps {
   service: Service;
@@ -87,6 +97,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
   const keywords = getServiceKeywords(service.slug);
   const variation = keywords.variations[1] ?? keywords.primary;
   const locationText = location ? ` ${location.name}` : '';
+  const aboutImage = serviceAboutImages[service.slug] || FALLBACK_IMAGE;
 
   return (
     <>
@@ -109,7 +120,7 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
           <div className="w-1/2 relative">
              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200 bg-slate-100 aspect-square">
                 <Image
-                  src={HOUSE_IMAGE}
+                  src={aboutImage}
                   alt={`Professional ${service.name}${locationText}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
