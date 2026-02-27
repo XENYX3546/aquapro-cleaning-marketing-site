@@ -60,7 +60,7 @@ const _allServices: Service[] = [
     description: 'Professional carpet cleaning service for domestic and commercial properties. Hot water extraction removes stubborn stains, pet odours, and allergens. Family-run, fully insured, with 100% satisfaction guarantee.',
     longDescription: '<strong>Professional carpet cleaning</strong> that restores your carpets to like new condition. Our <strong>truck-mounted hot water extraction</strong> delivers the most thorough deep clean, far more powerful than portable cleaners. We remove <strong>stubborn stains, pet odours, and allergens</strong> with residue-free, eco-friendly solutions. <strong>Free stain protection treatment</strong> and deodoriser included. Family-run business with transparent pricing and no hidden fees.',
     icon: 'sparkles',
-    image: '/images/blake-van-image.jpg',
+    image: '/images/carpet-cleaning-after.jpg',
     hero: {
       headline: 'Carpets Stained or Faded?',
       subheadline: "We'll Bring Them Back to Life",
@@ -141,7 +141,7 @@ const _allServices: Service[] = [
     description: 'Professional sofa cleaning, couch cleaning, and upholstery cleaning for all fabric furniture. We clean sofas, settees, armchairs, recliners, and leather furniture.',
     longDescription: '<strong>Expert sofa and couch cleaning</strong> that removes embedded dirt, stains, and odours your vacuum can\'t reach. Whether you need a <strong>3-seater sofa cleaned</strong>, <strong>leather sofa restoration</strong>, or <strong>fabric armchair refresh</strong>, we handle all types. Safe for velvet, linen, cotton, microfibre, and leather.',
     icon: 'sofa',
-    image: '/images/blake-van-image.jpg',
+    image: '/images/carpet-cleaning-after.jpg',
     hero: {
       headline: 'Sofa Looking Tired and Stained?',
       subheadline: "We'll Make It Look New Again",
@@ -216,7 +216,7 @@ const _allServices: Service[] = [
     description: 'Powerful pressure washing for driveways, patios, decking, and external surfaces. Remove years of grime in hours.',
     longDescription: '<strong>Removes moss, algae, oil stains, and years of grime</strong> from driveways, patios, and decking. <strong>Adjustable pressure won\'t damage surfaces</strong>. See the transformation in a single visit.',
     icon: 'droplets',
-    image: '/images/blake-van-image.jpg',
+    image: '/images/aquapro-pressure-wash-after.jpg',
     hero: {
       headline: 'Driveway or Patio Looking Tired?',
       subheadline: 'Watch Years of Grime Disappear',
@@ -446,7 +446,7 @@ const _allServices: Service[] = [
     description: 'High-reach gutter clearing to prevent blockages, leaks, and water damage.',
     longDescription: 'Professional gutter clearing using our high-reach vacuum system. No ladders on your property, wireless camera inspection included.',
     icon: 'droplets',
-    image: '/images/blake-window-cleaning.jpg',
+    image: '/images/gutter-cleaning-after.jpg',
     hero: {
       headline: 'Gutters Blocked or Overflowing?',
       subheadline: 'Prevent Costly Water Damage',
@@ -599,7 +599,7 @@ const _allServices: Service[] = [
     description: 'Professional driveway cleaning for block paving, concrete, tarmac, and resin driveways. Remove moss, oil stains, and years of grime. Re-sanding and sealing available.',
     longDescription: '<strong>Transform your driveway</strong> with our professional driveway cleaning service. We remove <strong>moss, algae, weeds, oil stains, and years of built-up grime</strong> from all driveway types including <strong>block paving, concrete, tarmac, resin, and gravel</strong>. Our <strong>commercial-grade pressure washing</strong> equipment delivers stunning results. <strong>Re-sanding and sealing services</strong> available to protect your investment and keep your driveway looking great for longer.',
     icon: 'car',
-    image: '/images/blake-van-image.jpg',
+    image: '/images/aquapro-pressure-wash-after.jpg',
     hero: {
       headline: 'Driveway Covered in Moss and Stains?',
       subheadline: "We'll Make It Look New Again",
@@ -673,7 +673,7 @@ const _allServices: Service[] = [
     description: 'Professional patio cleaning for slabs, natural stone, porcelain, and decking. Remove green algae, black spots, and weathered grime. Restore your outdoor space.',
     longDescription: '<strong>Bring your patio back to life</strong> with our professional patio cleaning service. We restore <strong>concrete slabs, Indian sandstone, porcelain tiles, limestone, slate, and natural stone</strong> to their original beauty. Our specialist treatments remove <strong>green algae, black spot, lichen, and years of weathering</strong>. <strong>Safe cleaning methods</strong> for all patio types, no damage to pointing or delicate stone. <strong>Sealing available</strong> to protect your patio and enhance colour.',
     icon: 'sun',
-    image: '/images/blake-van-image.jpg',
+    image: '/images/aquapro-pressure-wash-after.jpg',
     hero: {
       headline: 'Patio Green and Slippery?',
       subheadline: 'Get It Ready for Summer',
