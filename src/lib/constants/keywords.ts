@@ -269,12 +269,12 @@ export const getServiceKeywords = (serviceSlug: string): ServiceKeywords => {
 // Each service maps to 2 services customers genuinely book together
 export const relatedServiceMap: Record<string, { slug: string; label: string }[]> = {
   'carpet-cleaning': [
-    { slug: 'upholstery-cleaning', label: 'upholstery cleaning' },
-    { slug: 'stain-removal', label: 'stain removal' },
+    { slug: 'pressure-washing', label: 'pressure washing' },
+    { slug: 'roof-cleaning', label: 'roof cleaning' },
   ],
   'upholstery-cleaning': [
-    { slug: 'carpet-cleaning', label: 'carpet cleaning' },
-    { slug: 'mattress-cleaning', label: 'mattress cleaning' },
+    { slug: 'pressure-washing', label: 'pressure washing' },
+    { slug: 'roof-cleaning', label: 'roof cleaning' },
   ],
   'pressure-washing': [
     { slug: 'driveway-cleaning', label: 'driveway cleaning' },
@@ -282,19 +282,19 @@ export const relatedServiceMap: Record<string, { slug: string; label: string }[]
   ],
   'roof-cleaning': [
     { slug: 'gutter-cleaning', label: 'gutter cleaning' },
-    { slug: 'window-cleaning', label: 'window cleaning' },
+    { slug: 'pressure-washing', label: 'pressure washing' },
   ],
   'window-cleaning': [
-    { slug: 'conservatory-cleaning', label: 'conservatory cleaning' },
     { slug: 'gutter-cleaning', label: 'gutter cleaning' },
+    { slug: 'roof-cleaning', label: 'roof cleaning' },
   ],
   'gutter-cleaning': [
     { slug: 'roof-cleaning', label: 'roof cleaning' },
-    { slug: 'window-cleaning', label: 'window cleaning' },
+    { slug: 'pressure-washing', label: 'pressure washing' },
   ],
   'stain-removal': [
-    { slug: 'carpet-cleaning', label: 'carpet cleaning' },
-    { slug: 'upholstery-cleaning', label: 'upholstery cleaning' },
+    { slug: 'pressure-washing', label: 'pressure washing' },
+    { slug: 'roof-cleaning', label: 'roof cleaning' },
   ],
   'driveway-cleaning': [
     { slug: 'patio-cleaning', label: 'patio cleaning' },
@@ -302,19 +302,19 @@ export const relatedServiceMap: Record<string, { slug: string; label: string }[]
   ],
   'patio-cleaning': [
     { slug: 'driveway-cleaning', label: 'driveway cleaning' },
-    { slug: 'conservatory-cleaning', label: 'conservatory cleaning' },
+    { slug: 'pressure-washing', label: 'pressure washing' },
   ],
   'solar-panel-cleaning': [
     { slug: 'roof-cleaning', label: 'roof cleaning' },
     { slug: 'gutter-cleaning', label: 'gutter cleaning' },
   ],
   'conservatory-cleaning': [
-    { slug: 'window-cleaning', label: 'window cleaning' },
     { slug: 'patio-cleaning', label: 'patio cleaning' },
+    { slug: 'gutter-cleaning', label: 'gutter cleaning' },
   ],
   'mattress-cleaning': [
-    { slug: 'carpet-cleaning', label: 'carpet cleaning' },
-    { slug: 'upholstery-cleaning', label: 'upholstery cleaning' },
+    { slug: 'pressure-washing', label: 'pressure washing' },
+    { slug: 'roof-cleaning', label: 'roof cleaning' },
   ],
 };
 

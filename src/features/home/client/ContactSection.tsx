@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Star, Copy, Check } from 'lucide-react';
 import { siteConfig, getServiceSpecificReviews, getAllReviews, type Review } from '@/lib/constants';
+import { useElfsightLazy } from '@/hooks/useElfsightLazy';
 
 const CopyButton = ({ text }: { text: string }) => {
   const [copied, setCopied] = useState(false);
@@ -134,6 +135,8 @@ const DEFAULT_CTA_CONFIG = {
 const MAX_TESTIMONIAL_LENGTH = 120;
 
 export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
+  const { containerRef: elfsightRef, loaded: elfsightLoaded } = useElfsightLazy('viewport');
+
   // Get service-specific CTA config
   const ctaConfig = serviceId && SERVICE_CTA_CONFIG[serviceId]
     ? SERVICE_CTA_CONFIG[serviceId]
@@ -148,18 +151,6 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
   const review = topReview
     || (serviceId ? getTopFittingReview(getServiceSpecificReviews(serviceId)) : null)
     || getTopFittingReview(getAllReviews());
-
-  // Load the Elfsight platform script
-  useEffect(() => {
-    const scriptSrc = 'https://elfsightcdn.com/platform.js';
-    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.src = scriptSrc;
-      script.async = true;
-      document.body.appendChild(script);
-    }
-  }, []);
 
   return (
     <section id="contact" className="py-16 lg:py-24 bg-white relative">
@@ -298,14 +289,27 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
             </div>
 
             {/* Form */}
-            <div className="p-12 lg:p-16 bg-white flex flex-col justify-center">
+            <div ref={elfsightRef} className="p-12 lg:p-16 bg-white flex flex-col justify-center">
               <div className="mb-8">
                  <h3 className="text-2xl font-bold text-slate-900 mb-2">{ctaConfig.formTitle}</h3>
                  <p className="text-slate-500 text-sm">{ctaConfig.formSubtitle}</p>
               </div>
 
-              {/* Elfsight Contact Form */}
-              <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
+              <div className="relative" style={{ height: 538 }}>
+                <div className="absolute inset-0">
+                  <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
+                </div>
+                <div className={`absolute inset-0 animate-pulse transition-opacity duration-300 ${elfsightLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                  <div className="flex flex-col gap-4 h-full">
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-20" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-16" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-24" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-20" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1 flex-1"><div className="h-3 bg-slate-100 rounded w-24" /><div className="h-full bg-slate-100 rounded-lg" /></div>
+                    <div className="h-12 bg-slate-200 rounded-lg" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

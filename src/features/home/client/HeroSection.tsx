@@ -1,22 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { reviewStatsDisplay } from '@/lib/constants';
+import { useElfsightLazy } from '@/hooks/useElfsightLazy';
 
 export function HeroSection() {
-  // Load the Elfsight platform script
-  useEffect(() => {
-    const scriptSrc = 'https://elfsightcdn.com/platform.js';
-    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.src = scriptSrc;
-      script.async = true;
-      document.body.appendChild(script);
-    }
-  }, []);
+  const { containerRef, loaded } = useElfsightLazy('interaction');
 
   return (
     <div
@@ -131,7 +121,7 @@ export function HeroSection() {
           </div>
 
           {/* Right Content - Form Card */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5" ref={containerRef}>
             <div className="bg-white rounded-2xl shadow-2xl p-5 sm:p-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-2 text-center lg:text-left">
                 Get a Free Quote
@@ -140,8 +130,21 @@ export function HeroSection() {
                 Enter your details below for a fast, fixed price.
               </p>
 
-              {/* Elfsight Contact Form */}
-              <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
+              <div className="relative" style={{ height: 538 }}>
+                <div className="absolute inset-0">
+                  <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
+                </div>
+                <div className={`absolute inset-0 animate-pulse transition-opacity duration-300 ${loaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                  <div className="flex flex-col gap-4 h-full">
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-20" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-16" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-24" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1"><div className="h-3 bg-slate-100 rounded w-20" /><div className="h-11 bg-slate-100 rounded-lg" /></div>
+                    <div className="space-y-1 flex-1"><div className="h-3 bg-slate-100 rounded w-24" /><div className="h-full bg-slate-100 rounded-lg" /></div>
+                    <div className="h-12 bg-slate-200 rounded-lg" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
