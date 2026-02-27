@@ -200,7 +200,7 @@ const beforeAfterImages: Record<string, { before: string; after: string }[]> = {
     { before: '/images/pressure-washing-before.jpg', after: '/images/pressure-washing-after.jpg' },
   ],
   'patio-cleaning': [
-    { before: '/images/pressure-washing-before.jpg', after: '/images/pressure-washing-after.jpg' },
+    { before: '/images/patio-clean-before.jpg', after: '/images/patio-clean-after.jpg' },
   ],
   // Default to carpet cleaning for services without specific images
   default: [

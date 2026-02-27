@@ -14,7 +14,7 @@ const serviceAboutImages: Record<string, string> = {
   'upholstery-cleaning': '/images/carpet-cleaning-after.jpg',
   'pressure-washing': '/images/aquapro-pressure-wash-after.jpg',
   'driveway-cleaning': '/images/aquapro-pressure-wash-after.jpg',
-  'patio-cleaning': '/images/aquapro-pressure-wash-after.jpg',
+  'patio-cleaning': '/images/patio-clean-after.jpg',
   'gutter-cleaning': '/images/gutter-cleaning-after.jpg',
 };
 

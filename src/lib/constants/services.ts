@@ -673,7 +673,7 @@ const _allServices: Service[] = [
     description: 'Professional patio cleaning for slabs, natural stone, porcelain, and decking. Remove green algae, black spots, and weathered grime. Restore your outdoor space.',
     longDescription: '<strong>Bring your patio back to life</strong> with our professional patio cleaning service. We restore <strong>concrete slabs, Indian sandstone, porcelain tiles, limestone, slate, and natural stone</strong> to their original beauty. Our specialist treatments remove <strong>green algae, black spot, lichen, and years of weathering</strong>. <strong>Safe cleaning methods</strong> for all patio types, no damage to pointing or delicate stone. <strong>Sealing available</strong> to protect your patio and enhance colour.',
     icon: 'sun',
-    image: '/images/aquapro-pressure-wash-after.jpg',
+    image: '/images/patio-clean-after.jpg',
     hero: {
       headline: 'Patio Green and Slippery?',
       subheadline: 'Get It Ready for Summer',
