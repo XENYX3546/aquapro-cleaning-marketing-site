@@ -12,6 +12,8 @@ export type ServiceId =
   | 'stain-removal'
   | 'roof-cleaning'
   | 'pressure-washing'
+  | 'driveway-cleaning'
+  | 'patio-cleaning'
   | 'gutter-cleaning'
   | 'window-cleaning'
   | 'general';
@@ -2442,7 +2444,9 @@ const RELATED_SERVICES: Record<ServiceId, ServiceId[]> = {
   'stain-removal': ['carpet-cleaning', 'upholstery-cleaning'],
   'roof-cleaning': ['gutter-cleaning', 'pressure-washing'],
   'gutter-cleaning': ['roof-cleaning'],
-  'pressure-washing': ['roof-cleaning'],
+  'pressure-washing': ['driveway-cleaning', 'patio-cleaning', 'roof-cleaning'],
+  'driveway-cleaning': ['pressure-washing', 'patio-cleaning'],
+  'patio-cleaning': ['pressure-washing', 'driveway-cleaning'],
   'window-cleaning': [],
   'general': [],
 };
@@ -2588,6 +2592,8 @@ const sortedServiceReviews: Record<ServiceId, Review[]> = {
   'stain-removal': buildServiceReviewList('stain-removal'),
   'roof-cleaning': buildServiceReviewList('roof-cleaning'),
   'pressure-washing': buildServiceReviewList('pressure-washing'),
+  'driveway-cleaning': buildServiceReviewList('driveway-cleaning'),
+  'patio-cleaning': buildServiceReviewList('patio-cleaning'),
   'gutter-cleaning': buildServiceReviewList('gutter-cleaning'),
   'window-cleaning': buildServiceReviewList('window-cleaning'),
   'general': allSortedReviews,
@@ -2673,6 +2679,8 @@ export const serviceReviews: ServiceReviewsMap = {
   'stain-removal': getReviewsByServiceId('stain-removal'),
   'roof-cleaning': getReviewsByServiceId('roof-cleaning'),
   'pressure-washing': getReviewsByServiceId('pressure-washing'),
+  'driveway-cleaning': getReviewsByServiceId('driveway-cleaning'),
+  'patio-cleaning': getReviewsByServiceId('patio-cleaning'),
   'gutter-cleaning': getReviewsByServiceId('gutter-cleaning'),
   'window-cleaning': displayableReviews,
 };
@@ -2687,6 +2695,8 @@ export const reviewCountsByService = {
   'stain-removal': getReviewsByServiceId('stain-removal').length,
   'roof-cleaning': getReviewsByServiceId('roof-cleaning').length,
   'pressure-washing': getReviewsByServiceId('pressure-washing').length,
+  'driveway-cleaning': getReviewsByServiceId('driveway-cleaning').length,
+  'patio-cleaning': getReviewsByServiceId('patio-cleaning').length,
   'gutter-cleaning': getReviewsByServiceId('gutter-cleaning').length,
   'window-cleaning': displayableReviews.length,
   'general': reviews.filter((r) => r.services.includes('general')).length,
