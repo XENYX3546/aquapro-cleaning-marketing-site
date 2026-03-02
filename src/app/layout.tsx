@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/next';
+import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { siteConfig, reviewStats, services } from '@/lib/constants';
@@ -96,6 +97,8 @@ export default function RootLayout({
     <html lang="en-GB" className={inter.variable}>
       <head>
         {/* DNS prefetch for faster resolution */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
         <link rel="dns-prefetch" href="https://app.zuviaone.com" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.google.com" />
@@ -113,6 +116,49 @@ export default function RootLayout({
       <body className="font-sans antialiased text-neutral-900">
         {children}
         <Analytics />
+
+        {/* Google tag (gtag.js) — Google Ads + GA4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-16686011342"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-16686011342');
+            gtag('config', 'G-0TXRRR3LBG');
+            gtag('config', 'AW-16686011342/iX0DCNaWzt0ZEM6nwZQ-', {
+              'phone_conversion_number': '01268 225511'
+            });
+          `}
+        </Script>
+
+        {/* Meta Pixel */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '387953377712390');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=387953377712390&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
       </body>
     </html>
   );
