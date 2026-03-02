@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next';
 import Script from 'next/script';
 import { Inter } from 'next/font/google';
+import { ElfsightConversionTracker } from '@/components/ElfsightConversionTracker';
 import './globals.css';
 import { siteConfig, reviewStats, services } from '@/lib/constants';
 import type { Metadata, Viewport } from 'next';
@@ -116,6 +117,7 @@ export default function RootLayout({
       <body className="font-sans antialiased text-neutral-900">
         {children}
         <Analytics />
+        <ElfsightConversionTracker />
 
         {/* Google tag (gtag.js) — Google Ads + GA4 */}
         <Script
