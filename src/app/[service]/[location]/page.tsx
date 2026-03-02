@@ -8,7 +8,6 @@ import {
   locations,
   getLocationBySlug,
   siteConfig,
-  reviewStats,
   reviewStatsDisplay,
   getReviewsForServiceAndLocation,
   getAllReviewsForService,
@@ -135,17 +134,7 @@ function generateSchemas(service: Service, location: Location, allFaqs: { questi
       ? `Professional ${primary.toLowerCase()} services across ${location.name} county`
       : `Professional ${primary.toLowerCase()} services ${location.name}, ${location.county}`,
     provider: {
-      '@type': 'LocalBusiness',
       '@id': `${siteConfig.url}/#organization`,
-      name: siteConfig.name,
-      image: `${siteConfig.url}/og-image.png`,
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: reviewStats.averageRating,
-        reviewCount: reviewStats.totalReviews,
-        bestRating: reviewStats.bestRating,
-        worstRating: reviewStats.worstRating,
-      },
     },
     areaServed: isCounty
       ? {
