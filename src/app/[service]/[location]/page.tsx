@@ -135,7 +135,17 @@ function generateSchemas(service: Service, location: Location, allFaqs: { questi
       ? `Professional ${primary.toLowerCase()} services across ${location.name} county`
       : `Professional ${primary.toLowerCase()} services ${location.name}, ${location.county}`,
     provider: {
+      '@type': 'LocalBusiness',
       '@id': `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      image: `${siteConfig.url}/og-image.png`,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: reviewStats.averageRating,
+        reviewCount: reviewStats.totalReviews,
+        bestRating: reviewStats.bestRating,
+        worstRating: reviewStats.worstRating,
+      },
     },
     areaServed: isCounty
       ? {
@@ -148,13 +158,6 @@ function generateSchemas(service: Service, location: Location, allFaqs: { questi
           name: location.name,
           containedInPlace: { '@type': 'AdministrativeArea', name: location.county },
         },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: String(reviewStats.averageRating),
-      reviewCount: String(reviewStats.totalReviews),
-      bestRating: String(reviewStats.bestRating),
-      worstRating: String(reviewStats.worstRating),
-    },
   };
 
   const breadcrumbSchema = {

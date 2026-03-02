@@ -217,10 +217,10 @@ function LocalBusinessSchema() {
     ],
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: String(reviewStats.averageRating),
-      reviewCount: String(reviewStats.totalReviews),
-      bestRating: String(reviewStats.bestRating),
-      worstRating: String(reviewStats.worstRating),
+      ratingValue: reviewStats.averageRating,
+      reviewCount: reviewStats.totalReviews,
+      bestRating: reviewStats.bestRating,
+      worstRating: reviewStats.worstRating,
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
