@@ -297,7 +297,7 @@ export function ContactSection({ serviceId, topReview }: ContactSectionProps) {
 
               <div className="relative" style={{ height: 538 }}>
                 <div className="absolute inset-0">
-                  <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" data-elfsight-app-lazy />
+                  <div className="elfsight-app-59309e4b-fb3a-4595-86ba-1ada85aa4c3a" />
                 </div>
                 <div className={`absolute inset-0 bg-white transition-opacity duration-300 z-10 ${elfsightLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                   <div className="flex flex-col gap-4 h-full animate-pulse">
