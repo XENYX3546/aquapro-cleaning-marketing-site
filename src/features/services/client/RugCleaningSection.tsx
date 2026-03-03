@@ -2,6 +2,7 @@
 
 import { Check, ArrowRight } from 'lucide-react';
 import type { Location } from '@/lib/constants/locations';
+import { OpenPhoneNumber } from '@/components/ui/OpenPhoneNumber';
 
 const rugTypes = [
   { name: 'Persian Rugs', detail: 'Hand-knotted wool and silk, colour-safe wash' },
@@ -70,7 +71,7 @@ export function RugCleaningSection({ location }: RugCleaningSectionProps) {
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="text-center flex flex-col items-center gap-2">
           <button
             onClick={scrollToQuoteForm}
             className="inline-flex items-center gap-3 bg-cta hover:bg-cta-hover text-white font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-lg"
@@ -78,6 +79,7 @@ export function RugCleaningSection({ location }: RugCleaningSectionProps) {
             Get My Free Rug Cleaning Quote
             <ArrowRight className="w-5 h-5" />
           </button>
+          <OpenPhoneNumber variant="dark" />
         </div>
 
       </div>

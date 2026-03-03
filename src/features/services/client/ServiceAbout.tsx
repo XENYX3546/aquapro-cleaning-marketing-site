@@ -5,6 +5,7 @@ import { ShieldCheck, Users, Award, Star, ArrowRight } from 'lucide-react';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay, customerStatsDisplay, getServiceKeywords, siteConfig } from '@/lib/constants';
+import { OpenPhoneNumber } from '@/components/ui/OpenPhoneNumber';
 
 const FALLBACK_IMAGE = "/images/blake-window-cleaning.jpg";
 
@@ -196,13 +197,16 @@ export function ServiceAbout({ service, location }: ServiceAboutProps) {
              </div>
 
              {/* CTA Button */}
-             <button
-                onClick={scrollToQuoteForm}
-                className="bg-[#E30663] hover:bg-[#C20555] text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-[#E30663]/20 transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center gap-3 text-lg"
-             >
-                Get My Free Quote
-                <ArrowRight className="w-5 h-5" />
-             </button>
+             <div className="flex flex-col items-start gap-2">
+               <button
+                  onClick={scrollToQuoteForm}
+                  className="bg-[#E30663] hover:bg-[#C20555] text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-[#E30663]/20 transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center gap-3 text-lg"
+               >
+                  Get My Free Quote
+                  <ArrowRight className="w-5 h-5" />
+               </button>
+               <OpenPhoneNumber variant="dark" />
+             </div>
 
           </div>
         </div>

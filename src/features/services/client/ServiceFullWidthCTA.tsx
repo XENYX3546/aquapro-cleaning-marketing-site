@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowRight, Star, ShieldCheck, CalendarCheck } from 'lucide-react';
-import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
+import { OpenPhoneNumber } from '@/components/ui/OpenPhoneNumber';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 import { reviewStatsDisplay, customerStatsDisplay, getServiceKeywords, relatedServiceMap } from '@/lib/constants';
@@ -52,13 +52,15 @@ export function ServiceFullWidthCTA({ service, location }: ServiceFullWidthCTAPr
           {service.slug === 'carpet-cleaning' && (
             <>
               <span className="text-slate-500 text-sm font-medium hidden sm:block">or</span>
-              <BookOnlineButton className="inline-flex items-center gap-2.5 bg-cta hover:bg-cta-hover text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-lg">
+              <a href="#quote-form" className="inline-flex items-center gap-2.5 bg-cta hover:bg-cta-hover text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-lg">
                 <CalendarCheck className="w-5 h-5" />
-                <span>Book Online</span>
-              </BookOnlineButton>
+                <span>Get My Free Quote</span>
+              </a>
             </>
           )}
         </div>
+
+        <OpenPhoneNumber variant="light" className="mb-6" />
 
         <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
           <div className="flex items-center gap-1.5">

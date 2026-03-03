@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Phone, CalendarCheck } from 'lucide-react';
 import { siteConfig } from '@/lib/constants';
-import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
 import type { Service } from '@/lib/constants/services';
 import type { Location } from '@/lib/constants/locations';
 
@@ -71,10 +70,10 @@ export function ServiceStickyCTA({ service, location: _location }: ServiceSticky
           {siteConfig.contact.phone}
         </button>
         {service.slug === 'carpet-cleaning' ? (
-          <BookOnlineButton className="flex-1 bg-cta text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-cta-hover flex items-center justify-center gap-2">
+          <a href="#quote-form" className="flex-1 bg-cta text-white font-bold py-2.5 px-4 rounded-lg shadow-sm text-sm active:bg-cta-hover flex items-center justify-center gap-2">
             <CalendarCheck className="w-4 h-4" />
-            Book Online
-          </BookOnlineButton>
+            Get My Free Quote
+          </a>
         ) : (
           <button
             onClick={scrollToForm}

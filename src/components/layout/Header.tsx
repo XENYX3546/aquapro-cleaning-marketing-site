@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import { siteConfig, services } from '@/lib/constants';
-import { BookOnlineButton } from '@/components/ui/BookOnlineButton';
+import { OpenPhoneNumber } from '@/components/ui/OpenPhoneNumber';
 import { cn } from '@/lib/utils';
 import {
   Menu,
@@ -26,10 +27,24 @@ import {
   Building2,
 } from 'lucide-react';
 
+/** Pages that have an inline quote form with id="quote-form" */
+const PAGES_WITH_FORM = ['/', '/contact'];
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  // Detect current service from the URL
+  const segments = pathname.split('/').filter(Boolean);
+  const serviceSlug = segments[0] === 'services' ? segments[1] : segments[0];
+  const currentService = serviceSlug ? services.find((s) => s.slug === serviceSlug) : undefined;
+
+  // Service pages & homepage/contact have inline forms — scroll to them
+  const hasInlineForm = currentService || PAGES_WITH_FORM.includes(pathname);
+  const ctaHref = hasInlineForm ? '#quote-form' : '/contact';
+  const ctaLabel = currentService ? `Get My Free ${currentService.name} Quote` : 'Get My Free Quote';
 
   // Lock body scroll when mobile menu is open + signal to other components
   useEffect(() => {
@@ -240,19 +255,15 @@ export function Header() {
             </div>
 
             {/* Desktop CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex flex-col items-end gap-1">
               <a
-                href={siteConfig.contact.phoneHref}
-                className="p-2.5 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                aria-label="Call us"
-                title={siteConfig.contact.phone}
+                href={ctaHref}
+                className="bg-cta hover:bg-cta-hover text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-cta/25 transform hover:-translate-y-0.5 flex items-center gap-2 group"
               >
-                <Phone className="h-5 w-5" />
-              </a>
-              <BookOnlineButton className="bg-cta hover:bg-cta-hover text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-cta/25 transform hover:-translate-y-0.5 flex items-center gap-2 group">
-                Get Quote & Book Online
+                {ctaLabel}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </BookOnlineButton>
+              </a>
+              <OpenPhoneNumber variant="light" />
             </div>
 
             {/* Mobile Actions */}
@@ -413,12 +424,14 @@ export function Header() {
 
         {/* Sticky Bottom CTA */}
         <div className="border-t border-white/10 bg-slate-900 p-4 pb-8">
-          <BookOnlineButton
+          <a
+            href={ctaHref}
+            onClick={() => setMobileMenuOpen(false)}
             className="w-full bg-cta active:bg-cta-hover text-white px-6 py-4 rounded-xl font-bold text-base shadow-lg flex items-center justify-center gap-2 mb-3"
           >
-            Get Quote & Book Online
+            {ctaLabel}
             <ArrowRight className="w-4 h-4" />
-          </BookOnlineButton>
+          </a>
 
           <a
             href={siteConfig.contact.phoneHref}

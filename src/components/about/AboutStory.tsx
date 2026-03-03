@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Star, ArrowRight, Check } from 'lucide-react';
 import { ctaLinks, getAllReviews, customerStatsDisplay, type Review } from '@/lib/constants';
+import { OpenPhoneNumber } from '@/components/ui/OpenPhoneNumber';
 
 // Max characters for testimonial to fit in the overlay
 const MAX_TESTIMONIAL_LENGTH = 120;
@@ -104,7 +105,7 @@ export function AboutStory() {
             </p>
 
             {/* CTA Button */}
-            <div className="mb-10">
+            <div className="mb-10 flex flex-col items-start gap-2">
               <Link
                 href={ctaLinks.quote}
                 className="bg-cta hover:bg-cta-hover text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 w-fit transition-all"
@@ -112,6 +113,7 @@ export function AboutStory() {
                 Get My Free Quote
                 <ArrowRight className="w-5 h-5" />
               </Link>
+              <OpenPhoneNumber variant="dark" />
             </div>
 
             {/* Stats - Horizontal Row Layout */}

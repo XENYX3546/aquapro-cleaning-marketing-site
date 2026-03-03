@@ -121,7 +121,7 @@ export function HeroSection() {
           </div>
 
           {/* Right Content - Form Card */}
-          <div className="lg:col-span-5" ref={containerRef}>
+          <div className="lg:col-span-5" ref={containerRef} id="quote-form">
             <div className="bg-white rounded-2xl shadow-2xl p-5 sm:p-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-2 text-center lg:text-left">
                 Get a Free Quote

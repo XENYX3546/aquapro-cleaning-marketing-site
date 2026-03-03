@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ClipboardCheck, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
 import { ctaLinks } from '@/lib/constants';
+import { OpenPhoneNumber } from '@/components/ui/OpenPhoneNumber';
 
 const steps = [
   {
@@ -76,13 +77,14 @@ export function HowItWorks() {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="text-center flex flex-col items-center gap-2">
           <Link
             href={ctaLinks.quote}
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-600 text-white font-bold rounded-lg hover:bg-brand-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
           >
             Start Your Quote <ArrowRight className="w-4 h-4" />
           </Link>
+          <OpenPhoneNumber variant="dark" />
         </div>
       </div>
     </section>

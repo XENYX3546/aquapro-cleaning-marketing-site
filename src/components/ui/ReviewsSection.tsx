@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Star, X, ZoomIn, Check, MapPin, ArrowRight, ShieldCheck, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getAllReviews, reviewStatsDisplay, customerStatsDisplay, getRelativeTime, getLocationFromPostcode, type Review } from '@/lib/constants';
+import { OpenPhoneNumber } from '@/components/ui/OpenPhoneNumber';
 
 // Type for flattened image gallery
 type GalleryImage = {
@@ -37,11 +38,12 @@ function ReviewsCTACard() {
 
         <button
           onClick={scrollToQuoteForm}
-          className="w-full bg-white text-[#1B9CB6] font-bold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 mb-4"
+          className="w-full bg-white text-[#1B9CB6] font-bold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
         >
           Get My Free Quote
           <ArrowRight className="w-4 h-4" />
         </button>
+        <OpenPhoneNumber variant="light" className="mt-2 mb-2" />
 
         <div className="flex items-center justify-center gap-4 text-white/70 text-xs">
           <div className="flex items-center gap-1">
