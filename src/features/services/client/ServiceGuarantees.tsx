@@ -16,8 +16,8 @@ const serviceGuarantees: Record<string, Guarantee[]> = {
   'roof-cleaning': [
     {
       icon: <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />,
-      title: "5-Year Moss-Free Guarantee",
-      description: "Our roof cleaners return after 3 years to re-apply treatment free of charge, extending your guarantee to 5 years."
+      title: "3-Year Moss-Free Guarantee",
+      description: "Your roof stays moss-free for 3 years, backed by our guarantee."
     },
     {
       icon: <Home className="w-6 h-6" strokeWidth={1.5} />,

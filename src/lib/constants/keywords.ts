@@ -92,7 +92,7 @@ export const serviceKeywordMap: Record<string, ServiceKeywords> = {
     semanticNeighbors: ['biocide treatment', 'lichen removal', 'ridge tile repointing', 'fungal treatment', 'tile sealing', 'roof preservation'],
     specs: {
       'Method': 'Low-pressure soft wash with biocide treatment',
-      'Guarantee': '5 years moss-free (re-applied at year 3)',
+      'Guarantee': '3 years moss-free',
       'Tile Types': 'Clay, concrete, slate, flat felt, ridge tiles',
       'Includes': 'Moss scrape, biocide spray, gutter clear, window clean',
       'Safety': 'Full harness system, £5M public liability',

@@ -26,7 +26,7 @@ const serviceSectionContent: Record<string, ServiceSectionContent> = {
     sliderHint: 'Drag to see the transformation',
     inclusions: [
       'Free drone survey and expert advice at every step',
-      'Specialist roof clean with 5-year moss-free guarantee',
+      'Specialist roof clean with 3-year moss-free guarantee',
       'Free gutter clean and all waste removed',
     ],
   },

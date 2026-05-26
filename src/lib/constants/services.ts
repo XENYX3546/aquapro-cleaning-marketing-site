@@ -321,10 +321,10 @@ const _allServices: Service[] = [
     process: [
       { step: 1, title: 'Free Personalised Quote', description: 'We visit your property, survey your roof with our drone, and give you a fixed price on the spot. No hidden fees, no surprises.' },
       { step: 2, title: 'We Clean Your Roof', description: 'Our team safely removes every bit of moss, algae, and black staining. Then we apply a protective treatment that keeps your roof moss-free for years.' },
-      { step: 3, title: 'Like New Roof, Guaranteed', description: 'We remove all the waste and leave your property spotless. Your roof looks brand new, backed by our 5-year guarantee.' },
+      { step: 3, title: 'Like New Roof, Guaranteed', description: 'We remove all the waste and leave your property spotless. Your roof looks brand new, backed by our 3-year guarantee.' },
     ],
     faqs: [
-      { question: 'How much does roof cleaning cost?', answer: 'A typical semi-detached roof costs £400–£800, and a 4-bed detached around £800–£1,500. Price depends on roof size, tile type, and moss severity. Our quote includes the full clean, biocide treatment, gutter clear, window clean, waste removal, and a free re-treatment at year 3.' },
+      { question: 'How much does roof cleaning cost?', answer: 'A typical semi-detached roof costs £400–£800, and a 4-bed detached around £800–£1,500. Price depends on roof size, tile type, and moss severity. Our quote includes the full clean, biocide treatment, gutter clear, window clean, and waste removal.' },
       { question: 'What\'s the difference between soft washing and pressure washing a roof?', answer: 'Soft washing uses low-pressure water with a biocide solution to kill moss and algae without force. Pressure washing blasts it off mechanically. We use soft washing because high-pressure jets can crack ageing clay and concrete tiles, strip protective coatings, and drive water under the tile overlap. Soft wash is safer, lasts longer, and is recommended for all UK roof types.' },
       { question: 'What\'s the best time of year to clean a roof?', answer: 'Spring through early autumn, ideally March to October. Biocide treatments need temperatures above 5°C to be effective. Cleaning in late autumn still works for the mechanical removal, but the protective treatment performs best in warmer, drier months.' },
       { question: 'Is roof moss removal safe for my tiles?', answer: 'Yes. Our gentle soft wash method is safe for clay tiles, concrete tiles, slate, and flat felt roofs. No damage, no lifted tiles, backed by our tile replacement guarantee.' },
@@ -332,9 +332,9 @@ const _allServices: Service[] = [
       { question: 'Will roof cleaning leave a mess?', answer: 'Never. We sheet the area, remove all moss, algae, and debris, clean your gutters and windows, and leave your property spotless.' },
       { question: 'Is the biocide treatment safe for pets and plants?', answer: 'Yes. The protective biocide treatment we apply is completely safe for children, pets, and garden plants once dry. We take care around fishponds and cover them during application.' },
       { question: 'Do I need to be home during the roof clean?', answer: 'No. As long as we have access to your property, water, and power, our roof cleaning team can complete everything while you\'re out.' },
-      { question: 'How long does a professional roof clean last?', answer: 'Our moss removal results are guaranteed for 5 years. We return after 3 years for a free biocide re-treatment to keep your roof moss-free. Without treatment, moss typically recolonises within 12–18 months.' },
+      { question: 'How long does a professional roof clean last?', answer: 'Our moss removal results are guaranteed for 3 years. Without treatment, moss typically recolonises within 12–18 months.' },
       { question: 'What if a roof tile gets damaged?', answer: 'We replace it like-for-like, free of charge. That\'s our roof tile replacement guarantee, and we\'re fully insured for £5 million public liability.' },
-      { question: 'What\'s included in a roof cleaning quote?', answer: 'Everything. Manual moss scraping, soft wash clean, biocide treatment, gutter clear, window clean, all waste removal, and a free re-treatment at year 3. One fixed price, no hidden costs.' },
+      { question: 'What\'s included in a roof cleaning quote?', answer: 'Everything. Manual moss scraping, soft wash clean, biocide treatment, gutter clear, window clean, and all waste removal. One fixed price, no hidden costs.' },
     ],
     seo: {
       title: 'Roof Cleaning & Moss Removal | 3-Year Guarantee | Aquapro',
@@ -345,11 +345,11 @@ const _allServices: Service[] = [
     hero: {
       headline: 'Make Your Roof Look Brand New Again',
       subheadline: 'Roof Cleaning Specialists',
-      description: 'Our professional roof cleaning service removes moss, algae and black streaks, prevents costly repairs and brings your home back to life - backed by our 5 year moss-free guarantee.',
+      description: 'Our professional roof cleaning service removes moss, algae and black streaks, prevents costly repairs and brings your home back to life - backed by our 3 year moss-free guarantee.',
       checkpoints: [
         'Removes 100% of moss, algae & black streaks',
         'Stops moss falling onto your driveway, patio, and conservatory',
-        'Moss-free roof backed by our 5-year guarantee',
+        'Moss-free roof backed by our 3-year guarantee',
         'All waste removed, no mess left behind',
       ],
       formTitle: 'Get a Free Roof Cleaning Quote',
